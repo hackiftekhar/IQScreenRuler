@@ -1,0 +1,129 @@
+/* This file should be localized in Hindi */
+
+/* Aspect Ratio */
+"Aspect Ratio" = "छवि अनुपात";
+"Original" = "मूल प्रति";
+"Square" = "चौकोर";
+
+/* No Screenshots */
+"no_screenshots_title" = "कुछ भी स्क्रीनशॉट नहीं मिले";
+"no_screenshots_description" = "आप स्क्रीन लॉक बटन और होम बटन का उपयोग कर अपने डिवाइस पर स्क्रीनशॉट ले सकते हैं।";
+
+/* Open Screenshots */
+"Camera" = "कैमरा";
+"Photo Library" = "फोटो लाइब्रेरी";
+
+/* Ruler Ratio It's like 1x, 2x, 3x */
+"Change Scale Multiplier" = "मापन गुणक बदले";
+
+/* Sharing Text */
+"Mail Sent" = "मेल भेज दिया गया।";
+"mail_body" = "\n\n मैं iOS '%2$@' के साथ '%1$@' पर हूँ, '%4$@' के संस्करण '%3$@' का उपयोग कर रहा हूँ।";
+"mail_device_configuration_message" = "आपकी डिवाइस मेल भेजने के लिए समर्थ नहीं है।";
+"Screen Ruler - Bug Report" = "स्क्रीनशॉट पैमाना - त्रुटि विवरण";
+"Screen Ruler - Feedback" = "स्क्रीनशॉट पैमाना - राय";
+
+/* Help Tour. */
+"Skip" = "छोड़ें";
+"Start Help Tour" = "सहायता सफ़र शुरू करे।";
+"Tap to continue" = "जारी रखने के लिए स्पर्श करे।";
+"horizontal_scale_help" = "अपनी जरूरत के अनुसार अपनी उंगलियों के साथ क्षैतिज पैमाने को समायोजित करें।";
+"vertical_scale_help" = "अपनी जरूरत के अनुसार अपनी उंगलियों के साथ खड़ी पैमाने को समायोजित करें।";
+"device_scale_help" = "अपने डिवाइस रिजल्यूशन या अपनी जरूरत के अनुसार मापन गुणक चुनें।";
+"double_tap_help" = "ज़ूम-इन करने के लिए एक उंगली का उपयोग कर दो बार स्पर्श करें, ज़ूम-आउट करने के लिए दो उंगलियों का प्रयोग कर दो बार स्पर्श करें।";
+"long_tap_color_help" = "पिक्सेल का आरजीबी रंग दिखाने के लिए लंबे समय तक स्पर्श करें और उंगली खिसकाये।";
+"long_tap_scale_help" = "क्षैतिज या खड़ी पैमाने के अधिक विकल्प दिखाने के लिए लंबे समय तक स्पर्श करें।";
+
+/* Buttons */
+"Back" = "पीछे";
+"Cancel" = "रद्द करें";
+"Done" = "पूर्ण";
+"OK" = "ठीक";
+
+/* Social Share. */
+"Share Photo" = "फोटो साझा करें";
+"social_share_text" = "'%@' मोबाइल ऐप 'गुणवत्ता आश्वासन' इंजीनियर के लिए iOS एप्लिकेशन यूजर इंटरफेस का ब्यौरा निकालने के लिए और स्क्रीनशॉट के विवरण देखने में यह बहुत लाभदायक है। ये वास्तव में एक मजेदार और बहुत उपयोगी मोबाइल ऐप है।";
+
+/* Resizing */
+"Custom" = "रुचि अनुसार";
+"Enter width and height" = "चौड़ाई और ऊंचाई दर्ज करें";
+"Height" = "ऊंचाई";
+"Width" = "चौड़ाई";
+"Resize" = "आकार बदलें";
+"Crop" = "काटें";
+"Resize Screenshot" = "स्क्रीनशॉट का आकार बदलें";
+
+/* Change Scale X Y. */
+"Reset Scale to Original" = "मूल पैमाने पर रीसेट करें";
+"Set Scale point location" = "मूल पैमाने बिंदु स्थान स्थित करें";
+"Mark as X reference" = "X बिंदु संकेत स्थित करें";
+"Mark as Y reference" = "Y बिंदु संकेत स्थित करें";
+
+/* Zoom Scale */
+"Zoom Scale" = "जूम पैमाना";
+"minimum_percent" = "न्यूनतम पैमाना (%.0f%%)";
+"original_percent" = "मूल पैमाना (%.0f%%)";
+
+/* Crop Info */
+"x_y_width_height" = "X: %1$.0f,  Y: %2$.0f\nचौड़ाई: %3$.0f,  ऊंचाई: %4$.0f";
+
+/* RGB Colro Point */
+"X: NA, Y: NA" = "X: अनुपलब्ध, Y: अनुपलब्ध";
+
+/* Settings */
+"Settings" = "सेटिंग्स";
+"Color Theme" = "रंग विषय";
+"Natural" = "प्राकृतिक";
+"Inverted" = "प्रतिलोम";
+"Social" = "सामाजिक नेटवर्किंग";
+"Share On Social Network" = "सामाजिक नेटवर्क पर साझा करें";
+"Rate Us On App Store" = "ऐप स्टोर पर राय दें";
+"Feedback" = "राय";
+"Bug Report" = "रुटि विवरण";
+"Terms" = "नियम";
+"Terms and Conditions" = "नियम और शर्तें";
+"Open Source Libraries" = "ओपन सोर्स सॉफ्टवेयर";
+"InfoEnum Software Systems" = "इन्फोइनम सॉफ्टवेयर सिस्टम्स";
+
+/* Other. */
+"Error" = "असफल";
+"Version" = "संस्करण";
+"image_load_error" = "फोटो लोड करने में कोई त्रुटि हो गयी है। कृपया पुन: प्रयास करें।";
+
+/*
+ ******************************************
+ // App Store Localized Full Name
+ 
+ Screen Ruler - Pixel Perfect Screenshot Ruler
+ 
+ ******************************************
+ //App Store Localized Description
+ 
+ CONGRATULATIONS! YOU HAVE FOUND MOST ADVANCE SCREENSHOT RULER APP.
+ 
+ As an iOS developer, I always feel the lack of simple app to check position of objects/elements in any picture or screenshot. Now it's very easy to find position and size of any UI element, specifically x/y position and width/height/size.
+ 
+ This app is specially designed for making Mobile Quality Assurance Engineer (QA Engg.) life much easier. Now they can quickly review Mobile UI with point & pixel perfect dimensions within minutes.
+ 
+ HOW IT WORKS:
+ Step1: Take Screenshot of the app to debug it. This will automatically be saved to your Camera Roll -> Screenshots album.
+ Step2: Open Screen Ruler app and you can see your recent screenshot, enable ruler and straight line frame.
+ Step3: Check your screenshot dimensions and UI element positions by zooming in/out and using rulers and line frame.
+ 
+ Other fantastic features of Ruler app:
+ - 4 Sided dynamic ruler. You can also adjust ruler position using your finger. Long tap for more options.
+ - Free hand ruler scale. It can also rotate to check angles.
+ - Straighten line frame.
+ - Long tap & move on screenshot to show RGB color values of any position.
+ - Multi-feature crop too.
+ - Change Aspect Ratio.
+ - Screenshot Resizing.
+ - Change Device Scale Factor.
+ - Double-Tap, Pan, pinch gestures to zoom and move pictures.
+ 
+ Download to see how QA engineers accelerating their business by reducing time to check pixel measurements.
+ ******************************************
+ //App Store Keywords
+ 
+ Screenshot, ruler, scale, straighten, developer, QA, Quality Assurance
+ */

@@ -1,0 +1,328 @@
+//
+//  IQRulerView.m
+//  Screen Ruler
+//
+//  Created by Mohd Iftekhar Qurashi
+//  Copyright (c) 2016 InfoEum Software Systems. Licensed under the Apache License v2.0.
+//  See COPYING or https://www.apache.org/licenses/LICENSE-2.0
+
+#import "IQRulerView.h"
+#import "IQGeometry+AffineTransform.h"
+#import "IQGeometry+Angle.h"
+#import "UIColor+HexColors.h"
+
+@interface IQRulerView ()<UIGestureRecognizerDelegate>
+{
+    CGFloat _previousAngle;
+    BOOL _isAngleLocked;
+}
+
+@property(nonatomic, strong, readonly) IQAngleView *angleView;
+
+@property(strong, readonly) UIPanGestureRecognizer *panRecognizer;
+@property(strong, readonly) UIRotationGestureRecognizer *rotateRecognizer;
+
+@end
+
+@implementation IQRulerView
+
+#pragma mark - Initialization
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self initialize];
+    }
+    return self;
+}
+
+-(void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    [self initialize];
+}
+
+-(void)initialize
+{    
+    self.layer.borderWidth = 1.0;
+    _zoomScale = 1;
+    _deviceScale = 1;
+
+    _angleView = [[IQAngleView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    _angleView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+    _angleView.autoresizesSubviews = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
+    [self addSubview:_angleView];
+    
+    _panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panRecognizer:)];
+    _panRecognizer.delegate = self;
+    _panRecognizer.maximumNumberOfTouches = 2;
+    [self addGestureRecognizer:_panRecognizer];
+    
+    _rotateRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotateRecognizer:)];
+    _rotateRecognizer.delegate = self;
+    [self addGestureRecognizer:_rotateRecognizer];
+
+    self.lineColor = [UIColor darkGrayColor];
+    self.rulerColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
+}
+
+#pragma mark - Overrided methods
+
+-(void)setZoomScale:(CGFloat)zoomScale
+{
+    _zoomScale = zoomScale;
+    [self setNeedsLayout];
+}
+
+-(void)setDeviceScale:(CGFloat)deviceScale
+{
+    _deviceScale = deviceScale;
+    [self setNeedsLayout];
+}
+
+-(void)setLineColor:(UIColor *)lineColor
+{
+    _lineColor = lineColor;
+    
+    self.layer.borderColor = _lineColor.CGColor;
+    self.angleView.textColor = _lineColor;
+    [self setNeedsLayout];
+}
+
+-(void)setRulerColor:(UIColor *)rulerColor
+{
+    _rulerColor = rulerColor;
+    self.backgroundColor = _rulerColor;
+    self.angleView.backgroundColor = [_rulerColor colorWithAlphaComponent:_rulerColor.alpha+(1-_rulerColor.alpha)/2];
+    [self setNeedsLayout];
+}
+
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    NSArray *layers = [self.layer.sublayers copy];
+    
+    for (CALayer *layer in layers)
+    {
+        if (layer != self.angleView.layer)
+        {
+            [layer removeFromSuperlayer];
+        }
+    }
+    
+    CGFloat multiplier = 1;
+    
+    if (self.zoomScale >= 4)
+    {
+        multiplier = 1;
+    }
+    else if (self.zoomScale >= 0.4)
+    {
+        multiplier = 10;
+    }
+    else if (self.zoomScale >= 0.04)
+    {
+        multiplier = 100;
+    }
+    else if (self.zoomScale >= 0.004)
+    {
+        multiplier = 1000;
+    }
+    else
+    {
+        multiplier = 10000;
+    }
+
+    multiplier *=_deviceScale;
+    
+    CGFloat singleStep = self.zoomScale*multiplier;
+
+    {
+        NSInteger i = 1;
+        for (CGFloat currentStep = singleStep; currentStep<=self.bounds.size.width; currentStep+=singleStep, i++)
+        {
+            if (currentStep!=0)
+            {
+                CALayer *layer1 = [[CALayer alloc] init];
+                layer1.contentsScale = [[UIScreen mainScreen] scale];
+                layer1.backgroundColor = self.lineColor.CGColor;
+                CALayer *layer2 = [[CALayer alloc] init];
+                layer2.contentsScale = [[UIScreen mainScreen] scale];
+                layer2.backgroundColor = self.lineColor.CGColor;
+                
+                if (i % 10 == 0)
+                {
+                    layer1.frame = CGRectMake(currentStep-0.4, 0, 0.8, 10);
+                    layer2.frame = CGRectMake(currentStep-0.4, self.bounds.size.height-10, 0.8, 10);
+                }
+                else if (i % 5 == 0)
+                {
+                    layer1.frame = CGRectMake(currentStep-0.3, 0, 0.6, 7);
+                    layer2.frame = CGRectMake(currentStep-0.3, self.bounds.size.height-7, 0.6, 7);
+                }
+                else
+                {
+                    layer1.frame = CGRectMake(currentStep-0.25, 0, 0.5, 5);
+                    layer2.frame = CGRectMake(currentStep-0.25, self.bounds.size.height-5, 0.5, 5);
+                }
+                
+                [self.layer addSublayer:layer1];
+                [self.layer addSublayer:layer2];
+                
+                if (singleStep > 40 || (singleStep*5 >= 40 && i%5 == 0) || (singleStep*10 >= 40 && i%10 == 0))
+                {
+                    CATextLayer *textLayer = [CATextLayer layer];
+                    textLayer.contentsScale = [[UIScreen mainScreen] scale];
+                    textLayer.font = (__bridge CFTypeRef)@"KohinoorBangla-Semibold";
+                    textLayer.fontSize = 10;
+                    textLayer.alignmentMode = kCAAlignmentCenter;
+                    textLayer.string = [NSString localizedStringWithFormat:@"%.0f",i*multiplier/_deviceScale];
+                    textLayer.foregroundColor = self.lineColor.CGColor;
+                    textLayer.frame = CGRectMake(currentStep-20, self.bounds.size.height/2-6, 40, 12);
+                    textLayer.position = CGPointMake(layer1.frame.origin.x, CGRectGetMidY(self.bounds));
+                    
+                    textLayer.transform = CATransform3DMakeAffineTransform(CGAffineTransformInvert(CGAffineTransformMakeRotation(IQAffineTransformGetAngle(self.transform))));
+                    [self.layer addSublayer:textLayer];
+                }
+            }
+        }
+    }
+
+    [self bringSubviewToFront:self.angleView];
+    self.angleView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+}
+
+#pragma mark - Gesture Recognizers
+
+-(void)panRecognizer:(UIPanGestureRecognizer*)recognizer
+{
+    if (recognizer.state == UIGestureRecognizerStateBegan)
+    {
+//        UIView *piece = recognizer.view;
+//        CGPoint locationInView = [recognizer locationInView:piece];
+//        CGPoint locationInSuperview = [recognizer locationInView:piece.superview];
+//        
+//        piece.layer.anchorPoint = CGPointMake(locationInView.x / piece.bounds.size.width, locationInView.y / piece.bounds.size.height);
+//        piece.center = locationInSuperview;
+
+        for (UIView *view in [self.superview.subviews reverseObjectEnumerator])
+        {
+            if ([view isKindOfClass:[IQRulerView class]] && view != self)
+            {
+                [self.superview insertSubview:self aboveSubview:view];
+                break;
+            }
+        }
+    }
+    else if (recognizer.state == UIGestureRecognizerStateChanged)
+    {
+        CGPoint translation = [recognizer translationInView:recognizer.view];
+
+        recognizer.view.transform = CGAffineTransformTranslate(recognizer.view.transform, translation.x, translation.y);
+
+        [recognizer setTranslation:CGPointMake(0, 0) inView:recognizer.view];
+    }
+}
+
+-(void)rotateRecognizer:(UIRotationGestureRecognizer*)recognizer
+{
+//    if (recognizer.state == UIGestureRecognizerStateBegan)
+//    {
+//        UIView *piece = recognizer.view;
+//        CGPoint locationInView = [recognizer locationInView:piece];
+//        CGPoint locationInSuperview = [recognizer locationInView:piece.superview];
+//        
+//        piece.layer.anchorPoint = CGPointMake(locationInView.x / piece.bounds.size.width, locationInView.y / piece.bounds.size.height);
+//        piece.center = locationInSuperview;
+//    }
+
+    CGFloat const recognizerAngleInDegree = IQRadianToDegree(recognizer.rotation);
+    CGFloat const currentAngleInRadian = IQAffineTransformGetAngle(self.transform);
+    CGFloat const currentAngleInDegree = IQRadianToDegree(currentAngleInRadian);
+    CGFloat finalAngleInDegree = recognizerAngleInDegree + currentAngleInDegree;
+    
+    NSInteger minimumRotationAngle = fabs(recognizer.velocity * 10);
+        
+    if (minimumRotationAngle > 2 || _isAngleLocked)
+    {
+        minimumRotationAngle = 5;
+    }
+    else
+    {
+        minimumRotationAngle = 1;
+    }
+    
+    NSMutableArray *lockDegrees = [[NSMutableArray alloc] init];
+
+    [lockDegrees addObject:@(0)];
+
+    for (NSInteger i = 45; i< 360; i+=45)
+    {
+        [lockDegrees addObject:@(i)];
+        [lockDegrees addObject:@(-i)];
+    }
+    
+    BOOL isLocked = NO;
+    
+    for (NSNumber *degree in lockDegrees)
+    {
+        NSInteger integerDegree = [degree integerValue];
+        
+        if ((finalAngleInDegree < integerDegree && (finalAngleInDegree+minimumRotationAngle) >= integerDegree) ||
+            (finalAngleInDegree > integerDegree && (finalAngleInDegree-minimumRotationAngle) <= integerDegree))
+        {
+            finalAngleInDegree = integerDegree;
+            isLocked = YES;
+            break;
+        }
+    }
+    
+    _isAngleLocked = isLocked;
+    
+    {
+        CGFloat finalAngleInRadian = IQDegreeToRadian(finalAngleInDegree);
+        
+        CGAffineTransform transform = CGAffineTransformMakeRotation(finalAngleInRadian);
+        transform.tx = recognizer.view.transform.tx;
+        transform.ty = recognizer.view.transform.ty;
+        
+        recognizer.view.transform = transform;
+        
+        if (_isAngleLocked == NO)
+        {
+            recognizer.rotation = 0.0;
+        }
+        
+        _angleView.angle = IQAffineTransformGetAngle(self.transform);
+        
+        for (CALayer *layer in self.layer.sublayers)
+        {
+            if ([layer isKindOfClass:[CATextLayer class]])
+            {
+                layer.transform = CATransform3DMakeAffineTransform(CGAffineTransformInvert(self.transform));
+            }
+        }
+        
+        _previousAngle = recognizerAngleInDegree;
+    }
+}
+
+#pragma mark - Gesture Recognizer Delegates
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    if ((gestureRecognizer == _rotateRecognizer && otherGestureRecognizer == _panRecognizer) ||
+        (gestureRecognizer == _panRecognizer && otherGestureRecognizer == _rotateRecognizer))
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
+@end

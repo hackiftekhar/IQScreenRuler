@@ -1,0 +1,92 @@
+/* This file should be localized in Spanish */
+
+/* Aspect Ratio */
+"Aspect Ratio" = "Aspect Ratio";
+"Original" = "Original";
+"Square" = "Square";
+
+/* No Screenshots */
+"no_screenshots_title" = "No screenshots found";
+"no_screenshots_description" = "You can capture the screen on your iOS device using the Sleep/Wake and Home buttons.";
+
+/* Open Screenshots */
+"Camera" = "Camera";
+"Photo Library" = "Photo Library";
+
+/* Ruler Ratio It's like 1x, 2x, 3x */
+"Change Scale Multiplier" = "Change Scale Multiplier";
+
+/* Sharing Text */
+"Mail Sent" = "Mail Sent";
+"mail_body" = "\n\n I am on '%1$@' with iOS '%2$@', using Version '%3$@' of '%4$@'";
+"mail_device_configuration_message" = "Your device is not configured to send Mail";
+"Screen Ruler - Bug Report" = "Screen Ruler - Bug Report";
+"Screen Ruler - Feedback" = "Screen Ruler - Feedback";
+
+/* Help Tour. */
+"Skip" = "Skip";
+"Start Help Tour" = "Start Help Tour";
+"Tap to continue" = "Tap to continue";
+"horizontal_scale_help" = "Adjust horizontal scale with your fingers according to your need";
+"vertical_scale_help" = "Adjust vertical scale with your fingers according to your need";
+"device_scale_help" = "Choose device scale multiplier according to your device resolution or according to your need";
+"double_tap_help" = "Double tap using one finger to zoom-in and Double tap using two fingers to zoom-out photo";
+"long_tap_color_help" = "Long tap and drag to show RGB color of pixel";
+"long_tap_scale_help" = "Long tap horizontal or vertical scale to show more options";
+
+/* Buttons */
+"Back" = "Back";
+"Cancel" = "Cancel";
+"Done" = "Done";
+"OK" = "OK";
+
+/* Social Share. */
+"Share Photo" = "Share Photo";
+"social_share_text" = "Check out '%@'. It's very helpful for Mobile App QA Guys to extract details of iOS app User Interface and looking into the details of screenshots is really a fun.";
+
+/* Resizing */
+"Custom" = "Custom";
+"Enter width and height" = "Enter width and height";
+"Height" = "Height";
+"Width" = "Width";
+"Resize" = "Resize";
+"Crop" = "Crop";
+"Resize Screenshot" = "Resize Screenshot";
+
+/* Change Scale X Y. */
+"Reset Scale to Original" = "Reset Scale to Original";
+"Set Scale point location" = "Set Scale point location";
+"Mark as X reference" = "Mark as X reference";
+"Mark as Y reference" = "Mark as Y reference";
+
+/* Zoom Scale */
+"Zoom Scale" = "Zoom Scale";
+"minimum_percent" = "Minimum Scale (%.0f%%)";
+"original_percent" = "Original (%.0f%%)";
+
+/* Crop Info */
+"x_y_width_height" = "X: %1$.0f,  Y: %2$.0f\nWidth: %3$.0f,  Height: %4$.0f";
+
+/* RGB Colro Point */
+"X: %.0f, Y: %.0f" = "X: %1$.0f, Y: %2$.0f";
+"X: NA, Y: NA" = "X: NA, Y: NA";
+
+/* Settings */
+"Settings" = "Settings";
+"Color Theme" = "Color Theme";
+"Natural" = "Natural";
+"Inverted" = "Inverted";
+"Social" = "Social";
+"Share On Social Network" = "Share On Social Network";
+"Rate Us On App Store" = "Rate Us On App Store";
+"Feedback" = "Feedback";
+"Bug Report" = "Bug Report";
+"Terms" = "Terms";
+"Terms and Conditions" = "Terms and Conditions";
+"Open Source Libraries" = "Open Source Libraries";
+"InfoEnum Software Systems" = "InfoEnum Software Systems";
+
+/* Other. */
+"Error" = "Error";
+"Version" = "Version";
+"image_load_error" = "There is an error loading the image. Please try again.";

@@ -1,0 +1,19 @@
+PODS:
+  - COSTouchVisualizer (1.0.6)
+  - Crashlytics (3.8.2):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.9)
+
+DEPENDENCIES:
+  - COSTouchVisualizer
+  - Crashlytics
+  - Fabric
+
+SPEC CHECKSUMS:
+  COSTouchVisualizer: a398089327a6c02897823614d7447ccc97198997
+  Crashlytics: 27acca95a01b042a8294291dd6dff27f8f6af6d7
+  Fabric: bc5bec42cef4bcf1ee3ce0e218fc518e4b44dfbb
+
+PODFILE CHECKSUM: c93d5f9157a3f3f0b3c8afc004eb12e16887a899
+
+COCOAPODS: 1.0.1
