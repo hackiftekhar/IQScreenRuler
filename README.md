@@ -9,7 +9,7 @@ As an iOS developer, I always feel the lack of simple app to check position of o
 This app is specially designed for making Mobile Quality Assurance Engineer (QA Engg.) life much easier. Now they can quickly review Mobile UI with point & pixel perfect dimensions within minutes.
 
 ###Video
-<a href="https://youtu.be/joHcfhrhrxY"><img src="http://img.youtube.com/vi/WAYc2Qj-OQg/0.jpg"
+<a href="https://youtu.be/joHcfhrhrxY"><img src="http://img.youtube.com/vi/joHcfhrhrxY/3.jpg"
 alt="Screen Ruler - Pixel Perfect Screenshot Ruler" width="480" height="360" border="10" /></a>
 
 
