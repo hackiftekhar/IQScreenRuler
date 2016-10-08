@@ -22,7 +22,7 @@
 @implementation AppDelegate
 
 //#if DEBUG
-//// Add this method to your AppDelegate method for recording videos
+//// Add this method to your AppDelegate method for touch visualization (Used when creating videos)
 //- (COSTouchVisualizerWindow *)window {
 //    static COSTouchVisualizerWindow *visWindow = nil;
 //    if (!visWindow)

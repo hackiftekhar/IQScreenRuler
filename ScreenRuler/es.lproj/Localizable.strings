@@ -9,6 +9,9 @@
 "no_screenshots_title" = "No screenshots found";
 "no_screenshots_description" = "You can capture the screen on your iOS device using the Sleep/Wake and Home buttons.";
 
+"photo_access_denied_title" = "Photo Library Access Denied";
+"photo_access_denied_description" = "Unable to access Photo Library, Go to Settings to change photo library permission.";
+
 /* Open Screenshots */
 "Camera" = "Camera";
 "Photo Library" = "Photo Library";

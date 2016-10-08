@@ -33,9 +33,6 @@
     BOOL isLockedOrientation;
 }
 
-@property (strong, nonatomic) IBOutlet UILabel *labelNoScreenshotsTitle;
-@property (strong, nonatomic) IBOutlet UILabel *labelNoScreenshotsDiscription;
-
 @property (nonatomic, strong) NSTimer *coachMarkTimer;
 
 @property(nonatomic, strong) ACMagnifyingGlass *magnifyingGlass;
@@ -49,6 +46,10 @@
 @property (strong, nonatomic) IBOutlet IQScrollContainerView *scrollContainerView;
 
 @property (strong, nonatomic) IBOutlet UIView *viewNoScreenshotInfo;
+@property (strong, nonatomic) IBOutlet UILabel *labelNoScreenshotsTitle;
+@property (strong, nonatomic) IBOutlet UILabel *labelNoScreenshotsDiscription;
+@property (strong, nonatomic) IBOutlet UIButton *noScreenshotActionButton;
+
 
 @property (strong, nonatomic) IBOutlet SRToolbarButton *sideRulerButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sideRulerBarButton;
@@ -84,9 +85,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.labelNoScreenshotsTitle.text = NSLocalizedString(@"no_screenshots_title", nil);
-    self.labelNoScreenshotsDiscription.text = NSLocalizedString(@"no_screenshots_description", nil);
-
     self.topColorView.translatesAutoresizingMaskIntoConstraints = YES;
 
     self.magnifyingGlass = [[ACMagnifyingGlass alloc] initWithFrame:CGRectMake(0, 0, 115, 115)];
@@ -602,9 +600,35 @@
 
 - (IBAction)optionPhotoOptions:(id)sender {
     
-    SRScreenshotCollectionViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([SRScreenshotCollectionViewController class])];
-    controller.delegate = self;
-    [controller presentOverViewController:self.navigationControllerSR completion:nil];
+    void (^loadWithAuthorizationStatus)(PHAuthorizationStatus status) = ^(PHAuthorizationStatus status){
+        
+        if (status == PHAuthorizationStatusRestricted ||
+            status == PHAuthorizationStatusDenied)
+        {
+            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [[UIApplication sharedApplication] openURL:url];
+        }
+        else if (status == PHAuthorizationStatusAuthorized)
+        {
+            SRScreenshotCollectionViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([SRScreenshotCollectionViewController class])];
+            controller.delegate = self;
+            [controller presentOverViewController:self.navigationControllerSR completion:nil];
+        }
+    };
+    
+    if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusNotDetermined)
+    {
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                loadWithAuthorizationStatus(status);
+            }];
+        }];
+    }
+    else
+    {
+        loadWithAuthorizationStatus([PHPhotoLibrary authorizationStatus]);
+    }
 }
 
 -(void)screenshotControllerDidSelectOpenPhotoLibrary:(SRScreenshotCollectionViewController*)controller
@@ -651,22 +675,57 @@
 
 -(void)openWithLatestScreenshot
 {
-    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    activityView.color = [UIColor lightGrayColor];
-    activityView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
-    [activityView startAnimating];
-    [self.view addSubview:activityView];
-    
-    [self getLastestScreenshot:^(UIImage *image) {
-        [activityView stopAnimating];
-        [activityView removeFromSuperview];
+    void (^loadWithAuthorizationStatus)(PHAuthorizationStatus status) = ^(PHAuthorizationStatus status){
         
-        self.image = image;
-        [self.scrollContainerView zoomToMinimumScaleAnimated:YES];
-    }];
+        if (status == PHAuthorizationStatusRestricted ||
+            status == PHAuthorizationStatusDenied)
+        {
+            self.libraryBarButton.enabled = NO;
+            [self.noScreenshotActionButton setImage:[UIImage imageNamed:@"photo_access"] forState:UIControlStateNormal];
+            self.labelNoScreenshotsTitle.text = NSLocalizedString(@"photo_access_denied_title", nil);
+            self.labelNoScreenshotsDiscription.text = NSLocalizedString(@"photo_access_denied_description", nil);
+            self.image = nil;
+        }
+        else if (status == PHAuthorizationStatusAuthorized)
+        {
+            self.libraryBarButton.enabled = YES;
+            [self.noScreenshotActionButton setImage:[UIImage imageNamed:@"iPhone-sceenshot"] forState:UIControlStateNormal];
+            self.labelNoScreenshotsTitle.text = NSLocalizedString(@"no_screenshots_title", nil);
+            self.labelNoScreenshotsDiscription.text = NSLocalizedString(@"no_screenshots_description", nil);
+            
+            UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            activityView.color = [UIColor lightGrayColor];
+            activityView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
+            [activityView startAnimating];
+            [self.view addSubview:activityView];
+            
+            [self getLatestScreenshot:^(UIImage *image) {
+                [activityView stopAnimating];
+                [activityView removeFromSuperview];
+                
+                self.image = image;
+                [self.scrollContainerView zoomToMinimumScaleAnimated:YES];
+            }];
+        }
+    };
+    
+    self.libraryBarButton.enabled = NO;
+    if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusNotDetermined)
+    {
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                loadWithAuthorizationStatus(status);
+            }];
+        }];
+    }
+    else
+    {
+        loadWithAuthorizationStatus([PHPhotoLibrary authorizationStatus]);
+    }
 }
 
--(void)getLastestScreenshot:(void(^)(UIImage*))completionBlock
+-(void)getLatestScreenshot:(void(^)(UIImage*))completionBlock
 {
     [[NSOperationQueue new] addOperationWithBlock:^{
 

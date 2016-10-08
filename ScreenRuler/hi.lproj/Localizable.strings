@@ -9,6 +9,9 @@
 "no_screenshots_title" = "कुछ भी स्क्रीनशॉट नहीं मिले";
 "no_screenshots_description" = "आप स्क्रीन लॉक बटन और होम बटन का उपयोग कर अपने डिवाइस पर स्क्रीनशॉट ले सकते हैं।";
 
+"photo_access_denied_title" = "फोटो लाइब्रेरी की अनुमति नहीं";
+"photo_access_denied_description" = "फोटो लाइब्रेरी का उपयोग करने में समर्थ नहीं है। फोटो लाइब्रेरी की अनुमति बदलने के लिए सेटिंग्स में जायें।";
+
 /* Open Screenshots */
 "Camera" = "कैमरा";
 "Photo Library" = "फोटो लाइब्रेरी";
