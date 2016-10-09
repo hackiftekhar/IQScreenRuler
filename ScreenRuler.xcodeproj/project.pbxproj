@@ -10,6 +10,7 @@
 		11AC63C4048F0C26461C07D0 /* libPods-ScreenRuler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F6ABE1EFC39D370C25D1C1 /* libPods-ScreenRuler.a */; };
 		4C0403891DA910FC0075A71B /* SRIconsGeneratorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0403881DA910FC0075A71B /* SRIconsGeneratorViewController.m */; };
 		4C04038B1DA94D3E0075A71B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CD427201DA823CF000AD1CA /* Assets.xcassets */; };
+		4C21E7AE1DAA3923005BE8E2 /* Icon-64.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C21E7AC1DAA3923005BE8E2 /* Icon-64.png */; };
 		4C7396E31DA6A6E700397366 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C7396E11DA6A6E700397366 /* Localizable.strings */; };
 		4C8B705D1DA7AFD200285D24 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C8B705F1DA7AFD200285D24 /* InfoPlist.strings */; };
 		4CD032051CC165B800539151 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CD032031CC165B800539151 /* Main.storyboard */; };
@@ -70,6 +71,7 @@
 /* Begin PBXFileReference section */
 		4C0403871DA910FC0075A71B /* SRIconsGeneratorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRIconsGeneratorViewController.h; sourceTree = "<group>"; };
 		4C0403881DA910FC0075A71B /* SRIconsGeneratorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRIconsGeneratorViewController.m; sourceTree = "<group>"; };
+		4C21E7AC1DAA3923005BE8E2 /* Icon-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-64.png"; sourceTree = "<group>"; };
 		4C7396E21DA6A6E700397366 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4C7396E41DA6A6EF00397366 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4C7396EA1DA6A6F400397366 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -538,6 +540,7 @@
 		4CD4271F1DA823CF000AD1CA /* AssetsAndResources */ = {
 			isa = PBXGroup;
 			children = (
+				4C21E7AC1DAA3923005BE8E2 /* Icon-64.png */,
 				4CD427201DA823CF000AD1CA /* Assets.xcassets */,
 				4CD427211DA823CF000AD1CA /* iTunesArtwork */,
 				4CD427221DA823CF000AD1CA /* iTunesArtwork@2x */,
@@ -627,6 +630,7 @@
 				4CD427181DA8236A000AD1CA /* Acknowledgement.plist in Resources */,
 				4CD427251DA823CF000AD1CA /* iTunesArtwork in Resources */,
 				4C8B705D1DA7AFD200285D24 /* InfoPlist.strings in Resources */,
+				4C21E7AE1DAA3923005BE8E2 /* Icon-64.png in Resources */,
 				4CD426BA1DA8234B000AD1CA /* kb-loupe-hi_7.png in Resources */,
 				4CD427191DA8236A000AD1CA /* EULA.html in Resources */,
 			);

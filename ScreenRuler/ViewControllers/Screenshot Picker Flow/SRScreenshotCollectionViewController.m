@@ -223,26 +223,20 @@
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    
-    if (kind == UICollectionElementKindSectionHeader) {
-        
-        UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([UICollectionReusableView class]) forIndexPath:indexPath];
-        view.backgroundColor = [UIColor clearColor];
-        if (self.completeFetchResult.count == 0)
-        {
-            UILabel *label1 = [[UILabel alloc] initWithFrame:view.bounds];
-            label1.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-            label1.font = [UIFont kohinoorBanglaSemiboldWithSize:25.0];
-            label1.numberOfLines = 0;
-            label1.textAlignment = NSTextAlignmentCenter;
-            label1.textColor = [UIColor darkGrayColor];
-            label1.text = NSLocalizedString(@"no_screenshots_title", nil);
-            [view addSubview:label1];
-        }
-        return view;
+    UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([UICollectionReusableView class]) forIndexPath:indexPath];
+    view.backgroundColor = [UIColor clearColor];
+    if (self.completeFetchResult.count == 0)
+    {
+        UILabel *label1 = [[UILabel alloc] initWithFrame:view.bounds];
+        label1.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        label1.font = [UIFont kohinoorBanglaSemiboldWithSize:25.0];
+        label1.numberOfLines = 0;
+        label1.textAlignment = NSTextAlignmentCenter;
+        label1.textColor = [UIColor darkGrayColor];
+        label1.text = NSLocalizedString(@"no_screenshots_title", nil);
+        [view addSubview:label1];
     }
-    
-    return nil;
+    return view;
 }
 
 - (NSInteger) collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section

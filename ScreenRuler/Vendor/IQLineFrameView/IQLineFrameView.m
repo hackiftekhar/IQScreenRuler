@@ -405,17 +405,6 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
     
     multiplier *=_deviceScale;
 
-    CGRect respectiveBounds = CGRectZero;
-    
-    if (_respectiveView)
-    {
-        respectiveBounds = [self.respectiveView convertRect:self.respectiveView.bounds toView:self];
-    }
-    else
-    {
-        respectiveBounds = newRect;
-    }
-    
     CGPoint respectivePoint = [self.respectiveView convertPoint:self.startingScalePoint toView:self];
 
     CGFloat singleStep = self.zoomScale*multiplier;

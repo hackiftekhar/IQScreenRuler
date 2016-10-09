@@ -16,7 +16,11 @@
 
 @interface SRHomeViewController : UIViewController
 
+@property(nonatomic, strong) UIImage *image;
 -(void)openWithLatestScreenshot;
+
+@property (assign, nonatomic) BOOL isRequestingImage;
+@property (assign, nonatomic) BOOL isRequestShouldIgnore;
 
 @end
 

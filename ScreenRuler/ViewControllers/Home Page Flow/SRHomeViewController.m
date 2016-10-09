@@ -76,6 +76,7 @@
 
 
 @implementation SRHomeViewController
+@dynamic image;
 
 -(void)awakeFromNib
 {
@@ -185,6 +186,11 @@
 -(UIStatusBarAnimation)preferredStatusBarUpdateAnimation
 {
     return UIStatusBarAnimationSlide;
+}
+
+-(UIImage*)image
+{
+    return self.scrollContainerView.image;
 }
 
 -(void)setImage:(UIImage*)image
@@ -703,13 +709,20 @@
                 [activityView stopAnimating];
                 [activityView removeFromSuperview];
                 
-                self.image = image;
-                [self.scrollContainerView zoomToMinimumScaleAnimated:YES];
+                if (self.isRequestShouldIgnore == NO)
+                {
+                    self.image = image;
+                    [self.scrollContainerView zoomToMinimumScaleAnimated:YES];
+                }
+
+                self.isRequestingImage = NO;
+                self.isRequestShouldIgnore = YES;
             }];
         }
     };
     
     self.libraryBarButton.enabled = NO;
+    self.isRequestingImage = YES;
     if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusNotDetermined)
     {
         [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {

@@ -347,9 +347,6 @@
     
 //    [self layoutImageScrollView];
     
-    CGPoint centerPoint = CGPointMake(CGRectGetMidX(self.scrollView.bounds), CGRectGetMidY(self.scrollView.bounds));
-    centerPoint = [self.scrollView convertPoint:centerPoint toView:self.scrollView.contentView];
-
     CGFloat zoomScale = IQAspectScaleFit(self.image.size,self.bounds);
     self.minimumZoomScale = zoomScale;
     self.maximumZoomScale = [[UIScreen  mainScreen] bounds].size.width;
