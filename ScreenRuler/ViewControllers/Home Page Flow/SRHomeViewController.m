@@ -72,6 +72,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *labelGreen;
 @property (strong, nonatomic) IBOutlet UILabel *labelBlue;
 @property (strong, nonatomic) IBOutlet UILabel *labelColorLocation;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *loadingColorDataIndicator;
 
 @end
 
@@ -936,57 +937,88 @@
     }
     
     UIImage *image = self.scrollContainerView.image;
-    
-    UIColor *color = [image colorAtPoint:location];
-    
-    NSInteger red = [color red]*255.0;
-    NSInteger green = [color green]*255.0;
-    NSInteger blue = [color blue]*255.0;
-    
-    self.magnifyingGlass.color = color;
-    
-    self.labelRed.text      = [NSString localizedStringWithFormat:@"%ld",(long)red];
-    self.labelGreen.text    = [NSString localizedStringWithFormat:@"%ld",(long)green];
-    self.labelBlue.text     = [NSString localizedStringWithFormat:@"%ld",(long)blue];
-    
-    if (location.x <= 0 || location.y <= 0 || location.x > image.size.width || location.y > image.size.height)
-    {
-        self.labelColorLocation.text = NSLocalizedString(@"X: NA, Y: NA", nil);
-    }
-    else
-    {
-        self.labelColorLocation.text = [NSString localizedStringWithFormat:@"X: %.0f, Y: %.0f",location.x,location.y];
-    }
-    
-    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+
+    void(^drawColorInfo)(UIColor* color) = ^(UIColor* color){
+
+        self.magnifyingGlass.color = color;
+
+        NSInteger red = [color red]*255.0;
+        NSInteger green = [color green]*255.0;
+        NSInteger blue = [color blue]*255.0;
         
-        if (color)
+        self.labelRed.text      = [NSString localizedStringWithFormat:@"%ld",(long)red];
+        self.labelGreen.text    = [NSString localizedStringWithFormat:@"%ld",(long)green];
+        self.labelBlue.text     = [NSString localizedStringWithFormat:@"%ld",(long)blue];
+        
+        if (location.x <= 0 || location.y <= 0 || location.x > image.size.width || location.y > image.size.height)
         {
-            self.topColorView.backgroundColor = color;
+            self.labelColorLocation.text = NSLocalizedString(@"X: NA, Y: NA", nil);
         }
         else
         {
-            self.topColorView.backgroundColor = [UIColor originalThemeColor];
+            self.labelColorLocation.text = [NSString localizedStringWithFormat:@"X: %.0f, Y: %.0f",location.x,location.y];
         }
         
-        if ([color isDarkColor])
-        {
-            self.labelRed.textColor             = [UIColor blackColor];
-            self.labelGreen.textColor           = [UIColor blackColor];
-            self.labelBlue.textColor            = [UIColor blackColor];
-            self.labelColorLocation.textColor   = [UIColor blackColor];
-            self.viewColorLabelContainer.backgroundColor =  [UIColor colorWithWhite:1 alpha:0.9];
-        }
-        else
-        {
-            self.labelRed.textColor             = [UIColor whiteColor];
-            self.labelGreen.textColor           = [UIColor whiteColor];
-            self.labelBlue.textColor            = [UIColor whiteColor];
-            self.labelColorLocation.textColor   = [UIColor whiteColor];
-            self.viewColorLabelContainer.backgroundColor =  [UIColor colorWithWhite:0 alpha:0.7];
-        }
-        
-    } completion:NULL];
+        [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            
+            if (color)
+            {
+                self.topColorView.backgroundColor = color;
+            }
+            else
+            {
+                self.topColorView.backgroundColor = [UIColor originalThemeColor];
+            }
+            
+            if ([color isDarkColor])
+            {
+                self.labelRed.textColor             = [UIColor blackColor];
+                self.labelGreen.textColor           = [UIColor blackColor];
+                self.labelBlue.textColor            = [UIColor blackColor];
+                self.labelColorLocation.textColor   = [UIColor blackColor];
+                self.viewColorLabelContainer.backgroundColor =  [UIColor colorWithWhite:1 alpha:0.9];
+            }
+            else
+            {
+                self.labelRed.textColor             = [UIColor whiteColor];
+                self.labelGreen.textColor           = [UIColor whiteColor];
+                self.labelBlue.textColor            = [UIColor whiteColor];
+                self.labelColorLocation.textColor   = [UIColor whiteColor];
+                self.viewColorLabelContainer.backgroundColor =  [UIColor colorWithWhite:0 alpha:0.7];
+            }
+            
+        } completion:NULL];
+    };
+    
+    
+    if ([self.loadingColorDataIndicator isAnimating] == NO)
+    {
+        [image colorAtPoint:location preparingBlock:^{
+            [self.loadingColorDataIndicator startAnimating];
+        } completion:^(UIColor *colorAtPoint) {
+            
+            if ([self.loadingColorDataIndicator isAnimating])
+            {
+                [self.loadingColorDataIndicator stopAnimating];
+
+                [image colorAtPoint:self.magnifyingGlass.touchPoint preparingBlock:NULL completion:^(UIColor *colorAtPoint) {
+                    drawColorInfo(colorAtPoint);
+                }];
+            }
+            else
+            {
+                drawColorInfo(colorAtPoint);
+            }
+        }];
+    }
+    
+    if ([self.loadingColorDataIndicator isAnimating])
+    {
+        self.labelRed.text      = @" ";
+        self.labelGreen.text    = @" ";
+        self.labelBlue.text     = @" ";
+        self.labelColorLocation.text = @" ";
+    }
 }
 
 -(void)hideRGB

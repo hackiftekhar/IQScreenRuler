@@ -8,6 +8,8 @@
 
 #import "UIImage+Color.h"
 
+#import <objc/runtime.h>
+
 @implementation UIImage (Color)
 
 + (UIImage *)imageWithColor:(UIColor *)color
@@ -51,36 +53,116 @@
     return img;
 }
 
--(UIColor *)colorAtPoint:(CGPoint)point
+-(void)dealloc
+{
+    CFDataRef pixelData = (__bridge CFDataRef)(objc_getAssociatedObject(self, @selector(pixelData)));
+
+    if (pixelData)
+    {
+        CFRelease(pixelData);
+    }
+}
+
+-(void)colorAtPoint:(CGPoint)point preparingBlock:(void (^)(void))preparingBlock completion:(void (^)(UIColor*))colorCompletion
 {
     if (point.x <= 0 || point.y <= 0 || point.x > self.size.width || point.y > self.size.height)
     {
-        return nil;
+        if (colorCompletion)
+        {
+            colorCompletion(nil);
+        }
     }
-    
-    NSInteger pointX = ceilf(point.x)-1;
-    NSInteger pointY = ceilf(point.y);
+    //Method1 but having a huge performance hit with CGDataProviderCopyData method
+    else
+    {
+        void(^getColorBlock)(const UInt8* data) = ^(const UInt8* data){
+            
+            int numberOfColorComponents = 4; // R,G,B, and A
+            NSInteger pointX = ceilf(point.x)-1;
+            NSInteger pointY = ceilf(point.y)-1;
+            
+            float w = self.size.width;
+            int pixelInfo = ((w * pointY) + pointX) * numberOfColorComponents;
+            
+            int red = 0;
+            int green = 0;
+            int blue = 0;
+            int alpha = 255;
+            
+            switch (CGImageGetAlphaInfo(self.CGImage))
+            {
+                case kCGImageAlphaNone:
+                case kCGImageAlphaNoneSkipLast:
+                    red     = data[pixelInfo + 0];
+                    green   = data[pixelInfo + 1];
+                    blue    = data[pixelInfo + 2];
+                    break;
+                case kCGImageAlphaPremultipliedLast:
+                case kCGImageAlphaLast:
+                    red     = data[pixelInfo + 0];
+                    green   = data[pixelInfo + 1];
+                    blue    = data[pixelInfo + 2];
+                    alpha   = data[pixelInfo + 3];
+                    break;
+                case kCGImageAlphaPremultipliedFirst:
+                case kCGImageAlphaFirst:
+                    alpha   = data[pixelInfo + 0];
+                case kCGImageAlphaNoneSkipFirst:
+                    red     = data[pixelInfo + 1];
+                    green   = data[pixelInfo + 2];
+                    blue    = data[pixelInfo + 3];
+                    break;
+                case kCGImageAlphaOnly:
+                    alpha   = data[pixelInfo + 0];
+                    break;
+                    
+                default:
+                    break;
+            }
+            
+            // RGBA values range from 0 to 255
+            UIColor *color = [UIColor colorWithRed:red/255.0
+                                   green:green/255.0
+                                    blue:blue/255.0
+                                   alpha:alpha/255.0];
+            
+            if (colorCompletion)
+            {
+                colorCompletion(color);
+            }
+        };
+        
+        CFDataRef pixelData = (__bridge CFDataRef)(objc_getAssociatedObject(self, @selector(pixelData)));
 
-    CGImageRef cgImage = self.CGImage;
-    NSUInteger width = self.size.width;
-    NSUInteger height = self.size.height;
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    unsigned char pixelData[4] = { 0, 0, 0, 0 };
-    CGContextRef context = CGBitmapContextCreate(pixelData, 1, 1, CGImageGetBitsPerComponent(cgImage), CGImageGetBytesPerRow(cgImage), colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
-    CGColorSpaceRelease(colorSpace);
-    CGContextSetBlendMode(context, kCGBlendModeCopy);
-    
-    // Draw the pixel we are interested in onto the bitmap context
-    CGContextTranslateCTM(context, -pointX, pointY-(CGFloat)height);
-    CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, (CGFloat)width, (CGFloat)height), cgImage);
-    CGContextRelease(context);
-    
-    // Convert color values [0..255] to floats [0.0..1.0]
-    CGFloat red   = pixelData[0] / 255.0f;
-    CGFloat green = pixelData[1] / 255.0f;
-    CGFloat blue  = pixelData[2] / 255.0f;
-    CGFloat alpha = pixelData[3] / 255.0f;
-    return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+        if (pixelData)
+        {
+            getColorBlock(CFDataGetBytePtr(pixelData));
+        }
+        else
+        {
+            if (preparingBlock)
+            {
+                preparingBlock();
+            }
+            
+            NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+            queue.qualityOfService = NSQualityOfServiceUserInteractive;
+            
+            NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
+                CGDataProviderRef provider = CGImageGetDataProvider(self.CGImage);
+                CFDataRef pixelData = CGDataProviderCopyData(provider);
+                
+                objc_setAssociatedObject(self, @selector(pixelData), (__bridge NSData*)(pixelData), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+                
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    getColorBlock(CFDataGetBytePtr(pixelData));
+                }];
+            }];
+            
+            operation.qualityOfService = NSQualityOfServiceUserInteractive;
+            [queue addOperation:operation];
+        }
+    }
 }
 
 @end

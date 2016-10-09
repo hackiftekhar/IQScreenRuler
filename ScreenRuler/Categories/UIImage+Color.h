@@ -14,6 +14,6 @@
 
 -(UIImage*)imageWithColor:(UIColor*)color;
 
--(UIColor*)colorAtPoint:(CGPoint)point;
+-(void)colorAtPoint:(CGPoint)point preparingBlock:(void (^)(void))preparingBlock completion:(void (^)(UIColor*))colorCompletion;
 
 @end

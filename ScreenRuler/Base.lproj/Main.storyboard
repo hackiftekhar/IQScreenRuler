@@ -386,6 +386,7 @@
                         <outlet property="labelRed" destination="6GJ-s7-GOA" id="9JL-tS-epL"/>
                         <outlet property="libraryBarButton" destination="482-I6-R07" id="2SZ-lo-uTr"/>
                         <outlet property="lineFrameView" destination="0LF-Qs-9va" id="e1K-o0-1Mi"/>
+                        <outlet property="loadingColorDataIndicator" destination="SN5-Zm-Xev" id="Pj7-Vm-mG9"/>
                         <outlet property="noScreenshotActionButton" destination="Y6q-fu-Bb9" id="sPr-lD-Tzi"/>
                         <outlet property="optionBarButton" destination="WA8-oJ-SMr" id="EQM-uV-Ce7"/>
                         <outlet property="ratioButton" destination="BS5-SW-4dg" id="eZE-8S-tbI"/>
@@ -439,6 +440,7 @@
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="SN5-Zm-Xev"/>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAC-LU-8hK">
                                     <color key="backgroundColor" red="1" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </view>
@@ -462,11 +464,13 @@
                                 <constraint firstItem="hw2-Xq-wEh" firstAttribute="centerX" secondItem="fTE-iW-Ufe" secondAttribute="centerX" id="CLc-kd-6zd"/>
                                 <constraint firstItem="BL0-Ip-bSW" firstAttribute="centerX" secondItem="QAs-AY-r2r" secondAttribute="centerX" id="Do1-dw-klN"/>
                                 <constraint firstItem="hw2-Xq-wEh" firstAttribute="bottom" secondItem="QAC-LU-8hK" secondAttribute="bottom" id="DoU-LH-azI"/>
+                                <constraint firstItem="SN5-Zm-Xev" firstAttribute="centerY" secondItem="VPp-HV-2KR" secondAttribute="centerY" id="ICu-Ma-bGF"/>
                                 <constraint firstItem="qTh-jN-aXp" firstAttribute="leading" secondItem="VPp-HV-2KR" secondAttribute="leading" id="J0K-vC-d5Z"/>
                                 <constraint firstItem="QAC-LU-8hK" firstAttribute="centerX" secondItem="6GJ-s7-GOA" secondAttribute="centerX" id="Jvq-WY-JAF"/>
                                 <constraint firstItem="6GJ-s7-GOA" firstAttribute="leading" secondItem="VPp-HV-2KR" secondAttribute="leading" constant="10" id="LYX-5A-WzA"/>
                                 <constraint firstItem="QAs-AY-r2r" firstAttribute="top" secondItem="qTh-jN-aXp" secondAttribute="baseline" id="OkS-hn-oVJ"/>
                                 <constraint firstItem="QAs-AY-r2r" firstAttribute="leading" secondItem="6GJ-s7-GOA" secondAttribute="trailing" id="P5Z-NV-bBq"/>
+                                <constraint firstItem="SN5-Zm-Xev" firstAttribute="centerX" secondItem="VPp-HV-2KR" secondAttribute="centerX" id="PKZ-wk-N30"/>
                                 <constraint firstItem="BL0-Ip-bSW" firstAttribute="top" secondItem="QAC-LU-8hK" secondAttribute="top" id="T8y-tX-FTE"/>
                                 <constraint firstItem="hw2-Xq-wEh" firstAttribute="width" secondItem="QAC-LU-8hK" secondAttribute="width" id="ULE-c7-5MM"/>
                                 <constraint firstItem="hw2-Xq-wEh" firstAttribute="top" secondItem="QAC-LU-8hK" secondAttribute="top" id="cud-UT-TDA"/>
@@ -770,7 +774,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="Vb7-gB-CIP">
-                            <rect key="frame" x="0.0" y="337" width="375" height="80"/>
+                            <rect key="frame" x="0.0" y="336.5" width="375" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eN1-Hg-Wkb">
@@ -1272,7 +1276,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Share On Social Network" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IVF-fw-bRY">
-                                            <frame key="frameInset" minX="15" width="345" height="43"/>
+                                            <frame key="frameInset" minX="15" width="345" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
                                             <nil key="highlightedColor"/>
@@ -2151,7 +2155,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xAP-Je-5Ft">
-                                            <frame key="frameInset" minX="15" width="325" height="43"/>
+                                            <frame key="frameInset" minX="15" width="325" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
                                             <nil key="highlightedColor"/>

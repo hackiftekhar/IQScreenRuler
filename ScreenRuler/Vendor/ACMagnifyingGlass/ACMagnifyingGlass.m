@@ -55,6 +55,7 @@ CGFloat const kACMagnifyingGlassDefaultScale = 3;
         
         self.layer.magnificationFilter = kCAFilterNearest;
 		self.layer.borderWidth = 1;
+        self.layer.opaque = YES;
         self.layer.drawsAsynchronously = YES;
         self.layer.borderColor = [[UIColor grayColor] CGColor];
 		self.layer.masksToBounds = YES;
