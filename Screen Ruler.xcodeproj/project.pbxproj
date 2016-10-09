@@ -11,6 +11,7 @@
 		4C0403891DA910FC0075A71B /* SRIconsGeneratorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0403881DA910FC0075A71B /* SRIconsGeneratorViewController.m */; };
 		4C04038B1DA94D3E0075A71B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CD427201DA823CF000AD1CA /* Assets.xcassets */; };
 		4C21E7AE1DAA3923005BE8E2 /* Icon-64.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C21E7AC1DAA3923005BE8E2 /* Icon-64.png */; };
+		4C21E7B11DAAB978005BE8E2 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C21E7B01DAAB978005BE8E2 /* UIImage+fixOrientation.m */; };
 		4C7396E31DA6A6E700397366 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C7396E11DA6A6E700397366 /* Localizable.strings */; };
 		4C8B705D1DA7AFD200285D24 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C8B705F1DA7AFD200285D24 /* InfoPlist.strings */; };
 		4CD032051CC165B800539151 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CD032031CC165B800539151 /* Main.storyboard */; };
@@ -72,6 +73,8 @@
 		4C0403871DA910FC0075A71B /* SRIconsGeneratorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRIconsGeneratorViewController.h; sourceTree = "<group>"; };
 		4C0403881DA910FC0075A71B /* SRIconsGeneratorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRIconsGeneratorViewController.m; sourceTree = "<group>"; };
 		4C21E7AC1DAA3923005BE8E2 /* Icon-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-64.png"; sourceTree = "<group>"; };
+		4C21E7AF1DAAB978005BE8E2 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
+		4C21E7B01DAAB978005BE8E2 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
 		4C7396E21DA6A6E700397366 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4C7396E41DA6A6EF00397366 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4C7396EA1DA6A6F400397366 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -443,6 +446,8 @@
 				4CD426E51DA82364000AD1CA /* UIFont+AppFont.m */,
 				4CD426E61DA82364000AD1CA /* UIImage+Color.h */,
 				4CD426E71DA82364000AD1CA /* UIImage+Color.m */,
+				4C21E7AF1DAAB978005BE8E2 /* UIImage+fixOrientation.h */,
+				4C21E7B01DAAB978005BE8E2 /* UIImage+fixOrientation.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -597,7 +602,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4CD031F21CC165B700539151 /* Build configuration list for PBXProject "ScreenRuler" */;
+			buildConfigurationList = 4CD031F21CC165B700539151 /* Build configuration list for PBXProject "Screen Ruler" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -722,6 +727,7 @@
 				4CED77D41DA82A8E0093176D /* IQGeometry+Point.m in Sources */,
 				4CED77D51DA82A8E0093176D /* IQGeometry+Rect.m in Sources */,
 				4CED77D61DA82A8E0093176D /* IQGeometry+Size.m in Sources */,
+				4C21E7B11DAAB978005BE8E2 /* UIImage+fixOrientation.m in Sources */,
 				4CED77D71DA82A8E0093176D /* IQLineFrameView.m in Sources */,
 				4CED77D81DA82A8E0093176D /* IQRulerScrollView.m in Sources */,
 				4CED77D91DA82A8E0093176D /* IQScrollContainerView.m in Sources */,
@@ -929,7 +935,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4CD031F21CC165B700539151 /* Build configuration list for PBXProject "ScreenRuler" */ = {
+		4CD031F21CC165B700539151 /* Build configuration list for PBXProject "Screen Ruler" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4CD0320C1CC165B800539151 /* Debug */,

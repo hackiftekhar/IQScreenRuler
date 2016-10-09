@@ -55,6 +55,7 @@ CGFloat const kACMagnifyingGlassDefaultScale = 3;
         
         self.layer.magnificationFilter = kCAFilterNearest;
 		self.layer.borderWidth = 1;
+        self.layer.drawsAsynchronously = YES;
         self.layer.borderColor = [[UIColor grayColor] CGColor];
 		self.layer.masksToBounds = YES;
 		self.touchPointOffset = CGPointMake(0, kACMagnifyingGlassDefaultOffset);

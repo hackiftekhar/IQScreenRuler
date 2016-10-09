@@ -25,6 +25,7 @@
 #import "SRImagePickerController.h"
 #import "IQScrollContainerView.h"
 #import "SRScreenshotCollectionViewController.h"
+#import "UIImage+fixOrientation.h"
 
 //https://www.iconfinder.com/iconsets/hawcons-gesture-stroke
 
@@ -673,6 +674,7 @@
 -(void)imagePickerController:(SRImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    image = [image fixOrientation];
     self.image = image;
     [self.scrollContainerView zoomToMinimumScaleAnimated:YES];
 
