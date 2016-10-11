@@ -247,7 +247,7 @@
                         </constraints>
                     </view>
                     <toolbarItems>
-                        <barButtonItem style="plain" id="m4q-rI-c12">
+                        <barButtonItem id="m4q-rI-c12">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nRs-Du-Sr1" customClass="SRToolbarButton">
                                 <rect key="frame" x="16" y="10" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -272,7 +272,7 @@
                             </button>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="p3Q-GJ-XM5"/>
-                        <barButtonItem style="plain" id="ukV-1D-apM">
+                        <barButtonItem id="ukV-1D-apM">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Mry-3E-m5Q" customClass="SRToolbarButton">
                                 <rect key="frame" x="96" y="10" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -297,7 +297,7 @@
                             </button>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="y8N-DH-QFZ"/>
-                        <barButtonItem style="plain" id="MQY-9P-4nS">
+                        <barButtonItem id="MQY-9P-4nS">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pyb-lI-IG3" customClass="SRToolbarButton">
                                 <rect key="frame" x="175" y="10" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -342,9 +342,9 @@
                                     <segue destination="ETK-z5-Ybp" kind="presentation" id="rwW-32-gom"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem style="plain" id="Z3k-7t-jds">
+                            <barButtonItem id="Z3k-7t-jds">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="BS5-SW-4dg" customClass="SRToolbarButton">
-                                    <rect key="frame" x="60" y="9" width="35" height="25"/>
+                                    <rect key="frame" x="61" y="9" width="35" height="25"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="16"/>
                                     <state key="normal" title="@2x"/>
@@ -374,6 +374,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="editOptionBarButton" destination="Vtb-4d-B7u" id="KCe-gt-U97"/>
                         <outlet property="freeHandBarButton" destination="ukV-1D-apM" id="RH8-Na-M4q"/>
@@ -627,9 +630,9 @@
                                     <action selector="cancelAction:" destination="PQc-bh-qXo" id="esQ-QM-KKh"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem width="240" style="plain" id="RHp-LY-bRe">
+                            <barButtonItem width="240" id="RHp-LY-bRe">
                                 <view key="customView" contentMode="scaleToFill" id="nUi-Bi-sbh">
-                                    <rect key="frame" x="16" y="0.0" width="240" height="44"/>
+                                    <rect key="frame" x="77" y="0.0" width="240" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X:0 ,Y:0 Width:640, Height: 1136" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ql0-oU-nnw">
@@ -694,7 +697,7 @@
                     </view>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Te1-Az-2bC"/>
-                        <barButtonItem style="plain" id="asn-yr-pSn">
+                        <barButtonItem id="asn-yr-pSn">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EZs-P6-kgU" customClass="IQColorPickerButton">
                                 <rect key="frame" x="182" y="7" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -705,7 +708,7 @@
                             </button>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="IKX-Rb-al2"/>
-                        <barButtonItem style="plain" id="kwn-Ku-wXT">
+                        <barButtonItem id="kwn-Ku-wXT">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Enk-VY-nlH" customClass="IQTextPickerButton">
                                 <rect key="frame" x="383" y="5" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -757,7 +760,6 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="WJp-KD-ckD"/>
                         <segue destination="BYZ-38-t0r" kind="custom" identifier="SRPushSegue" customClass="SRPushSegue" id="URP-EC-cX9"/>
                     </connections>
                 </navigationController>
@@ -1016,7 +1018,6 @@
                                                 <constraint firstItem="MhP-w4-ZgU" firstAttribute="leading" secondItem="Ip7-Ht-HoF" secondAttribute="trailing" id="tSw-AN-YRC"/>
                                                 <constraint firstItem="Ip7-Ht-HoF" firstAttribute="top" secondItem="QkA-HO-2fg" secondAttribute="top" id="tr3-fb-7tH"/>
                                                 <constraint firstItem="SAz-IV-PPn" firstAttribute="leading" secondItem="UBP-2C-ySl" secondAttribute="trailing" id="trf-0E-ElP"/>
-                                                <constraint firstAttribute="trailing" secondItem="MhP-w4-ZgU" secondAttribute="trailing" id="uKF-7h-pyJ"/>
                                                 <constraint firstItem="UBP-2C-ySl" firstAttribute="bottom" secondItem="QkA-HO-2fg" secondAttribute="bottom" id="ua9-5O-tJR"/>
                                                 <constraint firstItem="MpO-Jh-Dd4" firstAttribute="top" secondItem="QkA-HO-2fg" secondAttribute="top" id="vJ5-NZ-qSC"/>
                                                 <constraint firstAttribute="height" constant="44" id="w9P-2s-Sah"/>
@@ -1028,11 +1029,6 @@
                                                 <constraint firstItem="Tl2-7T-RR4" firstAttribute="leading" secondItem="MhP-w4-ZgU" secondAttribute="trailing" id="z7A-7K-0BC"/>
                                                 <constraint firstItem="Ip7-Ht-HoF" firstAttribute="bottom" secondItem="QkA-HO-2fg" secondAttribute="bottom" id="zo2-iT-2ZZ"/>
                                             </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="uKF-7h-pyJ"/>
-                                                </mask>
-                                            </variation>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zf7-z0-aYW">
                                             <subviews>
@@ -2295,7 +2291,6 @@
         <image name="vertical_ruler" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="URP-EC-cX9"/>
         <segue reference="RkX-Ih-WUM"/>
     </inferredMetricsTieBreakers>
 </document>

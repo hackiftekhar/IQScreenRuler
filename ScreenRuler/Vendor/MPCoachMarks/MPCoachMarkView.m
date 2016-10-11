@@ -199,13 +199,15 @@ static const BOOL kEnableSkipButton = YES;
     // Fade in self
     self.alpha = 0.0f;
     self.hidden = NO;
+    __weak typeof(self) weakSelf = self;
+
     [UIView animateWithDuration:self.animationDuration
                      animations:^{
-                         self.alpha = 1.0f;
+                         weakSelf.alpha = 1.0f;
                      }
                      completion:^(BOOL finished) {
                          // Go to the first coach mark
-                         [self goToCoachMarkIndexed:0];
+                         [weakSelf goToCoachMarkIndexed:0];
                      }];
 }
 
@@ -254,8 +256,10 @@ static const BOOL kEnableSkipButton = YES;
     }
     
     // Coach mark definition
-    MPCoachMark *markDef = [self.coachMarks objectAtIndex:index];
+    __weak MPCoachMark *markDef = [self.coachMarks objectAtIndex:index];
     
+    __weak typeof(self) weakSelf = self;
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(markDef.beginInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 
         CGRect markRect = markDef.rect;
@@ -264,35 +268,35 @@ static const BOOL kEnableSkipButton = YES;
         {
             if (CGRectIsEmpty(markDef.rect))
             {
-                markRect = [markDef.view.superview convertRect:markDef.view.frame toView:self];
+                markRect = [markDef.view.superview convertRect:markDef.view.frame toView:weakSelf];
             }
             else
             {
-                markRect = [markDef.view convertRect:markDef.rect toView:self];
+                markRect = [markDef.view convertRect:markDef.rect toView:weakSelf];
             }
         }
         
         markRect = UIEdgeInsetsInsetRect(markRect, markDef.inset);
         
-        if ([self.delegate respondsToSelector:@selector(coachMarksViewDidClicked:atIndex:)])
+        if ([weakSelf.delegate respondsToSelector:@selector(coachMarksViewDidClicked:atIndex:)])
         {
             [currentView removeFromSuperview];
             currentView = [[UIView alloc] initWithFrame:markRect];
             currentView.backgroundColor = [UIColor clearColor];
             UITapGestureRecognizer *singleFingerTap =
-            [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+            [[UITapGestureRecognizer alloc] initWithTarget:weakSelf action:@selector(handleSingleTap:)];
             [currentView addGestureRecognizer:singleFingerTap];
-            [self addSubview:currentView];
+            [weakSelf addSubview:currentView];
         }
         
-        [self.arrowImage removeFromSuperview];
+        [weakSelf.arrowImage removeFromSuperview];
         
         // Calculate the caption position and size
-        self.lblCaption.alpha = 0.0f;
-        self.lblCaption.frame = (CGRect){{0.0f, 0.0f}, {self.maxLblWidth, 0.0f}};
-        self.lblCaption.text = markDef.caption;
-        [self.lblCaption sizeToFit];
-        self.lblCaption.frame = CGRectInset(self.lblCaption.frame, -10, -10);
+        weakSelf.lblCaption.alpha = 0.0f;
+        weakSelf.lblCaption.frame = (CGRect){{0.0f, 0.0f}, {weakSelf.maxLblWidth, 0.0f}};
+        weakSelf.lblCaption.text = markDef.caption;
+        [weakSelf.lblCaption sizeToFit];
+        weakSelf.lblCaption.frame = CGRectInset(weakSelf.lblCaption.frame, -10, -10);
         CGFloat y;
         CGFloat x;
         
@@ -300,13 +304,13 @@ static const BOOL kEnableSkipButton = YES;
         //Label Aligment and Position
         switch (markDef.alignment) {
             case LABEL_ALIGNMENT_RIGHT:
-                x = floorf(self.bounds.size.width - self.lblCaption.frame.size.width - kLabelMargin);
+                x = floorf(weakSelf.bounds.size.width - weakSelf.lblCaption.frame.size.width - kLabelMargin);
                 break;
             case LABEL_ALIGNMENT_LEFT:
                 x = kLabelMargin;
                 break;
             default:
-                x = floorf((self.bounds.size.width - self.lblCaption.frame.size.width) / 2.0f);
+                x = floorf((weakSelf.bounds.size.width - weakSelf.lblCaption.frame.size.width) / 2.0f);
                 break;
         }
         
@@ -315,137 +319,137 @@ static const BOOL kEnableSkipButton = YES;
         switch (markDef.position) {
             case LABEL_POSITION_TOP:
             {
-                y = markRect.origin.y - self.lblCaption.frame.size.height - kLabelMargin;
+                y = markRect.origin.y - weakSelf.lblCaption.frame.size.height - kLabelMargin;
                 if(markDef.image)
                 {
-                    self.arrowImage = [[UIImageView alloc] initWithImage:markDef.image];
-                    self.arrowImage.tintColor = originalThemeColor;
-                    CGRect imageViewFrame = self.arrowImage.frame;
+                    weakSelf.arrowImage = [[UIImageView alloc] initWithImage:markDef.image];
+                    weakSelf.arrowImage.tintColor = originalThemeColor;
+                    CGRect imageViewFrame = weakSelf.arrowImage.frame;
                     imageViewFrame.origin.x = x;
                     imageViewFrame.origin.y = y;
-                    self.arrowImage.frame = imageViewFrame;
-                    y -= (self.arrowImage.frame.size.height + kLabelMargin);
-                    [self addSubview:self.arrowImage];
+                    weakSelf.arrowImage.frame = imageViewFrame;
+                    y -= (weakSelf.arrowImage.frame.size.height + kLabelMargin);
+                    [weakSelf addSubview:weakSelf.arrowImage];
                 }
             }
                 break;
             case LABEL_POSITION_LEFT:
             {
-                y = markRect.origin.y + markRect.size.height/2 - self.lblCaption.frame.size.height/2;
-                x = self.bounds.size.width - self.lblCaption.frame.size.width - kLabelMargin - markRect.size.width;
+                y = markRect.origin.y + markRect.size.height/2 - weakSelf.lblCaption.frame.size.height/2;
+                x = weakSelf.bounds.size.width - weakSelf.lblCaption.frame.size.width - kLabelMargin - markRect.size.width;
                 if(markDef.image)
                 {
-                    self.arrowImage = [[UIImageView alloc] initWithImage:markDef.image];
-                    self.arrowImage.tintColor = originalThemeColor;
-                    CGRect imageViewFrame = self.arrowImage.frame;
-                    imageViewFrame.origin.x = self.bounds.size.width - self.arrowImage.frame.size.width - kLabelMargin - markRect.size.width;
-                    imageViewFrame.origin.y = y + self.lblCaption.frame.size.height/2 - imageViewFrame.size.height/2;
-                    self.arrowImage.frame = imageViewFrame;
-                    x -= (self.arrowImage.frame.size.width + kLabelMargin);
-                    [self addSubview:self.arrowImage];
+                    weakSelf.arrowImage = [[UIImageView alloc] initWithImage:markDef.image];
+                    weakSelf.arrowImage.tintColor = originalThemeColor;
+                    CGRect imageViewFrame = weakSelf.arrowImage.frame;
+                    imageViewFrame.origin.x = weakSelf.bounds.size.width - weakSelf.arrowImage.frame.size.width - kLabelMargin - markRect.size.width;
+                    imageViewFrame.origin.y = y + weakSelf.lblCaption.frame.size.height/2 - imageViewFrame.size.height/2;
+                    weakSelf.arrowImage.frame = imageViewFrame;
+                    x -= (weakSelf.arrowImage.frame.size.width + kLabelMargin);
+                    [weakSelf addSubview:weakSelf.arrowImage];
                 }
             }
                 break;
             case LABEL_POSITION_RIGHT:
             {
-                y = markRect.origin.y + markRect.size.height/2 - self.lblCaption.frame.size.height/2;
+                y = markRect.origin.y + markRect.size.height/2 - weakSelf.lblCaption.frame.size.height/2;
                 x = markRect.origin.x + markRect.size.width + kLabelMargin;
                 if(markDef.image) {
-                    self.arrowImage = [[UIImageView alloc] initWithImage:markDef.image];
-                    self.arrowImage.tintColor = originalThemeColor;
-                    CGRect imageViewFrame = self.arrowImage.frame;
+                    weakSelf.arrowImage = [[UIImageView alloc] initWithImage:markDef.image];
+                    weakSelf.arrowImage.tintColor = originalThemeColor;
+                    CGRect imageViewFrame = weakSelf.arrowImage.frame;
                     imageViewFrame.origin.x = x;
                     imageViewFrame.origin.y = y;
-                    self.arrowImage.frame = imageViewFrame;
-                    y -= (self.arrowImage.frame.size.height + kLabelMargin);
-                    [self addSubview:self.arrowImage];
+                    weakSelf.arrowImage.frame = imageViewFrame;
+                    y -= (weakSelf.arrowImage.frame.size.height + kLabelMargin);
+                    [weakSelf addSubview:weakSelf.arrowImage];
                 }
             }
                 break;
             case LABEL_POSITION_RIGHT_BOTTOM:
             {
-                y = markRect.origin.y + markRect.size.height + self.lblSpacing;
-                CGFloat bottomY = y + self.lblCaption.frame.size.height + self.lblSpacing;
-                if (bottomY > self.bounds.size.height) {
-                    y = markRect.origin.y - self.lblSpacing - self.lblCaption.frame.size.height;
+                y = markRect.origin.y + markRect.size.height + weakSelf.lblSpacing;
+                CGFloat bottomY = y + weakSelf.lblCaption.frame.size.height + weakSelf.lblSpacing;
+                if (bottomY > weakSelf.bounds.size.height) {
+                    y = markRect.origin.y - weakSelf.lblSpacing - weakSelf.lblCaption.frame.size.height;
                 }
                 x = markRect.origin.x + markRect.size.width + kLabelMargin;
                 if(markDef.image)
                 {
-                    self.arrowImage = [[UIImageView alloc] initWithImage:markDef.image];
-                    self.arrowImage.tintColor = originalThemeColor;
-                    CGRect imageViewFrame = self.arrowImage.frame;
+                    weakSelf.arrowImage = [[UIImageView alloc] initWithImage:markDef.image];
+                    weakSelf.arrowImage.tintColor = originalThemeColor;
+                    CGRect imageViewFrame = weakSelf.arrowImage.frame;
                     imageViewFrame.origin.x = x - markRect.size.width/2 - imageViewFrame.size.width/2;
-                    imageViewFrame.origin.y = y - kLabelMargin; //self.lblCaption.frame.size.height/2
+                    imageViewFrame.origin.y = y - kLabelMargin; //weakSelf.lblCaption.frame.size.height/2
                     y += imageViewFrame.size.height/2;
-                    self.arrowImage.frame = imageViewFrame;
-                    [self addSubview:self.arrowImage];
+                    weakSelf.arrowImage.frame = imageViewFrame;
+                    [weakSelf addSubview:weakSelf.arrowImage];
                 }
             }
                 break;
             default: {
-                y = markRect.origin.y + markRect.size.height + self.lblSpacing;
-                CGFloat bottomY = y + self.lblCaption.frame.size.height + self.lblSpacing;
-                if (bottomY > self.bounds.size.height) {
-                    y = markRect.origin.y - self.lblSpacing - self.lblCaption.frame.size.height;
+                y = markRect.origin.y + markRect.size.height + weakSelf.lblSpacing;
+                CGFloat bottomY = y + weakSelf.lblCaption.frame.size.height + weakSelf.lblSpacing;
+                if (bottomY > weakSelf.bounds.size.height) {
+                    y = markRect.origin.y - weakSelf.lblSpacing - weakSelf.lblCaption.frame.size.height;
                 }
                 if(markDef.image)
                 {
-                    self.arrowImage = [[UIImageView alloc] initWithImage:markDef.image];
-                    self.arrowImage.tintColor = originalThemeColor;
-                    CGRect imageViewFrame = self.arrowImage.frame;
+                    weakSelf.arrowImage = [[UIImageView alloc] initWithImage:markDef.image];
+                    weakSelf.arrowImage.tintColor = originalThemeColor;
+                    CGRect imageViewFrame = weakSelf.arrowImage.frame;
                     imageViewFrame.origin.x = x;
                     imageViewFrame.origin.y = y;
-                    self.arrowImage.frame = imageViewFrame;
-                    y += (self.arrowImage.frame.size.height + kLabelMargin);
-                    [self addSubview:self.arrowImage];
+                    weakSelf.arrowImage.frame = imageViewFrame;
+                    y += (weakSelf.arrowImage.frame.size.height + kLabelMargin);
+                    [weakSelf addSubview:weakSelf.arrowImage];
                 }
             }
                 break;
         }
         
         // Animate the caption label
-        self.lblCaption.frame = (CGRect){{x, y}, self.lblCaption.frame.size};
+        weakSelf.lblCaption.frame = (CGRect){{x, y}, weakSelf.lblCaption.frame.size};
         
         [UIView animateWithDuration:0.3f animations:^{
-            self.lblCaption.alpha = 1.0f;
+            weakSelf.lblCaption.alpha = 1.0f;
         }];
         
         // If first mark, set the cutout to the center of first mark
-        if (self.markIndex == 0)
+        if (weakSelf.markIndex == 0)
         {
             CGRect rect = markRect;
             
-            CGFloat maxXDistance = MAX(CGRectGetMinX(rect), CGRectGetWidth(self.bounds)-CGRectGetMaxX(rect));
-            CGFloat maxYDistance = MAX(CGRectGetMinY(rect), CGRectGetHeight(self.bounds)-CGRectGetMaxY(rect));
+            CGFloat maxXDistance = MAX(CGRectGetMinX(rect), CGRectGetWidth(weakSelf.bounds)-CGRectGetMaxX(rect));
+            CGFloat maxYDistance = MAX(CGRectGetMinY(rect), CGRectGetHeight(weakSelf.bounds)-CGRectGetMaxY(rect));
             CGFloat maxDistance = MAX(maxXDistance, maxYDistance);
             
             rect = CGRectInset(rect, -maxDistance, -maxDistance);
             
-            [self setCutoutToRect:rect withShape:markDef.shape];
+            [weakSelf setCutoutToRect:rect withShape:markDef.shape];
         }
         
         // Animate the cutout
-        [self animateCutoutToRect:markRect withShape:markDef.shape];
+        [weakSelf animateCutoutToRect:markRect withShape:markDef.shape];
         mask.strokeColor = markDef.borderColor.CGColor;
         
-        CGFloat lblContinueWidth =  (self.enableContinueLabel?(self.enableSkipButton ? (70.0/100.0) * self.bounds.size.width : self.bounds.size.width):0);
-        CGFloat btnSkipWidth = self.bounds.size.width - lblContinueWidth;
+        CGFloat lblContinueWidth =  (weakSelf.enableContinueLabel?(weakSelf.enableSkipButton ? (70.0/100.0) * weakSelf.bounds.size.width : weakSelf.bounds.size.width):0);
+        CGFloat btnSkipWidth = weakSelf.bounds.size.width - lblContinueWidth;
         
         // Show continue lbl if first mark
-        if (self.enableContinueLabel) {
-            if (self.markIndex == 0) {
-                lblContinue = [[UILabel alloc] initWithFrame:(CGRect){{0, [self yOriginForContinueLabel]}, {lblContinueWidth, 30.0f}}];
+        if (weakSelf.enableContinueLabel) {
+            if (weakSelf.markIndex == 0) {
+                lblContinue = [[UILabel alloc] initWithFrame:(CGRect){{0, [weakSelf yOriginForContinueLabel]}, {lblContinueWidth, 30.0f}}];
                 lblContinue.font = [UIFont kohinoorBanglaSemiboldWithSize:13.0f];
                 lblContinue.textAlignment = NSTextAlignmentCenter;
                 lblContinue.text = NSLocalizedString(@"Tap to continue", nil);
                 lblContinue.alpha = 0.0f;
                 lblContinue.backgroundColor = [UIColor whiteColor];
-                [self addSubview:lblContinue];
+                [weakSelf addSubview:lblContinue];
                 [UIView animateWithDuration:0.3f delay:1.0f options:0 animations:^{
-                    lblContinue.alpha = 1.0f;
+                    weakSelf.lblContinue.alpha = 1.0f;
                 } completion:nil];
-            } else if (self.markIndex > 0 && lblContinue != nil) {
+            } else if (weakSelf.markIndex > 0 && lblContinue != nil) {
                 // Otherwise, remove the lbl
                 [lblContinue removeFromSuperview];
                 lblContinue = nil;
@@ -454,17 +458,17 @@ static const BOOL kEnableSkipButton = YES;
             
         }
         
-        if (self.enableSkipButton) {
+        if (weakSelf.enableSkipButton) {
             btnSkipCoach = [UIButton buttonWithType:UIButtonTypeSystem];
-            btnSkipCoach.frame = (CGRect){{lblContinueWidth, [self yOriginForContinueLabel]}, {btnSkipWidth, 30.0f}};
-            [btnSkipCoach addTarget:self action:@selector(skipCoach) forControlEvents:UIControlEventTouchUpInside];
+            btnSkipCoach.frame = (CGRect){{lblContinueWidth, [weakSelf yOriginForContinueLabel]}, {btnSkipWidth, 30.0f}};
+            [btnSkipCoach addTarget:weakSelf action:@selector(skipCoach) forControlEvents:UIControlEventTouchUpInside];
             [btnSkipCoach setTitle:NSLocalizedString(@"Skip", nil) forState:UIControlStateNormal];
             btnSkipCoach.titleLabel.font = [UIFont kohinoorBanglaSemiboldWithSize:13.0f];
             btnSkipCoach.alpha = 0.0f;
             btnSkipCoach.tintColor = [UIColor whiteColor];
-            [self addSubview:btnSkipCoach];
+            [weakSelf addSubview:btnSkipCoach];
             [UIView animateWithDuration:0.3f delay:1.0f options:0 animations:^{
-                btnSkipCoach.alpha = 1.0f;
+                weakSelf.btnSkipCoach.alpha = 1.0f;
             } completion:nil];
         }
     });
@@ -489,18 +493,20 @@ static const BOOL kEnableSkipButton = YES;
         [self.delegate coachMarksViewWillCleanup:self];
     }
     
+    __weak typeof(self) weakSelf = self;
+
     // Fade out self
     [UIView animateWithDuration:self.animationDuration
                      animations:^{
-                         self.alpha = 0.0f;
+                         weakSelf.alpha = 0.0f;
                      }
                      completion:^(BOOL finished) {
                          // Remove self
-                         [self removeFromSuperview];
+                         [weakSelf removeFromSuperview];
                          
                          // Delegate (coachMarksViewDidCleanup:)
-                         if ([self.delegate respondsToSelector:@selector(coachMarksViewDidCleanup:)]) {
-                             [self.delegate coachMarksViewDidCleanup:self];
+                         if ([weakSelf.delegate respondsToSelector:@selector(coachMarksViewDidCleanup:)]) {
+                             [weakSelf.delegate coachMarksViewDidCleanup:weakSelf];
                          }
                      }];
 }

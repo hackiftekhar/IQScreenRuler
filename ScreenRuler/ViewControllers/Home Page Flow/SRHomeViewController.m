@@ -29,7 +29,7 @@
 
 //https://www.iconfinder.com/iconsets/hawcons-gesture-stroke
 
-@interface SRHomeViewController ()<UIScrollViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIToolbarDelegate,MPCoachMarksViewDelegate,ImageControllerDelegate,ScreenshotControllerDelegate>
+@interface SRHomeViewController ()<UIScrollViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIToolbarDelegate,MPCoachMarksViewDelegate,SRImageControllerDelegate,SRScreenshotCollectionViewControllerDelegate>
 {
     BOOL isLockedOrientation;
 }
@@ -160,6 +160,8 @@
 {
     [super viewWillAppear:animated];
 
+    self.scrollContainerView.showZoomControls = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowZoomOption"];
+
     UIColor *originalThemeColor = [UIColor originalThemeColor];
     UIColor *backgroundColor = [UIColor themeBackgroundColor];
 
@@ -229,9 +231,11 @@
 {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 
+    __weak typeof(self) weakSelf = self;
+
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Share Photo", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
 
-        UIActivityViewController *shareController = [[UIActivityViewController alloc] initWithActivityItems:@[self.scrollContainerView.image] applicationActivities:nil];
+        UIActivityViewController *shareController = [[UIActivityViewController alloc] initWithActivityItems:@[weakSelf.scrollContainerView.image] applicationActivities:nil];
         
         shareController.excludedActivityTypes = @[UIActivityTypeAssignToContact,
                                              UIActivityTypeAddToReadingList,
@@ -246,12 +250,12 @@
 
         shareController.popoverPresentationController.barButtonItem = sender;
 
-        [self presentViewController:shareController animated:YES completion:^{
+        [weakSelf presentViewController:shareController animated:YES completion:^{
         }];
     }]];
     
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Start Help Tour", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self startHelpTour];
+        [weakSelf startHelpTour];
     }]];
 
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
@@ -410,8 +414,10 @@
                     CGPoint point = self.lineFrameView.startingScalePoint;
                     point.y = i;
                     
+                    __weak typeof(self) weakSelf = self;
+
                     NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
-                        self.lineFrameView.startingScalePoint = point;
+                        weakSelf.lineFrameView.startingScalePoint = point;
                     }];
                     [[NSOperationQueue mainQueue] addOperation:operation];
                 }
@@ -423,8 +429,10 @@
                     CGPoint point = self.lineFrameView.startingScalePoint;
                     point.y = i;
                     
+                    __weak typeof(self) weakSelf = self;
+
                     NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
-                        self.lineFrameView.startingScalePoint = point;
+                        weakSelf.lineFrameView.startingScalePoint = point;
                     }];
                     
                     [[NSOperationQueue mainQueue] addOperation:operation];
@@ -441,8 +449,10 @@
                     CGPoint point = self.lineFrameView.startingScalePoint;
                     point.x = i;
                     
+                    __weak typeof(self) weakSelf = self;
+
                     NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
-                        self.lineFrameView.startingScalePoint = point;
+                        weakSelf.lineFrameView.startingScalePoint = point;
                     }];
                     
                     [[NSOperationQueue mainQueue] addOperation:operation];
@@ -455,8 +465,10 @@
                     CGPoint point = self.lineFrameView.startingScalePoint;
                     point.x = i;
                     
+                    __weak typeof(self) weakSelf = self;
+
                     NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
-                        self.lineFrameView.startingScalePoint = point;
+                        weakSelf.lineFrameView.startingScalePoint = point;
                     }];
                     
                     [[NSOperationQueue mainQueue] addOperation:operation];
@@ -516,8 +528,10 @@
             break;
         case 2:
         {
+            __weak typeof(self) weakSelf = self;
+
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [self hideRGB];
+                [weakSelf hideRGB];
             }];
         }
             break;
@@ -608,6 +622,8 @@
 
 - (IBAction)optionPhotoOptions:(id)sender {
     
+    __weak typeof(self) weakSelf = self;
+
     void (^loadWithAuthorizationStatus)(PHAuthorizationStatus status) = ^(PHAuthorizationStatus status){
         
         if (status == PHAuthorizationStatusRestricted ||
@@ -618,9 +634,9 @@
         }
         else if (status == PHAuthorizationStatusAuthorized)
         {
-            SRScreenshotCollectionViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([SRScreenshotCollectionViewController class])];
-            controller.delegate = self;
-            [controller presentOverViewController:self.navigationControllerSR completion:nil];
+            SRScreenshotCollectionViewController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([SRScreenshotCollectionViewController class])];
+            controller.delegate = weakSelf;
+            [controller presentOverViewController:weakSelf.navigationControllerSR completion:nil];
         }
     };
     
@@ -641,34 +657,40 @@
 
 -(void)screenshotControllerDidSelectOpenPhotoLibrary:(SRScreenshotCollectionViewController*)controller
 {
+    __weak typeof(self) weakSelf = self;
+
     [controller dismissViewControllerCompletion:^{
         if ([SRImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
         {
             SRImagePickerController *controller = [[SRImagePickerController alloc] init];
-            controller.delegate = self;
+            controller.delegate = weakSelf;
             controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            [self presentViewController:controller animated:YES completion:nil];
+            [weakSelf presentViewController:controller animated:YES completion:nil];
         }
     }];
 }
 
 -(void)screenshotControllerDidSelectOpenCamera:(SRScreenshotCollectionViewController*)controller
 {
+    __weak typeof(self) weakSelf = self;
+
     [controller dismissViewControllerCompletion:^{
         if ([SRImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
         {
             SRImagePickerController *controller = [[SRImagePickerController alloc] init];
             controller.sourceType = UIImagePickerControllerSourceTypeCamera;
-            controller.delegate = self;
-            [self presentViewController:controller animated:YES completion:nil];
+            controller.delegate = weakSelf;
+            [weakSelf presentViewController:controller animated:YES completion:nil];
         }
     }];
 }
 
 -(void)screenshotController:(SRScreenshotCollectionViewController*)controller didSelectScreenshot:(UIImage*)image
 {
+    __weak typeof(self) weakSelf = self;
+
     [controller dismissViewControllerCompletion:^{
-        self.image = image;
+        weakSelf.image = image;
     }];
 }
 
@@ -684,42 +706,44 @@
 
 -(void)openWithLatestScreenshot
 {
+    __weak typeof(self) weakSelf = self;
+
     void (^loadWithAuthorizationStatus)(PHAuthorizationStatus status) = ^(PHAuthorizationStatus status){
         
         if (status == PHAuthorizationStatusRestricted ||
             status == PHAuthorizationStatusDenied)
         {
-            self.libraryBarButton.enabled = NO;
-            [self.noScreenshotActionButton setImage:[UIImage imageNamed:@"photo_access"] forState:UIControlStateNormal];
-            self.labelNoScreenshotsTitle.text = NSLocalizedString(@"photo_access_denied_title", nil);
-            self.labelNoScreenshotsDiscription.text = NSLocalizedString(@"photo_access_denied_description", nil);
-            self.image = nil;
+            weakSelf.libraryBarButton.enabled = NO;
+            [weakSelf.noScreenshotActionButton setImage:[UIImage imageNamed:@"photo_access"] forState:UIControlStateNormal];
+            weakSelf.labelNoScreenshotsTitle.text = NSLocalizedString(@"photo_access_denied_title", nil);
+            weakSelf.labelNoScreenshotsDiscription.text = NSLocalizedString(@"photo_access_denied_description", nil);
+            weakSelf.image = nil;
         }
         else if (status == PHAuthorizationStatusAuthorized)
         {
-            self.libraryBarButton.enabled = YES;
-            [self.noScreenshotActionButton setImage:[UIImage imageNamed:@"iPhone-sceenshot"] forState:UIControlStateNormal];
-            self.labelNoScreenshotsTitle.text = NSLocalizedString(@"no_screenshots_title", nil);
-            self.labelNoScreenshotsDiscription.text = NSLocalizedString(@"no_screenshots_description", nil);
+            weakSelf.libraryBarButton.enabled = YES;
+            [weakSelf.noScreenshotActionButton setImage:[UIImage imageNamed:@"iPhone-sceenshot"] forState:UIControlStateNormal];
+            weakSelf.labelNoScreenshotsTitle.text = NSLocalizedString(@"no_screenshots_title", nil);
+            weakSelf.labelNoScreenshotsDiscription.text = NSLocalizedString(@"no_screenshots_description", nil);
             
             UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             activityView.color = [UIColor lightGrayColor];
-            activityView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
+            activityView.center = CGPointMake(CGRectGetMidX(weakSelf.view.bounds), CGRectGetMidY(weakSelf.view.bounds));
             [activityView startAnimating];
-            [self.view addSubview:activityView];
+            [weakSelf.view addSubview:activityView];
             
-            [self getLatestScreenshot:^(UIImage *image) {
+            [weakSelf getLatestScreenshot:^(UIImage *image) {
                 [activityView stopAnimating];
                 [activityView removeFromSuperview];
                 
-                if (self.isRequestShouldIgnore == NO)
+                if (weakSelf.isRequestShouldIgnore == NO)
                 {
-                    self.image = image;
-                    [self.scrollContainerView zoomToMinimumScaleAnimated:YES];
+                    weakSelf.image = image;
+                    [weakSelf.scrollContainerView zoomToMinimumScaleAnimated:YES];
                 }
 
-                self.isRequestingImage = NO;
-                self.isRequestShouldIgnore = YES;
+                weakSelf.isRequestingImage = NO;
+                weakSelf.isRequestShouldIgnore = YES;
             }];
         }
     };
@@ -819,14 +843,16 @@
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Change Scale Multiplier", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
+    __weak typeof(self) weakSelf = self;
+
     if (currentRatio != 1)
     {
         [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"@%dx",1] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             NSInteger selectedRatio = 1;
-            [self.ratioButton setTitle:[NSString localizedStringWithFormat:@"@%ldx",(long)selectedRatio] forState:UIControlStateNormal];
-            _freeRulerView.deviceScale = selectedRatio;
-            _lineFrameView.deviceScale = selectedRatio;
+            [weakSelf.ratioButton setTitle:[NSString localizedStringWithFormat:@"@%ldx",(long)selectedRatio] forState:UIControlStateNormal];
+            weakSelf.freeRulerView.deviceScale = selectedRatio;
+            weakSelf.lineFrameView.deviceScale = selectedRatio;
         }]];
     }
     
@@ -834,9 +860,9 @@
     {
         [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"@%dx",2] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             NSInteger selectedRatio = 2;
-            [self.ratioButton setTitle:[NSString localizedStringWithFormat:@"@%ldx",(long)selectedRatio] forState:UIControlStateNormal];
-            _freeRulerView.deviceScale = selectedRatio;
-            _lineFrameView.deviceScale = selectedRatio;
+            [weakSelf.ratioButton setTitle:[NSString localizedStringWithFormat:@"@%ldx",(long)selectedRatio] forState:UIControlStateNormal];
+            weakSelf.freeRulerView.deviceScale = selectedRatio;
+            weakSelf.lineFrameView.deviceScale = selectedRatio;
         }]];
     }
     
@@ -844,9 +870,9 @@
     {
         [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"@%dx",3] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             NSInteger selectedRatio = 3;
-            [self.ratioButton setTitle:[NSString localizedStringWithFormat:@"@%ldx",(long)selectedRatio] forState:UIControlStateNormal];
-            _freeRulerView.deviceScale = selectedRatio;
-            _lineFrameView.deviceScale = selectedRatio;
+            [weakSelf.ratioButton setTitle:[NSString localizedStringWithFormat:@"@%ldx",(long)selectedRatio] forState:UIControlStateNormal];
+            weakSelf.freeRulerView.deviceScale = selectedRatio;
+            weakSelf.lineFrameView.deviceScale = selectedRatio;
         }]];
     }
     
@@ -864,9 +890,11 @@
 {
     button.selected = !button.selected;
     
+    __weak typeof(self) weakSelf = self;
+
     [UIView animateWithDuration:0.2 animations:^{
-        self.lineFrameView.hideRuler = !self.lineFrameView.hideRuler;
-        [[NSUserDefaults standardUserDefaults] setBool:!self.lineFrameView.hideRuler forKey:@"SideRulerShow"];
+        weakSelf.lineFrameView.hideRuler = !weakSelf.lineFrameView.hideRuler;
+        [[NSUserDefaults standardUserDefaults] setBool:!weakSelf.lineFrameView.hideRuler forKey:@"SideRulerShow"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }];
 }
@@ -882,15 +910,17 @@
         self.freeRulerView.hidden = NO;
     }
     
+    __weak typeof(self) weakSelf = self;
+
     [UIView animateWithDuration:0.2 animations:^{
-        self.freeRulerView.alpha = self.freeRulerView.alpha != 1.0?1.0:0.0;
-        [[NSUserDefaults standardUserDefaults] setBool:self.freeRulerView.alpha forKey:@"FreeHandRulerShow"];
+        weakSelf.freeRulerView.alpha = weakSelf.freeRulerView.alpha != 1.0?1.0:0.0;
+        [[NSUserDefaults standardUserDefaults] setBool:weakSelf.freeRulerView.alpha forKey:@"FreeHandRulerShow"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     } completion:^(BOOL finished) {
 
         if (!button.selected)
         {
-            self.freeRulerView.hidden = YES;
+            weakSelf.freeRulerView.hidden = YES;
         }
     }];
 }
@@ -901,9 +931,11 @@
 {
     button.selected = !button.selected;
     
+    __weak typeof(self) weakSelf = self;
+
     [UIView animateWithDuration:0.2 animations:^{
-        self.lineFrameView.hideLine = !self.lineFrameView.hideLine;
-        [[NSUserDefaults standardUserDefaults] setBool:!self.lineFrameView.hideLine forKey:@"LineFrameShow"];
+        weakSelf.lineFrameView.hideLine = !weakSelf.lineFrameView.hideLine;
+        [[NSUserDefaults standardUserDefaults] setBool:!weakSelf.lineFrameView.hideLine forKey:@"LineFrameShow"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }];
 }
@@ -917,6 +949,8 @@
     location.x = ceilf(location.x);
     location.y = ceilf(location.y);
     
+    __weak typeof(self) weakSelf = self;
+
     if (self.magnifyingGlass.window == nil)
     {
         self.magnifyingGlass.touchPoint = originalLocation;
@@ -926,13 +960,13 @@
         [self.magnifyingGlass show];
         
         [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-            self.topColorView.alpha = 1.0;
+            weakSelf.topColorView.alpha = 1.0;
         } completion:NULL];
     }
     else
     {
         [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-            self.magnifyingGlass.touchPoint = originalLocation;
+            weakSelf.magnifyingGlass.touchPoint = originalLocation;
         } completion:NULL];
     }
     
@@ -940,51 +974,51 @@
 
     void(^drawColorInfo)(UIColor* color) = ^(UIColor* color){
 
-        self.magnifyingGlass.color = color;
+        weakSelf.magnifyingGlass.color = color;
 
         NSInteger red = [color red]*255.0;
         NSInteger green = [color green]*255.0;
         NSInteger blue = [color blue]*255.0;
         
-        self.labelRed.text      = [NSString localizedStringWithFormat:@"%ld",(long)red];
-        self.labelGreen.text    = [NSString localizedStringWithFormat:@"%ld",(long)green];
-        self.labelBlue.text     = [NSString localizedStringWithFormat:@"%ld",(long)blue];
+        weakSelf.labelRed.text      = [NSString localizedStringWithFormat:@"%ld",(long)red];
+        weakSelf.labelGreen.text    = [NSString localizedStringWithFormat:@"%ld",(long)green];
+        weakSelf.labelBlue.text     = [NSString localizedStringWithFormat:@"%ld",(long)blue];
         
         if (location.x <= 0 || location.y <= 0 || location.x > image.size.width || location.y > image.size.height)
         {
-            self.labelColorLocation.text = NSLocalizedString(@"X: NA, Y: NA", nil);
+            weakSelf.labelColorLocation.text = NSLocalizedString(@"X: NA, Y: NA", nil);
         }
         else
         {
-            self.labelColorLocation.text = [NSString localizedStringWithFormat:@"X: %.0f, Y: %.0f",location.x,location.y];
+            weakSelf.labelColorLocation.text = [NSString localizedStringWithFormat:@"X: %.0f, Y: %.0f",location.x,location.y];
         }
         
         [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
             
             if (color)
             {
-                self.topColorView.backgroundColor = color;
+                weakSelf.topColorView.backgroundColor = color;
             }
             else
             {
-                self.topColorView.backgroundColor = [UIColor originalThemeColor];
+                weakSelf.topColorView.backgroundColor = [UIColor originalThemeColor];
             }
             
             if ([color isDarkColor])
             {
-                self.labelRed.textColor             = [UIColor blackColor];
-                self.labelGreen.textColor           = [UIColor blackColor];
-                self.labelBlue.textColor            = [UIColor blackColor];
-                self.labelColorLocation.textColor   = [UIColor blackColor];
-                self.viewColorLabelContainer.backgroundColor =  [UIColor colorWithWhite:1 alpha:0.9];
+                weakSelf.labelRed.textColor             = [UIColor blackColor];
+                weakSelf.labelGreen.textColor           = [UIColor blackColor];
+                weakSelf.labelBlue.textColor            = [UIColor blackColor];
+                weakSelf.labelColorLocation.textColor   = [UIColor blackColor];
+                weakSelf.viewColorLabelContainer.backgroundColor =  [UIColor colorWithWhite:1 alpha:0.9];
             }
             else
             {
-                self.labelRed.textColor             = [UIColor whiteColor];
-                self.labelGreen.textColor           = [UIColor whiteColor];
-                self.labelBlue.textColor            = [UIColor whiteColor];
-                self.labelColorLocation.textColor   = [UIColor whiteColor];
-                self.viewColorLabelContainer.backgroundColor =  [UIColor colorWithWhite:0 alpha:0.7];
+                weakSelf.labelRed.textColor             = [UIColor whiteColor];
+                weakSelf.labelGreen.textColor           = [UIColor whiteColor];
+                weakSelf.labelBlue.textColor            = [UIColor whiteColor];
+                weakSelf.labelColorLocation.textColor   = [UIColor whiteColor];
+                weakSelf.viewColorLabelContainer.backgroundColor =  [UIColor colorWithWhite:0 alpha:0.7];
             }
             
         } completion:NULL];
@@ -994,14 +1028,14 @@
     if ([self.loadingColorDataIndicator isAnimating] == NO)
     {
         [image colorAtPoint:location preparingBlock:^{
-            [self.loadingColorDataIndicator startAnimating];
+            [weakSelf.loadingColorDataIndicator startAnimating];
         } completion:^(UIColor *colorAtPoint) {
             
-            if ([self.loadingColorDataIndicator isAnimating])
+            if ([weakSelf.loadingColorDataIndicator isAnimating])
             {
-                [self.loadingColorDataIndicator stopAnimating];
+                [weakSelf.loadingColorDataIndicator stopAnimating];
 
-                [image colorAtPoint:self.magnifyingGlass.touchPoint preparingBlock:NULL completion:^(UIColor *colorAtPoint) {
+                [image colorAtPoint:weakSelf.magnifyingGlass.touchPoint preparingBlock:NULL completion:^(UIColor *colorAtPoint) {
                     drawColorInfo(colorAtPoint);
                 }];
             }
@@ -1025,10 +1059,12 @@
 {
     if (self.magnifyingGlass.window)
     {
+        __weak typeof(self) weakSelf = self;
+
         [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-            self.topColorView.alpha = 0.0;
+            weakSelf.topColorView.alpha = 0.0;
         } completion:^(BOOL finished) {
-            [_topColorView removeFromSuperview];
+            [weakSelf.topColorView removeFromSuperview];
         }];
         [self.magnifyingGlass hide];
     }
@@ -1119,19 +1155,21 @@
 
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
+    __weak typeof(self) weakSelf = self;
+
     CGAffineTransform transform = _freeRulerView.transform;
     [UIView animateWithDuration:0.25 animations:^{
-        _freeRulerView.transform = CGAffineTransformIdentity;
+        weakSelf.freeRulerView.transform = CGAffineTransformIdentity;
     }];
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         
-        _freeRulerView.transform = transform;
+        weakSelf.freeRulerView.transform = transform;
         
-        [_lineFrameView updateUIAnimated:YES];
+        [weakSelf.lineFrameView updateUIAnimated:YES];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         
-        [_lineFrameView updateUIAnimated:YES];
+        [weakSelf.lineFrameView updateUIAnimated:YES];
     }];
 }
 

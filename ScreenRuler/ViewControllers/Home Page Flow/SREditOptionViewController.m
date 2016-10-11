@@ -14,7 +14,7 @@
 #import "SRNavigationController.h"
 #import "UIColor+ThemeColor.h"
 
-@interface SREditOptionViewController ()<ImageControllerDelegate,UIScrollViewDelegate>
+@interface SREditOptionViewController ()<SRImageControllerDelegate,UIScrollViewDelegate>
 
 @property (strong, nonatomic) IBOutlet IQScrollContainerView *scrollContainerView;
 
@@ -78,6 +78,8 @@
     
     BOOL hasMoreOptions = NO;
     
+    __weak typeof(self) weakSelf = self;
+
     if (fmodf(imageSize.width,[[UIScreen mainScreen] bounds].size.width) == 0 &&
         fmodf(imageSize.height,[[UIScreen mainScreen] bounds].size.height) == 0)
     {
@@ -85,8 +87,8 @@
         
         [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"%.0fx%.0f",[[UIScreen mainScreen] bounds].size.width,[[UIScreen mainScreen] bounds].size.height] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            UIImage *image = [self.scrollContainerView.image IQ_scaleToFillSize:[[UIScreen mainScreen] bounds].size];
-            self.image = image;
+            UIImage *image = [weakSelf.scrollContainerView.image IQ_scaleToFillSize:[[UIScreen mainScreen] bounds].size];
+            weakSelf.image = image;
         }]];
     }
     
@@ -97,8 +99,8 @@
 
         [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"%.0fx%.0f",[[UIScreen mainScreen] bounds].size.height,[[UIScreen mainScreen] bounds].size.width] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            UIImage *image = [self.scrollContainerView.image IQ_scaleToFillSize:CGSizeMake([[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width)];
-            self.image = image;
+            UIImage *image = [weakSelf.scrollContainerView.image IQ_scaleToFillSize:CGSizeMake([[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width)];
+            weakSelf.image = image;
         }]];
     }
     
@@ -106,14 +108,14 @@
     {
         [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Custom", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            [self showCustomResizeAlertFromItem:item];
+            [weakSelf showCustomResizeAlertFromItem:item];
         }]];
         
         [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         }]];
 
         alertController.popoverPresentationController.barButtonItem = item;
-        [self presentViewController:alertController animated:YES completion:^{
+        [weakSelf presentViewController:alertController animated:YES completion:^{
         }];
     }
     else
@@ -130,6 +132,8 @@
     
     __weak typeof(UIAlertController) *weakAlertController = alertController;
     
+    __weak typeof(self) weakSelf = self;
+
     UIAlertAction *doneAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Done", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         UITextField *widthTextField = nil;
@@ -150,8 +154,8 @@
         NSInteger width = [widthTextField.text integerValue];
         NSInteger height = [heightTextField.text integerValue];
         
-        UIImage *image = [self.scrollContainerView.image IQ_scaleToFillSize:CGSizeMake(width, height)];
-        self.image = image;
+        UIImage *image = [weakSelf.scrollContainerView.image IQ_scaleToFillSize:CGSizeMake(width, height)];
+        weakSelf.image = image;
     }];
     doneAction.enabled = NO;
     

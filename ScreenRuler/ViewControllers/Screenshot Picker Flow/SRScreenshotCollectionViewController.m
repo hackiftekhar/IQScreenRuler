@@ -131,27 +131,29 @@
     
     if (changes)
     {
+        __weak typeof(self) weakSelf = self;
+
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             
-            PHFetchResultChangeDetails *collectionChanges = [changeInstance changeDetailsForFetchResult:self.completeFetchResult];
+            PHFetchResultChangeDetails *collectionChanges = [changeInstance changeDetailsForFetchResult:weakSelf.completeFetchResult];
             if (collectionChanges) {
                 
-                self.completeFetchResult = [collectionChanges fetchResultAfterChanges];
+                weakSelf.completeFetchResult = [collectionChanges fetchResultAfterChanges];
                 
-                UICollectionView *collectionView = self.latestScreenshotCollectionView;
+                UICollectionView *collectionView = weakSelf.latestScreenshotCollectionView;
                 NSArray *removedPaths;
                 NSArray *insertedPaths;
                 NSArray *changedPaths;
                 
                 if ([collectionChanges hasIncrementalChanges]) {
                     NSIndexSet *removedIndexes = [collectionChanges removedIndexes];
-                    removedPaths = [self indexPathsFromIndexSet:removedIndexes withSection:0];
+                    removedPaths = [weakSelf indexPathsFromIndexSet:removedIndexes withSection:0];
                     
                     NSIndexSet *insertedIndexes = [collectionChanges insertedIndexes];
-                    insertedPaths = [self indexPathsFromIndexSet:insertedIndexes withSection:0];
+                    insertedPaths = [weakSelf indexPathsFromIndexSet:insertedIndexes withSection:0];
                     
                     NSIndexSet *changedIndexes = [collectionChanges changedIndexes];
-                    changedPaths = [self indexPathsFromIndexSet:changedIndexes withSection:0];
+                    changedPaths = [weakSelf indexPathsFromIndexSet:changedIndexes withSection:0];
                     
                     BOOL shouldReload = NO;
                     
@@ -164,7 +166,7 @@
                         }
                     }
                     
-                    if (removedPaths.lastObject && ((NSIndexPath *)removedPaths.lastObject).item >= self.completeFetchResult.count) {
+                    if (removedPaths.lastObject && ((NSIndexPath *)removedPaths.lastObject).item >= weakSelf.completeFetchResult.count) {
                         shouldReload = YES;
                     }
                     
@@ -200,7 +202,7 @@
                         }];
                     }
                     
-                    [self resetCachedAssets];
+                    [weakSelf resetCachedAssets];
                 } else {
                     [collectionView reloadData];
                 }
@@ -454,11 +456,13 @@
     [controller.view addSubview:self.view];
     [self didMoveToParentViewController:controller];
     
+    __weak typeof(self) weakSelf = self;
+
     self.view.backgroundColor = [UIColor clearColor];
     self.visualEffectView.transform = CGAffineTransformMakeTranslation(0, self.visualEffectView.frame.size.height);
     [UIView animateWithDuration:0.25 delay:0 options:7<<16 animations:^{
-        self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
-        self.visualEffectView.transform = CGAffineTransformIdentity;
+        weakSelf.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
+        weakSelf.visualEffectView.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
         if (completion)
         {
@@ -472,13 +476,15 @@
     self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
     self.visualEffectView.transform = CGAffineTransformIdentity;
 
+    __weak typeof(self) weakSelf = self;
+
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.view.backgroundColor = [UIColor clearColor];
-        self.visualEffectView.transform = CGAffineTransformMakeTranslation(0, self.visualEffectView.frame.size.height);
+        weakSelf.view.backgroundColor = [UIColor clearColor];
+        weakSelf.visualEffectView.transform = CGAffineTransformMakeTranslation(0, weakSelf.visualEffectView.frame.size.height);
     } completion:^(BOOL finished) {
-        [self willMoveToParentViewController:nil];
-        [self.view removeFromSuperview];
-        [self removeFromParentViewController];
+        [weakSelf willMoveToParentViewController:nil];
+        [weakSelf.view removeFromSuperview];
+        [weakSelf removeFromParentViewController];
         
         if (completion)
         {
@@ -489,9 +495,11 @@
 
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
+    __weak typeof(self) weakSelf = self;
+
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         
-        [_latestScreenshotCollectionView.collectionViewLayout invalidateLayout];
+        [weakSelf.latestScreenshotCollectionView.collectionViewLayout invalidateLayout];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
     }];
 }

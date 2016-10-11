@@ -243,8 +243,10 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
         {
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Set Scale point location", nil) preferredStyle:UIAlertControllerStyleActionSheet];
             
+            __weak typeof(self) weakSelf = self;
+
             [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Reset Scale to Original", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                self.startingScalePoint = CGPointZero;
+                weakSelf.startingScalePoint = CGPointZero;
             }]];
             
             CGPoint point = [gesture locationInView:self];
@@ -261,22 +263,21 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
                 position = PositionSelectorX;
             }
 
-            
             [alertController addAction:[UIAlertAction actionWithTitle:(position == PositionSelectorX? NSLocalizedString(@"Mark as X reference", nil):NSLocalizedString(@"Mark as Y reference", nil)) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 
-                CGPoint referencePoint = [self convertPoint:point toView:self.respectiveView];
+                CGPoint referencePoint = [weakSelf convertPoint:point toView:weakSelf.respectiveView];
                 
                 if (position == PositionSelectorY)
                 {
-                    CGPoint scalePoint = self.startingScalePoint;
+                    CGPoint scalePoint = weakSelf.startingScalePoint;
                     scalePoint.y = roundf(referencePoint.y);
-                    self.startingScalePoint = scalePoint;
+                    weakSelf.startingScalePoint = scalePoint;
                 }
                 else if (position == PositionSelectorX)
                 {
-                    CGPoint scalePoint = self.startingScalePoint;
+                    CGPoint scalePoint = weakSelf.startingScalePoint;
                     scalePoint.x = roundf(referencePoint.x);
-                    self.startingScalePoint = scalePoint;
+                    weakSelf.startingScalePoint = scalePoint;
                 }
             }]];
             

@@ -66,6 +66,7 @@
 "Zoom Scale" = "Zoom Scale";
 "minimum_percent" = "Minimum Scale (%.0f%%)";
 "original_percent" = "Original (%.0f%%)";
+"Show Zoom Options" = "Show Zoom Options";
 
 /* Crop Info */
 "x_y_width_height" = "X: %1$.0f,  Y: %2$.0f\nWidth: %3$.0f,  Height: %4$.0f";

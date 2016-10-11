@@ -415,6 +415,8 @@
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     
+    __weak typeof(self) weakSelf = self;
+
 //    self.topToolbar.alpha = 0.0;
 //    self.bottomToolbar.alpha = 0.0;
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
@@ -423,46 +425,46 @@
 //        self.bottomToolbar.alpha = 1.0;
 
         {
-            [self.view removeConstraints:_navigationPortraitConstraints];
-            [self.view removeConstraints:_navigationLandscapeLeftConstraints];
-            [self.view removeConstraints:_navigationLandscapeRightConstraints];
-            [self.view removeConstraints:_toolbarPortraitConstraints];
-            [self.view removeConstraints:_toolbarLandscapeLeftConstraints];
-            [self.view removeConstraints:_toolbarLandscapeRightConstraints];
+            [weakSelf.view removeConstraints:weakSelf.navigationPortraitConstraints];
+            [weakSelf.view removeConstraints:weakSelf.navigationLandscapeLeftConstraints];
+            [weakSelf.view removeConstraints:weakSelf.navigationLandscapeRightConstraints];
+            [weakSelf.view removeConstraints:weakSelf.toolbarPortraitConstraints];
+            [weakSelf.view removeConstraints:weakSelf.toolbarLandscapeLeftConstraints];
+            [weakSelf.view removeConstraints:weakSelf.toolbarLandscapeRightConstraints];
             
-            switch (self.interfaceOrientation)
+            switch (weakSelf.interfaceOrientation)
             {
                 case UIInterfaceOrientationLandscapeLeft:
                 {
-                    CGRect rect = CGRectInset(self.view.bounds, 44, 0);
-                    _containerView.frame = rect;
+                    CGRect rect = CGRectInset(weakSelf.view.bounds, 44, 0);
+                    weakSelf.containerView.frame = rect;
 
-                    [self.view addConstraints:_navigationLandscapeLeftConstraints];
-                    [self.view addConstraints:_toolbarLandscapeLeftConstraints];
-                    self.topToolbar.transform = CGAffineTransformMakeRotation(M_PI_2);
-                    self.bottomToolbar.transform = CGAffineTransformMakeRotation(M_PI_2);
+                    [weakSelf.view addConstraints:weakSelf.navigationLandscapeLeftConstraints];
+                    [weakSelf.view addConstraints:weakSelf.toolbarLandscapeLeftConstraints];
+                    weakSelf.topToolbar.transform = CGAffineTransformMakeRotation(M_PI_2);
+                    weakSelf.bottomToolbar.transform = CGAffineTransformMakeRotation(M_PI_2);
                 }
                     break;
                 case UIInterfaceOrientationLandscapeRight:
                 {
-                    CGRect rect = CGRectInset(self.view.bounds, 44, 0);
-                    _containerView.frame = rect;
+                    CGRect rect = CGRectInset(weakSelf.view.bounds, 44, 0);
+                    weakSelf.containerView.frame = rect;
 
-                    [self.view addConstraints:_navigationLandscapeRightConstraints];
-                    [self.view addConstraints:_toolbarLandscapeRightConstraints];
-                    self.topToolbar.transform = CGAffineTransformMakeRotation(-M_PI_2);
-                    self.bottomToolbar.transform = CGAffineTransformMakeRotation(-M_PI_2);
+                    [weakSelf.view addConstraints:weakSelf.navigationLandscapeRightConstraints];
+                    [weakSelf.view addConstraints:weakSelf.toolbarLandscapeRightConstraints];
+                    weakSelf.topToolbar.transform = CGAffineTransformMakeRotation(-M_PI_2);
+                    weakSelf.bottomToolbar.transform = CGAffineTransformMakeRotation(-M_PI_2);
                 }
                     break;
                 default:
                 {
-                    CGRect rect = CGRectInset(self.view.bounds, 0, 44);
-                    _containerView.frame = rect;
+                    CGRect rect = CGRectInset(weakSelf.view.bounds, 0, 44);
+                    weakSelf.containerView.frame = rect;
 
-                    [self.view addConstraints:_navigationPortraitConstraints];
-                    [self.view addConstraints:_toolbarPortraitConstraints];
-                    self.topToolbar.transform = CGAffineTransformIdentity;
-                    self.bottomToolbar.transform = CGAffineTransformIdentity;
+                    [weakSelf.view addConstraints:weakSelf.navigationPortraitConstraints];
+                    [weakSelf.view addConstraints:weakSelf.toolbarPortraitConstraints];
+                    weakSelf.topToolbar.transform = CGAffineTransformIdentity;
+                    weakSelf.bottomToolbar.transform = CGAffineTransformIdentity;
                 }
                     break;
             }
@@ -477,16 +479,18 @@
 {
     [super viewWillAppear:animated];
 
+    __weak typeof(self) weakSelf = self;
+
     [UIView animateWithDuration:animated?0.3:0 animations:^{
         
         UIColor *themeColor = [UIColor themeColor];
         UIColor *textColor = [UIColor themeTextColor];
         UIColor *backgroundColor = [UIColor themeBackgroundColor];
 
-        self.view.backgroundColor = backgroundColor;
-        self.topToolbar.barTintColor = self.bottomToolbar.barTintColor = themeColor;
-        self.topToolbar.tintColor = self.bottomToolbar.tintColor = textColor;
-        self.topToolbar.barStyle = self.bottomToolbar.barStyle = ![UIColor isThemeInverted];
+        weakSelf.view.backgroundColor = backgroundColor;
+        weakSelf.topToolbar.barTintColor = weakSelf.bottomToolbar.barTintColor = themeColor;
+        weakSelf.topToolbar.tintColor = weakSelf.bottomToolbar.tintColor = textColor;
+        weakSelf.topToolbar.barStyle = weakSelf.bottomToolbar.barStyle = ![UIColor isThemeInverted];
     }];
 }
 

@@ -17,7 +17,7 @@
 //    UISwipeGestureRecognizer *swipeRecognizer;
 }
 
-@property(nonatomic, strong, readonly) UIView *zoomInfoContainerView;
+@property(nonatomic, strong, readonly) UIVisualEffectView *zoomInfoContainerView;
 @property(nonatomic, strong, readonly) UIButton *zoomDecreaseButton;
 @property(nonatomic, strong, readonly) UIButton *zoomInfoButton;
 @property(nonatomic, strong, readonly) UIButton *zoomIncreaseButton;
@@ -217,25 +217,33 @@
     self.zoomIncreaseButton.enabled = !(scrollView.zoomScale >= scrollView.maximumZoomScale);
 }
 
+-(void)setShowZoomControls:(BOOL)showZoomControls
+{
+    _showZoomControls = showZoomControls;
+    
+    self.zoomInfoContainerView.alpha = showZoomControls?1.0:0.0;
+}
+
 #pragma mark - Zoom label
 
--(UIView *)zoomInfoContainerView
+-(UIVisualEffectView *)zoomInfoContainerView
 {
     if (_zoomInfoContainerView == nil)
     {
-        _zoomInfoContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 168, 44)];
+        _zoomInfoContainerView = [[UIVisualEffectView alloc] initWithFrame:CGRectMake(0, 0, 168, 44)];
+        _zoomInfoContainerView.effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
         _zoomInfoContainerView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMaxY(self.bounds)-25);
         _zoomInfoContainerView.layer.cornerRadius = 22;
-        _zoomInfoContainerView.layer.borderWidth = 2;
-        _zoomInfoContainerView.layer.borderColor = [UIColor colorWithWhite:1 alpha:1].CGColor;
+        _zoomInfoContainerView.layer.borderWidth = 1;
+        _zoomInfoContainerView.layer.borderColor = [UIColor lightGrayColor].CGColor;
         _zoomInfoContainerView.layer.masksToBounds = YES;
         _zoomInfoContainerView.hidden = YES;
-        _zoomInfoContainerView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
+        _zoomInfoContainerView.tintColor = [UIColor redColor];
         _zoomInfoContainerView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
         
-        [_zoomInfoContainerView addSubview:self.zoomDecreaseButton];
-        [_zoomInfoContainerView addSubview:self.zoomIncreaseButton];
-        [_zoomInfoContainerView addSubview:self.zoomInfoButton];
+        [_zoomInfoContainerView.contentView addSubview:self.zoomDecreaseButton];
+        [_zoomInfoContainerView.contentView addSubview:self.zoomIncreaseButton];
+        [_zoomInfoContainerView.contentView addSubview:self.zoomInfoButton];
     }
     
     return _zoomInfoContainerView;
@@ -247,8 +255,8 @@
     {
         _zoomIncreaseButton = [UIButton buttonWithType:UIButtonTypeSystem];
         [_zoomIncreaseButton setTitle:[NSString localizedStringWithFormat:@"+"] forState:UIControlStateNormal];
-        [_zoomIncreaseButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_zoomIncreaseButton setTitleColor:[[UIColor whiteColor] colorWithAlphaComponent:0.5] forState:UIControlStateDisabled];
+        [_zoomIncreaseButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [_zoomIncreaseButton setTitleColor:[[UIColor darkGrayColor] colorWithAlphaComponent:0.5] forState:UIControlStateDisabled];
         _zoomIncreaseButton.frame = CGRectMake(CGRectGetMaxX(self.zoomInfoButton.frame), 0, 44, 44);
         _zoomIncreaseButton.titleLabel.font = [UIFont kohinoorBanglaSemiboldWithSize:35];
         [_zoomIncreaseButton addTarget:self action:@selector(zoomIncreaseAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -267,8 +275,8 @@
     {
         _zoomDecreaseButton = [UIButton buttonWithType:UIButtonTypeSystem];
         [_zoomDecreaseButton setTitle:[NSString localizedStringWithFormat:@"-"] forState:UIControlStateNormal];
-        [_zoomDecreaseButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_zoomDecreaseButton setTitleColor:[[UIColor whiteColor] colorWithAlphaComponent:0.5] forState:UIControlStateDisabled];
+        [_zoomDecreaseButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [_zoomDecreaseButton setTitleColor:[[UIColor darkGrayColor] colorWithAlphaComponent:0.5] forState:UIControlStateDisabled];
         _zoomDecreaseButton.frame = CGRectMake(CGRectGetMinX(self.zoomInfoButton.frame)-44, 0, 44, 44);
         _zoomDecreaseButton.titleLabel.font = [UIFont kohinoorBanglaSemiboldWithSize:35];
         [_zoomDecreaseButton addTarget:self action:@selector(zoomDecreaseAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -286,11 +294,13 @@
     if (_zoomInfoButton == nil)
     {
         _zoomInfoButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_zoomInfoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_zoomInfoButton setTitleColor:[[UIColor whiteColor] colorWithAlphaComponent:0.8] forState:UIControlStateHighlighted];
+        [_zoomInfoButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [_zoomInfoButton setTitleColor:[[UIColor darkGrayColor] colorWithAlphaComponent:0.8] forState:UIControlStateHighlighted];
         _zoomInfoButton.frame = CGRectMake(0, 0, 70, 44);
         _zoomInfoButton.center = CGPointMake(CGRectGetMidX(self.zoomInfoContainerView.bounds), CGRectGetMidY(self.zoomInfoContainerView.bounds));
         _zoomInfoButton.titleLabel.font = [UIFont kohinoorBanglaSemiboldWithSize:18];
+        _zoomInfoButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+        _zoomInfoButton.titleLabel.minimumScaleFactor = 0.5;
         [_zoomInfoButton addTarget:self action:@selector(zoomInfoAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     
@@ -316,10 +326,12 @@
     {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Zoom Scale", nil) preferredStyle:UIAlertControllerStyleActionSheet];
         
+        __weak typeof(self) weakSelf = self;
+
         if (self.zoomScale != 1.0)
         {
             [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:NSLocalizedString(@"original_percent", nil),(CGFloat)100]  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [self zoomToOriginalScaleAnimated:YES];
+                [weakSelf zoomToOriginalScaleAnimated:YES];
             }]];
         }
         
@@ -328,7 +340,7 @@
             CGFloat zoomPercent = self.minimumZoomScale*100.0;
 
             [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:NSLocalizedString(@"minimum_percent", nil),zoomPercent] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [self zoomToMinimumScaleAnimated:YES];
+                [weakSelf zoomToMinimumScaleAnimated:YES];
             }]];
         }
 

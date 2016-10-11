@@ -114,16 +114,18 @@
     UIImage *capturedImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
+    __weak typeof(self) weakSelf = self;
+
     [UIView animateWithDuration:0.2 animations:^{
-        self.image = capturedImage;
+        weakSelf.image = capturedImage;
         
     } completion:^(BOOL finished) {
         
-        if ([self.delegate respondsToSelector:@selector(controller:finishWithImage:zoomScale:contentOffset:)]) {
-            [self.delegate controller:self finishWithImage:self.scrollContainerView.image zoomScale:self.scrollContainerView.zoomScale contentOffset:self.scrollContainerView.contentOffset];
+        if ([weakSelf.delegate respondsToSelector:@selector(controller:finishWithImage:zoomScale:contentOffset:)]) {
+            [weakSelf.delegate controller:weakSelf finishWithImage:weakSelf.scrollContainerView.image zoomScale:weakSelf.scrollContainerView.zoomScale contentOffset:weakSelf.scrollContainerView.contentOffset];
         }
 
-        [self.navigationControllerSR popViewControllerAnimated:YES];
+        [weakSelf.navigationControllerSR popViewControllerAnimated:YES];
     }];
 }
 

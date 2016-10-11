@@ -11,7 +11,7 @@
 
 @interface SREditOptionViewController : UIViewController
 
-@property(nonatomic, weak) id <ImageControllerDelegate> delegate;
+@property(nonatomic, weak) id <SRImageControllerDelegate> delegate;
 @property(nonatomic, strong) UIImage* image;
 @property(nonatomic, assign) CGFloat zoomScale;
 @property(nonatomic, assign) CGPoint contentOffset;

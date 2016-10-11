@@ -53,9 +53,11 @@
     return img;
 }
 
+static char kPixelData;
+
 -(void)dealloc
 {
-    CFDataRef pixelData = (__bridge CFDataRef)(objc_getAssociatedObject(self, @selector(pixelData)));
+    CFDataRef pixelData = (__bridge CFDataRef)(objc_getAssociatedObject(self, &kPixelData));
 
     if (pixelData)
     {
@@ -75,13 +77,15 @@
     //Method1 but having a huge performance hit with CGDataProviderCopyData method
     else
     {
+        __weak typeof(self) weakSelf = self;
+
         void(^getColorBlock)(const UInt8* data) = ^(const UInt8* data){
             
             int numberOfColorComponents = 4; // R,G,B, and A
             NSInteger pointX = ceilf(point.x)-1;
             NSInteger pointY = ceilf(point.y)-1;
             
-            float w = self.size.width;
+            float w = weakSelf.size.width;
             int pixelInfo = ((w * pointY) + pointX) * numberOfColorComponents;
             
             int red = 0;
@@ -89,7 +93,7 @@
             int blue = 0;
             int alpha = 255;
             
-            switch (CGImageGetAlphaInfo(self.CGImage))
+            switch (CGImageGetAlphaInfo(weakSelf.CGImage))
             {
                 case kCGImageAlphaNone:
                 case kCGImageAlphaNoneSkipLast:
@@ -132,7 +136,7 @@
             }
         };
         
-        CFDataRef pixelData = (__bridge CFDataRef)(objc_getAssociatedObject(self, @selector(pixelData)));
+        CFDataRef pixelData = (__bridge CFDataRef)(objc_getAssociatedObject(self, &kPixelData));
 
         if (pixelData)
         {
@@ -149,10 +153,10 @@
             queue.qualityOfService = NSQualityOfServiceUserInteractive;
             
             NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
-                CGDataProviderRef provider = CGImageGetDataProvider(self.CGImage);
+                CGDataProviderRef provider = CGImageGetDataProvider(weakSelf.CGImage);
                 CFDataRef pixelData = CGDataProviderCopyData(provider);
                 
-                objc_setAssociatedObject(self, @selector(pixelData), (__bridge NSData*)(pixelData), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+                objc_setAssociatedObject(weakSelf, &kPixelData, (__bridge NSData*)(pixelData), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
                 
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     getColorBlock(CFDataGetBytePtr(pixelData));

@@ -20,38 +20,32 @@ CGFloat circularViewWidth = 44;
 
 @interface IQCropperView()<UIGestureRecognizerDelegate>
 
-@property(nonatomic, assign, readonly) CGRect cropBounds;
+@property(nonatomic, readonly) CGRect cropBounds;
+@property(nonatomic, readonly) UIView* innerCropperView;
+@property(nonatomic, readonly) UIView *tl1, *tl2, *tr1, *tr2, *bl1, *bl2, *br1, *br2;
+@property(nonatomic, readonly) UIView *leftVerticalLine, *rightVerticalLine, *topHorizontalLine, *bottomHorizontalLine;
+@property(nonatomic, readonly) CAShapeLayer *shapeLayer;
 
 @end
 
 @implementation IQCropperView
 {
-    UIView* _innerCropperView;
-    
     UIPanGestureRecognizer *panRecognizer;
-    UIView *tl1, *tl2, *tr1, *tr2, *bl1, *bl2, *br1, *br2;
     
     CGPoint _beginTouchPoint;
     CGRect _beginRect;
     IQCropViewEdge _beginEdge;
-    
-    CAShapeLayer *shapeLayer;
-    
-    UIView *leftVerticalLine;
-    UIView *rightVerticalLine;
-    UIView *topHorizontalLine;
-    UIView *bottomHorizontalLine;
 }
 
 @synthesize aspectSize = _aspectSize;
 
 -(void)initialize
 {
-    shapeLayer = [[CAShapeLayer alloc] init];
-    [shapeLayer setFillRule:kCAFillRuleEvenOdd];
-    [shapeLayer setFillColor:[UIColor colorWithWhite:0.0 alpha:0.7].CGColor];
-    [shapeLayer setFrame:self.bounds];
-    [self.layer addSublayer:shapeLayer];
+    _shapeLayer = [[CAShapeLayer alloc] init];
+    [_shapeLayer setFillRule:kCAFillRuleEvenOdd];
+    [_shapeLayer setFillColor:[UIColor colorWithWhite:0.0 alpha:0.7].CGColor];
+    [_shapeLayer setFrame:self.bounds];
+    [self.layer addSublayer:_shapeLayer];
 
     UIColor *originalThemeColor = [UIColor originalThemeColor];
 
@@ -65,63 +59,63 @@ CGFloat circularViewWidth = 44;
 
     {
         /*-Top Left-*/
-        tl1 = [[UIView alloc] init];
-        tl1.backgroundColor = originalThemeColor;
-        [self addSubview:tl1];
+        _tl1 = [[UIView alloc] init];
+        _tl1.backgroundColor = originalThemeColor;
+        [self addSubview:_tl1];
         
-        tl2 = [[UIView alloc] init];
-        tl2.backgroundColor = originalThemeColor;
-        [self addSubview:tl2];
+        _tl2 = [[UIView alloc] init];
+        _tl2.backgroundColor = originalThemeColor;
+        [self addSubview:_tl2];
 
         /*-Top Right-*/
-        tr1 = [[UIView alloc] init];
-        tr1.backgroundColor = originalThemeColor;
-        [self addSubview:tr1];
+        _tr1 = [[UIView alloc] init];
+        _tr1.backgroundColor = originalThemeColor;
+        [self addSubview:_tr1];
         
-        tr2 = [[UIView alloc] init];
-        tr2.backgroundColor = originalThemeColor;
-        [self addSubview:tr2];
+        _tr2 = [[UIView alloc] init];
+        _tr2.backgroundColor = originalThemeColor;
+        [self addSubview:_tr2];
 
         /*-Bottom Left-*/
-        bl1 = [[UIView alloc] init];
-        bl1.backgroundColor = originalThemeColor;
-        [self addSubview:bl1];
+        _bl1 = [[UIView alloc] init];
+        _bl1.backgroundColor = originalThemeColor;
+        [self addSubview:_bl1];
         
-        bl2 = [[UIView alloc] init];
-        bl2.backgroundColor = originalThemeColor;
-        [self addSubview:bl2];
+        _bl2 = [[UIView alloc] init];
+        _bl2.backgroundColor = originalThemeColor;
+        [self addSubview:_bl2];
 
         /*-Bottom Right-*/
-        br1 = [[UIView alloc] init];
-        br1.backgroundColor = originalThemeColor;
-        [self addSubview:br1];
+        _br1 = [[UIView alloc] init];
+        _br1.backgroundColor = originalThemeColor;
+        [self addSubview:_br1];
         
-        br2 = [[UIView alloc] init];
-        br2.backgroundColor = originalThemeColor;
-        [self addSubview:br2];
+        _br2 = [[UIView alloc] init];
+        _br2.backgroundColor = originalThemeColor;
+        [self addSubview:_br2];
     }
     
 //    _cropRect = self.cropBounds;
     
-    leftVerticalLine = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetWidth(_innerCropperView.bounds)*2/3, 0, 1, CGRectGetHeight(_innerCropperView.bounds))];
-    [leftVerticalLine setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleHeight)];
-    [leftVerticalLine setBackgroundColor:[originalThemeColor colorWithAlphaComponent:0.2]];
-    [_innerCropperView addSubview:leftVerticalLine];
+    _leftVerticalLine = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetWidth(_innerCropperView.bounds)*2/3, 0, 1, CGRectGetHeight(_innerCropperView.bounds))];
+    [_leftVerticalLine setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleHeight)];
+    [_leftVerticalLine setBackgroundColor:[originalThemeColor colorWithAlphaComponent:0.2]];
+    [_innerCropperView addSubview:_leftVerticalLine];
     
-    rightVerticalLine = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetWidth(_innerCropperView.bounds)/3, 0, 1, CGRectGetHeight(_innerCropperView.bounds))];
-    [rightVerticalLine setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleHeight)];
-    [rightVerticalLine setBackgroundColor:[originalThemeColor colorWithAlphaComponent:0.2]];
-    [_innerCropperView addSubview:rightVerticalLine];
+    _rightVerticalLine = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetWidth(_innerCropperView.bounds)/3, 0, 1, CGRectGetHeight(_innerCropperView.bounds))];
+    [_rightVerticalLine setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleHeight)];
+    [_rightVerticalLine setBackgroundColor:[originalThemeColor colorWithAlphaComponent:0.2]];
+    [_innerCropperView addSubview:_rightVerticalLine];
     
-    topHorizontalLine = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_innerCropperView.bounds)/3, CGRectGetWidth(_innerCropperView.bounds), 1)];
-    [topHorizontalLine setAutoresizingMask:(UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleWidth)];
-    [topHorizontalLine setBackgroundColor:[originalThemeColor colorWithAlphaComponent:0.2]];
-    [_innerCropperView addSubview:topHorizontalLine];
+    _topHorizontalLine = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_innerCropperView.bounds)/3, CGRectGetWidth(_innerCropperView.bounds), 1)];
+    [_topHorizontalLine setAutoresizingMask:(UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleWidth)];
+    [_topHorizontalLine setBackgroundColor:[originalThemeColor colorWithAlphaComponent:0.2]];
+    [_innerCropperView addSubview:_topHorizontalLine];
     
-    bottomHorizontalLine = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_innerCropperView.bounds)*2/3, CGRectGetWidth(_innerCropperView.bounds), 1)];
-    [bottomHorizontalLine setAutoresizingMask:(UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleWidth)];
-    [bottomHorizontalLine setBackgroundColor:[originalThemeColor colorWithAlphaComponent:0.2]];
-    [_innerCropperView addSubview:bottomHorizontalLine];
+    _bottomHorizontalLine = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_innerCropperView.bounds)*2/3, CGRectGetWidth(_innerCropperView.bounds), 1)];
+    [_bottomHorizontalLine setAutoresizingMask:(UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleWidth)];
+    [_bottomHorizontalLine setBackgroundColor:[originalThemeColor colorWithAlphaComponent:0.2]];
+    [_innerCropperView addSubview:_bottomHorizontalLine];
 }
 
 -(CGRect)cropBounds
@@ -148,57 +142,59 @@ CGFloat circularViewWidth = 44;
         _cropRect = CGRectIntersection(self.bounds, _cropRect);
     }
 
+    __weak typeof(self) weakSelf = self;
+
     [UIView animateWithDuration:animated?0.3:0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
 
-        _innerCropperView.frame = _cropRect;
+        weakSelf.innerCropperView.frame = weakSelf.cropRect;
         
         {
             CGFloat widthHeight = 2;
             
             /*-Top Left-*/
-            tl1.frame = CGRectMake(CGRectGetMinX(_cropRect)-widthHeight, CGRectGetMinY(_cropRect)-widthHeight, 20, widthHeight);
-            tl2.frame = CGRectMake(CGRectGetMinX(_cropRect)-widthHeight, CGRectGetMinY(_cropRect)-widthHeight, widthHeight, 20);
+            weakSelf.tl1.frame = CGRectMake(CGRectGetMinX(weakSelf.cropRect)-widthHeight, CGRectGetMinY(weakSelf.cropRect)-widthHeight, 20, widthHeight);
+            weakSelf.tl2.frame = CGRectMake(CGRectGetMinX(weakSelf.cropRect)-widthHeight, CGRectGetMinY(weakSelf.cropRect)-widthHeight, widthHeight, 20);
             
             /*-Top Right-*/
-            tr1.frame = CGRectMake(CGRectGetMaxX(_cropRect)-20+widthHeight, CGRectGetMinY(_cropRect)-widthHeight, 20, widthHeight);
-            tr2.frame = CGRectMake(CGRectGetMaxX(_cropRect),CGRectGetMinY(_cropRect)-widthHeight, widthHeight, 20);
+            weakSelf.tr1.frame = CGRectMake(CGRectGetMaxX(weakSelf.cropRect)-20+widthHeight, CGRectGetMinY(weakSelf.cropRect)-widthHeight, 20, widthHeight);
+            weakSelf.tr2.frame = CGRectMake(CGRectGetMaxX(weakSelf.cropRect),CGRectGetMinY(weakSelf.cropRect)-widthHeight, widthHeight, 20);
             
             /*-Bottom Left-*/
-            bl1.frame = CGRectMake(CGRectGetMinX(_cropRect)-widthHeight, CGRectGetMaxY(_cropRect), 20, widthHeight);
-            bl2.frame = CGRectMake(CGRectGetMinX(_cropRect)-widthHeight, CGRectGetMaxY(_cropRect)-20+widthHeight, widthHeight, 20);
+            weakSelf.bl1.frame = CGRectMake(CGRectGetMinX(weakSelf.cropRect)-widthHeight, CGRectGetMaxY(weakSelf.cropRect), 20, widthHeight);
+            weakSelf.bl2.frame = CGRectMake(CGRectGetMinX(weakSelf.cropRect)-widthHeight, CGRectGetMaxY(weakSelf.cropRect)-20+widthHeight, widthHeight, 20);
             
             /*-Bottom Right-*/
-            br1.frame = CGRectMake(CGRectGetMaxX(_cropRect)-20+widthHeight, CGRectGetMaxY(_cropRect), 20, widthHeight);
-            br2.frame = CGRectMake(CGRectGetMaxX(_cropRect),CGRectGetMaxY(_cropRect)-20+widthHeight, widthHeight, 20);
+            weakSelf.br1.frame = CGRectMake(CGRectGetMaxX(weakSelf.cropRect)-20+widthHeight, CGRectGetMaxY(weakSelf.cropRect), 20, widthHeight);
+            weakSelf.br2.frame = CGRectMake(CGRectGetMaxX(weakSelf.cropRect),CGRectGetMaxY(weakSelf.cropRect)-20+widthHeight, widthHeight, 20);
         }
         
         {
-            [leftVerticalLine setFrame:CGRectMake(CGRectGetWidth(_innerCropperView.bounds)*2/3, 0, 1, CGRectGetHeight(_innerCropperView.bounds))];
-            [rightVerticalLine setFrame:CGRectMake(CGRectGetWidth(_innerCropperView.bounds)/3, 0, 1, CGRectGetHeight(_innerCropperView.bounds))];
-            [topHorizontalLine setFrame:CGRectMake(0,CGRectGetHeight(_innerCropperView.bounds)/3, CGRectGetWidth(_innerCropperView.bounds), 1)];
-            [bottomHorizontalLine setFrame:CGRectMake(0,CGRectGetHeight(_innerCropperView.bounds)*2/3, CGRectGetWidth(_innerCropperView.bounds), 1)];
+            [weakSelf.leftVerticalLine setFrame:CGRectMake(CGRectGetWidth(weakSelf.innerCropperView.bounds)*2/3, 0, 1, CGRectGetHeight(weakSelf.innerCropperView.bounds))];
+            [weakSelf.rightVerticalLine setFrame:CGRectMake(CGRectGetWidth(weakSelf.innerCropperView.bounds)/3, 0, 1, CGRectGetHeight(weakSelf.innerCropperView.bounds))];
+            [weakSelf.topHorizontalLine setFrame:CGRectMake(0,CGRectGetHeight(weakSelf.innerCropperView.bounds)/3, CGRectGetWidth(weakSelf.innerCropperView.bounds), 1)];
+            [weakSelf.bottomHorizontalLine setFrame:CGRectMake(0,CGRectGetHeight(weakSelf.innerCropperView.bounds)*2/3, CGRectGetWidth(weakSelf.innerCropperView.bounds), 1)];
         }
         
         {
             UIBezierPath *bezierPath = [[UIBezierPath alloc] init];
-            [bezierPath appendPath:[UIBezierPath bezierPathWithRect:self.bounds]];
-            [bezierPath appendPath:[UIBezierPath bezierPathWithRect:_innerCropperView.frame]];
+            [bezierPath appendPath:[UIBezierPath bezierPathWithRect:weakSelf.bounds]];
+            [bezierPath appendPath:[UIBezierPath bezierPathWithRect:weakSelf.innerCropperView.frame]];
 
             if (animated)
             {
                 CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"path"];
                 animation.duration = 0.3;
                 animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-                [shapeLayer addAnimation:animation forKey:@"pathAnimation"];
+                [weakSelf.shapeLayer addAnimation:animation forKey:@"pathAnimation"];
             }
 
-            [shapeLayer setPath:bezierPath.CGPath];
+            [weakSelf.shapeLayer setPath:bezierPath.CGPath];
         }
     } completion:^(BOOL finished) {
 
-        if ([self.delegate respondsToSelector:@selector(cropViewDidChangedCropRect:)])
+        if ([weakSelf.delegate respondsToSelector:@selector(cropViewDidChangedCropRect:)])
         {
-            [self.delegate cropViewDidChangedCropRect:self];
+            [weakSelf.delegate cropViewDidChangedCropRect:weakSelf];
         }
     }];
 }
@@ -223,7 +219,7 @@ CGFloat circularViewWidth = 44;
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    shapeLayer.frame = self.bounds;
+    _shapeLayer.frame = self.bounds;
 }
 
 //-(void)dealloc

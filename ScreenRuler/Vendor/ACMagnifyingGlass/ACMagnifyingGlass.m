@@ -155,17 +155,21 @@ CGFloat const kACMagnifyingGlassDefaultScale = 3;
     
     self.transform = CGAffineTransformMake(0.1, 0, 0, 0.1, 0, 60);
     
+    __weak typeof(self) weakSelf = self;
+
     [UIView animateWithDuration:0.2 animations:^{
-        self.transform = CGAffineTransformIdentity;
+        weakSelf.transform = CGAffineTransformIdentity;
     }];
 }
 
 -(void)hide
 {
+    __weak typeof(self) weakSelf = self;
+
     [UIView animateWithDuration:0.2 animations:^{
-        self.transform = CGAffineTransformMake(0.1, 0, 0, 0.1, 0, 60);
+        weakSelf.transform = CGAffineTransformMake(0.1, 0, 0, 0.1, 0, 60);
     } completion:^(BOOL finished) {
-        [self removeFromSuperview];
+        [weakSelf removeFromSuperview];
     }];
 }
 

@@ -36,9 +36,12 @@
   
     self.title = NSLocalizedString(@"Settings", nil);
     
-    settingsItems = @[@{@"title":NSLocalizedString(@"Settings", nil),@"items":@[@{@"title":NSLocalizedString(@"Color Theme", nil),@"discloseIndicator":@NO}]},
-                      @{@"title":NSLocalizedString(@"Social", nil),@"items":@[@{@"title":NSLocalizedString(@"Share On Social Network", nil),@"discloseIndicator":@NO},@{@"title":NSLocalizedString(@"Rate Us On App Store", nil),@"discloseIndicator":@NO}]},
-                      @{@"title":NSLocalizedString(@"Feedback", nil),@"items":@[@{@"title":NSLocalizedString(@"Feedback", nil),@"discloseIndicator":@NO},@{@"title":NSLocalizedString(@"Bug Report", nil),@"discloseIndicator":@NO}]},
+    UISwitch *showZoomOptionSwitch = [[UISwitch alloc] init];
+    [showZoomOptionSwitch addTarget:self action:@selector(showZoomOptionAction:) forControlEvents:UIControlEventValueChanged];
+    showZoomOptionSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowZoomOption"];
+    settingsItems = @[@{@"title":NSLocalizedString(@"Settings", nil),@"items":@[@{@"title":NSLocalizedString(@"Color Theme", nil)},@{@"title":NSLocalizedString(@"Show Zoom Options", nil),@"accessoryView":showZoomOptionSwitch}]},
+                      @{@"title":NSLocalizedString(@"Social", nil),@"items":@[@{@"title":NSLocalizedString(@"Share On Social Network", nil)},@{@"title":NSLocalizedString(@"Rate Us On App Store", nil)}]},
+                      @{@"title":NSLocalizedString(@"Feedback", nil),@"items":@[@{@"title":NSLocalizedString(@"Feedback", nil)},@{@"title":NSLocalizedString(@"Bug Report", nil)}]},
                       @{@"title":NSLocalizedString(@"Terms", nil),@"items":@[@{@"title":NSLocalizedString(@"Terms and Conditions", nil),@"discloseIndicator":@YES},@{@"title":NSLocalizedString(@"Open Source Libraries", nil),@"discloseIndicator":@YES}]}];
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", nil) style:UIBarButtonItemStyleDone target:nil action:nil];
@@ -87,11 +90,13 @@
 {
     [UIColor setThemeColor:sender.color];
     
+    __weak typeof(self) weakSelf = self;
+
     [UIView animateWithDuration:0.2 animations:^{
-        self.navigationController.navigationBar.barTintColor = [UIColor themeColor];
-        self.navigationController.navigationBar.tintColor = [UIColor themeTextColor];
-        self.navigationController.navigationBar.barStyle = ![UIColor isThemeInverted];
-        [self.tableView reloadData];
+        weakSelf.navigationController.navigationBar.barTintColor = [UIColor themeColor];
+        weakSelf.navigationController.navigationBar.tintColor = [UIColor themeTextColor];
+        weakSelf.navigationController.navigationBar.barStyle = ![UIColor isThemeInverted];
+        [weakSelf.tableView reloadData];
     }];
 }
 
@@ -99,12 +104,20 @@
 {
     [UIColor setThemeInverted:sender.selectedSegmentIndex];
 
+    __weak typeof(self) weakSelf = self;
+
     [UIView animateWithDuration:0.2 animations:^{
-        self.navigationController.navigationBar.barTintColor = [UIColor themeColor];
-        self.navigationController.navigationBar.tintColor = [UIColor themeTextColor];
-        self.navigationController.navigationBar.barStyle = ![UIColor isThemeInverted];
+        weakSelf.navigationController.navigationBar.barTintColor = [UIColor themeColor];
+        weakSelf.navigationController.navigationBar.tintColor = [UIColor themeTextColor];
+        weakSelf.navigationController.navigationBar.barStyle = ![UIColor isThemeInverted];
         sender.tintColor = [UIColor originalThemeColor];
     }];
+}
+
+-(void)showZoomOptionAction:(UISwitch*)aSwitch
+{
+    [[NSUserDefaults standardUserDefaults] setBool:aSwitch.on forKey:@"ShowZoomOption"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -141,7 +154,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0)
+    if (indexPath.section == 0 && indexPath.row == 0)
     {
         SRThemeTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SRThemeTableViewCell class]) forIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         
@@ -168,6 +181,14 @@
         
         cell.textLabel.text = dict[@"title"];
         cell.accessoryType = [dict[@"discloseIndicator"] boolValue]?UITableViewCellAccessoryDisclosureIndicator:UITableViewCellAccessoryNone;
+        cell.accessoryView = dict[@"accessoryView"];
+        
+        if ([cell.accessoryView isKindOfClass:[UISwitch class]])
+        {
+            UISwitch *accessoryView = (UISwitch*)cell.accessoryView;
+            accessoryView.onTintColor = [UIColor originalThemeColor];
+        }
+        
         return cell;
     }
 }

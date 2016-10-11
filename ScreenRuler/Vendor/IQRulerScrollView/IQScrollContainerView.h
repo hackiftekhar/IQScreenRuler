@@ -24,6 +24,7 @@
 @property(nonatomic) CGFloat zoomScale;
 @property(nonatomic) CGFloat minimumZoomScale;
 @property(nonatomic) CGFloat maximumZoomScale;
+@property(nonatomic) BOOL showZoomControls;
 
 @property(nonatomic) CGPoint contentOffset;
 - (void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated;

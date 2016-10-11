@@ -10,7 +10,7 @@
 
 @class SRScreenshotCollectionViewController;
 
-@protocol ScreenshotControllerDelegate <NSObject>
+@protocol SRScreenshotCollectionViewControllerDelegate <NSObject>
 
 -(void)screenshotControllerDidSelectOpenCamera:(SRScreenshotCollectionViewController*)controller;
 
@@ -22,7 +22,7 @@
 
 @interface SRScreenshotCollectionViewController : UIViewController
 
-@property(nonatomic, weak) id <ScreenshotControllerDelegate> delegate;
+@property(nonatomic, weak) id <SRScreenshotCollectionViewControllerDelegate> delegate;
 
 -(void)presentOverViewController:(UIViewController*)controller completion:(void (^)(void))completion;
 -(void)dismissViewControllerCompletion:(void (^)(void))completion;

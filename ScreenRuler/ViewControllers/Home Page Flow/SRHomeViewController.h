@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol ImageControllerDelegate <NSObject>
+@protocol SRImageControllerDelegate <NSObject>
 
 -(void)controller:(UIViewController*)controller finishWithImage:(UIImage*)image zoomScale:(CGFloat)zoomScale contentOffset:(CGPoint)contentOffset;
 
