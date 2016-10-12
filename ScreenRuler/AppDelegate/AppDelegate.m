@@ -51,6 +51,7 @@
     
     UIApplicationShortcutItem *shortcutItem = [launchOptions objectForKey:UIApplicationLaunchOptionsShortcutItemKey];
     
+    [Fabric sharedSDK].debug = YES;
     [Fabric with:@[[Crashlytics class]]];
 
     if(shortcutItem){

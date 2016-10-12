@@ -15,6 +15,8 @@
 #import "UIColor+HexColors.h"
 #import "SRThemeTableViewCell.h"
 #import "SRSettingsTableViewCell.h"
+#import <Crashlytics/Answers.h>
+#import <SafariServices/SafariServices.h>
 
 @interface SRSettingTableViewController ()<MFMailComposeViewControllerDelegate,SKStoreProductViewControllerDelegate>
 {
@@ -90,6 +92,8 @@
 {
     [UIColor setThemeColor:sender.color];
     
+    [Answers logCustomEventWithName:@"Theme Changed" customAttributes:nil];
+
     __weak typeof(self) weakSelf = self;
 
     [UIView animateWithDuration:0.2 animations:^{
@@ -104,6 +108,8 @@
 {
     [UIColor setThemeInverted:sender.selectedSegmentIndex];
 
+    [Answers logCustomEventWithName:@"Theme Inverted" customAttributes:@{@"Inverted":@(sender.selectedSegmentIndex)}];
+
     __weak typeof(self) weakSelf = self;
 
     [UIView animateWithDuration:0.2 animations:^{
@@ -116,9 +122,33 @@
 
 -(void)showZoomOptionAction:(UISwitch*)aSwitch
 {
+    [Answers logCustomEventWithName:@"Theme Inverted" customAttributes:@{@"Show":@(aSwitch.on)}];
+
     [[NSUserDefaults standardUserDefaults] setBool:aSwitch.on forKey:@"ShowZoomOption"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
+- (IBAction)openSourceAtGithubAction:(UIButton *)sender {
+    
+    [Answers logCustomEventWithName:@"Open Repository Safari" customAttributes:nil];
+
+    NSURL *url = [NSURL URLWithString:@"https://github.com/hackiftekhar/IQScreenRuler"];
+    
+    SFSafariViewController *controller = [[SFSafariViewController alloc] initWithURL:url];
+    
+    if ([controller respondsToSelector:@selector(preferredBarTintColor)])
+    {
+        [controller setPreferredBarTintColor:[UIColor themeColor]];
+    }
+    
+    if ([controller respondsToSelector:@selector(preferredControlTintColor)])
+    {
+        [controller setPreferredControlTintColor:[UIColor themeTextColor]];
+    }
+    
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -205,6 +235,8 @@
             {
                 case 0:
                 {
+                    [Answers logShareWithMethod:@"Social Share" contentName:@"Share Activity" contentType:@"share" contentId:@"share.app" customAttributes:nil];
+
                     //Share With UIActivityViewController
                     NSString *messageBody =[NSString localizedStringWithFormat:NSLocalizedString(@"social_share_text", nil),appName];
                     NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/app/id1104790987"];
@@ -216,6 +248,8 @@
                     
                 case 1:
                 {
+                    [Answers logCustomEventWithName:@"Rate Us" customAttributes:nil];
+                    
                     SKStoreProductViewController* skpvc = [[SKStoreProductViewController alloc] init];
                     skpvc.delegate = self;
                     NSDictionary* dict = [NSDictionary dictionaryWithObject: @(1104790987) forKey: SKStoreProductParameterITunesItemIdentifier];
@@ -254,6 +288,8 @@
                     }
                     else
                     {
+                        [Answers logCustomEventWithName:@"Feedback" customAttributes:nil];
+
                         NSString *messageBody =[NSString localizedStringWithFormat:NSLocalizedString(@"mail_body", nil),[[UIDevice currentDevice] model],[[UIDevice currentDevice] systemVersion],versionString,appName];
                         
                         NSArray *emailAdd = [NSArray arrayWithObject: @"info@infoenum.com"];
@@ -272,7 +308,6 @@
                 case 1:
                 {
                     //Bug Report
-                    
                     if(![MFMailComposeViewController canSendMail])
                     {
                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"mail_device_configuration_message", nil) preferredStyle:UIAlertControllerStyleAlert];
@@ -286,6 +321,7 @@
                     }
                     else
                     {
+                        [Answers logCustomEventWithName:@"Bug Report" customAttributes:nil];
                         
                         NSString *messageBody =[NSString localizedStringWithFormat:NSLocalizedString(@"mail_body", nil),[[UIDevice currentDevice] model],[[UIDevice currentDevice] systemVersion],versionString,appName];
                         
@@ -310,11 +346,13 @@
             {
                 case 0:
                 {
+                    [Answers logCustomEventWithName:@"Privacy Policy" customAttributes:nil];
                     [self performSegueWithIdentifier:NSStringFromClass([SRPrivacyPolicyViewController class]) sender:self];
                 }
                     break;
                 case 1:
                 {
+                    [Answers logCustomEventWithName:@"Open Source Libraries" customAttributes:nil];
                     [self performSegueWithIdentifier:NSStringFromClass([SRAcknowledgementTableViewController class]) sender:self];
                 }
                     break;

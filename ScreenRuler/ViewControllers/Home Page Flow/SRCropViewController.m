@@ -12,6 +12,8 @@
 #import "IQScrollContainerView.h"
 #import "SRNavigationController.h"
 #import "UIColor+ThemeColor.h"
+#import <Crashlytics/Answers.h>
+
 
 @interface SRCropViewController ()<IQCropViewDelegate>
 
@@ -101,51 +103,75 @@
 
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Original", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         weakSelf.cropView.aspectSize = IQ_IQAspectSizeOriginal;
+        
+        [Answers logCustomEventWithName:@"Aspect Ratio" customAttributes:@{@"Ratio":@"original"}];
     }]];
     
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Square", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         weakSelf.cropView.aspectSize = IQ_IQAspectSizeSquare;
+        
+        [Answers logCustomEventWithName:@"Aspect Ratio" customAttributes:@{@"Ratio":@"square"}];
     }]];
     
     [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"%d:%d",2,3] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         weakSelf.cropView.aspectSize = IQ_IQAspectSize2x3;
+        
+        [Answers logCustomEventWithName:@"Aspect Ratio" customAttributes:@{@"Ratio":@"2x3"}];
     }]];
     
     [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"%d:%d",3,4] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         weakSelf.cropView.aspectSize = IQ_IQAspectSize3x4;
+        
+        [Answers logCustomEventWithName:@"Aspect Ratio" customAttributes:@{@"Ratio":@"3x4"}];
     }]];
     
     [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"%d:%d",4,5] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         weakSelf.cropView.aspectSize = IQ_IQAspectSize4x5;
+        
+        [Answers logCustomEventWithName:@"Aspect Ratio" customAttributes:@{@"Ratio":@"4x5"}];
     }]];
     
     [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"%d:%d",5,7] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         weakSelf.cropView.aspectSize = IQ_IQAspectSize5x7;
+        
+        [Answers logCustomEventWithName:@"Aspect Ratio" customAttributes:@{@"Ratio":@"5x7"}];
     }]];
     
     [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"%d:%d",9,16] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         weakSelf.cropView.aspectSize = IQ_IQAspectSize9x16;
+        
+        [Answers logCustomEventWithName:@"Aspect Ratio" customAttributes:@{@"Ratio":@"9x16"}];
     }]];
     
     [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"%d:%d",3,2] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         weakSelf.cropView.aspectSize = IQ_IQAspectSize3x2;
+        
+        [Answers logCustomEventWithName:@"Aspect Ratio" customAttributes:@{@"Ratio":@"3x2"}];
     }]];
     
     [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"%d:%d",4,3] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         weakSelf.cropView.aspectSize = IQ_IQAspectSize4x3;
+        
+        [Answers logCustomEventWithName:@"Aspect Ratio" customAttributes:@{@"Ratio":@"4x3"}];
     }]];
     
     [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"%d:%d",5,4] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         weakSelf.cropView.aspectSize = IQ_IQAspectSize5x4;
+        
+        [Answers logCustomEventWithName:@"Aspect Ratio" customAttributes:@{@"Ratio":@"5x4"}];
     }]];
     
     [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"%d:%d",7,5] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         weakSelf.cropView.aspectSize = IQ_IQAspectSize7x5;
+        
+        [Answers logCustomEventWithName:@"Aspect Ratio" customAttributes:@{@"Ratio":@"7x5"}];
     }]];
     
     [NSLocale currentLocale];
     [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"%d:%d",16,9] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         weakSelf.cropView.aspectSize = IQ_IQAspectSize16x9;
+        
+        [Answers logCustomEventWithName:@"Aspect Ratio" customAttributes:@{@"Ratio":@"16x9"}];
     }]];
     
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -182,6 +208,8 @@
 
 -(IBAction)doneAction:(UIBarButtonItem*)item
 {
+    [Answers logCustomEventWithName:@"Crop Done" customAttributes:nil];
+
     CGRect respectiveRect = [self.cropView convertRect:self.cropView.cropRect toView:self.scrollContainerView.imageView];
     UIImage *image = [self.scrollContainerView.image croppedImageWithFrame:respectiveRect angle:0];
     

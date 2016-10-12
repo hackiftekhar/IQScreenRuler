@@ -10,6 +10,7 @@
 #import "SRScreenshotCollectionViewCell.h"
 #import <Photos/Photos.h>
 #import "UIFont+AppFont.h"
+#import <Crashlytics/Answers.h>
 
 @implementation UICollectionView(Screenshots)
 
@@ -380,6 +381,8 @@
 {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
+    [Answers logCustomEventWithName:@"Screenshot Selected" customAttributes:nil];
+
     __weak typeof(self) weakSelf = self;
     
     UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -422,6 +425,8 @@
 
 - (IBAction)photoLibraryAction:(UIButton *)sender {
     
+    [Answers logCustomEventWithName:@"Open Photo Library" customAttributes:nil];
+
     if ([self.delegate respondsToSelector:@selector(screenshotControllerDidSelectOpenPhotoLibrary:)])
     {
         [self.delegate screenshotControllerDidSelectOpenPhotoLibrary:self];
@@ -434,6 +439,8 @@
 
 - (IBAction)openCameraAction:(UIButton *)sender {
     
+    [Answers logCustomEventWithName:@"Open Camera" customAttributes:nil];
+
     if ([self.delegate respondsToSelector:@selector(screenshotControllerDidSelectOpenCamera:)])
     {
         [self.delegate screenshotControllerDidSelectOpenCamera:self];

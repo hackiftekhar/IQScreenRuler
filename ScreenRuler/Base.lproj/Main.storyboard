@@ -699,7 +699,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Te1-Az-2bC"/>
                         <barButtonItem id="asn-yr-pSn">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EZs-P6-kgU" customClass="IQColorPickerButton">
-                                <rect key="frame" x="182" y="7" width="30" height="30"/>
+                                <rect key="frame" x="105" y="7" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -710,7 +710,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="IKX-Rb-al2"/>
                         <barButtonItem id="kwn-Ku-wXT">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Enk-VY-nlH" customClass="IQTextPickerButton">
-                                <rect key="frame" x="383" y="5" width="35" height="35"/>
+                                <rect key="frame" x="235" y="5" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="16"/>
                                 <state key="normal" title="5"/>
@@ -776,9 +776,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="Vb7-gB-CIP">
-                            <rect key="frame" x="0.0" y="336.5" width="375" height="80"/>
+                            <rect key="frame" x="0.0" y="337" width="375" height="200"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUr-Ki-Ldf">
+                                    <attributedString key="attributedText">
+                                        <fragment content="Screen Ruler">
+                                            <attributes>
+                                                <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <font key="NSFont" size="15" name="KohinoorBangla-Semibold"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=" is open source at:">
+                                            <attributes>
+                                                <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <font key="NSFont" size="15" name="KohinoorBangla-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ctv-RH-2yB">
+                                    <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="17"/>
+                                    <color key="tintColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <state key="normal" title=" GitHub" image="GitHub-Mark"/>
+                                    <connections>
+                                        <action selector="openSourceAtGithubAction:" destination="Mh7-lW-SaP" eventType="touchUpInside" id="uM4-fV-ltt"/>
+                                    </connections>
+                                </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eN1-Hg-Wkb">
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Version 1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNb-df-MmM">
@@ -799,21 +826,26 @@
                                     </subviews>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
+                                        <constraint firstItem="fNb-df-MmM" firstAttribute="top" secondItem="eN1-Hg-Wkb" secondAttribute="top" id="0md-7Q-FFL"/>
                                         <constraint firstItem="fNb-df-MmM" firstAttribute="leading" secondItem="eN1-Hg-Wkb" secondAttribute="leading" constant="5" id="5x7-OR-fC8"/>
                                         <constraint firstAttribute="trailing" secondItem="fNb-df-MmM" secondAttribute="trailing" constant="5" id="JfQ-Qo-TSQ"/>
                                         <constraint firstItem="DVq-8t-TE4" firstAttribute="leading" secondItem="fNb-df-MmM" secondAttribute="leading" id="UuN-nM-IwN"/>
-                                        <constraint firstItem="fNb-df-MmM" firstAttribute="top" secondItem="eN1-Hg-Wkb" secondAttribute="top" constant="10" id="XEQ-ns-Osb"/>
                                         <constraint firstItem="DVq-8t-TE4" firstAttribute="trailing" secondItem="fNb-df-MmM" secondAttribute="trailing" id="aYK-RD-eh2"/>
                                         <constraint firstItem="DVq-8t-TE4" firstAttribute="top" secondItem="fNb-df-MmM" secondAttribute="bottom" id="ljg-Ed-eVy"/>
+                                        <constraint firstAttribute="bottom" secondItem="DVq-8t-TE4" secondAttribute="bottom" id="mrm-OI-wo1"/>
                                     </constraints>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="eN1-Hg-Wkb" secondAttribute="bottom" id="Nvq-KT-GeG"/>
-                                <constraint firstItem="eN1-Hg-Wkb" firstAttribute="leading" secondItem="Vb7-gB-CIP" secondAttribute="leading" id="bpF-m0-9rO"/>
-                                <constraint firstItem="eN1-Hg-Wkb" firstAttribute="top" secondItem="Vb7-gB-CIP" secondAttribute="top" id="tCz-p4-tBw"/>
-                                <constraint firstAttribute="trailing" secondItem="eN1-Hg-Wkb" secondAttribute="trailing" id="zbD-23-GGV"/>
+                                <constraint firstItem="eN1-Hg-Wkb" firstAttribute="top" secondItem="Ctv-RH-2yB" secondAttribute="bottom" constant="40" id="6Gh-Fx-gOz"/>
+                                <constraint firstAttribute="trailing" secondItem="eN1-Hg-Wkb" secondAttribute="trailing" id="9na-i9-fQG"/>
+                                <constraint firstItem="vUr-Ki-Ldf" firstAttribute="top" secondItem="Vb7-gB-CIP" secondAttribute="top" constant="10" id="F9v-4q-Qym"/>
+                                <constraint firstItem="vUr-Ki-Ldf" firstAttribute="leading" secondItem="Vb7-gB-CIP" secondAttribute="leading" constant="5" id="N28-wB-EOq"/>
+                                <constraint firstAttribute="trailing" secondItem="vUr-Ki-Ldf" secondAttribute="trailing" constant="5" id="bSG-mO-0vW"/>
+                                <constraint firstItem="Ctv-RH-2yB" firstAttribute="centerX" secondItem="Vb7-gB-CIP" secondAttribute="centerX" id="vw7-Tx-PMA"/>
+                                <constraint firstItem="eN1-Hg-Wkb" firstAttribute="leading" secondItem="Vb7-gB-CIP" secondAttribute="leading" id="xpE-yb-kni"/>
+                                <constraint firstItem="Ctv-RH-2yB" firstAttribute="top" secondItem="vUr-Ki-Ldf" secondAttribute="bottom" constant="5" id="y6K-8Y-2bZ"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -1272,7 +1304,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Share On Social Network" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IVF-fw-bRY">
-                                            <frame key="frameInset" minX="15" width="345" height="43.5"/>
+                                            <frame key="frameInset" minX="15" width="345" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
                                             <nil key="highlightedColor"/>
@@ -2151,7 +2183,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xAP-Je-5Ft">
-                                            <frame key="frameInset" minX="15" width="325" height="43.5"/>
+                                            <frame key="frameInset" minX="15" width="325" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
                                             <nil key="highlightedColor"/>
@@ -2278,6 +2310,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="GitHub-Mark" width="32" height="32"/>
         <image name="color_palette" width="25" height="25"/>
         <image name="crop" width="26" height="26"/>
         <image name="horizontal_ruler" width="26" height="26"/>

@@ -13,6 +13,7 @@
 #import "SRDrawViewController.h"
 #import "SRNavigationController.h"
 #import "UIColor+ThemeColor.h"
+#import <Crashlytics/Answers.h>
 
 @interface SREditOptionViewController ()<SRImageControllerDelegate,UIScrollViewDelegate>
 
@@ -87,7 +88,11 @@
         
         [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"%.0fx%.0f",[[UIScreen mainScreen] bounds].size.width,[[UIScreen mainScreen] bounds].size.height] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            UIImage *image = [weakSelf.scrollContainerView.image IQ_scaleToFillSize:[[UIScreen mainScreen] bounds].size];
+            CGSize newSize = [[UIScreen mainScreen] bounds].size;
+            
+            [Answers logCustomEventWithName:@"Resize" customAttributes:@{@"size":NSStringFromCGSize(newSize)}];
+
+            UIImage *image = [weakSelf.scrollContainerView.image IQ_scaleToFillSize:newSize];
             weakSelf.image = image;
         }]];
     }
@@ -99,7 +104,11 @@
 
         [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"%.0fx%.0f",[[UIScreen mainScreen] bounds].size.height,[[UIScreen mainScreen] bounds].size.width] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            UIImage *image = [weakSelf.scrollContainerView.image IQ_scaleToFillSize:CGSizeMake([[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width)];
+            CGSize newSize = CGSizeMake([[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
+            
+            [Answers logCustomEventWithName:@"Resize" customAttributes:@{@"size":NSStringFromCGSize(newSize)}];
+            
+            UIImage *image = [weakSelf.scrollContainerView.image IQ_scaleToFillSize:newSize];
             weakSelf.image = image;
         }]];
     }
@@ -154,7 +163,11 @@
         NSInteger width = [widthTextField.text integerValue];
         NSInteger height = [heightTextField.text integerValue];
         
-        UIImage *image = [weakSelf.scrollContainerView.image IQ_scaleToFillSize:CGSizeMake(width, height)];
+        CGSize newSize = CGSizeMake(width, height);
+        
+        [Answers logCustomEventWithName:@"Resize" customAttributes:@{@"size":NSStringFromCGSize(newSize)}];
+
+        UIImage *image = [weakSelf.scrollContainerView.image IQ_scaleToFillSize:newSize];
         weakSelf.image = image;
     }];
     doneAction.enabled = NO;

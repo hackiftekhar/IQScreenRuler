@@ -26,6 +26,7 @@
 #import "IQScrollContainerView.h"
 #import "SRScreenshotCollectionViewController.h"
 #import "UIImage+fixOrientation.h"
+#import <Crashlytics/Answers.h>
 
 //https://www.iconfinder.com/iconsets/hawcons-gesture-stroke
 
@@ -235,6 +236,8 @@
 
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Share Photo", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
 
+        [Answers logShareWithMethod:@"Share Photo" contentName:@"Share Activity" contentType:@"share" contentId:@"share.photo" customAttributes:nil];
+        
         UIActivityViewController *shareController = [[UIActivityViewController alloc] initWithActivityItems:@[weakSelf.scrollContainerView.image] applicationActivities:nil];
         
         shareController.excludedActivityTypes = @[UIActivityTypeAssignToContact,
@@ -255,6 +258,9 @@
     }]];
     
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Start Help Tour", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [Answers logCustomEventWithName:@"Start Help Tour" customAttributes:nil];
+
         [weakSelf startHelpTour];
     }]];
 
@@ -849,6 +855,8 @@
     {
         [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"@%dx",1] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
+            [Answers logCustomEventWithName:@"Chane Scale Multiplier" customAttributes:@{@"value":@"1"}];
+
             NSInteger selectedRatio = 1;
             [weakSelf.ratioButton setTitle:[NSString localizedStringWithFormat:@"@%ldx",(long)selectedRatio] forState:UIControlStateNormal];
             weakSelf.freeRulerView.deviceScale = selectedRatio;
@@ -860,6 +868,9 @@
     {
         [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"@%dx",2] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             NSInteger selectedRatio = 2;
+
+            [Answers logCustomEventWithName:@"Chane Scale Multiplier" customAttributes:@{@"value":@"2"}];
+
             [weakSelf.ratioButton setTitle:[NSString localizedStringWithFormat:@"@%ldx",(long)selectedRatio] forState:UIControlStateNormal];
             weakSelf.freeRulerView.deviceScale = selectedRatio;
             weakSelf.lineFrameView.deviceScale = selectedRatio;
@@ -869,6 +880,9 @@
     if (currentRatio != 3)
     {
         [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"@%dx",3] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+            [Answers logCustomEventWithName:@"Chane Scale Multiplier" customAttributes:@{@"value":@"3"}];
+
             NSInteger selectedRatio = 3;
             [weakSelf.ratioButton setTitle:[NSString localizedStringWithFormat:@"@%ldx",(long)selectedRatio] forState:UIControlStateNormal];
             weakSelf.freeRulerView.deviceScale = selectedRatio;
@@ -1076,6 +1090,8 @@
     {
         CGPoint location = [recognizer locationInView:self.scrollContainerView.imageView];
         
+        [Answers logCustomEventWithName:@"Show RGB Value" customAttributes:nil];
+
         [self showRGBAtLocation:location];
     }
     else

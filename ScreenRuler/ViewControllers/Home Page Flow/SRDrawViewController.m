@@ -14,6 +14,8 @@
 #import "IQ_SmoothedBIView.h"
 #import "UIColor+ThemeColor.h"
 #import "UIImage+Color.h"
+#import <Crashlytics/Answers.h>
+
 
 @interface SRDrawViewController ()<UIScrollViewDelegate>
 
@@ -92,10 +94,14 @@
 
 - (IBAction)colorPickerChanged:(IQColorPickerButton *)sender {
     self.drawView.strokeColor = sender.color;
+
+    [Answers logCustomEventWithName:@"Color Picker Color Changed" customAttributes:nil];
 }
 
 - (IBAction)sizePickerChanged:(IQTextPickerButton *)sender {
     self.drawView.strokeWidth = [sender.selectedItem floatValue];
+
+    [Answers logCustomEventWithName:@"Size Picker Size Changed" customAttributes:nil];
 }
 
 -(IBAction)cancelAction:(UIBarButtonItem*)item
@@ -109,6 +115,8 @@
 
 -(IBAction)doneAction:(UIBarButtonItem*)item
 {
+    [Answers logCustomEventWithName:@"Draw Done" customAttributes:nil];
+
     UIGraphicsBeginImageContext(self.scrollContainerView.scrollView.image.size);
     [self.scrollContainerView.scrollView.contentView.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *capturedImage = UIGraphicsGetImageFromCurrentImageContext();
