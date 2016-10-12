@@ -1,96 +1,96 @@
 /* This file should be localized in Spanish */
 
 /* Aspect Ratio */
-"Aspect Ratio" = "Aspect Ratio";
+"Aspect Ratio" = "Relación de Aspecto";
 "Original" = "Original";
-"Square" = "Square";
+"Square" = "Cuadrado";
 
 /* No Screenshots */
-"no_screenshots_title" = "No screenshots found";
-"no_screenshots_description" = "You can capture the screen on your iOS device using the Sleep/Wake and Home buttons.";
+"no_screenshots_title" = "No se encontraron capturas de pantalla";
+"no_screenshots_description" = "Puedes tomar una captura de pantalla presionando el botón de bloqueo y el botón de inicio de tu dispositivo iOS.";
 
-"photo_access_denied_title" = "Photo Library Access Denied";
-"photo_access_denied_description" = "Unable to access Photo Library, Go to Settings to change photo library permission.";
+"photo_access_denied_title" = "Acceso al Carrete denegado";
+"photo_access_denied_description" = "No se puede acceder al Carrete. Para habilitar los permisos, dirígase a Ajustes > Screen Ruler";
 
 /* Open Screenshots */
-"Camera" = "Camera";
-"Photo Library" = "Photo Library";
+"Camera" = "Cámara";
+"Photo Library" = "Carrete";
 
 /* Ruler Ratio It's like 1x, 2x, 3x */
-"Change Scale Multiplier" = "Change Scale Multiplier";
+"Change Scale Multiplier" = "Cambiar Escala";
 
 /* Sharing Text */
-"Mail Sent" = "Mail Sent";
-"mail_body" = "\n\n I am on '%1$@' with iOS '%2$@', using Version '%3$@' of '%4$@'";
-"mail_device_configuration_message" = "Your device is not configured to send Mail";
-"Screen Ruler - Bug Report" = "Screen Ruler - Bug Report";
+"Mail Sent" = "Mail Enviado";
+"mail_body" = "\n\n Estoy en '%1$@' con iOS '%2$@', utilizando la Versión '%3$@' de '%4$@'";
+"mail_device_configuration_message" = "Tu dispositivo no tiene ninguna cuenta de mail configurada.";
+"Screen Ruler - Bug Report" = "Screen Ruler - Reporte de Bug";
 "Screen Ruler - Feedback" = "Screen Ruler - Feedback";
 
 /* Help Tour. */
-"Skip" = "Skip";
-"Start Help Tour" = "Start Help Tour";
-"Tap to continue" = "Tap to continue";
-"horizontal_scale_help" = "Adjust horizontal scale with your fingers according to your need";
-"vertical_scale_help" = "Adjust vertical scale with your fingers according to your need";
-"device_scale_help" = "Choose device scale multiplier according to your device resolution or according to your need";
-"double_tap_help" = "Double tap using one finger to zoom-in and Double tap using two fingers to zoom-out photo";
-"long_tap_color_help" = "Long tap and drag to show RGB color of pixel";
-"long_tap_scale_help" = "Long tap horizontal or vertical scale to show more options";
+"Skip" = "Saltar";
+"Start Help Tour" = "Iniciar Tutorial";
+"Tap to continue" = "Toca para continuar";
+"horizontal_scale_help" = "Ajusta la escala horizontal con tus dedos de acuerdo a lo que necesites";
+"vertical_scale_help" = "Ajusta la escala vertical con tus dedos de acuerdo a lo que necesites";
+"device_scale_help" = "Elige una escala de acuerdo a la resolución de tu dispositivo, o de acuerdo a lo que necesites";
+"double_tap_help" = "Haz un toque doble utilizando un dedo para ampliar, y un toque doble con dos dedos para alejar";
+"long_tap_color_help" = "Haz un toque largo para mostrar el RGB de un pixel";
+"long_tap_scale_help" = "Haz un toque largo en una escala horizontal o vertical para mostrar mas opciones";
 
 /* Buttons */
-"Back" = "Back";
-"Cancel" = "Cancel";
-"Done" = "Done";
+"Back" = "Atras";
+"Cancel" = "Cancelar";
+"Done" = "Listo";
 "OK" = "OK";
 
 /* Social Share. */
-"Share Photo" = "Share Photo";
-"social_share_text" = "Check out '%@'. It's very helpful for Mobile App QA Guys to extract details of iOS app User Interface and looking into the details of screenshots is really a fun.";
+"Share Photo" = "Compartir Foto";
+"social_share_text" = "Prueba '%@'. Es muy útil para Testers de aplicaciones móviles, para extraer detalles de interfaces de usuarios y para analizar capturas de pantalla. Es muy divertido!";
 
 /* Resizing */
-"Custom" = "Custom";
-"Enter width and height" = "Enter width and height";
-"Height" = "Height";
-"Width" = "Width";
-"Resize" = "Resize";
-"Crop" = "Crop";
-"Resize Screenshot" = "Resize Screenshot";
+"Custom" = "Personalizado";
+"Enter width and height" = "Ingresa ancho y alto";
+"Height" = "Alto";
+"Width" = "Ancho";
+"Resize" = "Redimensionar";
+"Crop" = "Cortar";
+"Resize Screenshot" = "Redimensionar Captura";
 
 /* Change Scale X Y. */
-"Reset Scale to Original" = "Reset Scale to Original";
-"Set Scale point location" = "Set Scale point location";
-"Mark as X reference" = "Mark as X reference";
-"Mark as Y reference" = "Mark as Y reference";
+"Reset Scale to Original" = "Restablecer Escala";
+"Set Scale point location" = "Marcar punto en la escala";
+"Mark as X reference" = "Marcar como referencia en X";
+"Mark as Y reference" = "Marcar como referencia en Y";
 
 /* Zoom Scale */
-"Zoom Scale" = "Zoom Scale";
-"minimum_percent" = "Minimum Scale (%.0f%%)";
+"Zoom Scale" = "Aumentar Escala";
+"minimum_percent" = "Escala mínima (%.0f%%)";
 "original_percent" = "Original (%.0f%%)";
-"Show Zoom Options" = "Show Zoom Options";
+"Show Zoom Options" = "Mostrar opciones de Zoom";
 
 /* Crop Info */
-"x_y_width_height" = "X: %1$.0f,  Y: %2$.0f\nWidth: %3$.0f,  Height: %4$.0f";
+"x_y_width_height" = "X: %1$.0f,  Y: %2$.0f\nAncho: %3$.0f,  Alto: %4$.0f";
 
 /* RGB Colro Point */
 "X: %.0f, Y: %.0f" = "X: %1$.0f, Y: %2$.0f";
 "X: NA, Y: NA" = "X: NA, Y: NA";
 
 /* Settings */
-"Settings" = "Settings";
-"Color Theme" = "Color Theme";
+"Settings" = "Configuración";
+"Color Theme" = "Color del Tema";
 "Natural" = "Natural";
-"Inverted" = "Inverted";
+"Inverted" = "Invertido";
 "Social" = "Social";
-"Share On Social Network" = "Share On Social Network";
-"Rate Us On App Store" = "Rate Us On App Store";
+"Share On Social Network" = "Compartir en Redes Sociales";
+"Rate Us On App Store" = "Puntúanos en el AppStore";
 "Feedback" = "Feedback";
-"Bug Report" = "Bug Report";
-"Terms" = "Terms";
-"Terms and Conditions" = "Terms and Conditions";
-"Open Source Libraries" = "Open Source Libraries";
+"Bug Report" = "Reportar Bug";
+"Terms" = "Términos";
+"Terms and Conditions" = "Términos y Condiciones";
+"Open Source Libraries" = "Librerías de Código Abierto";
 "InfoEnum Software Systems" = "InfoEnum Software Systems";
 
 /* Other. */
 "Error" = "Error";
-"Version" = "Version";
-"image_load_error" = "There is an error loading the image. Please try again.";
+"Version" = "Versión";
+"image_load_error" = "Hubo un error cargando la imagen. Por favor intenta nuevamente.";

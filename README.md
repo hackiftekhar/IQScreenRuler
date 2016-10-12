@@ -50,7 +50,7 @@ Any contribution is more than welcome! You can contribute through pull requests 
 ###Credits
 Many thanks to
 - [Lucas Diez de Medina](https://github.com/lucaslt89) for **Spanish** localization.
-- May be **YOU**.
+- **YOU ARE NEXT**.
 
 ###Author
 If you wish to contact me, email at: hack.iftekhar@gmail.com
