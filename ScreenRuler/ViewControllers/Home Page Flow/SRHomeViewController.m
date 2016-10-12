@@ -855,7 +855,7 @@
     {
         [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"@%dx",1] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            [Answers logCustomEventWithName:@"Chane Scale Multiplier" customAttributes:@{@"value":@"1"}];
+            [Answers logCustomEventWithName:@"Change Scale Multiplier" customAttributes:@{@"value":@"1"}];
 
             NSInteger selectedRatio = 1;
             [weakSelf.ratioButton setTitle:[NSString localizedStringWithFormat:@"@%ldx",(long)selectedRatio] forState:UIControlStateNormal];
@@ -869,7 +869,7 @@
         [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"@%dx",2] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             NSInteger selectedRatio = 2;
 
-            [Answers logCustomEventWithName:@"Chane Scale Multiplier" customAttributes:@{@"value":@"2"}];
+            [Answers logCustomEventWithName:@"Change Scale Multiplier" customAttributes:@{@"value":@"2"}];
 
             [weakSelf.ratioButton setTitle:[NSString localizedStringWithFormat:@"@%ldx",(long)selectedRatio] forState:UIControlStateNormal];
             weakSelf.freeRulerView.deviceScale = selectedRatio;
@@ -881,7 +881,7 @@
     {
         [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:@"@%dx",3] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
 
-            [Answers logCustomEventWithName:@"Chane Scale Multiplier" customAttributes:@{@"value":@"3"}];
+            [Answers logCustomEventWithName:@"Change Scale Multiplier" customAttributes:@{@"value":@"3"}];
 
             NSInteger selectedRatio = 3;
             [weakSelf.ratioButton setTitle:[NSString localizedStringWithFormat:@"@%ldx",(long)selectedRatio] forState:UIControlStateNormal];
