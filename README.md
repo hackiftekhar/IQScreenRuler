@@ -48,7 +48,9 @@ Any contribution is more than welcome! You can contribute through pull requests 
 - Malay localization.
 
 ###Credits
-- Many thanks to [Lucas Diez de Medina](https://github.com/lucaslt89) for adding support of **Spanish** localization.
+Many thanks to
+- [Lucas Diez de Medina](https://github.com/lucaslt89) for **Spanish** localization.
+- May be **you**.
 
 ###Author
 If you wish to contact me, email at: hack.iftekhar@gmail.com
