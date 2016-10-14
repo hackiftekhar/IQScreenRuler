@@ -94,3 +94,46 @@
 "Error" = "Error";
 "Version" = "Versión";
 "image_load_error" = "Hubo un error cargando la imagen. Por favor intenta nuevamente.";
+
+/*New text need to be localized*/
+"is open source at:" = "is open source at:";
+"You are upto date" = "You are upto date";
+"Update Now" = "Update Now";
+
+/* ******************************************
+ // App Store Localized Full Name
+ 
+ Screen Ruler - Regla para capturas de pantalla
+ ******************************************
+ //App Store Localized Description
+ 
+ FELICITACIONES! HAS ENCONTRADO LA APLICACIÓN MÁS AVANZADA PARA MEDIR CAPTURAS DE PANTALLA.
+ 
+ Como desarrollador iOS, siento la necesidad de una aplicación simple para verificar la posición de objetos/elementos en una imagen o una captura de pantalla. Ahora es muy simple encontrar la posición y el tamaño de cualquier elemento de la interfaz gráfica.
+ 
+ Esta aplicación está especialmente diseñada para facilitar el trabajo de los ingenieros de calidad (QA) en las aplicaciones móviles. Ahora pueden verificar las interfaces gráficas con precisión en minutos.
+ 
+ COMO FUNCIONA:
+ 1: Toma una captura de pantalla de la aplicación. Esta se guardará automáticamente en tu librería.
+ 2: Abre la aplicación Screen Ruler. La última captura de pantalla se cargará automáticamente.
+ 3: Verifica los tamaños y posiciones de los elementos de la interfaz en tu captura de pantalla. Utiliza las herramientas de zoom, la regla y el marco.
+ 
+ Otras funciones de la aplicación:
+ 
+ - 4 reglas dinámicas en los márgenes. También puedes ajustar la posición de la regla. Haz un toque largo para más opciones
+ - Escala de la regla a mano alzada. También la puedes rotar para verificar ángulos
+ - Líneas auto ajustable
+ - Haz un toque largo en la imagen para mostrar el componente RGB de un pixel
+ - Herramienta de corte
+ - Cambiar relación de aspecto
+ - Redimensiona la captura de pantalla
+ - Cambiar la escala del dispositivo
+ - Interacción a través de gestos con la imagen
+ 
+ Descárgala y verifica cómo los ingenieros de calidad aceleran sus tareas reduciendo el tiempo para verificar interfaces de usuario.
+ 
+ ******************************************
+ //App Store Keywords
+ 
+ Captura de pantalla, regla, escala, enderezar, desarrollador, QA, calidad
+ */

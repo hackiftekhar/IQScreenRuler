@@ -776,26 +776,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="Vb7-gB-CIP">
-                            <rect key="frame" x="0.0" y="337" width="375" height="200"/>
+                            <rect key="frame" x="0.0" y="381" width="375" height="200"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUr-Ki-Ldf">
-                                    <attributedString key="attributedText">
-                                        <fragment content="Screen Ruler">
-                                            <attributes>
-                                                <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <font key="NSFont" size="15" name="KohinoorBangla-Semibold"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content=" is open source at:">
-                                            <attributes>
-                                                <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <font key="NSFont" size="15" name="KohinoorBangla-Regular"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Screen Ruler is open source at:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUr-Ki-Ldf">
+                                    <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="15"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ctv-RH-2yB">
@@ -1312,6 +1298,29 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SRVersionTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="SRVersionTableViewCell" textLabel="3t2-tf-c9S" detailTextLabel="hRz-x0-6Ro" style="IBUITableViewCellStyleValue1" id="hFI-TZ-fUc" customClass="SRVersionTableViewCell">
+                                <rect key="frame" x="0.0" y="319" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hFI-TZ-fUc" id="q49-Wz-i2R">
+                                    <frame key="frameInset" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="You are up to date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3t2-tf-c9S">
+                                            <frame key="frameInset" minX="15" minY="10" width="134" height="23"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="1.0.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hRz-x0-6Ro">
+                                            <frame key="frameInset" minX="329" minY="10" width="31" height="23"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <sections/>
                         <connections>
@@ -1328,6 +1337,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="labelCompanyName" destination="DVq-8t-TE4" id="3T4-tC-RPW"/>
+                        <outlet property="labelOpenSource" destination="vUr-Ki-Ldf" id="7Jb-ky-sbl"/>
                         <outlet property="versionLabel" destination="fNb-df-MmM" id="tKk-wb-uKQ"/>
                         <segue destination="dwK-9q-CdO" kind="show" identifier="SRPrivacyPolicyViewController" id="X8e-2J-ofJ"/>
                         <segue destination="4HM-Bl-5h0" kind="show" identifier="SRAcknowledgementTableViewController" id="dKG-d7-huy"/>
@@ -1346,7 +1356,7 @@
                         <viewControllerLayoutGuide type="bottom" id="fHa-fY-LSN"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vEg-IK-SQv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90b-mr-72J">
@@ -2080,8 +2090,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="F5L-ff-lqh"/>
                                     <constraint firstAttribute="trailing" secondItem="yPe-uV-I1t" secondAttribute="trailing" id="S3H-vb-MVJ"/>
                                     <constraint firstItem="yPe-uV-I1t" firstAttribute="leading" secondItem="gHB-Dn-a0l" secondAttribute="leading" id="SO8-V2-SEm"/>
+                                    <constraint firstAttribute="width" constant="50" id="YTl-uE-wCN"/>
                                     <constraint firstItem="yPe-uV-I1t" firstAttribute="top" secondItem="gHB-Dn-a0l" secondAttribute="top" id="ZIJ-Ve-qYe"/>
                                     <constraint firstAttribute="bottom" secondItem="yPe-uV-I1t" secondAttribute="bottom" id="hqY-VM-Cw5"/>
                                 </constraints>
@@ -2106,16 +2118,13 @@
                             <constraint firstItem="0ah-Yg-xkj" firstAttribute="width" secondItem="90b-mr-72J" secondAttribute="width" id="J7c-TI-wqw"/>
                             <constraint firstItem="xZm-1M-kxo" firstAttribute="top" secondItem="90b-mr-72J" secondAttribute="top" id="Rud-ft-tM0"/>
                             <constraint firstItem="KGb-Po-bbz" firstAttribute="height" secondItem="90b-mr-72J" secondAttribute="height" id="TLn-QR-ayS"/>
-                            <constraint firstItem="gHB-Dn-a0l" firstAttribute="width" secondItem="90b-mr-72J" secondAttribute="width" id="VNw-Fc-7jo"/>
                             <constraint firstItem="eO2-o0-M47" firstAttribute="height" secondItem="yna-0A-rml" secondAttribute="height" id="WzX-Sr-NXr"/>
                             <constraint firstItem="KGb-Po-bbz" firstAttribute="width" secondItem="90b-mr-72J" secondAttribute="width" id="ZFh-hP-TGZ"/>
                             <constraint firstItem="xJf-ND-zUi" firstAttribute="leading" secondItem="5l5-fg-gjQ" secondAttribute="trailing" constant="10" id="bB9-59-eKH"/>
                             <constraint firstItem="xJf-ND-zUi" firstAttribute="width" secondItem="90b-mr-72J" secondAttribute="width" id="ba4-IQ-C5q"/>
                             <constraint firstItem="KGb-Po-bbz" firstAttribute="bottom" secondItem="90b-mr-72J" secondAttribute="bottom" id="cU9-gK-p9F"/>
-                            <constraint firstItem="gHB-Dn-a0l" firstAttribute="bottom" secondItem="90b-mr-72J" secondAttribute="bottom" id="cqA-44-lfb"/>
                             <constraint firstItem="0ah-Yg-xkj" firstAttribute="height" secondItem="90b-mr-72J" secondAttribute="height" id="eTN-BV-y17"/>
                             <constraint firstItem="KGb-Po-bbz" firstAttribute="top" secondItem="90b-mr-72J" secondAttribute="top" id="fP4-uH-lwh"/>
-                            <constraint firstItem="gHB-Dn-a0l" firstAttribute="height" secondItem="90b-mr-72J" secondAttribute="height" id="ggZ-o5-fio"/>
                             <constraint firstItem="xZm-1M-kxo" firstAttribute="height" secondItem="90b-mr-72J" secondAttribute="height" id="hui-nq-bqa"/>
                             <constraint firstItem="aQa-ws-0iA" firstAttribute="height" secondItem="yna-0A-rml" secondAttribute="height" id="ktZ-8u-Msg"/>
                             <constraint firstItem="0ah-Yg-xkj" firstAttribute="top" secondItem="90b-mr-72J" secondAttribute="top" id="pSM-ky-RQX"/>
@@ -2127,6 +2136,8 @@
                             <constraint firstItem="xJf-ND-zUi" firstAttribute="bottom" secondItem="90b-mr-72J" secondAttribute="bottom" id="whd-1l-SlU"/>
                         </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="1024" height="1024"/>
                     <connections>
                         <outlet property="aspectRatioView" destination="0ah-Yg-xkj" id="TL9-R1-bVT"/>
                         <outlet property="cropView" destination="xZm-1M-kxo" id="fvc-99-w79"/>

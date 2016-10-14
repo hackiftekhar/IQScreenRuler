@@ -67,6 +67,7 @@
 		4CED77F11DA82A8E0093176D /* SRSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD4270C1DA8236A000AD1CA /* SRSettingTableViewController.m */; };
 		4CED77F21DA82A8E0093176D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD4271D1DA82372000AD1CA /* AppDelegate.m */; };
 		4CED77F31DA82A8E0093176D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD031FB1CC165B800539151 /* main.m */; };
+		4CEDBF971DB15B970005A812 /* SRVersionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEDBF961DB15B970005A812 /* SRVersionTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -186,6 +187,8 @@
 		4CD427211DA823CF000AD1CA /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = text; path = iTunesArtwork; sourceTree = "<group>"; };
 		4CD427221DA823CF000AD1CA /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = text; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		4CD427231DA823CF000AD1CA /* Logo Raw File.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo Raw File.png"; sourceTree = "<group>"; };
+		4CEDBF951DB15B970005A812 /* SRVersionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRVersionTableViewCell.h; sourceTree = "<group>"; };
+		4CEDBF961DB15B970005A812 /* SRVersionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRVersionTableViewCell.m; sourceTree = "<group>"; };
 		9E8696A411D92D96E26E04BC /* Pods-ScreenRuler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScreenRuler.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScreenRuler/Pods-ScreenRuler.release.xcconfig"; sourceTree = "<group>"; };
 		A9177D2EF9891C352E52A1F3 /* Pods-ScreenRuler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScreenRuler.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScreenRuler/Pods-ScreenRuler.debug.xcconfig"; sourceTree = "<group>"; };
 		C5F6ABE1EFC39D370C25D1C1 /* libPods-ScreenRuler.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ScreenRuler.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -520,6 +523,8 @@
 				4CD427031DA8236A000AD1CA /* SRSettingsTableViewCell.m */,
 				4CD427041DA8236A000AD1CA /* SRThemeTableViewCell.h */,
 				4CD427051DA8236A000AD1CA /* SRThemeTableViewCell.m */,
+				4CEDBF951DB15B970005A812 /* SRVersionTableViewCell.h */,
+				4CEDBF961DB15B970005A812 /* SRVersionTableViewCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -699,7 +704,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -750,6 +755,7 @@
 				4CED77EA1DA82A8E0093176D /* SRScreenshotCollectionViewCell.m in Sources */,
 				4CED77EB1DA82A8E0093176D /* SRScreenshotCollectionViewController.m in Sources */,
 				4CED77EC1DA82A8E0093176D /* SRSettingsTableViewCell.m in Sources */,
+				4CEDBF971DB15B970005A812 /* SRVersionTableViewCell.m in Sources */,
 				4CED77ED1DA82A8E0093176D /* SRThemeTableViewCell.m in Sources */,
 				4CED77EE1DA82A8E0093176D /* SRAcknowledgementDetailsViewController.m in Sources */,
 				4CED77EF1DA82A8E0093176D /* SRAcknowledgementTableViewController.m in Sources */,

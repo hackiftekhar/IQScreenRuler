@@ -14,8 +14,13 @@
 #import "COSTouchVisualizerWindow.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import <iVersion/iVersion.h>
 
-@interface AppDelegate ()<COSTouchVisualizerWindowDelegate>
+NSNotificationName iVersionDidUpdateNotification = @"iVersionDidUpdateNotification";
+
+const NSInteger kSRAppStoreID = 1104790987;
+
+@interface AppDelegate ()<COSTouchVisualizerWindowDelegate,iVersionDelegate>
 
 @end
 
@@ -45,7 +50,14 @@
 //
 //#endif
 
++ (void)initialize
+{
+    [iVersion sharedInstance].appStoreID = kSRAppStoreID;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [iVersion sharedInstance].delegate = self;
     
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont kohinoorBanglaSemiboldWithSize:16.0]} forState:UIControlStateNormal];
     
@@ -155,6 +167,32 @@
     {
         completionHandler(NO);
     }
+}
+
+- (BOOL)iVersionShouldCheckForNewVersion
+{
+    self.isCheckingNewVersion = YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:iVersionDidUpdateNotification object:nil];
+    return YES;
+}
+
+- (void)iVersionDidNotDetectNewVersion
+{
+    self.isCheckingNewVersion = NO;
+    [[NSNotificationCenter defaultCenter] postNotificationName:iVersionDidUpdateNotification object:nil];
+}
+
+- (void)iVersionVersionCheckDidFailWithError:(NSError *)error
+{
+    self.isCheckingNewVersion = NO;
+    [[NSNotificationCenter defaultCenter] postNotificationName:iVersionDidUpdateNotification object:nil];
+}
+
+- (void)iVersionDidDetectNewVersion:(NSString *)version details:(NSString *)versionDetails
+{
+    self.isCheckingNewVersion = NO;
+    self.updatedVersionString = version;
+    [[NSNotificationCenter defaultCenter] postNotificationName:iVersionDidUpdateNotification object:nil];
 }
 
 @end
