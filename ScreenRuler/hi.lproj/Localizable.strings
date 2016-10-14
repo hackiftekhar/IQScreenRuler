@@ -1,101 +1,101 @@
 /* This file should be localized in Hindi */
 
 /* Aspect Ratio */
-"Aspect Ratio" = "छवि अनुपात";
-"Original" = "मूल प्रति";
-"Square" = "चौकोर";
+"aspect_ratio"  = "छवि अनुपात";
+"original"      = "मूल प्रति";
+"square"        = "चौकोर";
 
 /* No Screenshots */
-"no_screenshots_title" = "कुछ भी स्क्रीनशॉट नहीं मिले";
-"no_screenshots_description" = "आप स्क्रीन लॉक बटन और होम बटन का उपयोग कर अपने डिवाइस पर स्क्रीनशॉट ले सकते हैं।";
+"no_screenshots_title"          = "कुछ भी स्क्रीनशॉट नहीं मिले";
+"no_screenshots_description"    = "आप स्क्रीन लॉक बटन और होम बटन का उपयोग कर अपने डिवाइस पर स्क्रीनशॉट ले सकते हैं।";
 
-"photo_access_denied_title" = "फोटो लाइब्रेरी की अनुमति नहीं";
-"photo_access_denied_description" = "फोटो लाइब्रेरी का उपयोग करने में समर्थ नहीं है। फोटो लाइब्रेरी की अनुमति बदलने के लिए सेटिंग्स में जायें।";
+"photo_access_denied_title"         = "फोटो लाइब्रेरी की अनुमति नहीं";
+"photo_access_denied_description"   = "फोटो लाइब्रेरी का उपयोग करने में समर्थ नहीं है। फोटो लाइब्रेरी की अनुमति बदलने के लिए सेटिंग्स में जायें।";
 
 /* Open Screenshots */
-"Camera" = "कैमरा";
-"Photo Library" = "फोटो लाइब्रेरी";
+"camera"        = "कैमरा";
+"photo_library" = "फोटो लाइब्रेरी";
 
 /* Ruler Ratio It's like 1x, 2x, 3x */
-"Change Scale Multiplier" = "मापन गुणक बदले";
+"change_scale_multiplier"   = "मापन गुणक बदले";
 
 /* Sharing Text */
-"Mail Sent" = "मेल भेज दिया गया।";
-"mail_body" = "\n\n मैं iOS '%2$@' के साथ '%1$@' पर हूँ, '%4$@' के संस्करण '%3$@' का उपयोग कर रहा हूँ।";
+"mail_sent"                         = "मेल भेज दिया गया।";
+"mail_body"                         = "\n\n मैं iOS '%2$@' के साथ '%1$@' पर हूँ, '%4$@' के संस्करण '%3$@' का उपयोग कर रहा हूँ।";
 "mail_device_configuration_message" = "आपकी डिवाइस मेल भेजने के लिए समर्थ नहीं है।";
-"Screen Ruler - Bug Report" = "स्क्रीनशॉट पैमाना - त्रुटि विवरण";
-"Screen Ruler - Feedback" = "स्क्रीनशॉट पैमाना - राय";
+"screen_ruler_bug_report"           = "स्क्रीनशॉट पैमाना - त्रुटि विवरण";
+"screen_ruler_feedback"             = "स्क्रीनशॉट पैमाना - राय";
 
 /* Help Tour. */
-"Skip" = "छोड़ें";
-"Start Help Tour" = "सहायता सफ़र शुरू करे।";
-"Tap to continue" = "जारी रखने के लिए स्पर्श करे।";
+"skip"                  = "छोड़ें";
+"start_help_tour"       = "सहायता सफ़र शुरू करे।";
+"tap_to_continue"       = "जारी रखने के लिए स्पर्श करे।";
 "horizontal_scale_help" = "अपनी जरूरत के अनुसार अपनी उंगलियों के साथ क्षैतिज पैमाने को समायोजित करें।";
-"vertical_scale_help" = "अपनी जरूरत के अनुसार अपनी उंगलियों के साथ खड़ी पैमाने को समायोजित करें।";
-"device_scale_help" = "अपने डिवाइस रिजल्यूशन या अपनी जरूरत के अनुसार मापन गुणक चुनें।";
-"double_tap_help" = "ज़ूम-इन करने के लिए एक उंगली का उपयोग कर दो बार स्पर्श करें, ज़ूम-आउट करने के लिए दो उंगलियों का प्रयोग कर दो बार स्पर्श करें।";
-"long_tap_color_help" = "पिक्सेल का आरजीबी रंग दिखाने के लिए लंबे समय तक स्पर्श करें और उंगली खिसकाये।";
-"long_tap_scale_help" = "क्षैतिज या खड़ी पैमाने के अधिक विकल्प दिखाने के लिए लंबे समय तक स्पर्श करें।";
+"vertical_scale_help"   = "अपनी जरूरत के अनुसार अपनी उंगलियों के साथ खड़ी पैमाने को समायोजित करें।";
+"device_scale_help"     = "अपने डिवाइस रिजल्यूशन या अपनी जरूरत के अनुसार मापन गुणक चुनें।";
+"double_tap_help"       = "ज़ूम-इन करने के लिए एक उंगली का उपयोग कर दो बार स्पर्श करें, ज़ूम-आउट करने के लिए दो उंगलियों का प्रयोग कर दो बार स्पर्श करें।";
+"long_tap_color_help"   = "पिक्सेल का आरजीबी रंग दिखाने के लिए लंबे समय तक स्पर्श करें और उंगली खिसकाये।";
+"long_tap_scale_help"   = "क्षैतिज या खड़ी पैमाने के अधिक विकल्प दिखाने के लिए लंबे समय तक स्पर्श करें।";
 
 /* Buttons */
-"Back" = "पीछे";
-"Cancel" = "रद्द करें";
-"Done" = "पूर्ण";
-"OK" = "ठीक";
+"back"      = "पीछे";
+"cancel"    = "रद्द करें";
+"done"      = "पूर्ण";
+"ok"        = "ठीक";
 
 /* Social Share. */
-"Share Photo" = "फोटो साझा करें";
+"share_photo"       = "फोटो साझा करें";
 "social_share_text" = "'%@' मोबाइल ऐप 'गुणवत्ता आश्वासन' इंजीनियर के लिए iOS एप्लिकेशन यूजर इंटरफेस का ब्यौरा निकालने के लिए और स्क्रीनशॉट के विवरण देखने में यह बहुत लाभदायक है। ये वास्तव में एक मजेदार और बहुत उपयोगी मोबाइल ऐप है।";
 
 /* Resizing */
-"Custom" = "रुचि अनुसार";
-"Enter width and height" = "चौड़ाई और ऊंचाई दर्ज करें";
-"Height" = "ऊंचाई";
-"Width" = "चौड़ाई";
-"Resize" = "आकार बदलें";
-"Crop" = "काटें";
-"Resize Screenshot" = "स्क्रीनशॉट का आकार बदलें";
+"custom"                    = "रुचि अनुसार";
+"enter_width_and_height"    = "चौड़ाई और ऊंचाई दर्ज करें";
+"height"                    = "ऊंचाई";
+"width"                     = "चौड़ाई";
+"resize"                    = "आकार बदलें";
+"crop"                      = "काटें";
+"resize_screenshot"         = "स्क्रीनशॉट का आकार बदलें";
 
 /* Change Scale X Y. */
-"Reset Scale to Original" = "मूल पैमाने पर रीसेट करें";
-"Set Scale point location" = "मूल पैमाने बिंदु स्थान स्थित करें";
-"Mark as X reference" = "X बिंदु संकेत स्थित करें";
-"Mark as Y reference" = "Y बिंदु संकेत स्थित करें";
+"reset_scale_to_original"   = "मूल पैमाने पर रीसेट करें";
+"set_scale_point_location"  = "मूल पैमाने बिंदु स्थान स्थित करें";
+"mark_as_x_reference"       = "X बिंदु संकेत स्थित करें";
+"mark_as_y_reference"       = "Y बिंदु संकेत स्थित करें";
 
 /* Zoom Scale */
-"Zoom Scale" = "जूम पैमाना";
-"minimum_percent" = "न्यूनतम पैमाना (%.0f%%)";
-"original_percent" = "मूल पैमाना (%.0f%%)";
-"Show Zoom Options" = "ज़ूम विकल्प दिखायें";
+"zoom_scale"            = "जूम पैमाना";
+"minimum_percent"       = "न्यूनतम पैमाना (%.0f%%)";
+"original_percent"      = "मूल पैमाना (%.0f%%)";
+"show_zoom_options"     = "ज़ूम विकल्प दिखायें";
 
 /* Crop Info */
-"x_y_width_height" = "X: %1$.0f,  Y: %2$.0f\nचौड़ाई: %3$.0f,  ऊंचाई: %4$.0f";
+"x_y_width_height"  = "X: %1$.0f,  Y: %2$.0f\nचौड़ाई: %3$.0f,  ऊंचाई: %4$.0f";
 
 /* RGB Colro Point */
-"X: NA, Y: NA" = "X: अनुपलब्ध, Y: अनुपलब्ध";
+"X: NA, Y: NA"  = "X: अनुपलब्ध, Y: अनुपलब्ध";
 
 /* Settings */
-"Settings" = "सेटिंग्स";
-"Color Theme" = "रंग विषय";
-"Natural" = "प्राकृतिक";
-"Inverted" = "प्रतिलोम";
-"Social" = "सामाजिक नेटवर्किंग";
-"Share On Social Network" = "सामाजिक नेटवर्क पर साझा करें";
-"Rate Us On App Store" = "ऐप स्टोर पर राय दें";
-"Feedback" = "राय";
-"Bug Report" = "रुटि विवरण";
-"Terms" = "नियम";
-"Terms and Conditions" = "नियम और शर्तें";
-"Open Source Libraries" = "ओपन सोर्स सॉफ्टवेयर";
-"You are upto date" = "आप अपडेट हैं";
-"Update Now" = "अभी अपडेट करें";
-"is open source at:" = "यहां पर ओपन सोर्स है:";
-"InfoEnum Software Systems" = "इन्फोइनम सॉफ्टवेयर सिस्टम्स";
+"settings"                  = "सेटिंग्स";
+"color_theme"               = "रंग विषय";
+"natural"                   = "प्राकृतिक";
+"inverted"                  = "प्रतिलोम";
+"social"                    = "सामाजिक नेटवर्किंग";
+"share_on_social_network"   = "सामाजिक नेटवर्क पर साझा करें";
+"rate_us_on_app_store"      = "ऐप स्टोर पर राय दें";
+"feedback"                  = "राय";
+"bug_report"                = "रुटि विवरण";
+"terms"                     = "नियम";
+"terms_and_conditions"      = "नियम और शर्तें";
+"open_source_libraries"     = "ओपन सोर्स सॉफ्टवेयर";
+"you_are_upto_date"         = "आप अपडेट हैं";
+"update_now"                = "अभी अपडेट करें";
+"is_open_source_at"         = "यहां पर ओपन सोर्स है:";
+"infoenum_software_systems" = "इन्फोइनम सॉफ्टवेयर सिस्टम्स";
 
 /* Other. */
-"Error" = "असफल";
-"Version" = "संस्करण";
-"image_load_error" = "फोटो लोड करने में कोई त्रुटि हो गयी है। कृपया पुन: प्रयास करें।";
+"error"             = "असफल";
+"version"           = "संस्करण";
+"image_load_error"  = "फोटो लोड करने में कोई त्रुटि हो गयी है। कृपया पुन: प्रयास करें।";
 
 /*
  ******************************************

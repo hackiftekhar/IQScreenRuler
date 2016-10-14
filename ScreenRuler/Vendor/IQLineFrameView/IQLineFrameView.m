@@ -241,11 +241,11 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
 
         if ([nextResponder isKindOfClass:[UIViewController class]])
         {
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Set Scale point location", nil) preferredStyle:UIAlertControllerStyleActionSheet];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"set_scale_point_location", nil) preferredStyle:UIAlertControllerStyleActionSheet];
             
             __weak typeof(self) weakSelf = self;
 
-            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Reset Scale to Original", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"reset_scale_to_original", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
                 weakSelf.startingScalePoint = CGPointZero;
             }]];
             
@@ -263,7 +263,7 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
                 position = PositionSelectorX;
             }
 
-            [alertController addAction:[UIAlertAction actionWithTitle:(position == PositionSelectorX? NSLocalizedString(@"Mark as X reference", nil):NSLocalizedString(@"Mark as Y reference", nil)) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [alertController addAction:[UIAlertAction actionWithTitle:(position == PositionSelectorX? NSLocalizedString(@"mark_as_x_reference", nil):NSLocalizedString(@"mark_as_y_reference", nil)) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 
                 CGPoint referencePoint = [weakSelf convertPoint:point toView:weakSelf.respectiveView];
                 
@@ -281,7 +281,7 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
                 }
             }]];
             
-            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
+            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
             
             alertController.popoverPresentationController.sourceView = gesture.view;
             

@@ -23,7 +23,7 @@
     [super viewDidLoad];
      self.clearsSelectionOnViewWillAppear = YES;
     
-    self.title = NSLocalizedString(@"Open Source Libraries", nil);
+    self.title = NSLocalizedString(@"open_source_libraries", nil);
 
     NSString *path=[[NSBundle mainBundle] pathForResource:@"Acknowledgement" ofType:@".plist"];
     listDictionary=[[NSDictionary alloc] initWithContentsOfFile:path];

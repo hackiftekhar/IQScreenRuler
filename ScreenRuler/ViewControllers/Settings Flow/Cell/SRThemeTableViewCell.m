@@ -13,9 +13,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
 
-    self.labelTitle.text = NSLocalizedString(@"Color Theme", nil);
-    [self.segmentControl setTitle:NSLocalizedString(@"Natural", nil) forSegmentAtIndex:0];
-    [self.segmentControl setTitle:NSLocalizedString(@"Inverted", nil) forSegmentAtIndex:1];
+    self.labelTitle.text = NSLocalizedString(@"color_theme", nil);
+    [self.segmentControl setTitle:NSLocalizedString(@"natural", nil) forSegmentAtIndex:0];
+    [self.segmentControl setTitle:NSLocalizedString(@"inverted", nil) forSegmentAtIndex:1];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

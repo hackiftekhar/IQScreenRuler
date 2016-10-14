@@ -1,10 +1,10 @@
 //
 //  SRIconsGeneratorViewController.m
-//  ScreenRuler
+//  Screen Ruler
 //
-//  Created by IEMacBook01 on 08/10/16.
-//  Copyright © 2016 InfoEnum Software Systems. All rights reserved.
-//
+//  Created by Mohd Iftekhar Qurashi
+//  Copyright (c) 2016 InfoEum Software Systems. Licensed under the Apache License v2.0.
+//  See COPYING or https://www.apache.org/licenses/LICENSE-2.0
 
 #import "SRIconsGeneratorViewController.h"
 

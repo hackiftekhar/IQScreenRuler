@@ -40,7 +40,7 @@
 {
     [super viewDidLoad];
   
-    self.title = NSLocalizedString(@"Settings", nil);
+    self.title = NSLocalizedString(@"settings", nil);
     
     NSDictionary *localizedInfoDictionary = [[NSBundle mainBundle] localizedInfoDictionary];
     NSMutableDictionary *infoDictionary = [[[NSBundle mainBundle] infoDictionary] mutableCopy];
@@ -65,21 +65,21 @@
     UISwitch *showZoomOptionSwitch = [[UISwitch alloc] init];
     [showZoomOptionSwitch addTarget:self action:@selector(showZoomOptionAction:) forControlEvents:UIControlEventValueChanged];
     showZoomOptionSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowZoomOption"];
-    settingsItems = @[@{@"title":NSLocalizedString(@"Settings", nil),@"items":@[@{@"title":NSLocalizedString(@"Color Theme", nil)},@{@"title":NSLocalizedString(@"Show Zoom Options", nil),@"accessoryView":showZoomOptionSwitch}]},
-                      @{@"title":NSLocalizedString(@"Version", nil),@"items":@[@{@"title":NSLocalizedString(@"You are upto date", nil),@"subtitle":versionString}]},
-                      @{@"title":NSLocalizedString(@"Social", nil),@"items":@[@{@"title":NSLocalizedString(@"Share On Social Network", nil)},@{@"title":NSLocalizedString(@"Rate Us On App Store", nil)}]},
-                      @{@"title":NSLocalizedString(@"Feedback", nil),@"items":@[@{@"title":NSLocalizedString(@"Feedback", nil)},@{@"title":NSLocalizedString(@"Bug Report", nil)}]},
-                      @{@"title":NSLocalizedString(@"Terms", nil),@"items":@[@{@"title":NSLocalizedString(@"Terms and Conditions", nil),@"discloseIndicator":@YES},@{@"title":NSLocalizedString(@"Open Source Libraries", nil),@"discloseIndicator":@YES}]}];
+    settingsItems = @[@{@"title":NSLocalizedString(@"settings", nil),@"items":@[@{@"title":NSLocalizedString(@"color_theme", nil)},@{@"title":NSLocalizedString(@"show_zoom_options", nil),@"accessoryView":showZoomOptionSwitch}]},
+                      @{@"title":NSLocalizedString(@"version", nil),@"items":@[@{@"title":NSLocalizedString(@"you_are_upto_date", nil),@"subtitle":versionString}]},
+                      @{@"title":NSLocalizedString(@"social", nil),@"items":@[@{@"title":NSLocalizedString(@"share_on_social_network", nil)},@{@"title":NSLocalizedString(@"rate_us_on_app_store", nil)}]},
+                      @{@"title":NSLocalizedString(@"feedback", nil),@"items":@[@{@"title":NSLocalizedString(@"feedback", nil)},@{@"title":NSLocalizedString(@"bug_report", nil)}]},
+                      @{@"title":NSLocalizedString(@"terms", nil),@"items":@[@{@"title":NSLocalizedString(@"terms_and_conditions", nil),@"discloseIndicator":@YES},@{@"title":NSLocalizedString(@"open_source_libraries", nil),@"discloseIndicator":@YES}]}];
     
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", nil) style:UIBarButtonItemStyleDone target:nil action:nil];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"back", nil) style:UIBarButtonItemStyleDone target:nil action:nil];
 
-    NSString *openSourceString = [NSString stringWithFormat:@"%@ %@",appName,NSLocalizedString(@"is open source at:", nil)];
+    NSString *openSourceString = [NSString stringWithFormat:@"%@ %@",appName,NSLocalizedString(@"is_open_source_at", nil)];
     NSMutableAttributedString *openSourceAttributedString = [[NSMutableAttributedString alloc] initWithString:openSourceString attributes:nil];
     [openSourceAttributedString addAttribute:NSFontAttributeName value:[UIFont kohinoorBanglaSemiboldWithSize:15] range:[openSourceString rangeOfString:appName]];
     
     labelOpenSource.attributedText = openSourceAttributedString;
-    versionLabel.text =[NSString localizedStringWithFormat:@"%@ %@",NSLocalizedString(@"Version", nil),versionString];
-    labelCompanyName.text = NSLocalizedString(@"InfoEnum Software Systems", nil);
+    versionLabel.text =[NSString localizedStringWithFormat:@"%@ %@",NSLocalizedString(@"version", nil),versionString];
+    labelCompanyName.text = NSLocalizedString(@"infoenum_software_systems", nil);
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -237,7 +237,7 @@
         
         if (appDelegate.updatedVersionString)
         {
-            cell.textLabel.text = NSLocalizedString(@"Update Now", nil);
+            cell.textLabel.text = NSLocalizedString(@"update_now", nil);
             cell.textLabel.textColor = [UIColor colorWithRed:0 green:0.5 blue:1.0 alpha:1];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
@@ -369,7 +369,7 @@
                     {
                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"mail_device_configuration_message", nil) preferredStyle:UIAlertControllerStyleAlert];
                         
-                        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+                        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:NSLocalizedString(@"ok", nil)
                                                                            style:UIAlertActionStyleDefault
                                                                          handler:nil];
                         
@@ -387,7 +387,7 @@
                         MFMailComposeViewController *messageController = [[MFMailComposeViewController alloc] init];
                         messageController.mailComposeDelegate = self;
                         
-                        [messageController setSubject:NSLocalizedString(@"Screen Ruler - Feedback", nil)];
+                        [messageController setSubject:NSLocalizedString(@"screen_ruler_feedback", nil)];
                         [messageController setMessageBody:messageBody isHTML:NO];
                         [messageController setToRecipients:emailAdd];
                         
@@ -402,7 +402,7 @@
                     {
                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"mail_device_configuration_message", nil) preferredStyle:UIAlertControllerStyleAlert];
                         
-                        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+                        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:NSLocalizedString(@"ok", nil)
                                                                            style:UIAlertActionStyleDefault
                                                                          handler:nil];
                         
@@ -419,7 +419,7 @@
                         MFMailComposeViewController *messageController = [[MFMailComposeViewController alloc] init];
                         messageController.mailComposeDelegate = self;
                         
-                        [messageController setSubject:NSLocalizedString(@"Screen Ruler - Bug Report", nil)];
+                        [messageController setSubject:NSLocalizedString(@"screen_ruler_bug_report", nil)];
                         [messageController setMessageBody:messageBody isHTML:NO];
                         [messageController setToRecipients:emailAdd];
                         
@@ -469,10 +469,10 @@
         case MFMailComposeResultSent:{
             
             
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"Mail Sent", nil) preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"mail_sent", nil) preferredStyle:UIAlertControllerStyleAlert];
             
             
-            UIAlertAction *actionOk = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+            UIAlertAction *actionOk = [UIAlertAction actionWithTitle:NSLocalizedString(@"ok", nil)
                                                                style:UIAlertActionStyleDefault
                                                              handler:nil];
             [alertController addAction:actionOk];

@@ -37,7 +37,7 @@
 {
     [super viewWillAppear:animated];
 
-    self.barButtonCrop.title = NSLocalizedString(@"Crop", nil);
+    self.barButtonCrop.title = NSLocalizedString(@"crop", nil);
 
     self.scrollContainerView.zoomScale = self.zoomScale;
     self.scrollContainerView.contentOffset = self.contentOffset;
@@ -97,17 +97,17 @@
 
 -(IBAction)aspectRatioAction:(UIBarButtonItem*)item
 {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Aspect Ratio", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"aspect_ratio", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     __weak typeof(self) weakSelf = self;
 
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Original", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"original", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         weakSelf.cropView.aspectSize = IQ_IQAspectSizeOriginal;
         
         [Answers logCustomEventWithName:@"Aspect Ratio" customAttributes:@{@"Ratio":@"original"}];
     }]];
     
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Square", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"square", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         weakSelf.cropView.aspectSize = IQ_IQAspectSizeSquare;
         
         [Answers logCustomEventWithName:@"Aspect Ratio" customAttributes:@{@"Ratio":@"square"}];
@@ -174,7 +174,7 @@
         [Answers logCustomEventWithName:@"Aspect Ratio" customAttributes:@{@"Ratio":@"16x9"}];
     }]];
     
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }]];
     
     alertController.popoverPresentationController.barButtonItem = item;

@@ -51,9 +51,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.buttonPhotoLibrary setTitle:NSLocalizedString(@"Photo Library", nil) forState:UIControlStateNormal];
-    [self.buttonCamera setTitle:NSLocalizedString(@"Camera", nil) forState:UIControlStateNormal];
-    [self.buttonCancel setTitle:NSLocalizedString(@"Cancel", nil) forState:UIControlStateNormal];
+    [self.buttonPhotoLibrary setTitle:NSLocalizedString(@"photo_library", nil) forState:UIControlStateNormal];
+    [self.buttonCamera setTitle:NSLocalizedString(@"camera", nil) forState:UIControlStateNormal];
+    [self.buttonCancel setTitle:NSLocalizedString(@"cancel", nil) forState:UIControlStateNormal];
     
     self.imageManager = [[PHCachingImageManager alloc] init];
     
@@ -403,8 +403,8 @@
                 
                 if (result == nil)
                 {
-                    UIAlertController *controller = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"image_load_error", nil) preferredStyle:UIAlertControllerStyleAlert];
-                    [controller addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleDefault handler:nil]];
+                    UIAlertController *controller = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"error", nil) message:NSLocalizedString(@"image_load_error", nil) preferredStyle:UIAlertControllerStyleAlert];
+                    [controller addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"ok", nil) style:UIAlertActionStyleDefault handler:nil]];
                     [weakSelf presentViewController:controller animated:YES completion:nil];
                 }
                 else

@@ -73,7 +73,7 @@
 
 -(IBAction)resizeAction:(UIBarButtonItem*)item
 {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Resize", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"resize", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     CGSize imageSize = self.scrollContainerView.image.size;
     
@@ -90,7 +90,7 @@
             
             CGSize newSize = [[UIScreen mainScreen] bounds].size;
             
-            [Answers logCustomEventWithName:@"Resize" customAttributes:@{@"size":NSStringFromCGSize(newSize)}];
+            [Answers logCustomEventWithName:@"resize" customAttributes:@{@"size":NSStringFromCGSize(newSize)}];
 
             UIImage *image = [weakSelf.scrollContainerView.image IQ_scaleToFillSize:newSize];
             weakSelf.image = image;
@@ -115,12 +115,12 @@
     
     if (hasMoreOptions)
     {
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Custom", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"custom", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             [weakSelf showCustomResizeAlertFromItem:item];
         }]];
         
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         }]];
 
         alertController.popoverPresentationController.barButtonItem = item;
@@ -137,13 +137,13 @@
 {
     CGSize imageSize = self.scrollContainerView.image.size;
 
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Resize Screenshot", nil) message:NSLocalizedString(@"Enter width and height", nil) preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"resize_screenshot", nil) message:NSLocalizedString(@"enter_width_and_height", nil) preferredStyle:UIAlertControllerStyleAlert];
     
     __weak typeof(UIAlertController) *weakAlertController = alertController;
     
     __weak typeof(self) weakSelf = self;
 
-    UIAlertAction *doneAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Done", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *doneAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"done", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         UITextField *widthTextField = nil;
         UITextField *heightTextField = nil;
@@ -175,8 +175,8 @@
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         
         textField.tag = 1;
-        textField.placeholder = NSLocalizedString(@"Width", nil);
-        textField.text = [NSString localizedStringWithFormat:@"%.0f",imageSize.width];
+        textField.placeholder = NSLocalizedString(@"width", nil);
+        textField.text = [NSString stringWithFormat:@"%.0f",imageSize.width];
         textField.keyboardType = UIKeyboardTypeNumberPad;
         [[NSNotificationCenter defaultCenter] addObserverForName:UITextFieldTextDidChangeNotification object:textField queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
             
@@ -213,8 +213,8 @@
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         
         textField.tag = 2;
-        textField.placeholder = NSLocalizedString(@"Height", nil);
-        textField.text = [NSString localizedStringWithFormat:@"%.0f",imageSize.height];
+        textField.placeholder = NSLocalizedString(@"height", nil);
+        textField.text = [NSString stringWithFormat:@"%.0f",imageSize.height];
         textField.keyboardType = UIKeyboardTypeNumberPad;
         [[NSNotificationCenter defaultCenter] addObserverForName:UITextFieldTextDidChangeNotification object:textField queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
             
@@ -249,7 +249,7 @@
     }];
     
     [alertController addAction:doneAction];
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }]];
     
     alertController.popoverPresentationController.barButtonItem = item;

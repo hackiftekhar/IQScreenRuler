@@ -234,7 +234,7 @@
 
     __weak typeof(self) weakSelf = self;
 
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Share Photo", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"share_photo", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
 
         [Answers logShareWithMethod:@"Share Photo" contentName:@"Share Activity" contentType:@"share" contentId:@"share.photo" customAttributes:nil];
         
@@ -257,14 +257,14 @@
         }];
     }]];
     
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Start Help Tour", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"start_help_tour", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         [Answers logCustomEventWithName:@"Start Help Tour" customAttributes:nil];
 
         [weakSelf startHelpTour];
     }]];
 
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
     
     alertController.popoverPresentationController.barButtonItem = sender;
     
@@ -486,13 +486,13 @@
         {
             if (self.presentedViewController == nil)
             {
-                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Set Scale point location", nil) preferredStyle:UIAlertControllerStyleActionSheet];
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"set_scale_point_location", nil) preferredStyle:UIAlertControllerStyleActionSheet];
                 
-                [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Reset Scale to Original", nil) style:UIAlertActionStyleDestructive handler:nil]];
+                [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"reset_scale_to_original", nil) style:UIAlertActionStyleDestructive handler:nil]];
                 
-                [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Mark as Y reference", nil) style:UIAlertActionStyleDefault handler:nil]];
+                [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"mark_as_y_reference", nil) style:UIAlertActionStyleDefault handler:nil]];
                 
-                [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
+                [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
                 
                 alertController.popoverPresentationController.sourceView = self.lineFrameView;
                 
@@ -847,7 +847,7 @@
 {
     NSInteger currentRatio = [[[sender titleForState:UIControlStateNormal] substringWithRange:NSMakeRange(1, 1)] integerValue];
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Change Scale Multiplier", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"change_scale_multiplier", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     __weak typeof(self) weakSelf = self;
 
@@ -890,7 +890,7 @@
         }]];
     }
     
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
     
     alertController.popoverPresentationController.barButtonItem = self.rationBarButon;
     
