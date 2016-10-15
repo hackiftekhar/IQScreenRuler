@@ -196,10 +196,13 @@
             }
             else
             {
-                heightTextField.text = [NSString localizedStringWithFormat:@"%.0f",[textField.text integerValue] * (imageSize.height/imageSize.width)];
+                heightTextField.text = [NSString stringWithFormat:@"%.0f",[textField.text integerValue] * (imageSize.height/imageSize.width)];
             }
             
-            if ([textField.text length] == 0 || [textField.text integerValue] == 0 || [heightTextField.text length] == 0 || [heightTextField.text integerValue] == 0)
+            if ([textField.text integerValue] == 0 ||
+                [heightTextField.text integerValue] == 0 ||
+                [textField.text integerValue] > 10000 ||
+                [heightTextField.text integerValue] > 10000)
             {
                 doneAction.enabled = NO;
             }
@@ -234,10 +237,13 @@
             }
             else
             {
-                widthTextField.text = [NSString localizedStringWithFormat:@"%.0f",[textField.text integerValue] * (imageSize.width/imageSize.height)];
+                widthTextField.text = [NSString stringWithFormat:@"%.0f",[textField.text integerValue] * (imageSize.width/imageSize.height)];
             }
             
-            if ([textField.text length] == 0 || [textField.text integerValue] == 0 || [widthTextField.text length] == 0 || [widthTextField.text integerValue] == 0)
+            if ([textField.text integerValue] == 0 ||
+                [widthTextField.text integerValue] == 0 ||
+                [textField.text integerValue] > 10000 ||
+                [widthTextField.text integerValue] > 10000)
             {
                 doneAction.enabled = NO;
             }
