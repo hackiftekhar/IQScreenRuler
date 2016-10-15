@@ -41,8 +41,7 @@
 {
     [super viewDidAppear:animated];
     
-    [self.lineFrameView drawViewHierarchyInRect:self.lineFrameView.bounds afterScreenUpdates:YES];
-    
+    NSLog(@"%@",self.freeScaleview);
     NSLog(@"%@",self.scaleView);
 }
 

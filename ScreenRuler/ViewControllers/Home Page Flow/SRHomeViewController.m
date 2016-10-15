@@ -28,6 +28,10 @@
 #import "UIImage+fixOrientation.h"
 #import <Crashlytics/Answers.h>
 
+#import "CBZSplashView.h"
+#import "UIBezierPath+Shapes.h"
+
+
 //https://www.iconfinder.com/iconsets/hawcons-gesture-stroke
 
 @interface SRHomeViewController ()<UIScrollViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIToolbarDelegate,MPCoachMarksViewDelegate,SRImageControllerDelegate,SRScreenshotCollectionViewControllerDelegate>
@@ -74,6 +78,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *labelBlue;
 @property (strong, nonatomic) IBOutlet UILabel *labelColorLocation;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *loadingColorDataIndicator;
+
+@property (nonatomic, strong) CBZSplashView *splashView;
 
 @end
 
@@ -155,11 +161,32 @@
     [self.scrollContainerView.scrollView addGestureRecognizer:_longPressRecognizer];
     
     [self openWithLatestScreenshot];
+    
+    NSLog(@"%@",self.navigationControllerSR);
+    
+    __unused UIImage *icon = [UIImage imageNamed:@"ruler_logo"];
+
+    UIBezierPath *bezier = [UIBezierPath twitterShape];
+    UIColor *color = [UIColor originalThemeColor];
+    
+    NSLog(@"%@",NSStringFromCGRect(self.view.bounds));
+    NSLog(@"%@",NSStringFromCGRect(bezier.bounds));
+    
+    CBZSplashView *splashView = [CBZSplashView splashViewWithBezierPath:bezier
+                                                        backgroundColor:color];
+    
+    splashView.animationDuration = 1.4;
+    
+    [self.navigationControllerSR.view addSubview:splashView];
+    
+    self.splashView = splashView;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    NSLog(@"%@",self.navigationControllerSR);
 
     self.scrollContainerView.showZoomControls = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowZoomOption"];
 
@@ -181,6 +208,16 @@
         self.lineFrameView.rulerColor = shadeFactorColor;
         self.lineFrameView.lineColor = originalThemeColor;
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    /* wait a beat before animating in */
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.splashView startAnimation];
+    });
 }
 
 -(BOOL)prefersStatusBarHidden
@@ -295,7 +332,7 @@
                                                            @"caption": NSLocalizedString(@"double_tap_help", nil),
                                                            @"borderColor":originalThemeColor,
                                                            @"shape": @(SHAPE_CIRCLE),
-                                                           @"position":@(LABEL_POSITION_TOP),
+                                                           @"position":@(LABEL_POSITION_BOTTOM),
                                                            @"alignment":@(LABEL_ALIGNMENT_CENTER),
                                                            @"image":[UIImage imageNamed:@"DoubleTap"]
                                                            }];
@@ -1219,7 +1256,15 @@
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
-    return self.interfaceOrientation;
+    if (self.interfaceOrientation == UIInterfaceOrientationUnknown)
+    {
+        return UIInterfaceOrientationPortrait;
+    }
+    else
+    {
+        return self.interfaceOrientation;
+    }
+//    NSLog(@"%d",self.interfaceOrientation);
 }
 
 -(UIInterfaceOrientation)interfaceOrientation

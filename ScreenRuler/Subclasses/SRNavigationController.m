@@ -290,13 +290,13 @@
     [self.topToolbar setItems:viewController.topToolbarItems animated:animated];
     [self.bottomToolbar setItems:viewController.bottomToolbarItems animated:animated];
     
+    viewController.navigationControllerSR = self;
     viewController.view.frame = self.containerView.bounds;
     [viewController willMoveToParentViewController:self];
     [self addChildViewController:viewController];
     [viewController.view setNeedsLayout];
     [viewController.view layoutIfNeeded];
     [self.containerView addSubview:viewController.view];
-    viewController.navigationControllerSR = self;
     [viewController didMoveToParentViewController:self];
     
     UIViewController *topController = [self topViewController];
