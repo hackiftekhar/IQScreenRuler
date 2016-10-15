@@ -53,8 +53,11 @@ Any contribution is more than welcome! You can contribute through pull requests 
 
 ###Credits
 Many thanks to
+- [Adrian Inafuku](https://github.com/adrianinafuku) for giving me idea of **Screen Ruler**.
 - [Lucas Diez de Medina](https://github.com/lucaslt89) for **Spanish** localization.
 - **YOU ARE NEXT**.
+
+
 
 ###Author
 If you wish to contact me, email at: hack.iftekhar@gmail.com
