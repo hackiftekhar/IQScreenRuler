@@ -100,7 +100,13 @@
 "you_are_upto_date" = "You are upto date";
 "update_now"        = "Update Now";
 
-/* ******************************************
+/*
+ ******************************************
+ // Localized App Name (show in iOS device screen)
+ 
+ Screen Ruler
+ 
+ ******************************************
  // App Store Localized Full Name
  
  Screen Ruler - Regla para capturas de pantalla

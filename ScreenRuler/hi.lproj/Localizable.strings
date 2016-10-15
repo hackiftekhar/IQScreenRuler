@@ -98,5 +98,11 @@
 "image_load_error"  = "फोटो लोड करने में कोई त्रुटि हो गयी है। कृपया पुन: प्रयास करें।";
 
 /*
+ ******************************************
+ // Localized App Name (show in iOS device screen)
+ 
+ स्क्रीनशॉट पैमाना
+ 
+ ******************************************
  Hindi App Store Localization not supported
  */
