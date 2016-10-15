@@ -37,15 +37,19 @@ Download to see how QA engineers accelerating their business by reducing time to
 Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub.
 
 ####TODO:-
-- Japanese localization.
-- Korean localization.
-- French localization.
-- Italian localization.
-- Portuguese localization.
-- Chinese (Simplified) localization.
-- Chinese (Traditional) localization.
-- Russian localization.
-- Malay localization.
+- Chinese (Simplified) localization
+- Chinese (Traditional) localization
+- French localization
+- German localization
+- Italian localization
+- Japanese localization
+- Korean localization
+- Malay localization
+- Polish localization
+- Portuguese (Brazil) localization
+- Portuguese (Portugal) localization
+- Russian localization
+- OTHER LANGUAGES YOU KNOW
 
 ###Credits
 Many thanks to
