@@ -14,6 +14,7 @@
 #import "SRNavigationController.h"
 #import "UIColor+ThemeColor.h"
 #import <Crashlytics/Answers.h>
+#import "UIImage+Rotating.h"
 
 @interface SREditOptionViewController ()<SRImageControllerDelegate,UIScrollViewDelegate>
 
@@ -22,6 +23,7 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *drawBarButtonItem;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cropBarButtonItem;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *resizeBarButtonItem;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *rotateBarButtonItem;
 
 @end
 
@@ -132,6 +134,8 @@
         [self showCustomResizeAlertFromItem:item];
     }
 }
+
+
 
 -(void)showCustomResizeAlertFromItem:(UIBarButtonItem*)item
 {
@@ -263,6 +267,16 @@
     }];
 }
 
+- (IBAction)roatateAction:(UIBarButtonItem *)sender
+{
+    /*
+     TODO: Implement Rotation Animation
+     */
+    UIImage *image = [self.scrollContainerView.image rotateInDegrees:90];
+    self.scrollContainerView.image = image;
+}
+
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.destinationViewController isKindOfClass:[SRCropViewController class]])
@@ -282,6 +296,8 @@
         controller.contentOffset = self.scrollContainerView.contentOffset;
     }
 }
+
+
 
 -(void)controller:(UIViewController*)controller finishWithImage:(UIImage*)image zoomScale:(CGFloat)zoomScale contentOffset:(CGPoint)contentOffset
 {

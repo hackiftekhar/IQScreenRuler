@@ -434,7 +434,7 @@
                             </button>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="RxT-nf-NJl"/>
-                        <barButtonItem image="color_palette" id="Vtb-4d-B7u">
+                        <barButtonItem image="edit" id="Vtb-4d-B7u">
                             <connections>
                                 <segue destination="QBq-zN-R6s" kind="custom" customClass="SRPushSegue" id="il9-B4-XJU"/>
                             </connections>
@@ -667,6 +667,12 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="IUX-oT-G6r"/>
+                        <barButtonItem image="rotate" id="Cou-0e-fyI">
+                            <connections>
+                                <action selector="roatateAction:" destination="QBq-zN-R6s" id="GVG-uf-bJS"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="8yb-Yt-jL7"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="eBC-br-xwH">
                         <nil key="title"/>
@@ -681,6 +687,7 @@
                         <outlet property="cropBarButtonItem" destination="J1Z-Xb-3Vd" id="n29-Kt-KGm"/>
                         <outlet property="drawBarButtonItem" destination="MkJ-EH-hqf" id="o2P-cZ-Cas"/>
                         <outlet property="resizeBarButtonItem" destination="KUm-iO-2xf" id="ZBL-oJ-yDo"/>
+                        <outlet property="rotateBarButtonItem" destination="Cou-0e-fyI" id="QHm-3l-6oH"/>
                         <outlet property="scrollContainerView" destination="W27-vu-vCO" id="Qc6-2I-a1t"/>
                     </connections>
                 </viewController>
@@ -2371,28 +2378,32 @@
                                     <frame key="frameInset" width="375" height="324"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IQGeometry" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZe-uz-G5h">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="IQGeometry" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZe-uz-G5h">
+                                            <frame key="frameInset" minX="15" minY="8" width="345" height="21"/>
                                             <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="15"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MIT" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e6C-iN-80D">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="MIT" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e6C-iN-80D">
+                                            <frame key="frameInset" minX="15" minY="55" width="345" height="14"/>
                                             <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="10"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hxz-L7-fJn">
-                                            <mutableString key="text">Copyright (c) 2013 Mohd Iftekhar Qurashi
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hxz-L7-fJn">
+                                            <frame key="frameInset" minX="15" minY="77" width="345" height="239.5"/>
+                                            <string key="text">Copyright (c) 2013 Mohd Iftekhar Qurashi
                     
                     Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of  the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
                     
                     The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
                     
-                    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</mutableString>
+                    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</string>
                                             <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="9"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vqg-ST-Y4p">
+                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vqg-ST-Y4p">
+                                            <frame key="frameInset" minX="15" minY="29" width="345" height="26"/>
                                             <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="10"/>
                                             <state key="normal" title="https://github.com/hackiftekhar/IQGeometry"/>
                                         </button>
@@ -2480,6 +2491,7 @@
         <image name="GitHub-Mark" width="32" height="32"/>
         <image name="color_palette" width="25" height="25"/>
         <image name="crop" width="26" height="26"/>
+        <image name="edit" width="25" height="25"/>
         <image name="horizontal_ruler" width="26" height="26"/>
         <image name="humburger_menu" width="26" height="26"/>
         <image name="iPhone-sceenshot" width="170" height="170"/>
@@ -2488,6 +2500,7 @@
         <image name="photo_library" width="25" height="25"/>
         <image name="ratio" width="26" height="26"/>
         <image name="resize" width="26" height="26"/>
+        <image name="rotate" width="19" height="25"/>
         <image name="vertical_ruler" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>

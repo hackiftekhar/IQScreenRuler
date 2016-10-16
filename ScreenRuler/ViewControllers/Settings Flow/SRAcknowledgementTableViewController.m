@@ -8,11 +8,12 @@
 
 #import "SRAcknowledgementTableViewController.h"
 #import "SRLicenseTableViewCell.h"
+#import <SafariServices/SafariServices.h>
+#import "UIColor+ThemeColor.h"
 
 @interface SRAcknowledgementTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSArray<NSDictionary<NSString*,id>*> *listArray;
-//    NSArray *allkeys;
 }
 
 @end
@@ -27,7 +28,6 @@
 
     NSString *path=[[NSBundle mainBundle] pathForResource:@"Acknowledgement" ofType:@".plist"];
     listArray = [[NSArray alloc] initWithContentsOfFile:path];
-//    allkeys=[listDictionary allKeys];
 }
 
 -(UIStatusBarAnimation)preferredStatusBarUpdateAnimation
@@ -90,17 +90,19 @@
     
     if ([[UIApplication sharedApplication] canOpenURL:url])
     {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"open_safari?", nil) preferredStyle:UIAlertControllerStyleAlert];
+        SFSafariViewController *controller = [[SFSafariViewController alloc] initWithURL:url];
         
-        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:NSLocalizedString(@"open", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [[UIApplication sharedApplication] openURL:url];
-        }];
+        if ([controller respondsToSelector:@selector(preferredBarTintColor)])
+        {
+            [controller setPreferredBarTintColor:[UIColor themeColor]];
+        }
         
-        UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+        if ([controller respondsToSelector:@selector(preferredControlTintColor)])
+        {
+            [controller setPreferredControlTintColor:[UIColor themeTextColor]];
+        }
         
-        [alertController addAction:actionOk];
-        [alertController addAction:actionCancel];
-        [self presentViewController:alertController animated:YES completion:nil];
+        [self presentViewController:controller animated:YES completion:nil];
     }
 }
 

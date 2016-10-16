@@ -50,6 +50,7 @@ Any contribution is more than welcome! You can contribute through pull requests 
 - Portuguese (Portugal) localization
 - Russian localization
 - OTHER LANGUAGES YOU KNOW
+- Rotation Animation
 
 ###Credits
 Many thanks to
