@@ -10,6 +10,6 @@
 
 @interface UIBezierPath (Shapes)
 
-+ (instancetype)twitterShape;
++ (instancetype)rulerShape;
 
 @end

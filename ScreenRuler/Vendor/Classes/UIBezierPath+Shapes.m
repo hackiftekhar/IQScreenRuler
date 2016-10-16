@@ -10,7 +10,7 @@
 
 @implementation UIBezierPath (Shapes)
 
-+ (instancetype)twitterShape
++ (instancetype)rulerShape
 {
     UIBezierPath* nPath = [UIBezierPath bezierPath];
     

@@ -8,7 +8,7 @@
 
 #import "SREditOptionViewController.h"
 #import "IQScrollContainerView.h"
-#import "IQ_UIImage+Resizing.h"
+#import "UIImage+Resizing.h"
 #import "SRCropViewController.h"
 #import "SRDrawViewController.h"
 #import "SRNavigationController.h"
@@ -92,7 +92,7 @@
             
             [Answers logCustomEventWithName:@"resize" customAttributes:@{@"size":NSStringFromCGSize(newSize)}];
 
-            UIImage *image = [weakSelf.scrollContainerView.image IQ_scaleToFillSize:newSize];
+            UIImage *image = [weakSelf.scrollContainerView.image scaleToFillSize:newSize];
             weakSelf.image = image;
         }]];
     }
@@ -108,7 +108,7 @@
             
             [Answers logCustomEventWithName:@"Resize" customAttributes:@{@"size":NSStringFromCGSize(newSize)}];
             
-            UIImage *image = [weakSelf.scrollContainerView.image IQ_scaleToFillSize:newSize];
+            UIImage *image = [weakSelf.scrollContainerView.image scaleToFillSize:newSize];
             weakSelf.image = image;
         }]];
     }
@@ -167,7 +167,7 @@
         
         [Answers logCustomEventWithName:@"Resize" customAttributes:@{@"size":NSStringFromCGSize(newSize)}];
 
-        UIImage *image = [weakSelf.scrollContainerView.image IQ_scaleToFillSize:newSize];
+        UIImage *image = [weakSelf.scrollContainerView.image scaleToFillSize:newSize];
         weakSelf.image = image;
     }];
     doneAction.enabled = NO;

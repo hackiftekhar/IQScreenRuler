@@ -10,7 +10,6 @@
 		11AC63C4048F0C26461C07D0 /* libPods-ScreenRuler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F6ABE1EFC39D370C25D1C1 /* libPods-ScreenRuler.a */; };
 		4C0403891DA910FC0075A71B /* SRIconsGeneratorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0403881DA910FC0075A71B /* SRIconsGeneratorViewController.m */; };
 		4C04038B1DA94D3E0075A71B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CD427201DA823CF000AD1CA /* Assets.xcassets */; };
-		4C21E7B11DAAB978005BE8E2 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C21E7B01DAAB978005BE8E2 /* UIImage+fixOrientation.m */; };
 		4C7396E31DA6A6E700397366 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C7396E11DA6A6E700397366 /* Localizable.strings */; };
 		4C853B351DB23DA2003E3717 /* RoundedCornerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C853B341DB23DA2003E3717 /* RoundedCornerView.m */; };
 		4C853B3A1DB27313003E3717 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 4C853B371DB272FA003E3717 /* iTunesArtwork@2x */; };
@@ -20,6 +19,7 @@
 		4C853B541DB2C271003E3717 /* CBZRasterSplashView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C853B4F1DB2C271003E3717 /* CBZRasterSplashView.m */; };
 		4C853B551DB2C271003E3717 /* CBZSplashView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C853B511DB2C271003E3717 /* CBZSplashView.m */; };
 		4C853B561DB2C271003E3717 /* CBZVectorSplashView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C853B531DB2C271003E3717 /* CBZVectorSplashView.m */; };
+		4C853B591DB37585003E3717 /* SRLicenseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C853B581DB37585003E3717 /* SRLicenseTableViewCell.m */; };
 		4C8B705D1DA7AFD200285D24 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C8B705F1DA7AFD200285D24 /* InfoPlist.strings */; };
 		4CD032051CC165B800539151 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CD032031CC165B800539151 /* Main.storyboard */; };
 		4CD0320A1CC165B800539151 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CD032081CC165B800539151 /* LaunchScreen.storyboard */; };
@@ -33,7 +33,6 @@
 		4CED77CA1DA82A8E0093176D /* IQColorPickerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD4268A1DA8234B000AD1CA /* IQColorPickerButton.m */; };
 		4CED77CB1DA82A8E0093176D /* IQTextPickerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD4268C1DA8234B000AD1CA /* IQTextPickerButton.m */; };
 		4CED77CC1DA82A8E0093176D /* UIColor+HexColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD4268E1DA8234B000AD1CA /* UIColor+HexColors.m */; };
-		4CED77CD1DA82A8E0093176D /* IQ_UIImage+Resizing.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426911DA8234B000AD1CA /* IQ_UIImage+Resizing.m */; };
 		4CED77CE1DA82A8E0093176D /* IQCropperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426931DA8234B000AD1CA /* IQCropperView.m */; };
 		4CED77CF1DA82A8E0093176D /* UIImage+CropRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426951DA8234B000AD1CA /* UIImage+CropRotate.m */; };
 		4CED77D01DA82A8E0093176D /* IQGeometry+AffineTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426981DA8234B000AD1CA /* IQGeometry+AffineTransform.m */; };
@@ -66,7 +65,6 @@
 		4CED77EB1DA82A8E0093176D /* SRScreenshotCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426FB1DA8236A000AD1CA /* SRScreenshotCollectionViewController.m */; };
 		4CED77EC1DA82A8E0093176D /* SRSettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD427031DA8236A000AD1CA /* SRSettingsTableViewCell.m */; };
 		4CED77ED1DA82A8E0093176D /* SRThemeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD427051DA8236A000AD1CA /* SRThemeTableViewCell.m */; };
-		4CED77EE1DA82A8E0093176D /* SRAcknowledgementDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426FE1DA8236A000AD1CA /* SRAcknowledgementDetailsViewController.m */; };
 		4CED77EF1DA82A8E0093176D /* SRAcknowledgementTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD427001DA8236A000AD1CA /* SRAcknowledgementTableViewController.m */; };
 		4CED77F01DA82A8E0093176D /* SRPrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD427071DA8236A000AD1CA /* SRPrivacyPolicyViewController.m */; };
 		4CED77F11DA82A8E0093176D /* SRSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD4270C1DA8236A000AD1CA /* SRSettingTableViewController.m */; };
@@ -78,8 +76,6 @@
 /* Begin PBXFileReference section */
 		4C0403871DA910FC0075A71B /* SRIconsGeneratorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRIconsGeneratorViewController.h; sourceTree = "<group>"; };
 		4C0403881DA910FC0075A71B /* SRIconsGeneratorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRIconsGeneratorViewController.m; sourceTree = "<group>"; };
-		4C21E7AF1DAAB978005BE8E2 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
-		4C21E7B01DAAB978005BE8E2 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
 		4C7396E21DA6A6E700397366 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4C7396E41DA6A6EF00397366 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4C7396EA1DA6A6F400397366 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -102,6 +98,8 @@
 		4C853B511DB2C271003E3717 /* CBZSplashView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBZSplashView.m; sourceTree = "<group>"; };
 		4C853B521DB2C271003E3717 /* CBZVectorSplashView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBZVectorSplashView.h; sourceTree = "<group>"; };
 		4C853B531DB2C271003E3717 /* CBZVectorSplashView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBZVectorSplashView.m; sourceTree = "<group>"; };
+		4C853B571DB37585003E3717 /* SRLicenseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRLicenseTableViewCell.h; sourceTree = "<group>"; };
+		4C853B581DB37585003E3717 /* SRLicenseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRLicenseTableViewCell.m; sourceTree = "<group>"; };
 		4C8B705A1DA6D5AB00285D24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4C8B705E1DA7AFD200285D24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4C8B70601DA7AFD500285D24 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -125,8 +123,6 @@
 		4CD4268C1DA8234B000AD1CA /* IQTextPickerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQTextPickerButton.m; sourceTree = "<group>"; };
 		4CD4268D1DA8234B000AD1CA /* UIColor+HexColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColors.h"; sourceTree = "<group>"; };
 		4CD4268E1DA8234B000AD1CA /* UIColor+HexColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColors.m"; sourceTree = "<group>"; };
-		4CD426901DA8234B000AD1CA /* IQ_UIImage+Resizing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQ_UIImage+Resizing.h"; sourceTree = "<group>"; };
-		4CD426911DA8234B000AD1CA /* IQ_UIImage+Resizing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQ_UIImage+Resizing.m"; sourceTree = "<group>"; };
 		4CD426921DA8234B000AD1CA /* IQCropperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQCropperView.h; sourceTree = "<group>"; };
 		4CD426931DA8234B000AD1CA /* IQCropperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQCropperView.m; sourceTree = "<group>"; };
 		4CD426941DA8234B000AD1CA /* UIImage+CropRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CropRotate.h"; sourceTree = "<group>"; };
@@ -188,8 +184,6 @@
 		4CD426F91DA8236A000AD1CA /* SRScreenshotCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRScreenshotCollectionViewCell.m; sourceTree = "<group>"; };
 		4CD426FA1DA8236A000AD1CA /* SRScreenshotCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRScreenshotCollectionViewController.h; sourceTree = "<group>"; };
 		4CD426FB1DA8236A000AD1CA /* SRScreenshotCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRScreenshotCollectionViewController.m; sourceTree = "<group>"; };
-		4CD426FD1DA8236A000AD1CA /* SRAcknowledgementDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRAcknowledgementDetailsViewController.h; sourceTree = "<group>"; };
-		4CD426FE1DA8236A000AD1CA /* SRAcknowledgementDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRAcknowledgementDetailsViewController.m; sourceTree = "<group>"; };
 		4CD426FF1DA8236A000AD1CA /* SRAcknowledgementTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRAcknowledgementTableViewController.h; sourceTree = "<group>"; };
 		4CD427001DA8236A000AD1CA /* SRAcknowledgementTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRAcknowledgementTableViewController.m; sourceTree = "<group>"; };
 		4CD427021DA8236A000AD1CA /* SRSettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRSettingsTableViewCell.h; sourceTree = "<group>"; };
@@ -398,8 +392,6 @@
 		4CD4268F1DA8234B000AD1CA /* IQCropperView */ = {
 			isa = PBXGroup;
 			children = (
-				4CD426901DA8234B000AD1CA /* IQ_UIImage+Resizing.h */,
-				4CD426911DA8234B000AD1CA /* IQ_UIImage+Resizing.m */,
 				4CD426921DA8234B000AD1CA /* IQCropperView.h */,
 				4CD426931DA8234B000AD1CA /* IQCropperView.m */,
 				4CD426941DA8234B000AD1CA /* UIImage+CropRotate.h */,
@@ -505,8 +497,6 @@
 				4CD426E51DA82364000AD1CA /* UIFont+AppFont.m */,
 				4CD426E61DA82364000AD1CA /* UIImage+Color.h */,
 				4CD426E71DA82364000AD1CA /* UIImage+Color.m */,
-				4C21E7AF1DAAB978005BE8E2 /* UIImage+fixOrientation.h */,
-				4C21E7B01DAAB978005BE8E2 /* UIImage+fixOrientation.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -560,8 +550,6 @@
 			children = (
 				4CD427011DA8236A000AD1CA /* Cell */,
 				4CD427081DA8236A000AD1CA /* Resources */,
-				4CD426FD1DA8236A000AD1CA /* SRAcknowledgementDetailsViewController.h */,
-				4CD426FE1DA8236A000AD1CA /* SRAcknowledgementDetailsViewController.m */,
 				4CD426FF1DA8236A000AD1CA /* SRAcknowledgementTableViewController.h */,
 				4CD427001DA8236A000AD1CA /* SRAcknowledgementTableViewController.m */,
 				4CD427061DA8236A000AD1CA /* SRPrivacyPolicyViewController.h */,
@@ -581,6 +569,8 @@
 				4CD427051DA8236A000AD1CA /* SRThemeTableViewCell.m */,
 				4CEDBF951DB15B970005A812 /* SRVersionTableViewCell.h */,
 				4CEDBF961DB15B970005A812 /* SRVersionTableViewCell.m */,
+				4C853B571DB37585003E3717 /* SRLicenseTableViewCell.h */,
+				4C853B581DB37585003E3717 /* SRLicenseTableViewCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -788,7 +778,6 @@
 				4CED77CA1DA82A8E0093176D /* IQColorPickerButton.m in Sources */,
 				4CED77CB1DA82A8E0093176D /* IQTextPickerButton.m in Sources */,
 				4CED77CC1DA82A8E0093176D /* UIColor+HexColors.m in Sources */,
-				4CED77CD1DA82A8E0093176D /* IQ_UIImage+Resizing.m in Sources */,
 				4CED77CE1DA82A8E0093176D /* IQCropperView.m in Sources */,
 				4CED77CF1DA82A8E0093176D /* UIImage+CropRotate.m in Sources */,
 				4C0403891DA910FC0075A71B /* SRIconsGeneratorViewController.m in Sources */,
@@ -799,7 +788,6 @@
 				4CED77D41DA82A8E0093176D /* IQGeometry+Point.m in Sources */,
 				4CED77D51DA82A8E0093176D /* IQGeometry+Rect.m in Sources */,
 				4CED77D61DA82A8E0093176D /* IQGeometry+Size.m in Sources */,
-				4C21E7B11DAAB978005BE8E2 /* UIImage+fixOrientation.m in Sources */,
 				4CED77D71DA82A8E0093176D /* IQLineFrameView.m in Sources */,
 				4CED77D81DA82A8E0093176D /* IQRulerScrollView.m in Sources */,
 				4CED77D91DA82A8E0093176D /* IQScrollContainerView.m in Sources */,
@@ -807,6 +795,7 @@
 				4C853B351DB23DA2003E3717 /* RoundedCornerView.m in Sources */,
 				4CED77DB1DA82A8E0093176D /* MPCoachMark.m in Sources */,
 				4CED77DC1DA82A8E0093176D /* MPCoachMarkView.m in Sources */,
+				4C853B591DB37585003E3717 /* SRLicenseTableViewCell.m in Sources */,
 				4C853B541DB2C271003E3717 /* CBZRasterSplashView.m in Sources */,
 				4C853B4D1DB2938F003E3717 /* UIBezierPath+Shapes.m in Sources */,
 				4CED77DD1DA82A8E0093176D /* IQ_SmoothedBIView.m in Sources */,
@@ -828,7 +817,6 @@
 				4CED77EC1DA82A8E0093176D /* SRSettingsTableViewCell.m in Sources */,
 				4CEDBF971DB15B970005A812 /* SRVersionTableViewCell.m in Sources */,
 				4CED77ED1DA82A8E0093176D /* SRThemeTableViewCell.m in Sources */,
-				4CED77EE1DA82A8E0093176D /* SRAcknowledgementDetailsViewController.m in Sources */,
 				4CED77EF1DA82A8E0093176D /* SRAcknowledgementTableViewController.m in Sources */,
 				4CED77F01DA82A8E0093176D /* SRPrivacyPolicyViewController.m in Sources */,
 				4CED77F11DA82A8E0093176D /* SRSettingTableViewController.m in Sources */,

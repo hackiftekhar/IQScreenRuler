@@ -2246,26 +2246,66 @@
         <scene sceneID="4uJ-4Q-aqC">
             <objects>
                 <tableViewController storyboardIdentifier="SRAcknowledgementTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4HM-Bl-5h0" customClass="SRAcknowledgementTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="q4Q-YU-PoR">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="q4Q-YU-PoR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" textLabel="xAP-Je-5Ft" style="IBUITableViewCellStyleDefault" id="eJb-0y-ikZ">
-                                <rect key="frame" x="0.0" y="120" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SRLicenseTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="SRLicenseTableViewCell" rowHeight="325" id="ToA-S1-RQl" customClass="SRLicenseTableViewCell">
+                                <rect key="frame" x="0.0" y="120" width="375" height="325"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eJb-0y-ikZ" id="g9s-vC-etq">
-                                    <frame key="frameInset" width="342" height="43"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ToA-S1-RQl" id="I1X-t1-ABc">
+                                    <frame key="frameInset" width="375" height="324"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xAP-Je-5Ft">
-                                            <frame key="frameInset" minX="15" width="325" height="43"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IQGeometry" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZe-uz-G5h">
+                                            <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="15"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MIT" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e6C-iN-80D">
+                                            <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="10"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hxz-L7-fJn">
+                                            <mutableString key="text">Copyright (c) 2013 Mohd Iftekhar Qurashi
+                    
+                    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of  the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+                    
+                    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+                    
+                    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</mutableString>
+                                            <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="9"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vqg-ST-Y4p">
+                                            <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="10"/>
+                                            <state key="normal" title="https://github.com/hackiftekhar/IQGeometry"/>
+                                        </button>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="e6C-iN-80D" firstAttribute="trailing" secondItem="HZe-uz-G5h" secondAttribute="trailing" id="68d-e9-eLa"/>
+                                        <constraint firstItem="e6C-iN-80D" firstAttribute="top" secondItem="vqg-ST-Y4p" secondAttribute="bottom" id="7TF-f6-mgK"/>
+                                        <constraint firstItem="vqg-ST-Y4p" firstAttribute="top" secondItem="HZe-uz-G5h" secondAttribute="bottom" id="CdB-GE-Scf"/>
+                                        <constraint firstItem="Hxz-L7-fJn" firstAttribute="leading" secondItem="HZe-uz-G5h" secondAttribute="leading" id="EV3-31-t2T"/>
+                                        <constraint firstItem="Hxz-L7-fJn" firstAttribute="top" secondItem="e6C-iN-80D" secondAttribute="bottom" constant="8" id="Ftb-sR-eN4"/>
+                                        <constraint firstItem="HZe-uz-G5h" firstAttribute="top" secondItem="I1X-t1-ABc" secondAttribute="top" constant="8" id="Kmh-fs-pta"/>
+                                        <constraint firstItem="vqg-ST-Y4p" firstAttribute="leading" secondItem="HZe-uz-G5h" secondAttribute="leading" id="Ncc-1H-Rfr"/>
+                                        <constraint firstItem="Hxz-L7-fJn" firstAttribute="trailing" secondItem="HZe-uz-G5h" secondAttribute="trailing" id="O3W-mf-ceQ"/>
+                                        <constraint firstItem="e6C-iN-80D" firstAttribute="leading" secondItem="HZe-uz-G5h" secondAttribute="leading" id="Ucq-Gf-lmg"/>
+                                        <constraint firstItem="vqg-ST-Y4p" firstAttribute="trailing" secondItem="HZe-uz-G5h" secondAttribute="trailing" id="bAJ-pn-4Lg"/>
+                                        <constraint firstAttribute="bottom" secondItem="Hxz-L7-fJn" secondAttribute="bottom" constant="8" id="hv1-zL-aXF"/>
+                                        <constraint firstAttribute="trailing" secondItem="HZe-uz-G5h" secondAttribute="trailing" constant="15" id="kp3-qZ-jvO"/>
+                                        <constraint firstItem="HZe-uz-G5h" firstAttribute="leading" secondItem="I1X-t1-ABc" secondAttribute="leading" constant="15" id="vuo-Cn-WpF"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="buttonLink" destination="vqg-ST-Y4p" id="RWX-3E-kDf"/>
+                                    <outlet property="labelDescription" destination="Hxz-L7-fJn" id="e0j-WB-OLm"/>
+                                    <outlet property="labelLicenseType" destination="e6C-iN-80D" id="ErS-jE-Fgo"/>
+                                    <outlet property="labelTitle" destination="HZe-uz-G5h" id="SHk-au-fKY"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -2275,72 +2315,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Open Source Libraries" id="Pmg-cQ-3bD"/>
-                    <connections>
-                        <segue destination="qtT-hM-nEv" kind="show" identifier="SRAcknowledgementDetailsViewController" id="AXe-lQ-hsw">
-                            <nil key="action"/>
-                        </segue>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FMx-T6-xjS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4127" y="1222"/>
-        </scene>
-        <!--Acknowledgement Details View Controller-->
-        <scene sceneID="dsP-ve-xDN">
-            <objects>
-                <viewController storyboardIdentifier="SRAcknowledgementDetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qtT-hM-nEv" customClass="SRAcknowledgementDetailsViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="786-tO-Qhc"/>
-                        <viewControllerLayoutGuide type="bottom" id="hx1-iE-Luc"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8vk-O4-49w">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWK-eb-1Ql">
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obd-6X-DgI">
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="20" id="kdh-VL-R7z"/>
-                                            <constraint firstAttribute="width" constant="320" id="o2a-Fr-1q6"/>
-                                            <constraint firstAttribute="width" constant="3555" id="pNe-Ju-dq3"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="15"/>
-                                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="kdh-VL-R7z"/>
-                                                <exclude reference="o2a-Fr-1q6"/>
-                                                <exclude reference="pNe-Ju-dq3"/>
-                                            </mask>
-                                        </variation>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="obd-6X-DgI" firstAttribute="width" secondItem="BWK-eb-1Ql" secondAttribute="width" constant="-20" id="Ffi-Ba-ukV"/>
-                                    <constraint firstAttribute="trailing" secondItem="obd-6X-DgI" secondAttribute="trailing" constant="10" id="QlD-ZW-v0X"/>
-                                    <constraint firstItem="obd-6X-DgI" firstAttribute="top" secondItem="BWK-eb-1Ql" secondAttribute="top" constant="10" id="YEB-Oh-Pyl"/>
-                                    <constraint firstAttribute="bottom" secondItem="obd-6X-DgI" secondAttribute="bottom" constant="10" id="coe-qi-gbM"/>
-                                    <constraint firstItem="obd-6X-DgI" firstAttribute="leading" secondItem="BWK-eb-1Ql" secondAttribute="leading" constant="10" id="dQB-AM-DR0"/>
-                                </constraints>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.98823529409999999" green="0.98823529409999999" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="BWK-eb-1Ql" firstAttribute="leading" secondItem="8vk-O4-49w" secondAttribute="leading" id="7YC-Ie-5bc"/>
-                            <constraint firstAttribute="trailing" secondItem="BWK-eb-1Ql" secondAttribute="trailing" id="bzZ-dQ-rdb"/>
-                            <constraint firstAttribute="bottom" secondItem="BWK-eb-1Ql" secondAttribute="bottom" id="iCZ-67-wjS"/>
-                            <constraint firstItem="BWK-eb-1Ql" firstAttribute="top" secondItem="8vk-O4-49w" secondAttribute="top" id="tes-Au-LvE"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="labelDescription" destination="obd-6X-DgI" id="BSo-AD-zaA"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vd7-Dh-xNk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4821" y="1222"/>
+            <point key="canvasLocation" x="4125.6000000000004" y="1221.1394302848576"/>
         </scene>
         <!--Terms and Conditions-->
         <scene sceneID="ZhP-RS-R0L">

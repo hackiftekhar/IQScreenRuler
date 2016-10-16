@@ -91,6 +91,7 @@
 "update_now"                = "अभी अपडेट करें";
 "is_open_source_at"         = "यहां पर ओपन सोर्स है:";
 "infoenum_software_systems" = "इन्फोइनम सॉफ्टवेयर सिस्टम्स";
+"open_safari?"              = "सफारी खोलें?";
 
 /* Other. */
 "error"             = "असफल";

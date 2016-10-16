@@ -13,7 +13,7 @@
 #import "UIColor+HexColors.h"
 #import <Photos/Photos.h>
 #import "UIFont+AppFont.h"
-#import "IQ_UIImage+Resizing.h"
+#import "UIImage+Resizing.h"
 #import "IQLineFrameView.h"
 #import "ACMagnifyingGlass.h"
 #import "MPCoachMarkView.h"
@@ -164,13 +164,8 @@
     
     NSLog(@"%@",self.navigationControllerSR);
     
-    __unused UIImage *icon = [UIImage imageNamed:@"ruler_logo"];
-
-    UIBezierPath *bezier = [UIBezierPath twitterShape];
+    UIBezierPath *bezier = [UIBezierPath rulerShape];
     UIColor *color = [UIColor originalThemeColor];
-    
-    NSLog(@"%@",NSStringFromCGRect(self.view.bounds));
-    NSLog(@"%@",NSStringFromCGRect(bezier.bounds));
     
     CBZSplashView *splashView = [CBZSplashView splashViewWithBezierPath:bezier
                                                         backgroundColor:color];
@@ -215,7 +210,7 @@
     [super viewDidAppear:animated];
     
     /* wait a beat before animating in */
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.splashView startAnimation];
     });
 }

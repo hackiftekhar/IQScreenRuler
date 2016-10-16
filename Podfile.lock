@@ -4,19 +4,25 @@ PODS:
     - Fabric (~> 1.6.3)
   - Fabric (1.6.9)
   - iVersion (1.11.4)
+  - NYXImagesKit (2.3)
+  - UIImage+FixOrientation (1.0.0)
 
 DEPENDENCIES:
   - COSTouchVisualizer
   - Crashlytics
   - Fabric
   - iVersion
+  - NYXImagesKit
+  - UIImage+FixOrientation
 
 SPEC CHECKSUMS:
   COSTouchVisualizer: a398089327a6c02897823614d7447ccc97198997
   Crashlytics: 27acca95a01b042a8294291dd6dff27f8f6af6d7
   Fabric: bc5bec42cef4bcf1ee3ce0e218fc518e4b44dfbb
   iVersion: 2b6ffe708672cb494ba3cab150a94800c2892e81
+  NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
+  UIImage+FixOrientation: 6889ce14a2761462c22d6f92d26685db79a0c9b2
 
-PODFILE CHECKSUM: 81b1ff7f2b0080d6173d98af169c1574fd76940c
+PODFILE CHECKSUM: 03a0433dbd1b4bc0d44d997dd6b00ac12d5cae35
 
 COCOAPODS: 1.1.0.rc.3
