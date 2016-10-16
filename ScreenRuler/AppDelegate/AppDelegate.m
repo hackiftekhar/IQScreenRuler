@@ -26,29 +26,26 @@ const NSInteger kSRAppStoreID = 1104790987;
 
 @implementation AppDelegate
 
-//#if DEBUG
-//// Add this method to your AppDelegate method for touch visualization (Used when creating videos)
-//- (COSTouchVisualizerWindow *)window {
-//    static COSTouchVisualizerWindow *visWindow = nil;
-//    if (!visWindow)
-//    {
-//        visWindow = [[COSTouchVisualizerWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//        visWindow.touchVisualizerWindowDelegate = self;
-//    }
-//    return visWindow;
-//}
-//
-//- (BOOL)touchVisualizerWindowShouldShowFingertip:(COSTouchVisualizerWindow *)window
-//{
-//    return YES;
-//}
-//
-//- (BOOL)touchVisualizerWindowShouldAlwaysShowFingertip:(COSTouchVisualizerWindow *)window
-//{
-//    return YES;
-//}
-//
-//#endif
+- (COSTouchVisualizerWindow *)window
+{
+    static COSTouchVisualizerWindow *visWindow = nil;
+    if (!visWindow)
+    {
+        visWindow = [[COSTouchVisualizerWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        visWindow.touchVisualizerWindowDelegate = self;
+    }
+    return visWindow;
+}
+
+- (BOOL)touchVisualizerWindowShouldShowFingertip:(COSTouchVisualizerWindow *)window
+{
+    return self.shouldShowTouches;
+}
+
+- (BOOL)touchVisualizerWindowShouldAlwaysShowFingertip:(COSTouchVisualizerWindow *)window
+{
+    return self.shouldShowTouches;
+}
 
 + (void)initialize
 {

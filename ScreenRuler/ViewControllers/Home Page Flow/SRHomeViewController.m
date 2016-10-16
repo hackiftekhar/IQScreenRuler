@@ -162,8 +162,6 @@
     
     [self openWithLatestScreenshot];
     
-    NSLog(@"%@",self.navigationControllerSR);
-    
     UIBezierPath *bezier = [UIBezierPath rulerShape];
     UIColor *color = [UIColor originalThemeColor];
     
@@ -181,8 +179,6 @@
 {
     [super viewWillAppear:animated];
 
-    NSLog(@"%@",self.navigationControllerSR);
-
     self.scrollContainerView.showZoomControls = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowZoomOption"];
 
     UIColor *originalThemeColor = [UIColor originalThemeColor];
@@ -190,12 +186,12 @@
 
     self.view.backgroundColor = backgroundColor;
 
-    UIColor *shadeFactorColor = [originalThemeColor colorWithShadeFactor:0.9];
+    UIColor *shadeFactorColor = [[UIColor themeColor] colorWithShadeFactor:0.9];
     
     //Free
     {
-        self.freeRulerView.rulerColor = originalThemeColor;
-        self.freeRulerView.lineColor = shadeFactorColor;
+        self.freeRulerView.rulerColor = shadeFactorColor;
+        self.freeRulerView.lineColor = originalThemeColor;
     }
     
     //Line

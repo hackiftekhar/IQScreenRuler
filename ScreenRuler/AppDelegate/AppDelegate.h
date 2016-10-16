@@ -16,6 +16,8 @@ extern const NSInteger kSRAppStoreID;
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property BOOL shouldShowTouches;
+
 @property BOOL isCheckingNewVersion;
 @property NSString* updatedVersionString;
 

@@ -42,6 +42,7 @@
 "cancel"    = "रद्द करें";
 "done"      = "पूर्ण";
 "ok"        = "ठीक";
+"open"      = "खोलें";
 
 /* Social Share. */
 "share_photo"       = "फोटो साझा करें";
@@ -90,8 +91,14 @@
 "you_are_upto_date"         = "आप अपडेट हैं";
 "update_now"                = "अभी अपडेट करें";
 "is_open_source_at"         = "यहां पर ओपन सोर्स है:";
-"infoenum_software_systems" = "इन्फोइनम सॉफ्टवेयर सिस्टम्स";
 "open_safari?"              = "सफारी खोलें?";
+"debug"                     = "दोषमार्जन";
+"developer_options"         = "डेवलपर विकल्प";
+"infoenum_software_systems" = "इन्फोइनम सॉफ्टवेयर सिस्टम्स";
+
+"show_touches"              = "स्पर्श दिखायें";
+"in_use_memory"             = "उपयोग की जा रही स्मृति";
+"virtual_memory"            = "आभासी स्मृति";
 
 /* Other. */
 "error"             = "असफल";

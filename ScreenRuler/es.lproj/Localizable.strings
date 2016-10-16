@@ -100,6 +100,11 @@
 "you_are_upto_date" = "You are upto date";
 "update_now"        = "Update Now";
 "open_safari?"      = "Open Safari?";
+"developer_options" = "Developer Options";
+"show_touches"      = "Show Touches";
+"in_use_memory"     = "In Use memory";
+"virtual_memory"    = "Virtual Memory";
+"open"              = "Open";
 
 /*
  ******************************************

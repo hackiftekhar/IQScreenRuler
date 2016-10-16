@@ -170,6 +170,118 @@
             </objects>
             <point key="canvasLocation" x="2717.5999999999999" y="1220.2398800599701"/>
         </scene>
+        <!--Developer Options-->
+        <scene sceneID="DNc-cP-blF">
+            <objects>
+                <tableViewController storyboardIdentifier="SRDeveloperSettingsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Hes-Se-Wjq" customClass="SRDeveloperSettingsViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="et9-rB-DC3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="cFK-3M-fzF">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="0UP-Oj-cc0">
+                                        <rect key="frame" x="0.0" y="99" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0UP-Oj-cc0" id="mG0-bm-qUz">
+                                            <frame key="frameInset" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Show Touches" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0k-0k-uCt">
+                                                    <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ysJ-pA-JzV">
+                                                    <connections>
+                                                        <action selector="showTouchesAction:" destination="Hes-Se-Wjq" eventType="valueChanged" id="oyf-bE-hsE"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="W0k-0k-uCt" secondAttribute="bottom" id="3vO-aQ-ycT"/>
+                                                <constraint firstItem="W0k-0k-uCt" firstAttribute="leading" secondItem="mG0-bm-qUz" secondAttribute="leading" constant="15" id="Eez-Sm-s4A"/>
+                                                <constraint firstItem="ysJ-pA-JzV" firstAttribute="centerY" secondItem="mG0-bm-qUz" secondAttribute="centerY" id="Fs5-yD-z5R"/>
+                                                <constraint firstItem="W0k-0k-uCt" firstAttribute="top" secondItem="mG0-bm-qUz" secondAttribute="top" id="JzA-o2-xDU"/>
+                                                <constraint firstItem="ysJ-pA-JzV" firstAttribute="leading" secondItem="W0k-0k-uCt" secondAttribute="trailing" constant="10" id="ayo-We-Eea"/>
+                                                <constraint firstAttribute="trailing" secondItem="ysJ-pA-JzV" secondAttribute="trailing" constant="10" id="zeP-3M-JZO"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="yJY-dz-beP">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="zyX-cY-vk8" detailTextLabel="GBU-SH-l9B" style="IBUITableViewCellStyleValue1" id="TQR-2S-abg">
+                                        <rect key="frame" x="0.0" y="179" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TQR-2S-abg" id="xjD-hh-eG3">
+                                            <frame key="frameInset" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="In Use Memory" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zyX-cY-vk8">
+                                                    <frame key="frameInset" minX="15" minY="10" width="109" height="23"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="0 Bytes" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GBU-SH-l9B">
+                                                    <frame key="frameInset" minX="307" minY="10" width="53" height="23"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="sAY-0b-pPK" detailTextLabel="l9V-RL-Psd" style="IBUITableViewCellStyleValue1" id="7XI-DX-YkP">
+                                        <rect key="frame" x="0.0" y="223" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7XI-DX-YkP" id="ln2-f7-ZHQ">
+                                            <frame key="frameInset" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Virtual Memory" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sAY-0b-pPK">
+                                                    <frame key="frameInset" minX="15" minY="10" width="112" height="23"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="0 Bytes" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="l9V-RL-Psd">
+                                                    <frame key="frameInset" minX="307" minY="10" width="53" height="23"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="Hes-Se-Wjq" id="bfF-xX-yW4"/>
+                            <outlet property="delegate" destination="Hes-Se-Wjq" id="Ndx-Dl-Nsb"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Developer Options" id="QZZ-GA-Tpq"/>
+                    <connections>
+                        <outlet property="labelInUseMemory" destination="zyX-cY-vk8" id="ryL-9x-jFn"/>
+                        <outlet property="labelInUseMemoryBytes" destination="GBU-SH-l9B" id="LBY-RI-EIg"/>
+                        <outlet property="labelShowTouches" destination="W0k-0k-uCt" id="Uzf-Ev-VD0"/>
+                        <outlet property="labelVirtualMemory" destination="sAY-0b-pPK" id="mmt-nt-SsJ"/>
+                        <outlet property="labelVirtualMemoryBytes" destination="l9V-RL-Psd" id="aGf-UF-qAd"/>
+                        <outlet property="switchShowTouch" destination="ysJ-pA-JzV" id="h9M-fk-ePj"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dbv-8S-3WD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3373.5999999999999" y="1215.7421289355323"/>
+        </scene>
         <!--Delegate-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -1341,6 +1453,7 @@
                         <outlet property="versionLabel" destination="fNb-df-MmM" id="tKk-wb-uKQ"/>
                         <segue destination="dwK-9q-CdO" kind="show" identifier="SRPrivacyPolicyViewController" id="X8e-2J-ofJ"/>
                         <segue destination="4HM-Bl-5h0" kind="show" identifier="SRAcknowledgementTableViewController" id="dKG-d7-huy"/>
+                        <segue destination="Hes-Se-Wjq" kind="show" identifier="SRDeveloperSettingsViewController" id="iMe-9I-3gO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TOO-gI-QvE" userLabel="First Responder" sceneMemberID="firstResponder"/>
