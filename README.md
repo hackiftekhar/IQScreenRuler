@@ -69,6 +69,7 @@ Any contribution is more than welcome! You can contribute through pull requests 
 
 - Rotation Animation
 - Flood Fill (Fill picked color on tap on draw page)
+- Onboarding Experience something like [this](https://dribbble.com/shots/1332390--GIF-Tour), probably [this](https://github.com/forcedotcom/SlidingCarousel) would be good. 
 
 
 ###Credits
