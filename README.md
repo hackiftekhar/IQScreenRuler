@@ -77,7 +77,6 @@ Many thanks to
 - [Lucas Diez de Medina](https://github.com/lucaslt89) for **Spanish (es and es-MX)** localization.
 - [Vittorio Morganti](https://github.com/toioski) for **Italian (it)** localization.
 - [Andrey Posnov](https://github.com/aposnov) for **Russian (ru)** localization.
-
 - **YOU ARE NEXT**.
 
 ###Author
