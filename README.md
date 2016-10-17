@@ -57,7 +57,6 @@ Any contribution is more than welcome! You can contribute through pull requests 
 - Portuguese (Brazil) localization (pt-BR)
 - Portuguese (Portugal) localization (pt-PT)
 - Romanian localization (ro)
-- Russian localization (ru)
 - Slovak localization (sk)
 - Swedish localization (sv)
 - Thai localization (th)
@@ -77,6 +76,8 @@ Many thanks to
 - [Adrian Inafuku](https://github.com/adrianinafuku) for giving me idea of **Screen Ruler**.
 - [Lucas Diez de Medina](https://github.com/lucaslt89) for **Spanish (es and es-MX)** localization.
 - [Vittorio Morganti](https://github.com/toioski) for **Italian (it)** localization.
+- [Andrey Posnov](https://github.com/aposnov) for **Russian (ru)** localization.
+
 - **YOU ARE NEXT**.
 
 ###Author
