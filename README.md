@@ -51,6 +51,8 @@ Any contribution is more than welcome! You can contribute through pull requests 
 - Russian localization
 - OTHER LANGUAGES YOU KNOW
 - Rotation Animation
+- Flood Fill (Fill picked color on tap on draw page)
+
 
 ###Credits
 Many thanks to

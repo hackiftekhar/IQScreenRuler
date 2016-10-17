@@ -71,7 +71,7 @@
 
     NSDictionary<NSString*,NSString*> *item = listArray[indexPath.section][@"SubItem"][indexPath.row];
 
-    cell.labelTitle.text = item[@"Title"];
+    cell.labelTitle.text = [NSString stringWithFormat:@"%ld) %@",indexPath.row+1,item[@"Title"]];
     
     NSString *linkText = item[@"Link"];
     [cell.buttonLink setTitle:linkText forState:UIControlStateNormal];

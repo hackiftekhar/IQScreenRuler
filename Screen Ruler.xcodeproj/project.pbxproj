@@ -23,6 +23,8 @@
 		4C853B5C1DB39087003E3717 /* SRDeveloperSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C853B5B1DB39087003E3717 /* SRDeveloperSettingsViewController.m */; };
 		4C853B601DB39737003E3717 /* SRDebugHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C853B5F1DB39737003E3717 /* SRDebugHelper.m */; };
 		4C8B705D1DA7AFD200285D24 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C8B705F1DA7AFD200285D24 /* InfoPlist.strings */; };
+		4CBD45191DB3F52800DA6D73 /* LinkedListStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CBD45161DB3F52800DA6D73 /* LinkedListStack.m */; };
+		4CBD451A1DB3F52800DA6D73 /* UIImage+FloodFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CBD45181DB3F52800DA6D73 /* UIImage+FloodFill.m */; };
 		4CD032051CC165B800539151 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CD032031CC165B800539151 /* Main.storyboard */; };
 		4CD0320A1CC165B800539151 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CD032081CC165B800539151 /* LaunchScreen.storyboard */; };
 		4CD426BA1DA8234B000AD1CA /* kb-loupe-hi_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4267F1DA8234B000AD1CA /* kb-loupe-hi_7.png */; };
@@ -111,6 +113,10 @@
 		4C8B70601DA7AFD500285D24 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4C8B70611DA7AFD500285D24 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4C8B70671DA7AFDA00285D24 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4CBD45151DB3F52800DA6D73 /* LinkedListStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkedListStack.h; sourceTree = "<group>"; };
+		4CBD45161DB3F52800DA6D73 /* LinkedListStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkedListStack.m; sourceTree = "<group>"; };
+		4CBD45171DB3F52800DA6D73 /* UIImage+FloodFill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FloodFill.h"; sourceTree = "<group>"; };
+		4CBD45181DB3F52800DA6D73 /* UIImage+FloodFill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FloodFill.m"; sourceTree = "<group>"; };
 		4CD031F71CC165B700539151 /* ScreenRuler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScreenRuler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD031FB1CC165B800539151 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4CD0320B1CC165B800539151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -264,6 +270,17 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		4C554A881DB3E58000B5F292 /* UIImage+FloodFill */ = {
+			isa = PBXGroup;
+			children = (
+				4CBD45151DB3F52800DA6D73 /* LinkedListStack.h */,
+				4CBD45161DB3F52800DA6D73 /* LinkedListStack.m */,
+				4CBD45171DB3F52800DA6D73 /* UIImage+FloodFill.h */,
+				4CBD45181DB3F52800DA6D73 /* UIImage+FloodFill.m */,
+			);
+			path = "UIImage+FloodFill";
+			sourceTree = "<group>";
+		};
 		4C853B411DB29309003E3717 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,6 +354,7 @@
 		4CD4267A1DA8234B000AD1CA /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				4C554A881DB3E58000B5F292 /* UIImage+FloodFill */,
 				4C853B5D1DB39729003E3717 /* DebugHelper */,
 				4C853B411DB29309003E3717 /* Classes */,
 				4CD4267B1DA8234B000AD1CA /* ACMagnifyingGlass */,
@@ -796,6 +814,7 @@
 				4CED77CA1DA82A8E0093176D /* IQColorPickerButton.m in Sources */,
 				4CED77CB1DA82A8E0093176D /* IQTextPickerButton.m in Sources */,
 				4CED77CC1DA82A8E0093176D /* UIColor+HexColors.m in Sources */,
+				4CBD45191DB3F52800DA6D73 /* LinkedListStack.m in Sources */,
 				4CED77CE1DA82A8E0093176D /* IQCropperView.m in Sources */,
 				4CED77CF1DA82A8E0093176D /* UIImage+CropRotate.m in Sources */,
 				4C0403891DA910FC0075A71B /* SRIconsGeneratorViewController.m in Sources */,
@@ -841,6 +860,7 @@
 				4CED77F01DA82A8E0093176D /* SRPrivacyPolicyViewController.m in Sources */,
 				4CED77F11DA82A8E0093176D /* SRSettingTableViewController.m in Sources */,
 				4CED77F21DA82A8E0093176D /* AppDelegate.m in Sources */,
+				4CBD451A1DB3F52800DA6D73 /* UIImage+FloodFill.m in Sources */,
 				4C853B551DB2C271003E3717 /* CBZSplashView.m in Sources */,
 				4CED77F31DA82A8E0093176D /* main.m in Sources */,
 			);
