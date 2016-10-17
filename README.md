@@ -37,10 +37,16 @@ Download to see how QA engineers accelerating their business by reducing time to
 Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub.
 
 ####TODO:-
+- Arabic localization
 - Chinese (Simplified) localization
 - Chinese (Traditional) localization
+- Danish localization
+- Dutch localization
+- Finish localization
 - French localization
 - German localization
+- Greek localization
+- Indonasion localization
 - Italian localization
 - Japanese localization
 - Korean localization
@@ -49,6 +55,8 @@ Any contribution is more than welcome! You can contribute through pull requests 
 - Portuguese (Brazil) localization
 - Portuguese (Portugal) localization
 - Russian localization
+- Thai localization
+- Turkish localization
 - OTHER LANGUAGES YOU KNOW
 - Rotation Animation
 
@@ -56,9 +64,8 @@ Any contribution is more than welcome! You can contribute through pull requests 
 Many thanks to
 - [Adrian Inafuku](https://github.com/adrianinafuku) for giving me idea of **Screen Ruler**.
 - [Lucas Diez de Medina](https://github.com/lucaslt89) for **Spanish** localization.
+- [Vittorio Morganti](https://github.com/toioski) for **Italian** localization.
 - **YOU ARE NEXT**.
-
-
 
 ###Author
 If you wish to contact me, email at: hack.iftekhar@gmail.com
