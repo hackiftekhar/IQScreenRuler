@@ -37,27 +37,36 @@ Download to see how QA engineers accelerating their business by reducing time to
 Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub.
 
 ####TODO:-
-- Arabic localization
-- Chinese (Simplified) localization
-- Chinese (Traditional) localization
-- Danish localization
-- Dutch localization
-- Finish localization
-- French localization
-- German localization
-- Greek localization
-- Indonasion localization
-- Italian localization
-- Japanese localization
-- Korean localization
-- Malay localization
-- Polish localization
-- Portuguese (Brazil) localization
-- Portuguese (Portugal) localization
-- Russian localization
-- Thai localization
-- Turkish localization
+- Arabic localization (ar)
+- Catalan localization (ca)
+- Chinese (Simplified) localization  (zh-Hans)
+- Chinese (Traditional) localization (zh-Hant)
+- Danish localization (da)
+- Dutch localization (nl)
+- Filipino (Filipino) localization (fil)
+- Filipino (Filippines) localization (fil-PH)
+- Finnish localization (fi)
+- French localization (fr)
+- German localization (de)
+- Greek localization (el)
+- Indonasion localization (id)
+- Japanese localization (ja)
+- Korean localization (ko)
+- Malay localization (ms)
+- Polish localization (pl)
+- Portuguese (Brazil) localization (pt-BR)
+- Portuguese (Portugal) localization (pt-PT)
+- Romanian localization (ro)
+- Russian localization (ru)
+- Slovak localization (sk)
+- Swedish localization (sv)
+- Thai localization (th)
+- Turkish localization (tr)
+- Ukrainian localization (uk)
+- Veitnamese localization (vi)
+
 - OTHER LANGUAGES YOU KNOW
+
 - Rotation Animation
 - Flood Fill (Fill picked color on tap on draw page)
 
@@ -65,8 +74,8 @@ Any contribution is more than welcome! You can contribute through pull requests 
 ###Credits
 Many thanks to
 - [Adrian Inafuku](https://github.com/adrianinafuku) for giving me idea of **Screen Ruler**.
-- [Lucas Diez de Medina](https://github.com/lucaslt89) for **Spanish** localization.
-- [Vittorio Morganti](https://github.com/toioski) for **Italian** localization.
+- [Lucas Diez de Medina](https://github.com/lucaslt89) for **Spanish (es and es-MX)** localization.
+- [Vittorio Morganti](https://github.com/toioski) for **Italian (it)** localization.
 - **YOU ARE NEXT**.
 
 ###Author
