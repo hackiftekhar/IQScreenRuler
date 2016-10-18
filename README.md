@@ -78,6 +78,7 @@ Many thanks to
 - [Vittorio Morganti](https://github.com/toioski) for **Italian (it)** localization.
 - [Andrey Posnov](https://github.com/aposnov) for **Russian (ru)** localization.
 - [voisen](https://github.com/voisen) for **Chinese (Simplified zh-Hans)** localization.
+- [voisen](https://github.com/voisen) for **Chinese (Traditional zh-Hant)** localization.
 
 - **YOU ARE NEXT**.
 
