@@ -76,7 +76,7 @@ Many thanks to
 - [Adrian Inafuku](https://github.com/adrianinafuku) for giving me idea of **Screen Ruler**.
 - [Lucas Diez de Medina](https://github.com/lucaslt89) for **Spanish (es and es-MX)** localization.
 - [Vittorio Morganti](https://github.com/toioski) for **Italian (it)** localization.
-- [Andrey Posnov](https://github.com/aposnov) for **Russian (ru)** localization.
+- [Andrey Posnov](https://github.com/aposnov),[Leonid Dinershtein](https://github.com/leoniddinershtein) for **Russian (ru)** localization.
 - [voisen](https://github.com/voisen) for **Chinese (Simplified zh-Hans)** localization.
 - [voisen](https://github.com/voisen) for **Chinese (Traditional zh-Hant)** localization.
 
