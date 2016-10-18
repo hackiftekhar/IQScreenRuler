@@ -40,7 +40,7 @@ Any contribution is more than welcome! You can contribute through pull requests 
 - Arabic localization (ar)
 - Catalan localization (ca)
 - Chinese (Simplified) App Store description  (zh-Hans)
-- Chinese (Traditional) localization (zh-Hant)
+- Chinese (Traditional) App Store description (zh-Hant)
 - Danish localization (da)
 - Dutch localization (nl)
 - Filipino (Filipino) localization (fil)
