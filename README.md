@@ -39,7 +39,7 @@ Any contribution is more than welcome! You can contribute through pull requests 
 ####TODO:-
 - Arabic localization (ar)
 - Catalan localization (ca)
-- Chinese (Simplified) localization  (zh-Hans)
+- Chinese (Simplified) App Store description  (zh-Hans)
 - Chinese (Traditional) localization (zh-Hant)
 - Danish localization (da)
 - Dutch localization (nl)
@@ -77,6 +77,8 @@ Many thanks to
 - [Lucas Diez de Medina](https://github.com/lucaslt89) for **Spanish (es and es-MX)** localization.
 - [Vittorio Morganti](https://github.com/toioski) for **Italian (it)** localization.
 - [Andrey Posnov](https://github.com/aposnov) for **Russian (ru)** localization.
+- [voisen](https://github.com/voisen) for **Chinese (Simplified zh-Hans)** localization.
+
 - **YOU ARE NEXT**.
 
 ###Author
