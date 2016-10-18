@@ -39,8 +39,6 @@ Any contribution is more than welcome! You can contribute through pull requests 
 ####TODO:-
 - Arabic localization (ar)
 - Catalan localization (ca)
-- Chinese (Simplified) App Store description  (zh-Hans)
-- Chinese (Traditional) App Store description (zh-Hant)
 - Danish localization (da)
 - Dutch localization (nl)
 - Filipino (Filipino) localization (fil)
