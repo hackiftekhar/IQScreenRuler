@@ -804,7 +804,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 2a2b05af157dab9ab59f9b8e79c037ee6025e805 ef7854a785e2d3278a5901eb3477607f00a3ed6adb97f4712b6cf154c048ab1e";
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n\"${PODS_ROOT}/Fabric/run\" 2a2b05af157dab9ab59f9b8e79c037ee6025e805 ef7854a785e2d3278a5901eb3477607f00a3ed6adb97f4712b6cf154c048ab1e\nfi";
 		};
 		578D9CCE87918E16E259535C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1120,12 +1120,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Iftekhar Qurashi (RFN29V7Q6Y)";
+				DEVELOPMENT_TEAM = 7UUTF6T5P9;
 				INFOPLIST_FILE = ScreenRuler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.infoenum.ruler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "04236ed9-1a27-4d60-aa97-25b9ab87e506";
+				PROVISIONING_PROFILE_SPECIFIER = RulerAppDevelopment;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1137,12 +1139,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Iftekhar Qurashi (7UUTF6T5P9)";
+				DEVELOPMENT_TEAM = 7UUTF6T5P9;
 				INFOPLIST_FILE = ScreenRuler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.infoenum.ruler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "96274369-1d1c-4ef9-b8b4-0100dc95e151";
+				PROVISIONING_PROFILE_SPECIFIER = RulerAppDistribution;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -1118,7 +1118,10 @@
     {
         CGPoint location = [recognizer locationInView:self.scrollContainerView.imageView];
         
-        [Answers logCustomEventWithName:@"Show RGB Value" customAttributes:nil];
+        if(recognizer.state == UIGestureRecognizerStateBegan)
+        {
+            [Answers logCustomEventWithName:@"Show RGB" customAttributes:nil];
+        }
 
         [self showRGBAtLocation:location];
     }
