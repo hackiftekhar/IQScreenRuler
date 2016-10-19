@@ -90,6 +90,8 @@
 		4C33F2421DB7E315000BC753 /* ta-SG */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ta-SG"; path = "ta-SG.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4C33F2431DB7E32D000BC753 /* ta-LK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ta-LK"; path = "ta-LK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		4C33F2441DB7E32E000BC753 /* ta-LK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ta-LK"; path = "ta-LK.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		4C33F2451DB7E5B4000BC753 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		4C33F2461DB7E5B4000BC753 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4C7396E21DA6A6E700397366 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		4C7396E41DA6A6EF00397366 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		4C7396EA1DA6A6F400397366 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
@@ -775,6 +777,7 @@
 				"ta-MY",
 				"ta-SG",
 				"ta-LK",
+				"fr-CA",
 			);
 			mainGroup = 4CD031EE1CC165B700539151;
 			productRefGroup = 4CD031F81CC165B700539151 /* Products */;
@@ -976,6 +979,7 @@
 				4C33F2401DB7E304000BC753 /* ta-MY */,
 				4C33F2421DB7E315000BC753 /* ta-SG */,
 				4C33F2441DB7E32E000BC753 /* ta-LK */,
+				4C33F2461DB7E5B4000BC753 /* fr-CA */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1021,6 +1025,7 @@
 				4C33F23F1DB7E304000BC753 /* ta-MY */,
 				4C33F2411DB7E314000BC753 /* ta-SG */,
 				4C33F2431DB7E32D000BC753 /* ta-LK */,
+				4C33F2451DB7E5B4000BC753 /* fr-CA */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
