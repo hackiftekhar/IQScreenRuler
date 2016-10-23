@@ -77,6 +77,8 @@ Many thanks to
 - [Andrey Posnov](https://github.com/aposnov),[Leonid Dinershtein](https://github.com/leoniddinershtein) for **Russian (ru)** localization.
 - [voisen](https://github.com/voisen) for **Chinese (Simplified zh-Hans)** localization.
 - [voisen](https://github.com/voisen) for **Chinese (Traditional zh-Hant)** localization.
+- [Quentin Del](https://github.com/QuentinDela),[Jose Granja Martinez](https://github.com/dioxmio) for **French** localization.
+- [Mathi Arasan D V](https://github.com/mathiarasan24) for **Tamil (India)** localization.
 
 - **YOU ARE NEXT**.
 
