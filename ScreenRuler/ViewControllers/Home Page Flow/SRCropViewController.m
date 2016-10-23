@@ -37,6 +37,8 @@
 {
     [super viewWillAppear:animated];
 
+    self.scrollContainerView.showZoomControls = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowZoomOption"];
+    
     self.barButtonCrop.title = NSLocalizedString(@"crop", nil);
 
     self.scrollContainerView.zoomScale = self.zoomScale;

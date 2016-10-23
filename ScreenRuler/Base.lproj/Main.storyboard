@@ -185,7 +185,7 @@
                                         <rect key="frame" x="0.0" y="99" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0UP-Oj-cc0" id="mG0-bm-qUz">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Show Touches" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0k-0k-uCt">
@@ -449,14 +449,14 @@
                     <navigationItem key="navigationItem" id="rpO-sT-myJ">
                         <nil key="title"/>
                         <leftBarButtonItems>
-                            <barButtonItem image="humburger_menu" id="hAR-cr-aCN">
+                            <barButtonItem image="settings" id="hAR-cr-aCN">
                                 <connections>
                                     <segue destination="ETK-z5-Ybp" kind="presentation" id="rwW-32-gom"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem id="Z3k-7t-jds">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="BS5-SW-4dg" customClass="SRToolbarButton">
-                                    <rect key="frame" x="61" y="9" width="35" height="25"/>
+                                    <rect key="frame" x="60" y="9" width="35" height="25"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="16"/>
                                     <state key="normal" title="@2x"/>
@@ -895,7 +895,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="Vb7-gB-CIP">
-                            <rect key="frame" x="0.0" y="381" width="375" height="200"/>
+                            <rect key="frame" x="0.0" y="380.5" width="375" height="200"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Screen Ruler is open source at:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUr-Ki-Ldf">
@@ -958,7 +958,7 @@
                                 <rect key="frame" x="0.0" y="120" width="375" height="155"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Csh-fo-3Ru" id="9KT-VM-C5e">
-                                    <frame key="frameInset" width="375" height="154"/>
+                                    <frame key="frameInset" width="375" height="155"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color Theme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3hV-af-5SY">
@@ -1405,11 +1405,11 @@
                                 <rect key="frame" x="0.0" y="275" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Jy-yw-Pc6" id="btB-tO-QSf">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Share On Social Network" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IVF-fw-bRY">
-                                            <frame key="frameInset" minX="15" width="345" height="43"/>
+                                            <frame key="frameInset" minX="15" width="345" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
                                             <nil key="highlightedColor"/>
@@ -2493,7 +2493,6 @@
         <image name="crop" width="26" height="26"/>
         <image name="edit" width="25" height="25"/>
         <image name="horizontal_ruler" width="26" height="26"/>
-        <image name="humburger_menu" width="26" height="26"/>
         <image name="iPhone-sceenshot" width="170" height="170"/>
         <image name="line_frame" width="26" height="26"/>
         <image name="option" width="25" height="25"/>
@@ -2501,6 +2500,7 @@
         <image name="ratio" width="26" height="26"/>
         <image name="resize" width="26" height="26"/>
         <image name="rotate" width="19" height="25"/>
+        <image name="settings" width="25" height="25"/>
         <image name="vertical_ruler" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>

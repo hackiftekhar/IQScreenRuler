@@ -1144,7 +1144,7 @@
         
         if (_lineFrameView.hidden == NO && _lineFrameView.alpha != 0.0)
         {
-            BOOL animated = !(scrollView.tracking || scrollView.decelerating);
+            BOOL animated = !(scrollView.isTracking || scrollView.isDecelerating || scrollView.isDragging);
             [_lineFrameView setZoomScale:scrollView.zoomScale animated:animated];
         }
     }
@@ -1170,7 +1170,7 @@
         
         if (_lineFrameView.hidden == NO && _lineFrameView.alpha != 0.0)
         {
-            BOOL animated = !(scrollView.tracking || scrollView.decelerating);
+            BOOL animated = !(scrollView.isTracking || scrollView.isDecelerating || scrollView.isDragging);
 
             [_lineFrameView setZoomScale:scrollView.zoomScale animated:animated];
         }

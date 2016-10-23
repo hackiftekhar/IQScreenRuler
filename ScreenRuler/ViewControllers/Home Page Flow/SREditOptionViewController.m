@@ -40,6 +40,7 @@
 {
     [super viewWillAppear:animated];
     
+    self.scrollContainerView.showZoomControls = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowZoomOption"];
     self.scrollContainerView.zoomScale = self.zoomScale;
     self.scrollContainerView.contentOffset = self.contentOffset;
 
