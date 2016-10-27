@@ -29,6 +29,8 @@
     angleLabel = [[UILabel alloc] initWithFrame:self.bounds];
     angleLabel.text = [NSString localizedStringWithFormat:@"%d°",0];
     angleLabel.font = [UIFont kohinoorBanglaRegularWithSize:15.0];
+    angleLabel.adjustsFontSizeToFitWidth = YES;
+    angleLabel.minimumScaleFactor = 0.5;
     angleLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:angleLabel];
 }

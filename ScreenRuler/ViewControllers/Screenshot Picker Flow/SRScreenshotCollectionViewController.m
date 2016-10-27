@@ -231,6 +231,8 @@
     if (self.completeFetchResult.count == 0)
     {
         UILabel *label1 = [[UILabel alloc] initWithFrame:view.bounds];
+        label1.adjustsFontSizeToFitWidth = YES;
+        label1.minimumScaleFactor = 0.5;
         label1.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         label1.font = [UIFont kohinoorBanglaSemiboldWithSize:25.0];
         label1.numberOfLines = 0;

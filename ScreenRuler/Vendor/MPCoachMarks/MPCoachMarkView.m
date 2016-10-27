@@ -103,6 +103,8 @@ static const BOOL kEnableSkipButton = YES;
 
     // Captions
     self.lblCaption = [[UILabel alloc] initWithFrame:(CGRect){{0.0f, 0.0f}, {self.maxLblWidth, 0.0f}}];
+    self.lblCaption.adjustsFontSizeToFitWidth = YES;
+    self.lblCaption.minimumScaleFactor = 0.5;
     self.lblCaption.backgroundColor = [UIColor blackColor];
     self.lblCaption.textColor = [UIColor whiteColor];
     self.lblCaption.layer.masksToBounds = YES;
@@ -440,6 +442,8 @@ static const BOOL kEnableSkipButton = YES;
         if (weakSelf.enableContinueLabel) {
             if (weakSelf.markIndex == 0) {
                 lblContinue = [[UILabel alloc] initWithFrame:(CGRect){{0, [weakSelf yOriginForContinueLabel]}, {lblContinueWidth, 30.0f}}];
+                lblContinue.adjustsFontSizeToFitWidth = YES;
+                lblContinue.minimumScaleFactor = 0.5;
                 lblContinue.font = [UIFont kohinoorBanglaSemiboldWithSize:13.0f];
                 lblContinue.textAlignment = NSTextAlignmentCenter;
                 lblContinue.text = NSLocalizedString(@"tap_to_continue", nil);
