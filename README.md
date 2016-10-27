@@ -51,7 +51,6 @@ Any contribution is more than welcome! You can contribute through pull requests 
 - Japanese localization (ja)
 - Korean localization (ko)
 - Malay localization (ms)
-- Polish localization (pl)
 - Portuguese (Brazil) localization (pt-BR)
 - Portuguese (Portugal) localization (pt-PT)
 - Romanian localization (ro)
@@ -79,6 +78,7 @@ Many thanks to
 - [voisen](https://github.com/voisen) for **Chinese (Traditional zh-Hant)** localization.
 - [Quentin Del](https://github.com/QuentinDela),[Jose Granja Martinez](https://github.com/dioxmio) for **French** localization.
 - [Mathi Arasan D V](https://github.com/mathiarasan24) for **Tamil (India)** localization.
+- [Gracjan Ziółek](mailto:poczta@gracjan.art.pl) for **Polish** localization.
 
 - **YOU ARE NEXT**.
 
