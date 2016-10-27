@@ -49,9 +49,10 @@
 
     appName = [infoDictionary objectForKey:@"CFBundleName"];
     
+    NSString* shortVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    
+    if ([NSLocale instancesRespondToSelector:@selector(decimalSeparator)])
     {
-        NSString* shortVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-        
         NSMutableArray *versionArray = [[shortVersionString componentsSeparatedByString:@"."] mutableCopy];
         
         for (NSInteger i = 0; i<versionArray.count; i++)
@@ -61,6 +62,10 @@
         }
         
         versionString = [versionArray componentsJoinedByString:[[NSLocale currentLocale] decimalSeparator]];
+    }
+    else
+    {
+        versionString = shortVersionString;
     }
     
     UISwitch *showZoomOptionSwitch = [[UISwitch alloc] init];
