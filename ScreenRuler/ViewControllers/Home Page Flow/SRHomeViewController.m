@@ -13,7 +13,7 @@
 #import "UIColor+HexColors.h"
 #import <Photos/Photos.h>
 #import "UIFont+AppFont.h"
-#import "IQ_UIImage+Resizing.h"
+#import "UIImage+Resizing.h"
 #import "IQLineFrameView.h"
 #import "ACMagnifyingGlass.h"
 #import "MPCoachMarkView.h"
@@ -27,6 +27,10 @@
 #import "SRScreenshotCollectionViewController.h"
 #import "UIImage+fixOrientation.h"
 #import <Crashlytics/Answers.h>
+
+#import "CBZSplashView.h"
+#import "UIBezierPath+Shapes.h"
+
 
 //https://www.iconfinder.com/iconsets/hawcons-gesture-stroke
 
@@ -74,6 +78,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *labelBlue;
 @property (strong, nonatomic) IBOutlet UILabel *labelColorLocation;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *loadingColorDataIndicator;
+
+@property (nonatomic, strong) CBZSplashView *splashView;
 
 @end
 
@@ -155,6 +161,18 @@
     [self.scrollContainerView.scrollView addGestureRecognizer:_longPressRecognizer];
     
     [self openWithLatestScreenshot];
+    
+    UIBezierPath *bezier = [UIBezierPath rulerShape];
+    UIColor *color = [UIColor originalThemeColor];
+    
+    CBZSplashView *splashView = [CBZSplashView splashViewWithBezierPath:bezier
+                                                        backgroundColor:color];
+    
+    splashView.animationDuration = 1.4;
+    
+    [self.navigationControllerSR.view addSubview:splashView];
+    
+    self.splashView = splashView;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -168,12 +186,12 @@
 
     self.view.backgroundColor = backgroundColor;
 
-    UIColor *shadeFactorColor = [originalThemeColor colorWithShadeFactor:0.9];
+    UIColor *shadeFactorColor = [[UIColor themeColor] colorWithShadeFactor:0.9];
     
     //Free
     {
-        self.freeRulerView.rulerColor = originalThemeColor;
-        self.freeRulerView.lineColor = shadeFactorColor;
+        self.freeRulerView.rulerColor = shadeFactorColor;
+        self.freeRulerView.lineColor = originalThemeColor;
     }
     
     //Line
@@ -181,6 +199,16 @@
         self.lineFrameView.rulerColor = shadeFactorColor;
         self.lineFrameView.lineColor = originalThemeColor;
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    /* wait a beat before animating in */
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.splashView startAnimation];
+    });
 }
 
 -(BOOL)prefersStatusBarHidden
@@ -234,7 +262,7 @@
 
     __weak typeof(self) weakSelf = self;
 
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Share Photo", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"share_photo", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
 
         [Answers logShareWithMethod:@"Share Photo" contentName:@"Share Activity" contentType:@"share" contentId:@"share.photo" customAttributes:nil];
         
@@ -257,14 +285,14 @@
         }];
     }]];
     
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Start Help Tour", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"start_help_tour", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         [Answers logCustomEventWithName:@"Start Help Tour" customAttributes:nil];
 
         [weakSelf startHelpTour];
     }]];
 
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
     
     alertController.popoverPresentationController.barButtonItem = sender;
     
@@ -295,7 +323,7 @@
                                                            @"caption": NSLocalizedString(@"double_tap_help", nil),
                                                            @"borderColor":originalThemeColor,
                                                            @"shape": @(SHAPE_CIRCLE),
-                                                           @"position":@(LABEL_POSITION_TOP),
+                                                           @"position":@(LABEL_POSITION_BOTTOM),
                                                            @"alignment":@(LABEL_ALIGNMENT_CENTER),
                                                            @"image":[UIImage imageNamed:@"DoubleTap"]
                                                            }];
@@ -486,13 +514,13 @@
         {
             if (self.presentedViewController == nil)
             {
-                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Set Scale point location", nil) preferredStyle:UIAlertControllerStyleActionSheet];
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"set_scale_point_location", nil) preferredStyle:UIAlertControllerStyleActionSheet];
                 
-                [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Reset Scale to Original", nil) style:UIAlertActionStyleDestructive handler:nil]];
+                [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"reset_scale_to_original", nil) style:UIAlertActionStyleDestructive handler:nil]];
                 
-                [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Mark as Y reference", nil) style:UIAlertActionStyleDefault handler:nil]];
+                [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"mark_as_y_reference", nil) style:UIAlertActionStyleDefault handler:nil]];
                 
-                [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
+                [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
                 
                 alertController.popoverPresentationController.sourceView = self.lineFrameView;
                 
@@ -847,7 +875,7 @@
 {
     NSInteger currentRatio = [[[sender titleForState:UIControlStateNormal] substringWithRange:NSMakeRange(1, 1)] integerValue];
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Change Scale Multiplier", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"change_scale_multiplier", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     __weak typeof(self) weakSelf = self;
 
@@ -890,7 +918,7 @@
         }]];
     }
     
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
     
     alertController.popoverPresentationController.barButtonItem = self.rationBarButon;
     
@@ -1090,7 +1118,10 @@
     {
         CGPoint location = [recognizer locationInView:self.scrollContainerView.imageView];
         
-        [Answers logCustomEventWithName:@"Show RGB Value" customAttributes:nil];
+        if(recognizer.state == UIGestureRecognizerStateBegan)
+        {
+            [Answers logCustomEventWithName:@"Show RGB" customAttributes:nil];
+        }
 
         [self showRGBAtLocation:location];
     }
@@ -1113,7 +1144,7 @@
         
         if (_lineFrameView.hidden == NO && _lineFrameView.alpha != 0.0)
         {
-            BOOL animated = !(scrollView.tracking || scrollView.decelerating);
+            BOOL animated = !(scrollView.isTracking || scrollView.isDecelerating || scrollView.isDragging);
             [_lineFrameView setZoomScale:scrollView.zoomScale animated:animated];
         }
     }
@@ -1139,7 +1170,7 @@
         
         if (_lineFrameView.hidden == NO && _lineFrameView.alpha != 0.0)
         {
-            BOOL animated = !(scrollView.tracking || scrollView.decelerating);
+            BOOL animated = !(scrollView.isTracking || scrollView.isDecelerating || scrollView.isDragging);
 
             [_lineFrameView setZoomScale:scrollView.zoomScale animated:animated];
         }
@@ -1219,7 +1250,15 @@
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
-    return self.interfaceOrientation;
+    if (self.interfaceOrientation == UIInterfaceOrientationUnknown)
+    {
+        return UIInterfaceOrientationPortrait;
+    }
+    else
+    {
+        return self.interfaceOrientation;
+    }
+//    NSLog(@"%d",self.interfaceOrientation);
 }
 
 -(UIInterfaceOrientation)interfaceOrientation

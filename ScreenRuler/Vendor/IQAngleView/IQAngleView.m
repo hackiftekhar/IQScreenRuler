@@ -20,6 +20,8 @@
 {
     _textColor = textColor;
     angleLabel.textColor = textColor;
+    
+    [self setNeedsDisplay];
 }
 
 -(void)initialize
@@ -97,7 +99,7 @@
         [path moveToPoint:P1];
         [path addLineToPoint:P2];
         path.lineCapStyle = kCGLineCapSquare;
-        [[UIColor whiteColor] set];
+        [_textColor set];
 
         [path strokeWithBlendMode:kCGBlendModeNormal alpha:1.0];
     }

@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"Terms and Conditions", nil);
+    self.title = NSLocalizedString(@"terms_and_conditions", nil);
 
     NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"EULA" ofType:@"html"];
     NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];

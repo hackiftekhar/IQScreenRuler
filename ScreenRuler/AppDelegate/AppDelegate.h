@@ -8,10 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSNotificationName iVersionDidUpdateNotification;
+
+extern const NSInteger kSRAppStoreID;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property BOOL shouldShowTouches;
+
+@property BOOL isCheckingNewVersion;
+@property NSString* updatedVersionString;
 
 @end
 

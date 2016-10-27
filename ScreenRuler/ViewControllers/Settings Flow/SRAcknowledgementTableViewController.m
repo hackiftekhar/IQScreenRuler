@@ -7,12 +7,13 @@
 //  See COPYING or https://www.apache.org/licenses/LICENSE-2.0
 
 #import "SRAcknowledgementTableViewController.h"
-#import "SRAcknowledgementDetailsViewController.h"
+#import "SRLicenseTableViewCell.h"
+#import <SafariServices/SafariServices.h>
+#import "UIColor+ThemeColor.h"
 
 @interface SRAcknowledgementTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
-    NSDictionary *listDictionary;
-    NSArray *allkeys;
+    NSArray<NSDictionary<NSString*,id>*> *listArray;
 }
 
 @end
@@ -23,11 +24,10 @@
     [super viewDidLoad];
      self.clearsSelectionOnViewWillAppear = YES;
     
-    self.title = NSLocalizedString(@"Open Source Libraries", nil);
+    self.title = NSLocalizedString(@"open_source_libraries", nil);
 
     NSString *path=[[NSBundle mainBundle] pathForResource:@"Acknowledgement" ofType:@".plist"];
-    listDictionary=[[NSDictionary alloc] initWithContentsOfFile:path];
-    allkeys=[listDictionary allKeys];
+    listArray = [[NSArray alloc] initWithContentsOfFile:path];
 }
 
 -(UIStatusBarAnimation)preferredStatusBarUpdateAnimation
@@ -37,55 +37,73 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
-    return 1;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [listArray count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    return [listDictionary count];
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSDictionary<NSString*,id> *dict = listArray[section];
+    return dict[@"Title"];
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSDictionary<NSString*,id> *dict = listArray[section];
+    NSArray <NSDictionary<NSString*,NSString*>*> *subItem = dict[@"SubItem"];
+    return subItem.count;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 350;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *cellIdentifier=@"Cell";
-    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    SRLicenseTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SRLicenseTableViewCell class]) forIndexPath:indexPath];
 
-    cell.textLabel.text = [allkeys objectAtIndex:indexPath.row];
+    NSDictionary<NSString*,NSString*> *item = listArray[indexPath.section][@"SubItem"][indexPath.row];
+
+    cell.labelTitle.text = [NSString stringWithFormat:@"%ld) %@",indexPath.row+1,item[@"Title"]];
+    
+    NSString *linkText = item[@"Link"];
+    [cell.buttonLink setTitle:linkText forState:UIControlStateNormal];
+    [cell.buttonLink addTarget:self action:@selector(linkAction:) forControlEvents:UIControlEventTouchUpInside];
+    cell.buttonLink.hidden = ([linkText length] == 0);
+    cell.labelLicenseType.text = item[@"License"];
+    cell.labelDescription.text = item[@"Description"];
+
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)linkAction:(UIButton*)sender
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    [self performSegueWithIdentifier:NSStringFromClass([SRAcknowledgementDetailsViewController class]) sender:indexPath];
-}
-#pragma mark -  Actions
-- (IBAction)doneAcitons:(UIBarButtonItem *)sender
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    NSIndexPath *indexPath = sender;
+    NSString *text = [sender titleForState:UIControlStateNormal];
+    NSURL *url = [NSURL URLWithString:text];
     
-    NSString *title = [allkeys objectAtIndex:indexPath.row];
-    NSString *description = [listDictionary objectForKey:[allkeys objectAtIndex:indexPath.row]];
-
-    SRAcknowledgementDetailsViewController *ackVC=[segue destinationViewController];
-    ackVC.ackDescription=description;
-    ackVC.navigationItem.title = title;
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[UIApplication sharedApplication] canOpenURL:url])
+    {
+        SFSafariViewController *controller = [[SFSafariViewController alloc] initWithURL:url];
+        
+        if ([controller respondsToSelector:@selector(preferredBarTintColor)])
+        {
+            [controller setPreferredBarTintColor:[UIColor themeColor]];
+        }
+        
+        if ([controller respondsToSelector:@selector(preferredControlTintColor)])
+        {
+            [controller setPreferredControlTintColor:[UIColor themeTextColor]];
+        }
+        
+        [self presentViewController:controller animated:YES completion:nil];
+    }
 }
-
 
 @end

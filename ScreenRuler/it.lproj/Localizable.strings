@@ -1,0 +1,152 @@
+/* This file should be localized in Italian */
+
+/* Aspect Ratio */
+"aspect_ratio"  = "Aspect Ratio";
+"original"      = "Originale";
+"square"        = "Quadrato";
+
+/* No Screenshots */
+"no_screenshots_title"          = "Nessun screenshot trovato";
+"no_screenshots_description"    = "Puoi catturare uno screenshot dal tuo dispositivo premendo contemporaneamente il tasto Blocca ed il tasto Home.";
+
+"photo_access_denied_title"         = "Accesso negato alla Libreria Foto";
+"photo_access_denied_description"   = "Accesso negato alla Libreria Foto, Vai nelle Impostazioni per cambiare i permessi di accesso.";
+
+/* Open Screenshots */
+"camera"        = "Fotocamera";
+"photo_library" = "Libreria Foto";
+
+/* Ruler Ratio It's like 1x, 2x, 3x */
+"change_scale_multiplier"   = "Modifica Moltiplicatore di Scala";
+
+/* Sharing Text */
+"mail_sent"                         = "Mail Inviata";
+"mail_body"                         = "\n\n Sono su '%1$@' con iOS '%2$@', utilizzando la Versione '%3$@' di '%4$@'";
+"mail_device_configuration_message" = "Il tuo dispositivo non è configurato per inviare Mail";
+"screen_ruler_bug_report"           = "Screen Ruler - Segnala Bug";
+"screen_ruler_feedback"             = "Screen Ruler - Feedback";
+
+/* Help Tour. */
+"skip"                  = "Salta";
+"start_help_tour"       = "Inizia Tutorial";
+"tap_to_continue"       = "Premi per continuare";
+"horizontal_scale_help" = "Aggiusta la scala orizzontale con le dita in base alle tue esigenze";
+"vertical_scale_help"   = "Aggiusta la scala orizzontale con le dita in base alle tue esigenze";
+"device_scale_help"     = "Seleziona il moltiplicatore di scale del dispositivo in base al tuo dispositivo o alle tue esigenze.";
+"double_tap_help"       = "Doppio tocco utilizzando un dito per aumentare lo zoom, Doppio tocco con due dita per diminuire lo zoom";
+"long_tap_color_help"   = "Tocco prolungato con trascinamento per mostrare il colore RGB di un pixel";
+"long_tap_scale_help"   = "Tocco prolungato sulla scala verticale o orizzontale per mostrare più opzioni";
+
+/* Buttons */
+"back"      = "Indietro";
+"cancel"    = "Annula";
+"done"      = "Fatto";
+"ok"        = "OK";
+"open"      = "Apri";
+
+/* Social Share. */
+"share_photo"       = "Condivid Photo";
+"social_share_text" = "Visita '%@'. È molto utile per i ragazzi del Controllo Qualità analizzare i dettagli della User Interface di un'app iOS";
+
+/* Resizing */
+"custom"                    = "Personalizza";
+"enter_width_and_height"    = "Inserisci larghezza e altezza";
+"height"                    = "Altezza";
+"width"                     = "Larghezza";
+"resize"                    = "Ridimensiona";
+"crop"                      = "Ritaglia";
+"resize_screenshot"         = "Ridimensiona Screenshot";
+
+/* Change Scale X Y. */
+"reset_scale_to_original"   = "Ripristina Scala al Valore Originale";
+"set_scale_point_location"  = "Set Scale point location";
+"mark_as_x_reference"       = "Segna come riferimento X";
+"mark_as_y_reference"       = "Segna come riferimento Y";
+
+/* Zoom Scale */
+"zoom_scale"        = "Scala dello Zoom";
+"minimum_percent"   = "Scala Minima (%.0f%%)";
+"original_percent"  = "Originale (%.0f%%)";
+"show_zoom_options" = "Mostra Opzioni Zoom";
+
+/* Crop Info */
+"x_y_width_height"  = "X: %1$.0f,  Y: %2$.0f\nLarghezza: %3$.0f,  Altezza: %4$.0f";
+
+/* RGB Colro Point */
+"X: %.0f, Y: %.0f"  = "X: %1$.0f, Y: %2$.0f";
+"X: NA, Y: NA"      = "X: NA, Y: NA";
+
+/* Settings */
+"settings"                  = "Impostazioni";
+"color_theme"               = "Tema Colori";
+"natural"                   = "Naturale";
+"inverted"                  = "Invertito";
+"social"                    = "Social";
+"share_on_social_network"   = "Condivisi sui Social Network";
+"rate_us_on_app_store"      = "Valutaci sull'App Store";
+"feedback"                  = "Feedback";
+"bug_report"                = "Segnala Bug";
+"terms"                     = "Termini";
+"terms_and_conditions"      = "Termini e Condizioni";
+"open_source_libraries"     = "Librerie Open Source";
+"you_are_upto_date"         = "Sei aggiornato all'ultima versione";
+"update_now"                = "Aggiorna Ora";
+"is_open_source_at"         = "è open source presso:";
+"open_safari?"              = "Apri Safari?";
+"debug"                     = "Debug";
+"developer_options"         = "Opzioni Sviluppatore";
+"infoenum_software_systems" = "InfoEnum Software Systems";
+
+"show_touches"              = "Mostra Tocchi";
+"in_use_memory"             = "Memoria in uso";
+"virtual_memory"            = "Memoria virtuale";
+
+/* Other. */
+"error"             = "Errore";
+"version"           = "Versione";
+"image_load_error"  = "C'è stato un errore nel caricamento dell'immagine. Per favore riprova di nuovo.";
+
+
+
+/*
+ ******************************************
+ // Localized App Name (show in iOS device screen)
+ 
+ Screen Ruler
+ 
+ ******************************************
+ // App Store Localized Full Name
+ 
+ Screen Ruler - Pixel Perfect Screenshot Ruler
+ 
+ ******************************************
+ //App Store Localized Description
+ 
+CONGRATUALZIONI! HAI TROVATO LO STRUMENTO PIÙ AVANZATO ELABORARE GLI SCREENSHOT
+ 
+Come sviluppatore iOS, ho sempre sentito la mancanza di una applicazione che permettesse di controllare facilmente la posizione di oggetti/elementi in un'immagine o in uno screenshot. Ora, grazie a Pixel Ruler, sarà semplice trovare la posizione e la dimensione di qualsiasi elemento di UI, in particolare le coordinate (x,y) e l'altezza/larghezza/dimensione.
+ 
+Questa app è pensata in particolar modo per semplificare la vita agli ingegneri del Controllo Qualità (QA Engineer). Ora possono verificare le Mobile UI in pochi minuti.
+ 
+ COME FUNZIONA:
+ Passo 1: Cattura uno screenshot dell'app per debuggarlo. Questo verrà automaticamente salvato nell'album Screenshot del tuo Rullino Fotografico.
+ Passo 2: Apri l'app Screen Ruler Open Screen Ruler app and you can see your recent screenshot, enable ruler and straight line frame.
+ Passo 3: Check your screenshot dimensions and UI element positions by zooming in/out and using rulers and line frame.
+ 
+ Altre fantastiche funzionalità dell'app Screenshot Ruler:
+ - 4 Sided dynamic ruler. Puoi aggiustare la posizione del righello con le tue dita. Tocco prolungato per più opzioni.
+ - Modifica la scala del righello a mano libera. Può anche ruotare per controllare gli angoli.
+ - Frame di raddrizzamento linee.
+ - Tocco prolungato e trascinamento per mostrare il valore RGB di ogni pixel.
+ - Ritaglio avanzato.
+ - Modifica l'Aspect Ratio.
+ - Ridimensiona Screenshot.
+ - Modifica il fattore di scale del dispositivo.
+ - Doppio tocco, Pan e Pinch per zoommare e muovere le immagini.
+ 
+Scarica l'app per vedere come gli ingegneri del Controllo Qualità accelerano il loro business riducendo il tempo che impiegano nella misurazione delle misure in pixel.
+ ******************************************
+ //App Store Keywords
+ 
+ Screenshot, ruler, scale, straighten, developer, QA, Quality Assurance
+ */

@@ -1,96 +1,151 @@
-/* This file should be localized in Spanish */
+/* This file should be localized in Spanish (Spain)*/
 
 /* Aspect Ratio */
-"Aspect Ratio" = "Relación de Aspecto";
-"Original" = "Original";
-"Square" = "Cuadrado";
+"aspect_ratio"  = "Relación de Aspecto";
+"original"      = "Original";
+"square"        = "Cuadrado";
 
 /* No Screenshots */
-"no_screenshots_title" = "No se encontraron capturas de pantalla";
-"no_screenshots_description" = "Puedes tomar una captura de pantalla presionando el botón de bloqueo y el botón de inicio de tu dispositivo iOS.";
+"no_screenshots_title"          = "No se encontraron capturas de pantalla";
+"no_screenshots_description"    = "Puedes tomar una captura de pantalla presionando el botón de bloqueo y el botón de inicio de tu dispositivo iOS.";
 
-"photo_access_denied_title" = "Acceso al Carrete denegado";
-"photo_access_denied_description" = "No se puede acceder al Carrete. Para habilitar los permisos, dirígase a Ajustes > Screen Ruler";
+"photo_access_denied_title"         = "Acceso al Carrete denegado";
+"photo_access_denied_description"   = "No se puede acceder al Carrete. Para habilitar los permisos, dirígase a Ajustes > Screen Ruler";
 
 /* Open Screenshots */
-"Camera" = "Cámara";
-"Photo Library" = "Carrete";
+"camera"        = "Cámara";
+"photo_library" = "Carrete";
 
 /* Ruler Ratio It's like 1x, 2x, 3x */
-"Change Scale Multiplier" = "Cambiar Escala";
+"change_scale_multiplier"   = "Cambiar Escala";
 
 /* Sharing Text */
-"Mail Sent" = "Mail Enviado";
-"mail_body" = "\n\n Estoy en '%1$@' con iOS '%2$@', utilizando la Versión '%3$@' de '%4$@'";
+"mail_sent"                         = "Mail Enviado";
+"mail_body"                         = "\n\n Estoy en '%1$@' con iOS '%2$@', utilizando la Versión '%3$@' de '%4$@'";
 "mail_device_configuration_message" = "Tu dispositivo no tiene ninguna cuenta de mail configurada.";
-"Screen Ruler - Bug Report" = "Screen Ruler - Reporte de Bug";
-"Screen Ruler - Feedback" = "Screen Ruler - Feedback";
+"screen_ruler_bug_report"           = "Screen Ruler - Reporte de Bug";
+"screen_ruler_feedback"             = "Screen Ruler - Feedback";
 
 /* Help Tour. */
-"Skip" = "Saltar";
-"Start Help Tour" = "Iniciar Tutorial";
-"Tap to continue" = "Toca para continuar";
+"skip"                  = "Saltar";
+"start_help_tour"       = "Iniciar Tutorial";
+"tap_to_continue"       = "Toca para continuar";
 "horizontal_scale_help" = "Ajusta la escala horizontal con tus dedos de acuerdo a lo que necesites";
-"vertical_scale_help" = "Ajusta la escala vertical con tus dedos de acuerdo a lo que necesites";
-"device_scale_help" = "Elige una escala de acuerdo a la resolución de tu dispositivo, o de acuerdo a lo que necesites";
-"double_tap_help" = "Haz un toque doble utilizando un dedo para ampliar, y un toque doble con dos dedos para alejar";
-"long_tap_color_help" = "Haz un toque largo para mostrar el RGB de un pixel";
-"long_tap_scale_help" = "Haz un toque largo en una escala horizontal o vertical para mostrar mas opciones";
+"vertical_scale_help"   = "Ajusta la escala vertical con tus dedos de acuerdo a lo que necesites";
+"device_scale_help"     = "Elige una escala de acuerdo a la resolución de tu dispositivo, o de acuerdo a lo que necesites";
+"double_tap_help"       = "Haz un toque doble utilizando un dedo para ampliar, y un toque doble con dos dedos para alejar";
+"long_tap_color_help"   = "Haz un toque largo para mostrar el RGB de un pixel";
+"long_tap_scale_help"   = "Haz un toque largo en una escala horizontal o vertical para mostrar mas opciones";
 
 /* Buttons */
-"Back" = "Atras";
-"Cancel" = "Cancelar";
-"Done" = "Listo";
-"OK" = "OK";
+"back"      = "Atras";
+"cancel"    = "Cancelar";
+"done"      = "Listo";
+"ok"    = "OK";
 
 /* Social Share. */
-"Share Photo" = "Compartir Foto";
-"social_share_text" = "Prueba '%@'. Es muy útil para Testers de aplicaciones móviles, para extraer detalles de interfaces de usuarios y para analizar capturas de pantalla. Es muy divertido!";
+"share_photo"               = "Compartir Foto";
+"social_share_text"         = "Prueba '%@'. Es muy útil para Testers de aplicaciones móviles, para extraer detalles de interfaces de usuarios y para analizar capturas de pantalla. Es muy divertido!";
 
 /* Resizing */
-"Custom" = "Personalizado";
-"Enter width and height" = "Ingresa ancho y alto";
-"Height" = "Alto";
-"Width" = "Ancho";
-"Resize" = "Redimensionar";
-"Crop" = "Cortar";
-"Resize Screenshot" = "Redimensionar Captura";
+"custom"                    = "Personalizado";
+"enter_width_and_height"    = "Ingresa ancho y alto";
+"height"                    = "Alto";
+"width"                     = "Ancho";
+"resize"                    = "Redimensionar";
+"crop"                      = "Cortar";
+"resize_screenshot"         = "Redimensionar Captura";
 
 /* Change Scale X Y. */
-"Reset Scale to Original" = "Restablecer Escala";
-"Set Scale point location" = "Marcar punto en la escala";
-"Mark as X reference" = "Marcar como referencia en X";
-"Mark as Y reference" = "Marcar como referencia en Y";
+"reset_scale_to_original"   = "Restablecer Escala";
+"set_scale_point_location"  = "Marcar punto en la escala";
+"mark_as_x_reference"       = "Marcar como referencia en X";
+"mark_as_y_reference"       = "Marcar como referencia en Y";
 
 /* Zoom Scale */
-"Zoom Scale" = "Aumentar Escala";
-"minimum_percent" = "Escala mínima (%.0f%%)";
-"original_percent" = "Original (%.0f%%)";
-"Show Zoom Options" = "Mostrar opciones de Zoom";
+"zoom_scale"        = "Aumentar Escala";
+"minimum_percent"   = "Escala mínima (%.0f%%)";
+"original_percent"  = "Original (%.0f%%)";
+"show_zoom_options" = "Mostrar opciones de Zoom";
 
 /* Crop Info */
-"x_y_width_height" = "X: %1$.0f,  Y: %2$.0f\nAncho: %3$.0f,  Alto: %4$.0f";
+"x_y_width_height"  = "X: %1$.0f,  Y: %2$.0f\nAncho: %3$.0f,  Alto: %4$.0f";
 
 /* RGB Colro Point */
-"X: %.0f, Y: %.0f" = "X: %1$.0f, Y: %2$.0f";
-"X: NA, Y: NA" = "X: NA, Y: NA";
+"X: %.0f, Y: %.0f"  = "X: %1$.0f, Y: %2$.0f";
+"X: NA, Y: NA"      = "X: NA, Y: NA";
 
 /* Settings */
-"Settings" = "Configuración";
-"Color Theme" = "Color del Tema";
-"Natural" = "Natural";
-"Inverted" = "Invertido";
-"Social" = "Social";
-"Share On Social Network" = "Compartir en Redes Sociales";
-"Rate Us On App Store" = "Puntúanos en el AppStore";
-"Feedback" = "Feedback";
-"Bug Report" = "Reportar Bug";
-"Terms" = "Términos";
-"Terms and Conditions" = "Términos y Condiciones";
-"Open Source Libraries" = "Librerías de Código Abierto";
-"InfoEnum Software Systems" = "InfoEnum Software Systems";
+"settings"                  = "Configuración";
+"color_theme"               = "Color del Tema";
+"natural"                   = "Natural";
+"inverted"                  = "Invertido";
+"social"                    = "Social";
+"share_on_social_network"   = "Compartir en Redes Sociales";
+"rate_us_on_app_store"      = "Puntúanos en el AppStore";
+"feedback"                  = "Feedback";
+"bug_report"                = "Reportar Bug";
+"terms"                     = "Términos";
+"terms_and_conditions"      = "Términos y Condiciones";
+"open_source_libraries"     = "Librerías de Código Abierto";
+"infoenum_software_systems" = "InfoEnum Software Systems";
 
 /* Other. */
-"Error" = "Error";
-"Version" = "Versión";
-"image_load_error" = "Hubo un error cargando la imagen. Por favor intenta nuevamente.";
+"error"             = "Error";
+"version"           = "Versión";
+"image_load_error"  = "Hubo un error cargando la imagen. Por favor intenta nuevamente.";
+
+/*New text need to be localized*/
+"is_open_source_at" = "is open source at:";
+"you_are_upto_date" = "You are up to date";
+"update_now"        = "Update Now";
+"open_safari?"      = "Open Safari?";
+"developer_options" = "Developer Options";
+"show_touches"      = "Show Touches";
+"in_use_memory"     = "In Use memory";
+"virtual_memory"    = "Virtual Memory";
+"open"              = "Open";
+
+/*
+ ******************************************
+ // Localized App Name (show in iOS device screen)
+ 
+ Screen Ruler
+ 
+ ******************************************
+ // App Store Localized Full Name
+ 
+ Screen Ruler - Regla para capturas de pantalla
+ ******************************************
+ //App Store Localized Description
+ 
+ FELICITACIONES! HAS ENCONTRADO LA APLICACIÓN MÁS AVANZADA PARA MEDIR CAPTURAS DE PANTALLA.
+ 
+ Como desarrollador iOS, siento la necesidad de una aplicación simple para verificar la posición de objetos/elementos en una imagen o una captura de pantalla. Ahora es muy simple encontrar la posición y el tamaño de cualquier elemento de la interfaz gráfica.
+ 
+ Esta aplicación está especialmente diseñada para facilitar el trabajo de los ingenieros de calidad (QA) en las aplicaciones móviles. Ahora pueden verificar las interfaces gráficas con precisión en minutos.
+ 
+ COMO FUNCIONA:
+ 1: Toma una captura de pantalla de la aplicación. Esta se guardará automáticamente en tu librería.
+ 2: Abre la aplicación Screen Ruler. La última captura de pantalla se cargará automáticamente.
+ 3: Verifica los tamaños y posiciones de los elementos de la interfaz en tu captura de pantalla. Utiliza las herramientas de zoom, la regla y el marco.
+ 
+ Otras funciones de la aplicación:
+ 
+ - 4 reglas dinámicas en los márgenes. También puedes ajustar la posición de la regla. Haz un toque largo para más opciones
+ - Escala de la regla a mano alzada. También la puedes rotar para verificar ángulos
+ - Líneas auto ajustable
+ - Haz un toque largo en la imagen para mostrar el componente RGB de un pixel
+ - Herramienta de corte
+ - Cambiar relación de aspecto
+ - Redimensiona la captura de pantalla
+ - Cambiar la escala del dispositivo
+ - Interacción a través de gestos con la imagen
+ 
+ Descárgala y verifica cómo los ingenieros de calidad aceleran sus tareas reduciendo el tiempo para verificar interfaces de usuario.
+ 
+ ******************************************
+ //App Store Keywords
+ 
+ Captura de pantalla, regla, escala, enderezar, desarrollador, QA, calidad
+ */

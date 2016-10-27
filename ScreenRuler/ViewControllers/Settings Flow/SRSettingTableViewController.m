@@ -12,11 +12,15 @@
 #import "SRPrivacyPolicyViewController.h"
 #import <StoreKit/StoreKit.h>
 #import "UIColor+ThemeColor.h"
+#import "UIFont+AppFont.h"
 #import "UIColor+HexColors.h"
 #import "SRThemeTableViewCell.h"
 #import "SRSettingsTableViewCell.h"
+#import "SRVersionTableViewCell.h"
 #import <Crashlytics/Answers.h>
 #import <SafariServices/SafariServices.h>
+#import "AppDelegate.h"
+#import "SRDeveloperSettingsViewController.h"
 
 @interface SRSettingTableViewController ()<MFMailComposeViewControllerDelegate,SKStoreProductViewControllerDelegate>
 {
@@ -24,6 +28,7 @@
     NSString *versionString;
     IBOutlet UILabel *versionLabel;
     IBOutlet UILabel *labelCompanyName;
+    IBOutlet UILabel *labelOpenSource;
     
     NSArray<NSDictionary<NSString*,id>*> *settingsItems;
 }
@@ -36,17 +41,7 @@
 {
     [super viewDidLoad];
   
-    self.title = NSLocalizedString(@"Settings", nil);
-    
-    UISwitch *showZoomOptionSwitch = [[UISwitch alloc] init];
-    [showZoomOptionSwitch addTarget:self action:@selector(showZoomOptionAction:) forControlEvents:UIControlEventValueChanged];
-    showZoomOptionSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowZoomOption"];
-    settingsItems = @[@{@"title":NSLocalizedString(@"Settings", nil),@"items":@[@{@"title":NSLocalizedString(@"Color Theme", nil)},@{@"title":NSLocalizedString(@"Show Zoom Options", nil),@"accessoryView":showZoomOptionSwitch}]},
-                      @{@"title":NSLocalizedString(@"Social", nil),@"items":@[@{@"title":NSLocalizedString(@"Share On Social Network", nil)},@{@"title":NSLocalizedString(@"Rate Us On App Store", nil)}]},
-                      @{@"title":NSLocalizedString(@"Feedback", nil),@"items":@[@{@"title":NSLocalizedString(@"Feedback", nil)},@{@"title":NSLocalizedString(@"Bug Report", nil)}]},
-                      @{@"title":NSLocalizedString(@"Terms", nil),@"items":@[@{@"title":NSLocalizedString(@"Terms and Conditions", nil),@"discloseIndicator":@YES},@{@"title":NSLocalizedString(@"Open Source Libraries", nil),@"discloseIndicator":@YES}]}];
-    
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", nil) style:UIBarButtonItemStyleDone target:nil action:nil];
+    self.title = NSLocalizedString(@"settings", nil);
     
     NSDictionary *localizedInfoDictionary = [[NSBundle mainBundle] localizedInfoDictionary];
     NSMutableDictionary *infoDictionary = [[[NSBundle mainBundle] infoDictionary] mutableCopy];
@@ -54,9 +49,10 @@
 
     appName = [infoDictionary objectForKey:@"CFBundleName"];
     
+    NSString* shortVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    
+    if ([NSLocale instancesRespondToSelector:@selector(decimalSeparator)])
     {
-        NSString* shortVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-        
         NSMutableArray *versionArray = [[shortVersionString componentsSeparatedByString:@"."] mutableCopy];
         
         for (NSInteger i = 0; i<versionArray.count; i++)
@@ -67,9 +63,30 @@
         
         versionString = [versionArray componentsJoinedByString:[[NSLocale currentLocale] decimalSeparator]];
     }
+    else
+    {
+        versionString = shortVersionString;
+    }
+    
+    UISwitch *showZoomOptionSwitch = [[UISwitch alloc] init];
+    [showZoomOptionSwitch addTarget:self action:@selector(showZoomOptionAction:) forControlEvents:UIControlEventValueChanged];
+    showZoomOptionSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowZoomOption"];
+    settingsItems = @[@{@"title":NSLocalizedString(@"settings", nil),@"items":@[@{@"title":NSLocalizedString(@"color_theme", nil)},@{@"title":NSLocalizedString(@"show_zoom_options", nil),@"accessoryView":showZoomOptionSwitch}]},
+                      @{@"title":NSLocalizedString(@"version", nil),@"items":@[@{@"title":NSLocalizedString(@"you_are_upto_date", nil),@"subtitle":versionString}]},
+                      @{@"title":NSLocalizedString(@"social", nil),@"items":@[@{@"title":NSLocalizedString(@"share_on_social_network", nil)},@{@"title":NSLocalizedString(@"rate_us_on_app_store", nil)}]},
+                      @{@"title":NSLocalizedString(@"feedback", nil),@"items":@[@{@"title":NSLocalizedString(@"feedback", nil)},@{@"title":NSLocalizedString(@"bug_report", nil)}]},
+                      @{@"title":NSLocalizedString(@"terms", nil),@"items":@[@{@"title":NSLocalizedString(@"terms_and_conditions", nil),@"discloseIndicator":@YES},@{@"title":NSLocalizedString(@"open_source_libraries", nil),@"discloseIndicator":@YES}]},
+                      @{@"title":NSLocalizedString(@"debug", nil),@"items":@[@{@"title":NSLocalizedString(@"developer_options", nil),@"discloseIndicator":@YES}]}];
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"back", nil) style:UIBarButtonItemStyleDone target:nil action:nil];
 
-    versionLabel.text =[NSString localizedStringWithFormat:@"%@ %@",NSLocalizedString(@"Version", nil),versionString];
-    labelCompanyName.text = NSLocalizedString(@"InfoEnum Software Systems", nil);
+    NSString *openSourceString = [NSString stringWithFormat:@"%@ %@",appName,NSLocalizedString(@"is_open_source_at", nil)];
+    NSMutableAttributedString *openSourceAttributedString = [[NSMutableAttributedString alloc] initWithString:openSourceString attributes:nil];
+    [openSourceAttributedString addAttribute:NSFontAttributeName value:[UIFont kohinoorBanglaSemiboldWithSize:15] range:[openSourceString rangeOfString:appName]];
+    
+    labelOpenSource.attributedText = openSourceAttributedString;
+    versionLabel.text =[NSString localizedStringWithFormat:@"%@ %@",NSLocalizedString(@"version", nil),versionString];
+    labelCompanyName.text = NSLocalizedString(@"infoenum_software_systems", nil);
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -80,6 +97,20 @@
     self.navigationController.navigationBar.tintColor = [UIColor themeTextColor];
     self.navigationController.navigationBar.barStyle = ![UIColor isThemeInverted];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(iVersionDidUpdateNotification:) name:iVersionDidUpdateNotification object:nil];
+
+    [self.tableView reloadData];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:iVersionDidUpdateNotification object:nil];
+}
+
+-(void)iVersionDidUpdateNotification:(NSNotification*)notification
+{
     [self.tableView reloadData];
 }
 
@@ -203,6 +234,49 @@
 
         return cell;
     }
+    else if (indexPath.section == 1 && indexPath.row == 0)
+    {
+        SRVersionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SRVersionTableViewCell class]) forIndexPath:indexPath];
+        
+        NSDictionary *dict = settingsItems[indexPath.section][@"items"][indexPath.row];
+        
+        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        if (appDelegate.updatedVersionString)
+        {
+            cell.textLabel.text = NSLocalizedString(@"update_now", nil);
+            cell.textLabel.textColor = [UIColor colorWithRed:0 green:0.5 blue:1.0 alpha:1];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        else
+        {
+            cell.textLabel.text = dict[@"title"];
+            cell.textLabel.textColor = [UIColor blackColor];
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+        
+        if (appDelegate.isCheckingNewVersion)
+        {
+            UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+            [activityIndicator startAnimating];
+            cell.accessoryView = activityIndicator;
+            cell.detailTextLabel.text = nil;
+        }
+        else
+        {
+            cell.accessoryView = nil;
+            if (appDelegate.updatedVersionString)
+            {
+                cell.detailTextLabel.text = appDelegate.updatedVersionString;
+            }
+            else
+            {
+                cell.detailTextLabel.text = dict[@"subtitle"];
+            }
+        }
+        
+        return cell;
+    }
     else
     {
         SRSettingsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SRSettingsTableViewCell class]) forIndexPath:indexPath];
@@ -210,6 +284,7 @@
         NSDictionary *dict = settingsItems[indexPath.section][@"items"][indexPath.row];
         
         cell.textLabel.text = dict[@"title"];
+        cell.detailTextLabel.text = dict[@"subtitle"];
         cell.accessoryType = [dict[@"discloseIndicator"] boolValue]?UITableViewCellAccessoryDisclosureIndicator:UITableViewCellAccessoryNone;
         cell.accessoryView = dict[@"accessoryView"];
         
@@ -235,6 +310,29 @@
             {
                 case 0:
                 {
+                    SKStoreProductViewController* skpvc = [[SKStoreProductViewController alloc] init];
+                    skpvc.delegate = self;
+                    NSDictionary* dict = [NSDictionary dictionaryWithObject: @(kSRAppStoreID) forKey: SKStoreProductParameterITunesItemIdentifier];
+                    [skpvc loadProductWithParameters: dict completionBlock:^(BOOL result, NSError * _Nullable error) {
+                        
+                        if (result == NO && error != nil)
+                        {
+                            [skpvc dismissViewControllerAnimated:YES completion:nil];
+                        }
+                    }];
+                    [self presentViewController: skpvc animated: YES completion: nil];
+                }
+                    break;
+            }
+        }
+            break;
+
+        case 2:
+        {
+            switch (indexPath.row)
+            {
+                case 0:
+                {
                     [Answers logShareWithMethod:@"Social Share" contentName:@"Share Activity" contentType:@"share" contentId:@"share.app" customAttributes:nil];
 
                     //Share With UIActivityViewController
@@ -252,7 +350,7 @@
                     
                     SKStoreProductViewController* skpvc = [[SKStoreProductViewController alloc] init];
                     skpvc.delegate = self;
-                    NSDictionary* dict = [NSDictionary dictionaryWithObject: @(1104790987) forKey: SKStoreProductParameterITunesItemIdentifier];
+                    NSDictionary* dict = [NSDictionary dictionaryWithObject: @(kSRAppStoreID) forKey: SKStoreProductParameterITunesItemIdentifier];
                     [skpvc loadProductWithParameters: dict completionBlock:^(BOOL result, NSError * _Nullable error) {
 
                         if (result == NO && error != nil)
@@ -264,11 +362,10 @@
                 }//case 2
                     break;
             }
-            
-        }//case 0
+        }
             break;
             
-        case 2:
+        case 3:
         {
             switch (indexPath.row)
             {
@@ -279,7 +376,7 @@
                     {
                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"mail_device_configuration_message", nil) preferredStyle:UIAlertControllerStyleAlert];
                         
-                        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+                        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:NSLocalizedString(@"ok", nil)
                                                                            style:UIAlertActionStyleDefault
                                                                          handler:nil];
                         
@@ -297,7 +394,7 @@
                         MFMailComposeViewController *messageController = [[MFMailComposeViewController alloc] init];
                         messageController.mailComposeDelegate = self;
                         
-                        [messageController setSubject:NSLocalizedString(@"Screen Ruler - Feedback", nil)];
+                        [messageController setSubject:NSLocalizedString(@"screen_ruler_feedback", nil)];
                         [messageController setMessageBody:messageBody isHTML:NO];
                         [messageController setToRecipients:emailAdd];
                         
@@ -312,7 +409,7 @@
                     {
                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"mail_device_configuration_message", nil) preferredStyle:UIAlertControllerStyleAlert];
                         
-                        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+                        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:NSLocalizedString(@"ok", nil)
                                                                            style:UIAlertActionStyleDefault
                                                                          handler:nil];
                         
@@ -329,7 +426,7 @@
                         MFMailComposeViewController *messageController = [[MFMailComposeViewController alloc] init];
                         messageController.mailComposeDelegate = self;
                         
-                        [messageController setSubject:NSLocalizedString(@"Screen Ruler - Bug Report", nil)];
+                        [messageController setSubject:NSLocalizedString(@"screen_ruler_bug_report", nil)];
                         [messageController setMessageBody:messageBody isHTML:NO];
                         [messageController setToRecipients:emailAdd];
                         
@@ -340,7 +437,7 @@
             }
         }
             break;
-        case 3:
+        case 4:
         {
             switch (indexPath.row)
             {
@@ -358,7 +455,20 @@
                     break;
             }
         }
-        break;
+            break;
+        case 5:
+        {
+            switch (indexPath.row)
+            {
+                case 0:
+                {
+                    [Answers logCustomEventWithName:@"Developer Options" customAttributes:nil];
+                    [self performSegueWithIdentifier:NSStringFromClass([SRDeveloperSettingsViewController class]) sender:self];
+                }
+                    break;
+            }
+        }
+            break;
     }
 }
 
@@ -379,10 +489,10 @@
         case MFMailComposeResultSent:{
             
             
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"Mail Sent", nil) preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"mail_sent", nil) preferredStyle:UIAlertControllerStyleAlert];
             
             
-            UIAlertAction *actionOk = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+            UIAlertAction *actionOk = [UIAlertAction actionWithTitle:NSLocalizedString(@"ok", nil)
                                                                style:UIAlertActionStyleDefault
                                                              handler:nil];
             [alertController addAction:actionOk];

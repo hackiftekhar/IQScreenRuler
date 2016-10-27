@@ -1,0 +1,124 @@
+/* This file should be localized in Tamil India */
+
+/* Aspect Ratio */
+"aspect_ratio"  = "புலன் விகிதம்";
+"original"      = "மூலமுதலான";
+"square"        = "சதுர";
+
+/* No Screenshots */
+"no_screenshots_title"          = "திரைக்காட்சிகள் இல்லை";
+"no_screenshots_description"    = "நீங்கள் உங்கள் iOS சாதனம் திரையில் உள்ளதை கைப்பற் தூக்கம் / விழித்தெழு நிலையில் முகப்பு பொத்தான்களை பயன்படுத்தவும்.";
+
+"photo_access_denied_title"         = "கலை காட்சி கூடம் அணுகல் மறுக்கப்பட்டது";
+"photo_access_denied_description"   = "கலை காட்சி கூடம் அணுக முடியவில்லை, அணுகல் மாற்ற அமைப்புகள் சென்று அனுமதி கொடுக்க.";
+
+/* Open Screenshots */
+"camera"        = "நிழற்படக் கருவி";
+"photo_library" = "கலை காட்சி கூடம்";
+
+/* Ruler Ratio It's like 1x, 2x, 3x */
+"change_scale_multiplier"   = "சாதனம் அளவு விகிதத்தை மாற்ற";
+
+/* Sharing Text */
+"mail_sent"                         = "மின்னஞ்சல் அனுப்பப்பட்டது";
+"mail_body"                         = "\n\n நீங்கள் தற்போது '%1$@' உடன் iOS '%2$@', பதிப்பு '%3$@' இன் '%4$@'";
+"mail_device_configuration_message" = "உங்கள் சாதனம் மின்னஞ்சல் அனுப்ப உள்ளமைக்கப்படவில்லை";
+"screen_ruler_bug_report"           = "Screen Ruler - பிழை அறிக்கை";
+"screen_ruler_feedback"             = "Screen Ruler - உங்கள் கருத்து";
+
+/* Help Tour. */
+"skip"                  = "தவிர்";
+"start_help_tour"       = "உதவி சுற்றுப் பயணத்தை தொடங்கு";
+"tap_to_continue"       = "தொடர, திரையில் தொட்டு";
+"horizontal_scale_help" = "உங்கள் தேவையை பொறுத்து உங்கள் விரல்களால் கிடைமட்ட அளவில் சரிசெய்க";
+"vertical_scale_help"   = "உங்கள் தேவையை பொறுத்து உங்கள் விரல்களால் செங்குத்து அளவில் சரிசெய்க";
+"device_scale_help"     = "சாதனம் அளவு பெருக்கியைக் தேர்வு செய்க சாதனத்தின் தெளிவுத்திறனை பொறுத்து அல்லது உங்கள் தேவையை பொறுத்து";
+"double_tap_help"       = "புகைப்படத்தை ஒரு விரலை பயன்படுத்தி இருமுறை தட்டினால் பெரிதாக்கவும், இரு விரல்களைப் பயன்படுத்த இருமுறை தட்டினால் சிறிதாக்கும்";
+"long_tap_color_help"   = "நீண்ட நேரம் அழுத்தி மற்றும் இழுத்தல் துணுக்கின் RGB வண்ண காட்ட பார்க்கலாம்";
+"long_tap_scale_help"   = "மேலும் விருப்பத்தேர்வுகளைக் காட்ட நீண்ட நேரம் கிடைமட்ட அல்லது செங்குத்து அளவில் அழுத்தவும்";
+
+/* Buttons */
+"back"      = "பின்செல்";
+"cancel"    = "ரத்து";
+"done"      = "முடிந்தது";
+"ok"        = "சரி";
+"open"      = "திற";
+
+/* Social Share. */
+"share_photo"       = "புகைப்படத்தை பகிர்";
+"social_share_text" = "'%@' பாருங்கள். மொபைல் பயன்பாடு மற்றும் QA தோழர்களே iOS பயன்பாட்டை பயனர் இடைமுகம் விவரங்கள் பிரித்தெடுக்க மற்றும் திரைக்காட்சிகளுடன் விவரங்களை பார்க்க அது உண்மையில் பயனுள்ளதாக இருக்கிறது. அது உண்மையில் உன்னை மகிழ்ச்சியூட்டுவதாகும்.";
+
+/* Resizing */
+"custom"                    = "தனிப்பயன்";
+"enter_width_and_height"    = "அகலம் மற்றும் உயரத்தை உள்ளிடுக";
+"height"                    = "உயரம்";
+"width"                     = "அகலம்";
+"resize"                    = "அளவை மாற்றி அமை";
+"crop"                      = "படத்தை நுனிவெட்டு";
+"resize_screenshot"         = "திரைக்காட்சி அளவை மாற்றி அமை";
+
+/* Change Scale X Y. */
+"reset_scale_to_original"   = "ஆரம்ப அளவிள் மீட்டமை";
+"set_scale_point_location"  = "அளவு புள்ளி இடத்தை அமை";
+"mark_as_x_reference"       = "X என குறி";
+"mark_as_y_reference"       = "Y என குறி";
+
+/* Zoom Scale */
+"zoom_scale"        = "பெரிதாக்க அளவுகோல்";
+"minimum_percent"   = "குறைந்தபட்ச அளவுகோல் (%.0f%%)";
+"original_percent"  = "மூலமுதலான (%.0f%%)";
+"show_zoom_options" = "பெரிதாக்க விருப்பங்களை காட்டு";
+
+/* Crop Info */
+"x_y_width_height"  = "X: %1$.0f,  Y: %2$.0f\அகலம்: %3$.0f,  உயரம்: %4$.0f";
+
+/* RGB Colro Point */
+"X: %.0f, Y: %.0f"  = "X: %1$.0f, Y: %2$.0f";
+"X: NA, Y: NA"      = "X: பொருந்தாது, Y: பொருந்தாது";
+
+///* Settings */
+"settings"                  = "அமைப்புகள்";
+"color_theme"               = "வண்ண ஆய்வுப்பெருள்";
+"natural"                   = "இயற்கை";
+"inverted"                  = "எதிர் மாறான";
+"social"                    = "சமூக";
+"share_on_social_network"   = "சமூக வலைப்பின்னல் பகிர்";
+"rate_us_on_app_store"      = "App Store இல் எங்களை மதிப்பிட";
+"feedback"                  = "உங்கள் கருத்து";
+"bug_report"                = "பிழை அறிக்கை";
+"terms"                     = "விதிமுறை";
+"terms_and_conditions"      = "விதிமுறைகள் மற்றும் நிபந்தனைகள்";
+"open_source_libraries"     = "திறந்த மூல நூலகங்கள்";
+"you_are_upto_date"         = "அனைத்தும் புதுப்பித்த நிலையில் உள்ளன";
+"update_now"                = "இப்போது புதுப்பி";
+"is_open_source_at"         = "திறந்தமூல மென்பொருள்:";
+"infoenum_software_systems" = "InfoEnum Software Systems";
+"debug"                     = "பிழைதிருத்து";
+"developer_options"         = "படைப்பாளி விருப்பங்கள்";
+"open_safari?"              = "சஃபாரியில் திறக்கவா?";
+
+"show_touches"              = "தொடுதலைக் காட்டு";
+"in_use_memory"             = "பயன்பாட்டு நினைவகத்தில் இருக்கும்";
+"virtual_memory"            = "மெய்நிகர் நினைவகம்";
+
+/* Other. */
+"error"             = "பிழை";
+"version"           = "பதிப்பு";
+"image_load_error"  = "படத்தை ஏற்றுவதில் பிழை உள்ளது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.";
+
+
+
+/*
+ ******************************************
+ // Localized App Name (show in iOS device screen)
+ 
+ Screen Ruler
+ 
+ ******************************************
+ // App Store Localized Full Name
+ 
+ Screen Ruler - Pixel Perfect Screenshot Ruler
+ 
+ ******************************************
+ Tamil India App Store Localization not supported
+ */

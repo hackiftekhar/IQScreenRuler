@@ -8,12 +8,13 @@
 
 #import "SREditOptionViewController.h"
 #import "IQScrollContainerView.h"
-#import "IQ_UIImage+Resizing.h"
+#import "UIImage+Resizing.h"
 #import "SRCropViewController.h"
 #import "SRDrawViewController.h"
 #import "SRNavigationController.h"
 #import "UIColor+ThemeColor.h"
 #import <Crashlytics/Answers.h>
+#import "UIImage+Rotating.h"
 
 @interface SREditOptionViewController ()<SRImageControllerDelegate,UIScrollViewDelegate>
 
@@ -22,6 +23,7 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *drawBarButtonItem;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cropBarButtonItem;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *resizeBarButtonItem;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *rotateBarButtonItem;
 
 @end
 
@@ -38,6 +40,7 @@
 {
     [super viewWillAppear:animated];
     
+    self.scrollContainerView.showZoomControls = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowZoomOption"];
     self.scrollContainerView.zoomScale = self.zoomScale;
     self.scrollContainerView.contentOffset = self.contentOffset;
 
@@ -73,7 +76,7 @@
 
 -(IBAction)resizeAction:(UIBarButtonItem*)item
 {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Resize", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"resize", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     CGSize imageSize = self.scrollContainerView.image.size;
     
@@ -90,9 +93,9 @@
             
             CGSize newSize = [[UIScreen mainScreen] bounds].size;
             
-            [Answers logCustomEventWithName:@"Resize" customAttributes:@{@"size":NSStringFromCGSize(newSize)}];
+            [Answers logCustomEventWithName:@"resize" customAttributes:@{@"size":NSStringFromCGSize(newSize)}];
 
-            UIImage *image = [weakSelf.scrollContainerView.image IQ_scaleToFillSize:newSize];
+            UIImage *image = [weakSelf.scrollContainerView.image scaleToFillSize:newSize];
             weakSelf.image = image;
         }]];
     }
@@ -108,19 +111,19 @@
             
             [Answers logCustomEventWithName:@"Resize" customAttributes:@{@"size":NSStringFromCGSize(newSize)}];
             
-            UIImage *image = [weakSelf.scrollContainerView.image IQ_scaleToFillSize:newSize];
+            UIImage *image = [weakSelf.scrollContainerView.image scaleToFillSize:newSize];
             weakSelf.image = image;
         }]];
     }
     
     if (hasMoreOptions)
     {
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Custom", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"custom", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             [weakSelf showCustomResizeAlertFromItem:item];
         }]];
         
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         }]];
 
         alertController.popoverPresentationController.barButtonItem = item;
@@ -133,17 +136,19 @@
     }
 }
 
+
+
 -(void)showCustomResizeAlertFromItem:(UIBarButtonItem*)item
 {
     CGSize imageSize = self.scrollContainerView.image.size;
 
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Resize Screenshot", nil) message:NSLocalizedString(@"Enter width and height", nil) preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"resize_screenshot", nil) message:NSLocalizedString(@"enter_width_and_height", nil) preferredStyle:UIAlertControllerStyleAlert];
     
     __weak typeof(UIAlertController) *weakAlertController = alertController;
     
     __weak typeof(self) weakSelf = self;
 
-    UIAlertAction *doneAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Done", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *doneAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"done", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         UITextField *widthTextField = nil;
         UITextField *heightTextField = nil;
@@ -167,7 +172,7 @@
         
         [Answers logCustomEventWithName:@"Resize" customAttributes:@{@"size":NSStringFromCGSize(newSize)}];
 
-        UIImage *image = [weakSelf.scrollContainerView.image IQ_scaleToFillSize:newSize];
+        UIImage *image = [weakSelf.scrollContainerView.image scaleToFillSize:newSize];
         weakSelf.image = image;
     }];
     doneAction.enabled = NO;
@@ -175,8 +180,8 @@
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         
         textField.tag = 1;
-        textField.placeholder = NSLocalizedString(@"Width", nil);
-        textField.text = [NSString localizedStringWithFormat:@"%.0f",imageSize.width];
+        textField.placeholder = NSLocalizedString(@"width", nil);
+        textField.text = [NSString stringWithFormat:@"%.0f",imageSize.width];
         textField.keyboardType = UIKeyboardTypeNumberPad;
         [[NSNotificationCenter defaultCenter] addObserverForName:UITextFieldTextDidChangeNotification object:textField queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
             
@@ -196,10 +201,13 @@
             }
             else
             {
-                heightTextField.text = [NSString localizedStringWithFormat:@"%.0f",[textField.text integerValue] * (imageSize.height/imageSize.width)];
+                heightTextField.text = [NSString stringWithFormat:@"%.0f",[textField.text integerValue] * (imageSize.height/imageSize.width)];
             }
             
-            if ([textField.text length] == 0 || [textField.text integerValue] == 0 || [heightTextField.text length] == 0 || [heightTextField.text integerValue] == 0)
+            if ([textField.text integerValue] == 0 ||
+                [heightTextField.text integerValue] == 0 ||
+                [textField.text integerValue] > 10000 ||
+                [heightTextField.text integerValue] > 10000)
             {
                 doneAction.enabled = NO;
             }
@@ -213,8 +221,8 @@
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         
         textField.tag = 2;
-        textField.placeholder = NSLocalizedString(@"Height", nil);
-        textField.text = [NSString localizedStringWithFormat:@"%.0f",imageSize.height];
+        textField.placeholder = NSLocalizedString(@"height", nil);
+        textField.text = [NSString stringWithFormat:@"%.0f",imageSize.height];
         textField.keyboardType = UIKeyboardTypeNumberPad;
         [[NSNotificationCenter defaultCenter] addObserverForName:UITextFieldTextDidChangeNotification object:textField queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
             
@@ -234,10 +242,13 @@
             }
             else
             {
-                widthTextField.text = [NSString localizedStringWithFormat:@"%.0f",[textField.text integerValue] * (imageSize.width/imageSize.height)];
+                widthTextField.text = [NSString stringWithFormat:@"%.0f",[textField.text integerValue] * (imageSize.width/imageSize.height)];
             }
             
-            if ([textField.text length] == 0 || [textField.text integerValue] == 0 || [widthTextField.text length] == 0 || [widthTextField.text integerValue] == 0)
+            if ([textField.text integerValue] == 0 ||
+                [widthTextField.text integerValue] == 0 ||
+                [textField.text integerValue] > 10000 ||
+                [widthTextField.text integerValue] > 10000)
             {
                 doneAction.enabled = NO;
             }
@@ -249,13 +260,23 @@
     }];
     
     [alertController addAction:doneAction];
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }]];
     
     alertController.popoverPresentationController.barButtonItem = item;
     [self presentViewController:alertController animated:YES completion:^{
     }];
 }
+
+- (IBAction)roatateAction:(UIBarButtonItem *)sender
+{
+    /*
+     TODO: Implement Rotation Animation
+     */
+    UIImage *image = [self.scrollContainerView.image rotateInDegrees:90];
+    self.scrollContainerView.image = image;
+}
+
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -276,6 +297,8 @@
         controller.contentOffset = self.scrollContainerView.contentOffset;
     }
 }
+
+
 
 -(void)controller:(UIViewController*)controller finishWithImage:(UIImage*)image zoomScale:(CGFloat)zoomScale contentOffset:(CGPoint)contentOffset
 {

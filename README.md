@@ -37,19 +37,49 @@ Download to see how QA engineers accelerating their business by reducing time to
 Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub.
 
 ####TODO:-
-- Japanese localization.
-- Korean localization.
-- French localization.
-- Italian localization.
-- Portuguese localization.
-- Chinese (Simplified) localization.
-- Chinese (Traditional) localization.
-- Russian localization.
-- Malay localization.
+- Arabic localization (ar)
+- Catalan localization (ca)
+- Danish localization (da)
+- Dutch localization (nl)
+- Filipino (Filipino) localization (fil)
+- Filipino (Filippines) localization (fil-PH)
+- Finnish localization (fi)
+- French localization (fr)
+- German localization (de)
+- Greek localization (el)
+- Indonasion localization (id)
+- Japanese localization (ja)
+- Korean localization (ko)
+- Malay localization (ms)
+- Polish localization (pl)
+- Portuguese (Brazil) localization (pt-BR)
+- Portuguese (Portugal) localization (pt-PT)
+- Romanian localization (ro)
+- Slovak localization (sk)
+- Swedish localization (sv)
+- Thai localization (th)
+- Turkish localization (tr)
+- Ukrainian localization (uk)
+- Veitnamese localization (vi)
+
+- OTHER LANGUAGES YOU KNOW
+
+- Rotation Animation
+- Flood Fill (Fill picked color on tap on draw page)
+- Onboarding Experience something like [this](https://dribbble.com/shots/1332390--GIF-Tour), probably [this](https://github.com/forcedotcom/SlidingCarousel) would be good. 
+
 
 ###Credits
 Many thanks to
-- [Lucas Diez de Medina](https://github.com/lucaslt89) for **Spanish** localization.
+- [Adrian Inafuku](https://github.com/adrianinafuku) for giving me idea of **Screen Ruler**.
+- [Lucas Diez de Medina](https://github.com/lucaslt89) for **Spanish (es and es-MX)** localization.
+- [Vittorio Morganti](https://github.com/toioski) for **Italian (it)** localization.
+- [Andrey Posnov](https://github.com/aposnov),[Leonid Dinershtein](https://github.com/leoniddinershtein) for **Russian (ru)** localization.
+- [voisen](https://github.com/voisen) for **Chinese (Simplified zh-Hans)** localization.
+- [voisen](https://github.com/voisen) for **Chinese (Traditional zh-Hant)** localization.
+- [Quentin Del](https://github.com/QuentinDela),[Jose Granja Martinez](https://github.com/dioxmio) for **French** localization.
+- [Mathi Arasan D V](https://github.com/mathiarasan24) for **Tamil (India)** localization.
+
 - **YOU ARE NEXT**.
 
 ###Author
