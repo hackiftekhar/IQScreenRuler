@@ -15,6 +15,7 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <iVersion/iVersion.h>
+#import <iRate/iRate.h>
 
 NSNotificationName iVersionDidUpdateNotification = @"iVersionDidUpdateNotification";
 
@@ -50,7 +51,9 @@ const NSInteger kSRAppStoreID = 1104790987;
 + (void)initialize
 {
     [iVersion sharedInstance].appStoreID = kSRAppStoreID;
-}
+    [iRate sharedInstance].appStoreID = kSRAppStoreID;
+    [iRate sharedInstance].daysUntilPrompt = 5;
+    [iRate sharedInstance].usesUntilPrompt = 15;}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     

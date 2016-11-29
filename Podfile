@@ -7,6 +7,7 @@ target 'ScreenRuler' do
     pod 'NYXImagesKit'
     pod 'COSTouchVisualizer'
     pod 'iVersion'
+    pod 'iRate'
     pod 'Fabric'
     pod 'Crashlytics'
 end
