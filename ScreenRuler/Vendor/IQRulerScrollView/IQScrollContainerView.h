@@ -17,7 +17,7 @@
 
 @property(nonatomic, readonly) IQRulerScrollView *scrollView;
 
-@property(nonatomic, readonly) UIImageView *imageView;
+@property(nonatomic, readonly) SRLineImageView *imageView;
 
 @property(nonatomic) UIImage *image;
 

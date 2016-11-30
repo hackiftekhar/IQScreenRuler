@@ -8,34 +8,13 @@
 
 #import "IQLineFrameView.h"
 #import "UIColor+HexColors.h"
+#import "NSMutableArray+Stack.h"
 
 CGFloat const lineAlpha = 0.5;
 
 CGFloat const longLineHeight = 8;
 CGFloat const mediumLineHeight = 6;
 CGFloat const shortLineHeight = 4;
-
-@implementation NSMutableArray (Stack)
-
--(void)push:(id)object
-{
-    [self addObject:object];
-}
-
--(void)pushObjects:(NSArray*)objects
-{
-    [self addObjectsFromArray:objects];
-}
-
--(id)pop
-{
-    id object = [self lastObject];
-    [self removeLastObject];
-    return object;
-}
-
-@end
-
 
 typedef NS_ENUM(NSUInteger, PositionSelector) {
     PositionSelectorNone,
@@ -52,11 +31,6 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
     
     CAShapeLayer *backgroundLayer;
 
-    NSMutableArray<CALayer *> *cachedHorizontalLineLayers;
-    NSMutableArray<CALayer *> *cachedVerticalLineLayers;
-    NSMutableArray<CALayer *> *inUseHorizontalLineLayers;
-    NSMutableArray<CALayer *> *inUseVerticalLineLayers;
-    
     NSMutableArray<CATextLayer *> *cachedHorizontalTextLineLayers;
     NSMutableArray<CATextLayer *> *cachedVerticalTextLineLayers;
     NSMutableArray<CATextLayer *> *inUseHorizontalTextLineLayers;
@@ -67,6 +41,8 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
     NSMutableArray<CALayer *> *inUseHorizontalShortLineLayers;
     NSMutableArray<CALayer *> *inUseVerticalShortLineLayers;
 }
+
+@synthesize lineColor = _lineColor;
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -88,11 +64,6 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
 {
     _zoomScale = 1;
     _deviceScale = 1;
-
-    cachedHorizontalLineLayers = [[NSMutableArray alloc] init];
-    cachedVerticalLineLayers = [[NSMutableArray alloc] init];
-    inUseHorizontalLineLayers = [[NSMutableArray alloc] init];
-    inUseVerticalLineLayers = [[NSMutableArray alloc] init];
 
     cachedHorizontalTextLineLayers = [[NSMutableArray alloc] init];
     cachedVerticalTextLineLayers = [[NSMutableArray alloc] init];
@@ -148,11 +119,6 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
     [self updateUIAnimated:YES];
 }
 
--(void)setInset:(UIEdgeInsets)inset
-{
-    _inset = inset;
-}
-
 -(void)setLineColor:(UIColor *)lineColor
 {
     _lineColor = lineColor;
@@ -160,18 +126,6 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
     backgroundLayer.strokeColor = _lineColor.CGColor;
 
     CGColorRef colorRef = lineColor.CGColor;
-    CGColorRef colorRefAlpha = [lineColor colorWithAlphaComponent:lineAlpha].CGColor;
-    
-    NSMutableArray<CALayer*> *linelayers = [[NSMutableArray alloc] init];
-    [linelayers addObjectsFromArray:cachedHorizontalLineLayers];
-    [linelayers addObjectsFromArray:cachedVerticalLineLayers];
-    [linelayers addObjectsFromArray:inUseHorizontalLineLayers];
-    [linelayers addObjectsFromArray:inUseVerticalLineLayers];
-
-    for (CALayer *layer in linelayers)
-    {
-        layer.backgroundColor = colorRefAlpha;
-    }
     
     NSMutableArray<CALayer*> *scaleLinelayers = [[NSMutableArray alloc] init];
     [scaleLinelayers addObjectsFromArray:cachedHorizontalShortLineLayers];
@@ -202,18 +156,16 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
     [self updateUIAnimated:YES];
 }
 
--(void)setHideLine:(BOOL)hideLine
-{
-    _hideLine = hideLine;
-    
-    [self updateUIAnimated:YES];
-}
-
 -(void)setStartingScalePoint:(CGPoint)startingScalePoint
 {
     _startingScalePoint = startingScalePoint;
     
     [self updateUIAnimated:NO];
+    
+    if ([self.delegate respondsToSelector:@selector(lineFrameDidChangeStartingScalePoint:)])
+    {
+        [self.delegate lineFrameDidChangeStartingScalePoint:self];
+    }
 }
 
 -(void)setRulerColor:(UIColor *)rulerColor
@@ -363,16 +315,13 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
         [CATransaction setDisableActions:YES];
     }
     
-    NSMutableArray *currentHorizontalLines = [inUseHorizontalLineLayers mutableCopy];
-    NSMutableArray *currentVerticalLines = [inUseVerticalLineLayers mutableCopy];
-
     NSMutableArray *currentHorizontalTextLines = [inUseHorizontalTextLineLayers mutableCopy];
     NSMutableArray *currentVerticalTextLines = [inUseVerticalTextLineLayers mutableCopy];
     
     NSMutableArray *currentHorizontalShortLines = [inUseHorizontalShortLineLayers mutableCopy];
     NSMutableArray *currentVerticalShortLines = [inUseVerticalShortLineLayers mutableCopy];
     
-    CGRect newRect = UIEdgeInsetsInsetRect(self.bounds, self.inset);
+    CGRect newRect =self.bounds;
 
     CGSize scaleMargin = CGSizeMake(20, 20);
 
@@ -414,142 +363,7 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
     CGFloat  minY = CGRectGetMinY(newRect)+scaleMargin.height;
     CGFloat  maxX = CGRectGetMaxX(newRect)-scaleMargin.width;
     CGFloat  maxY = CGRectGetMaxY(newRect)-scaleMargin.height;
-    CGFloat  width = newRect.size.width-scaleMargin.width*2;
-    CGFloat  height = newRect.size.height-scaleMargin.height*2;
 
-    if (_hideLine == NO)
-    {
-        CGColorRef colorRefAlpha = [self.lineColor colorWithAlphaComponent:lineAlpha].CGColor;
-
-        //Horizontal Lines
-        {
-            CGFloat currentStep = respectivePoint.y;
-            
-            NSInteger i = 0;
-            
-            while (currentStep > 0)
-            {
-                currentStep -= singleStep;
-                i--;
-            }
-            
-            while (currentStep <= minY)
-            {
-                currentStep += singleStep;
-                i++;
-            }
-            
-            for ( ; currentStep<=maxY; currentStep+=singleStep, i ++)
-            {
-                if (currentStep!=0)
-                {
-                    CALayer *layer = [currentHorizontalLines pop];
-                    
-                    if (layer == nil)
-                    {
-                        layer = [cachedHorizontalLineLayers pop];
-                        
-                        if (layer)
-                        {
-                            [inUseHorizontalLineLayers push:layer];
-                            [self.layer insertSublayer:layer below:backgroundLayer];
-                        }
-                    }
-                    
-                    if (layer == nil)
-                    {
-                        layer = [[CALayer alloc] init];
-                        layer.actions = @{@"frame":[NSNull null],
-                                          @"transform":[NSNull null],
-                                          @"bounds":[NSNull null],
-                                          @"position":[NSNull null],
-                                          @"opacity":[NSNull null]};
-                        layer.contentsScale = [[UIScreen mainScreen] scale];
-                        layer.backgroundColor = colorRefAlpha;
-                        [inUseHorizontalLineLayers push:layer];
-                        [self.layer insertSublayer:layer below:backgroundLayer];
-                    }
-                    
-                    layer.frame = CGRectMake(minX, currentStep-0.5, width, 1);
-                    
-                    if (i % 10 == 0)
-                    {
-                        layer.opacity = 10;
-                    }
-                    else
-                    {
-                        NSInteger minStep = 4*_deviceScale;
-                        layer.opacity = (singleStep-minStep)/(minStep*9);
-                    }
-                }
-            }
-        }
-
-        //Vertical lines
-        {
-            CGFloat currentStep = respectivePoint.x;
-            
-            NSInteger i = 0;
-            
-            while (currentStep > 0)
-            {
-                currentStep -= singleStep;
-                i--;
-            }
-            
-            while (currentStep <= minX)
-            {
-                currentStep += singleStep;
-                i++;
-            }
-            
-            for (; currentStep <= maxX; currentStep+=singleStep, i++)
-            {
-                if (currentStep!=0)
-                {
-                    CALayer *layer = [currentVerticalLines pop];
-                    
-                    if (layer == nil)
-                    {
-                        layer = [cachedVerticalLineLayers pop];
-                        
-                        if (layer)
-                        {
-                            [inUseVerticalLineLayers push:layer];
-                            [self.layer insertSublayer:layer below:backgroundLayer];
-                        }
-                    }
-
-                    if (layer == nil)
-                    {
-                        layer = [[CALayer alloc] init];
-                        layer.actions = @{@"frame":[NSNull null],
-                                          @"transform":[NSNull null],
-                                          @"bounds":[NSNull null],
-                                          @"position":[NSNull null],
-                                          @"opacity":[NSNull null]};
-                        layer.contentsScale = [[UIScreen mainScreen] scale];
-                        layer.backgroundColor = colorRefAlpha;
-                        [inUseVerticalLineLayers push:layer];
-                        [self.layer insertSublayer:layer below:backgroundLayer];
-                    }
-
-                    layer.frame = CGRectMake(currentStep-0.5, minY, 1, height);
-                    
-                    if (i % 10 == 0)
-                    {
-                        layer.opacity = 1.0;
-                    }
-                    else
-                    {
-                        NSInteger minStep = 4*_deviceScale;
-                        layer.opacity = (singleStep-minStep)/(minStep*9);
-                    }
-                }
-            }
-        }
-    }
-    
     if (_hideRuler == NO)
     {
         //Background layer
@@ -914,18 +728,6 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
         backgroundLayer.opacity = 0.0;
     }
     
-    for (CALayer *layer in currentHorizontalLines)
-    {
-        [inUseHorizontalLineLayers removeObject:layer];
-        [layer removeFromSuperlayer];
-    }
-    
-    for (CALayer *layer in currentVerticalLines)
-    {
-        [inUseVerticalLineLayers removeObject:layer];
-        [layer removeFromSuperlayer];
-    }
-    
     for (CATextLayer *layer in currentHorizontalTextLines)
     {
         [inUseHorizontalTextLineLayers removeObject:layer];
@@ -949,9 +751,6 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
         [inUseVerticalShortLineLayers removeObject:layer];
         [layer removeFromSuperlayer];
     }
-    
-    [cachedHorizontalLineLayers addObjectsFromArray:currentHorizontalLines];
-    [cachedVerticalLineLayers addObjectsFromArray:currentVerticalLines];
     
     [cachedHorizontalTextLineLayers addObjectsFromArray:currentHorizontalTextLines];
     [cachedVerticalTextLineLayers addObjectsFromArray:currentVerticalTextLines];

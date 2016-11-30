@@ -8,7 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class IQLineFrameView;
+
+@protocol IQLineFrameViewDelegate <NSObject>
+
+-(void)lineFrameDidChangeStartingScalePoint:(IQLineFrameView*)lineView;
+
+@end
+
 @interface IQLineFrameView : UIView
+
+@property(nonatomic, weak) id<IQLineFrameViewDelegate> delegate;
 
 @property(nonatomic,assign) CGPoint startingScalePoint;
 
@@ -23,9 +33,6 @@
 @property(nonatomic,strong) UIColor *rulerColor;
 
 @property(nonatomic, assign) BOOL hideRuler;
-@property(nonatomic, assign) BOOL hideLine;
-
-@property(nonatomic, assign) UIEdgeInsets inset;
 
 -(void)updateUIAnimated:(BOOL)animated;
 

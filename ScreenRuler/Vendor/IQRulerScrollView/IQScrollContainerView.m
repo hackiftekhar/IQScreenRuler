@@ -104,7 +104,7 @@
     self.zoomInfoContainerView.hidden = image == nil;
 }
 
--(UIImageView *)imageView
+-(SRLineImageView *)imageView
 {
     return self.scrollView.imageView;
 }
@@ -393,23 +393,6 @@
     {
         return self.bounds;
     }
-    
-//    /*Aspect Fit*/
-//    CGRect IQRectAspectFit(CGSize sourceSize, CGRect destRect);
-//    CGFloat IQAspectScaleFit(CGSize sourceSize, CGRect destRect);
-//    // Only scales down, not up, and centers result
-//    CGRect IQRectFitSizeInRect(CGSize sourceSize, CGRect destRect);
-//    
-//    /*Aspect Fill*/
-//    CGRect IQRectAspectFillRect(CGSize sourceSize, CGRect destRect);
-//    CGFloat IQAspectScaleFill(CGSize sourceSize, CGRect destRect);
-
-    
-//    CGSize originalSize = UIEdgeInsetsInsetRect(_overlayView.frame, UIEdgeInsetsMake(20, 20, 20, 20)).size;
-//    CGSize fitSize = CGSizeFitSize(originalSize, _imageScrollView.zoomView.image.size);
-//    CGFloat widthDiff = self.overlayView.frame.size.width-fitSize.width;
-//    CGFloat heightDiff = self.overlayView.frame.size.height-fitSize.height;
-//    self.maskRect = CGRectMake(widthDiff/2, heightDiff/2, fitSize.width, fitSize.height);
 }
 
 #pragma mark - Rotation
