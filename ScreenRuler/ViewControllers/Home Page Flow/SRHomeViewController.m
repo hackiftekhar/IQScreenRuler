@@ -131,13 +131,28 @@
     
     {
         self.lineFrameView.delegate = self;
+        
+        {
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            {
+                self.lineFrameView.scaleMargin = CGSizeMake(32, 32);
+            }
+            else
+            {
+                self.lineFrameView.scaleMargin = CGSizeMake(20, 20);
+            }
+            
+            self.scrollContainerView.imageView.scaleMargin = self.lineFrameView.scaleMargin;
+        }
+
         self.lineFrameView.respectiveView = self.scrollContainerView.imageView;
         self.scrollContainerView.imageView.hideLine = !shouldLineFrameShow;
         self.lineFrameView.hideRuler = !shouldSideRulerShow;
 
         CGFloat width = sqrtf(powf(self.view.frame.size.width, 2)+powf(self.view.frame.size.height, 2));
-        
-        _freeRulerView = [[IQRulerView alloc] initWithFrame:CGRectMake(0, 0, width ,55)];
+        CGFloat height = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)?90:55;
+
+        _freeRulerView = [[IQRulerView alloc] initWithFrame:CGRectMake(0, 0, width ,height)];
         _freeRulerView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
         _freeRulerView.alpha = shouldFreeHandRulerShow?1.0:0.0;
         _freeRulerView.hidden = !shouldFreeHandRulerShow;
@@ -190,8 +205,10 @@
     
     //Free
     {
-        self.freeRulerView.rulerColor = shadeFactorColor;
-        self.freeRulerView.lineColor = originalThemeColor;
+//        self.freeRulerView.rulerColor = shadeFactorColor;
+//        self.freeRulerView.lineColor = originalThemeColor;
+        self.freeRulerView.rulerColor = originalThemeColor;
+        self.freeRulerView.lineColor = shadeFactorColor;
     }
     
     //Line
@@ -991,7 +1008,7 @@
     if (self.magnifyingGlass.window == nil)
     {
         self.magnifyingGlass.touchPoint = originalLocation;
-        self.topColorView.frame = CGRectMake(0, 0, self.navigationControllerSR.view.frame.size.width, 44);
+        self.topColorView.frame = CGRectMake(0, 0, self.navigationControllerSR.view.frame.size.width, self.navigationControllerSR.view.frame.size.height);
         [self.navigationControllerSR.view insertSubview:self.topColorView aboveSubview:self.navigationControllerSR.bottomToolbar];
         [self.view insertSubview:self.magnifyingGlass aboveSubview:self.lineFrameView];
         [self.magnifyingGlass show];

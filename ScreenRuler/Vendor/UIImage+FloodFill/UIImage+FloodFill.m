@@ -43,8 +43,8 @@
         
         CGImageRef imageRef = [self CGImage];
         
-        NSUInteger width = CGImageGetWidth(imageRef);
-        NSUInteger height = CGImageGetHeight(imageRef);
+        NSInteger width = CGImageGetWidth(imageRef);
+        NSInteger height = CGImageGetHeight(imageRef);
         
         unsigned char *imageData = malloc(height * width * 4);
         
@@ -123,8 +123,8 @@
         LinkedListStack *points = [[LinkedListStack alloc] initWithCapacity:500 incrementSize:500 andMultiplier:height];
         LinkedListStack *antiAliasingPoints = [[LinkedListStack alloc] initWithCapacity:500 incrementSize:500 andMultiplier:height];
         
-        int x = roundf(startPoint.x);
-        int y = roundf(startPoint.y);
+        NSInteger x = roundf(startPoint.x);
+        NSInteger y = roundf(startPoint.y);
         
         [points pushFrontX:x andY:y];
         

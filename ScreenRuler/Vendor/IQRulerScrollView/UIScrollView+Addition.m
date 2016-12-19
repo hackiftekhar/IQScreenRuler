@@ -25,14 +25,24 @@
 
 -(CGRect)visibleRect
 {
+    return [self visibleRectWithInsetSize:CGSizeZero];
+}
+
+-(CGRect)visibleRectWithInsetSize:(CGSize)insetSize
+{
     UIView *zoomView = [self.delegate respondsToSelector:@selector(viewForZoomingInScrollView:)] ? [self.delegate viewForZoomingInScrollView:self] : self;
-    return [self convertRect:self.bounds toView:zoomView];
+    return [self convertRect:CGRectInset(self.bounds, insetSize.width, insetSize.height) toView:zoomView];
 }
 
 -(CGRect)presentationLayerVisibleRect
 {
+    return [self presentationLayerVisibleRectWithInsetSize:CGSizeZero];
+}
+
+-(CGRect)presentationLayerVisibleRectWithInsetSize:(CGSize)insetSize
+{
     UIView *zoomView = [self.delegate respondsToSelector:@selector(viewForZoomingInScrollView:)] ? [self.delegate viewForZoomingInScrollView:self] : self;
-    return [self.layer.presentationLayer convertRect:self.layer.presentationLayer.bounds toLayer:zoomView.layer.presentationLayer];
+    return [self.layer.presentationLayer convertRect:CGRectInset(self.layer.presentationLayer.bounds, insetSize.width, insetSize.height) toLayer:zoomView.layer.presentationLayer];
 }
 
 -(CGSize)minimumSize

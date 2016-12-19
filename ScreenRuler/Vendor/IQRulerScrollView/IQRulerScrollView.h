@@ -22,3 +22,12 @@
 @property (strong, nonatomic) UITapGestureRecognizer *doubleTapTwoFingerRecognizer;
 
 @end
+
+
+@interface UIView (IQRulerScrollViewHierarchy)
+
+@property(readonly, assign) IQRulerScrollView *rulerView;
+
+@end
+
+

@@ -16,8 +16,6 @@
 
 #import "UIColor+ThemeColor.h"
 
-CGFloat circularViewWidth = 44;
-
 @interface IQCropperView()<UIGestureRecognizerDelegate>
 
 @property(nonatomic, readonly) CGRect cropBounds;

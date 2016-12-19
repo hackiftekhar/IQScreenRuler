@@ -206,11 +206,11 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
             
             PositionSelector position = PositionSelectorNone;
 
-            if (point.x <= 20 || point.x >= (self.frame.size.width-20))
+            if (point.x <= self.scaleMargin.width || point.x >= (self.frame.size.width-self.scaleMargin.width))
             {
                 position = PositionSelectorY;
             }
-            else if (point.y <= 20 || point.y >= (self.frame.size.height-20))
+            else if (point.y <= self.scaleMargin.height || point.y >= (self.frame.size.height-self.scaleMargin.height))
             {
                 position = PositionSelectorX;
             }
@@ -258,7 +258,7 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
         
         CGPoint point = [gesture locationInView:self];
 
-        if (point.x <= 20 || point.x >= (self.frame.size.width-20))
+        if (point.x <= self.scaleMargin.width || point.x >= (self.frame.size.width-self.scaleMargin.width))
         {
             position = PositionSelectorY;
             
@@ -266,7 +266,7 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
             scalePoint.y = _startingScalePointAtBegin.y + roundf(translation.y);
             self.startingScalePoint = scalePoint;
         }
-        else if (point.y <= 20 || point.y >= (self.frame.size.height-20))
+        else if (point.y <= self.scaleMargin.height || point.y >= (self.frame.size.height-self.scaleMargin.height))
         {
             position = PositionSelectorX;
 
@@ -322,9 +322,8 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
     NSMutableArray *currentVerticalShortLines = [inUseVerticalShortLineLayers mutableCopy];
     
     CGRect newRect =self.bounds;
-
-    CGSize scaleMargin = CGSizeMake(20, 20);
-
+    CGSize scaleMargin = self.scaleMargin;
+    
     if (_hideRuler == YES)
     {
         scaleMargin = CGSizeZero;
@@ -502,7 +501,7 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
                             topTextLayer.foregroundColor = self.lineColor.CGColor;
                             topTextLayer.contentsScale = [[UIScreen mainScreen] scale];
                             topTextLayer.font = (__bridge CFTypeRef)@"KohinoorBangla-Semibold";
-                            topTextLayer.fontSize = 10;
+                            topTextLayer.fontSize = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)?16:10;
                             topTextLayer.alignmentMode = kCAAlignmentCenter;
                             [inUseHorizontalTextLineLayers push:topTextLayer];
                             [self.layer insertSublayer:topTextLayer above:backgroundLayer];
@@ -533,17 +532,17 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
                             bottomTextLayer.foregroundColor = self.lineColor.CGColor;
                             bottomTextLayer.contentsScale = [[UIScreen mainScreen] scale];
                             bottomTextLayer.font = (__bridge CFTypeRef)@"KohinoorBangla-Semibold";
-                            bottomTextLayer.fontSize = 10;
+                            bottomTextLayer.fontSize = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)?16:10;
                             bottomTextLayer.alignmentMode = kCAAlignmentCenter;
                             [inUseHorizontalTextLineLayers push:bottomTextLayer];
                             [self.layer insertSublayer:bottomTextLayer above:backgroundLayer];
                         }
                         
                         topTextLayer.string = [NSString localizedStringWithFormat:@"%.0f",i*multiplier/_deviceScale];
-                        topTextLayer.frame = CGRectMake(currentStep-20, minY-scaleMargin.height, 40, scaleMargin.height-longLineHeight);
+                        topTextLayer.frame = CGRectMake(currentStep-scaleMargin.height, minY-scaleMargin.height, 40, scaleMargin.height-longLineHeight);
 
                         bottomTextLayer.string = [NSString localizedStringWithFormat:@"%.0f",i*multiplier/_deviceScale];
-                        bottomTextLayer.frame = CGRectMake(currentStep-20, maxY+longLineHeight, 40, scaleMargin.height-longLineHeight);
+                        bottomTextLayer.frame = CGRectMake(currentStep-scaleMargin.width, maxY+longLineHeight, 40, scaleMargin.height-longLineHeight);
                     }
                 }
             }
@@ -671,7 +670,7 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
                             leftTextLayer.foregroundColor = self.lineColor.CGColor;
                             leftTextLayer.contentsScale = [[UIScreen mainScreen] scale];
                             leftTextLayer.font = (__bridge CFTypeRef)@"KohinoorBangla-Semibold";
-                            leftTextLayer.fontSize = 10;
+                            leftTextLayer.fontSize = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)?16:10;
                             leftTextLayer.alignmentMode = kCAAlignmentCenter;
                             [inUseVerticalTextLineLayers push:leftTextLayer];
                             [self.layer insertSublayer:leftTextLayer above:backgroundLayer];
@@ -703,7 +702,7 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
                             rightTextLayer.foregroundColor = self.lineColor.CGColor;
                             rightTextLayer.contentsScale = [[UIScreen mainScreen] scale];
                             rightTextLayer.font = (__bridge CFTypeRef)@"KohinoorBangla-Semibold";
-                            rightTextLayer.fontSize = 10;
+                            rightTextLayer.fontSize = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)?16:10;
                             rightTextLayer.alignmentMode = kCAAlignmentCenter;
                             [inUseVerticalTextLineLayers push:rightTextLayer];
                             [self.layer insertSublayer:rightTextLayer above:backgroundLayer];

@@ -36,3 +36,10 @@
 - (void)zoomToMaximumScaleAnimated:(BOOL)animated;
 
 @end
+
+@interface UIView (IQScrollContainerViewHierarchy)
+
+@property(readonly, assign) IQScrollContainerView *scrollContainerView;
+
+@end
+

@@ -21,6 +21,7 @@
 @property(nonatomic, weak) id<IQLineFrameViewDelegate> delegate;
 
 @property(nonatomic,assign) CGPoint startingScalePoint;
+@property(nonatomic,assign) CGSize scaleMargin;
 
 @property(nonatomic,assign) CGFloat deviceScale;
 

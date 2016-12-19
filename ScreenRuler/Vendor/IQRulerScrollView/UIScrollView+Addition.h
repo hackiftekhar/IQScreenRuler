@@ -16,7 +16,11 @@
 
 @property(nonatomic, readonly) CGRect visibleRect;
 
+-(CGRect)visibleRectWithInsetSize:(CGSize)insetSize;
+
 @property(nonatomic, readonly) CGRect presentationLayerVisibleRect;
+
+-(CGRect)presentationLayerVisibleRectWithInsetSize:(CGSize)insetSize;
 
 /**
  * The receiver's `contentOffset` property, during animations. (read-only)

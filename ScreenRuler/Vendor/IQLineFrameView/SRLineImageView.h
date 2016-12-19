@@ -11,6 +11,7 @@
 @interface SRLineImageView : UIImageView
 
 @property(nonatomic,assign) CGPoint startingScalePoint;
+@property(nonatomic,assign) CGSize scaleMargin;
 
 @property(nonatomic,assign) CGFloat deviceScale;
 

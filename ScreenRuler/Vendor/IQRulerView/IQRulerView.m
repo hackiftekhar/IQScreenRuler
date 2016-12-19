@@ -50,7 +50,15 @@
     _zoomScale = 1;
     _deviceScale = 1;
 
-    _angleView = [[IQAngleView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        _angleView = [[IQAngleView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
+    }
+    else
+    {
+        _angleView = [[IQAngleView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    }
+    
     _angleView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
     _angleView.autoresizesSubviews = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
     [self addSubview:_angleView];
@@ -177,11 +185,11 @@
                     CATextLayer *textLayer = [CATextLayer layer];
                     textLayer.contentsScale = [[UIScreen mainScreen] scale];
                     textLayer.font = (__bridge CFTypeRef)@"KohinoorBangla-Semibold";
-                    textLayer.fontSize = 10;
+                    textLayer.fontSize = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)?16:10;
                     textLayer.alignmentMode = kCAAlignmentCenter;
                     textLayer.string = [NSString localizedStringWithFormat:@"%.0f",i*multiplier/_deviceScale];
                     textLayer.foregroundColor = self.lineColor.CGColor;
-                    textLayer.frame = CGRectMake(currentStep-20, self.bounds.size.height/2-6, 40, 12);
+                    textLayer.frame = CGRectMake(currentStep-20, self.bounds.size.height/2-10, 40, 20);
                     textLayer.position = CGPointMake(layer1.frame.origin.x, CGRectGetMidY(self.bounds));
                     
                     textLayer.transform = CATransform3DMakeAffineTransform(CGAffineTransformInvert(CGAffineTransformMakeRotation(IQAffineTransformGetAngle(self.transform))));

@@ -198,13 +198,27 @@
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0)
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
-        return 155;
+        if (indexPath.section == 0)
+        {
+            return 200;
+        }
+        else
+        {
+            return 70;
+        }
     }
     else
     {
-        return 44;
+        if (indexPath.section == 0)
+        {
+            return 155;
+        }
+        else
+        {
+            return 44;
+        }
     }
 }
 

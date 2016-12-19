@@ -121,31 +121,16 @@
             [CATransaction setDisableActions:YES];
         }
         
-        IQRulerScrollView *scrollView = nil;
-        
-        {
-            UIView *superview = self.superview;
-            
-            while (superview)
-            {
-                if ([superview isKindOfClass:[IQRulerScrollView class]])
-                {
-                    scrollView = (IQRulerScrollView*)superview;
-                    break;
-                }
-                else
-                {
-                    superview = superview.superview;
-                }
-            }
-        }
+        IQRulerScrollView *scrollView = [self rulerView];
         
         CGRect newRect = self.bounds;
         
         if (scrollView)
         {
-            CGRect visibleRect = scrollView.visibleRect;
-            CGRect presentationRect = scrollView.presentationLayerVisibleRect;
+            CGSize insetSize = CGSizeMake(-self.scaleMargin.width, -self.scaleMargin.height);
+            
+            CGRect visibleRect = [scrollView visibleRectWithInsetSize:insetSize];
+            CGRect presentationRect = [scrollView presentationLayerVisibleRectWithInsetSize:insetSize];
             
             newRect.origin.x = MIN(CGRectGetMinX(visibleRect), CGRectGetMinX(presentationRect));
             newRect.origin.y = MIN(CGRectGetMinY(visibleRect), CGRectGetMinY(presentationRect));

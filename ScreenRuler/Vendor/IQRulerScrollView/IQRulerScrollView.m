@@ -156,3 +156,27 @@
 }
 
 @end
+
+
+
+@implementation UIView (IQRulerScrollViewHierarchy)
+
+-(IQRulerScrollView *)rulerView
+{
+    UIView *superview = self.superview;
+    
+    while (superview) {
+        if ([superview isKindOfClass:[IQRulerScrollView class]]) {
+            return (IQRulerScrollView*)superview;
+            break;
+        }
+        else {
+            superview = superview.superview;
+        }
+    }
+    
+    return nil;
+}
+
+@end
+
