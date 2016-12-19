@@ -12,9 +12,9 @@
 #define INVALID_NODE_CONTENT INT_MIN
 typedef struct PointNode
 {
-    int nextNodeOffset;
+    NSInteger nextNodeOffset;
     
-    int point;
+    NSInteger point;
     
 } PointNode;
 
@@ -22,16 +22,16 @@ typedef struct PointNode
 {
     NSMutableData *nodeCache;
     
-    int freeNodeOffset;
-    int topNodeOffset;
-    int _cacheSizeIncrements;
+    NSInteger freeNodeOffset;
+    NSInteger topNodeOffset;
+    NSInteger _cacheSizeIncrements;
     
-    int multiplier;
+    NSInteger multiplier;
 }
 
-- (id)initWithCapacity:(int)capacity incrementSize:(int)increment andMultiplier:(int)mul;
-- (id)initWithCapacity:(int)capacity;
+- (id)initWithCapacity:(NSInteger)capacity incrementSize:(NSInteger)increment andMultiplier:(NSInteger)mul;
+- (id)initWithCapacity:(NSInteger)capacity;
 
-- (void)pushFrontX:(int)x andY:(int)y;
-- (int)popFront:(int *)x andY:(int *)y;
+- (void)pushFrontX:(NSInteger)x andY:(NSInteger)y;
+- (NSInteger)popFront:(NSInteger *)x andY:(NSInteger *)y;
 @end

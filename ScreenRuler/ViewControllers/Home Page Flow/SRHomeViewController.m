@@ -34,7 +34,7 @@
 
 //https://www.iconfinder.com/iconsets/hawcons-gesture-stroke
 
-@interface SRHomeViewController ()<UIScrollViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIToolbarDelegate,MPCoachMarksViewDelegate,SRImageControllerDelegate,SRScreenshotCollectionViewControllerDelegate>
+@interface SRHomeViewController ()<UIScrollViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIToolbarDelegate,MPCoachMarksViewDelegate,SRImageControllerDelegate,SRScreenshotCollectionViewControllerDelegate,IQLineFrameViewDelegate>
 {
     BOOL isLockedOrientation;
 }
@@ -130,13 +130,29 @@
     }
     
     {
+        self.lineFrameView.delegate = self;
+        
+        {
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            {
+                self.lineFrameView.scaleMargin = CGSizeMake(32, 32);
+            }
+            else
+            {
+                self.lineFrameView.scaleMargin = CGSizeMake(20, 20);
+            }
+            
+            self.scrollContainerView.imageView.scaleMargin = self.lineFrameView.scaleMargin;
+        }
+
         self.lineFrameView.respectiveView = self.scrollContainerView.imageView;
-        self.lineFrameView.hideLine = !shouldLineFrameShow;
+        self.scrollContainerView.imageView.hideLine = !shouldLineFrameShow;
         self.lineFrameView.hideRuler = !shouldSideRulerShow;
 
         CGFloat width = sqrtf(powf(self.view.frame.size.width, 2)+powf(self.view.frame.size.height, 2));
-        
-        _freeRulerView = [[IQRulerView alloc] initWithFrame:CGRectMake(0, 0, width ,55)];
+        CGFloat height = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)?90:55;
+
+        _freeRulerView = [[IQRulerView alloc] initWithFrame:CGRectMake(0, 0, width ,height)];
         _freeRulerView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
         _freeRulerView.alpha = shouldFreeHandRulerShow?1.0:0.0;
         _freeRulerView.hidden = !shouldFreeHandRulerShow;
@@ -150,8 +166,7 @@
         NSInteger selectedRatio = [[UIScreen mainScreen] scale];
         [self.ratioButton setTitle:[NSString localizedStringWithFormat:@"@%ldx",(long)selectedRatio] forState:UIControlStateNormal];
         
-        _freeRulerView.deviceScale = selectedRatio;
-        _lineFrameView.deviceScale = selectedRatio;
+        _scrollContainerView.imageView.deviceScale = _lineFrameView.deviceScale = _freeRulerView.deviceScale = selectedRatio;
     }
     
     _longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressRecognizer:)];
@@ -190,14 +205,16 @@
     
     //Free
     {
-        self.freeRulerView.rulerColor = shadeFactorColor;
-        self.freeRulerView.lineColor = originalThemeColor;
+//        self.freeRulerView.rulerColor = shadeFactorColor;
+//        self.freeRulerView.lineColor = originalThemeColor;
+        self.freeRulerView.rulerColor = originalThemeColor;
+        self.freeRulerView.lineColor = shadeFactorColor;
     }
     
     //Line
     {
         self.lineFrameView.rulerColor = shadeFactorColor;
-        self.lineFrameView.lineColor = originalThemeColor;
+        self.scrollContainerView.imageView.lineColor = self.lineFrameView.lineColor = originalThemeColor;
     }
 }
 
@@ -248,7 +265,7 @@
     _freeHandButton.enabled = image != nil;
     _freeHandButton.selected = (image != nil && _freeRulerView.alpha != 0.0);
     _straighenButton.enabled = image != nil;
-    _straighenButton.selected = (image != nil && !_lineFrameView.hideLine);
+    _straighenButton.selected = (image != nil && !_scrollContainerView.imageView.hideLine);
     _optionBarButton.enabled = image != nil;
 
     _viewNoScreenshotInfo.hidden = image != nil;
@@ -304,7 +321,7 @@
 {
     {
         [self.scrollContainerView zoomToMinimumScaleAnimated:YES];
-        self.lineFrameView.hideLine = NO;
+        self.scrollContainerView.imageView.hideLine = NO;
         self.straighenButton.selected = YES;
         
         self.lineFrameView.hideRuler = NO;
@@ -413,8 +430,7 @@
 
             NSInteger selectedRatio = (currentRatio-1)%3+1;
             [self.ratioButton setTitle:[NSString localizedStringWithFormat:@"@%ldx",(long)selectedRatio] forState:UIControlStateNormal];
-            _freeRulerView.deviceScale = selectedRatio;
-            _lineFrameView.deviceScale = selectedRatio;
+            _scrollContainerView.imageView.deviceScale = _lineFrameView.deviceScale = _freeRulerView.deviceScale = selectedRatio;
             
             if (self.presentedViewController == nil)
             {
@@ -555,8 +571,7 @@
         {
             NSInteger selectedRatio = [[UIScreen mainScreen] scale];
             [self.ratioButton setTitle:[NSString localizedStringWithFormat:@"@%ldx",(long)selectedRatio] forState:UIControlStateNormal];
-            _freeRulerView.deviceScale = selectedRatio;
-            _lineFrameView.deviceScale = selectedRatio;
+            _scrollContainerView.imageView.deviceScale = _lineFrameView.deviceScale = _freeRulerView.deviceScale = selectedRatio;
             [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
         }
             break;
@@ -887,8 +902,7 @@
 
             NSInteger selectedRatio = 1;
             [weakSelf.ratioButton setTitle:[NSString localizedStringWithFormat:@"@%ldx",(long)selectedRatio] forState:UIControlStateNormal];
-            weakSelf.freeRulerView.deviceScale = selectedRatio;
-            weakSelf.lineFrameView.deviceScale = selectedRatio;
+            weakSelf.scrollContainerView.imageView.deviceScale = weakSelf.lineFrameView.deviceScale = weakSelf.freeRulerView.deviceScale = selectedRatio;
         }]];
     }
     
@@ -900,8 +914,7 @@
             [Answers logCustomEventWithName:@"Change Scale Multiplier" customAttributes:@{@"value":@"2"}];
 
             [weakSelf.ratioButton setTitle:[NSString localizedStringWithFormat:@"@%ldx",(long)selectedRatio] forState:UIControlStateNormal];
-            weakSelf.freeRulerView.deviceScale = selectedRatio;
-            weakSelf.lineFrameView.deviceScale = selectedRatio;
+            weakSelf.scrollContainerView.imageView.deviceScale = weakSelf.lineFrameView.deviceScale = weakSelf.freeRulerView.deviceScale = selectedRatio;
         }]];
     }
     
@@ -913,8 +926,7 @@
 
             NSInteger selectedRatio = 3;
             [weakSelf.ratioButton setTitle:[NSString localizedStringWithFormat:@"@%ldx",(long)selectedRatio] forState:UIControlStateNormal];
-            weakSelf.freeRulerView.deviceScale = selectedRatio;
-            weakSelf.lineFrameView.deviceScale = selectedRatio;
+            weakSelf.scrollContainerView.imageView.deviceScale = weakSelf.lineFrameView.deviceScale = weakSelf.freeRulerView.deviceScale = selectedRatio;
         }]];
     }
     
@@ -976,8 +988,8 @@
     __weak typeof(self) weakSelf = self;
 
     [UIView animateWithDuration:0.2 animations:^{
-        weakSelf.lineFrameView.hideLine = !weakSelf.lineFrameView.hideLine;
-        [[NSUserDefaults standardUserDefaults] setBool:!weakSelf.lineFrameView.hideLine forKey:@"LineFrameShow"];
+        weakSelf.scrollContainerView.imageView.hideLine = !weakSelf.scrollContainerView.imageView.hideLine;
+        [[NSUserDefaults standardUserDefaults] setBool:!weakSelf.scrollContainerView.imageView.hideLine forKey:@"LineFrameShow"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }];
 }
@@ -996,7 +1008,7 @@
     if (self.magnifyingGlass.window == nil)
     {
         self.magnifyingGlass.touchPoint = originalLocation;
-        self.topColorView.frame = CGRectMake(0, 0, self.navigationControllerSR.view.frame.size.width, 44);
+        self.topColorView.frame = CGRectMake(0, 0, self.navigationControllerSR.view.frame.size.width, self.navigationControllerSR.view.frame.size.height);
         [self.navigationControllerSR.view insertSubview:self.topColorView aboveSubview:self.navigationControllerSR.bottomToolbar];
         [self.view insertSubview:self.magnifyingGlass aboveSubview:self.lineFrameView];
         [self.magnifyingGlass show];
@@ -1129,6 +1141,13 @@
     {
         [self hideRGB];
     }
+}
+
+#pragma mark - Line Frame View Delegates
+
+-(void)lineFrameDidChangeStartingScalePoint:(IQLineFrameView *)lineView
+{
+    self.scrollContainerView.imageView.startingScalePoint = lineView.startingScalePoint;
 }
 
 #pragma mark - ScrollView Delegates

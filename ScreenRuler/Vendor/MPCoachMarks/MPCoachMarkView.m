@@ -111,7 +111,16 @@ static const BOOL kEnableSkipButton = YES;
     self.lblCaption.layer.borderColor = originalThemeColor.CGColor;
     self.lblCaption.layer.borderWidth = 1.0;
     self.lblCaption.layer.cornerRadius = 5.0;
-    self.lblCaption.font = [UIFont kohinoorBanglaSemiboldWithSize:17.0f];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        self.lblCaption.font = [UIFont kohinoorBanglaSemiboldWithSize:27.0f];
+    }
+    else
+    {
+        self.lblCaption.font = [UIFont kohinoorBanglaSemiboldWithSize:17.0f];
+    }
+
     self.lblCaption.lineBreakMode = NSLineBreakByWordWrapping;
     self.lblCaption.numberOfLines = 0;
     self.lblCaption.textAlignment = NSTextAlignmentCenter;
@@ -444,7 +453,16 @@ static const BOOL kEnableSkipButton = YES;
                 lblContinue = [[UILabel alloc] initWithFrame:(CGRect){{0, [weakSelf yOriginForContinueLabel]}, {lblContinueWidth, 30.0f}}];
                 lblContinue.adjustsFontSizeToFitWidth = YES;
                 lblContinue.minimumScaleFactor = 0.5;
-                lblContinue.font = [UIFont kohinoorBanglaSemiboldWithSize:13.0f];
+                
+                if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+                {
+                    lblContinue.font = [UIFont kohinoorBanglaSemiboldWithSize:21.0f];
+                }
+                else
+                {
+                    lblContinue.font = [UIFont kohinoorBanglaSemiboldWithSize:13.0f];
+                }
+
                 lblContinue.textAlignment = NSTextAlignmentCenter;
                 lblContinue.text = NSLocalizedString(@"tap_to_continue", nil);
                 lblContinue.alpha = 0.0f;

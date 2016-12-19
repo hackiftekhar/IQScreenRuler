@@ -72,11 +72,37 @@ Class IQUIToolbarBackgroundClass;
             if (image)
             {
                 [button setImage:[image imageWithColor:tintColor] forState:UIControlStateNormal];
-                [button setImage:[image imageWithColor:barTintColor] forState:UIControlStateSelected];
+            }
+            
+            UIImage *selectedImage = [button imageForState:UIControlStateSelected];
+
+            if (selectedImage)
+            {
+                [button setImage:[selectedImage imageWithColor:barTintColor] forState:UIControlStateSelected];
             }
         }
     }
 }
+
+/*
+-(void)setNormalStateColor:(UIColor *)normalStateColor
+{
+    _normalStateColor = normalStateColor;
+    
+    UIImage *image = [[UIImage imageWithColor:_normalStateColor] resizableImageWithCapInsets:UIEdgeInsetsZero resizingMode:UIImageResizingModeStretch];
+    [self setBackgroundImage:image forState:UIControlStateNormal];
+}
+
+-(void)setDisabledStateColor:(UIColor *)disabledStateColor
+{
+    _disabledStateColor = disabledStateColor;
+    
+    UIImage *image = [[UIImage imageWithColor:_disabledStateColor] resizableImageWithCapInsets:UIEdgeInsetsZero resizingMode:UIImageResizingModeStretch];
+    [self setBackgroundImage:image forState:UIControlStateDisabled];
+}
+
+*/
+
 
 -(CGSize)sizeThatFits:(CGSize)size
 {

@@ -62,4 +62,16 @@
     appDelegate.shouldShowTouches = _switchShowTouch.on;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        return 70;
+    }
+    else
+    {
+        return 44;
+    }
+}
+
 @end

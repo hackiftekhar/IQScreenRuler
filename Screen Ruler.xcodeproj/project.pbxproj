@@ -10,6 +10,9 @@
 		11AC63C4048F0C26461C07D0 /* libPods-ScreenRuler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F6ABE1EFC39D370C25D1C1 /* libPods-ScreenRuler.a */; };
 		4C0403891DA910FC0075A71B /* SRIconsGeneratorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0403881DA910FC0075A71B /* SRIconsGeneratorViewController.m */; };
 		4C04038B1DA94D3E0075A71B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CD427201DA823CF000AD1CA /* Assets.xcassets */; };
+		4C0A13761DCF744900CFF881 /* SRLineImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0A13751DCF744900CFF881 /* SRLineImageView.m */; };
+		4C0A13791DCF771E00CFF881 /* NSMutableArray+Stack.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0A13781DCF771E00CFF881 /* NSMutableArray+Stack.m */; };
+		4C0A137C1DD0649000CFF881 /* UIScrollView+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0A137B1DD0649000CFF881 /* UIScrollView+Addition.m */; };
 		4C7396E31DA6A6E700397366 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C7396E11DA6A6E700397366 /* Localizable.strings */; };
 		4C853B351DB23DA2003E3717 /* RoundedCornerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C853B341DB23DA2003E3717 /* RoundedCornerView.m */; };
 		4C853B3A1DB27313003E3717 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 4C853B371DB272FA003E3717 /* iTunesArtwork@2x */; };
@@ -57,7 +60,6 @@
 		4CED77DF1DA82A8E0093176D /* SRNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426D61DA8235D000AD1CA /* SRNavigationController.m */; };
 		4CED77E01DA82A8E0093176D /* SRToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426D81DA8235D000AD1CA /* SRToolbar.m */; };
 		4CED77E11DA82A8E0093176D /* SRToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426DA1DA8235D000AD1CA /* SRToolbarButton.m */; };
-		4CED77E21DA82A8E0093176D /* NSMutableArray+Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426E11DA82364000AD1CA /* NSMutableArray+Queue.m */; };
 		4CED77E31DA82A8E0093176D /* UIColor+ThemeColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426E31DA82364000AD1CA /* UIColor+ThemeColor.m */; };
 		4CED77E41DA82A8E0093176D /* UIFont+AppFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426E51DA82364000AD1CA /* UIFont+AppFont.m */; };
 		4CED77E51DA82A8E0093176D /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426E71DA82364000AD1CA /* UIImage+Color.m */; };
@@ -80,6 +82,12 @@
 /* Begin PBXFileReference section */
 		4C0403871DA910FC0075A71B /* SRIconsGeneratorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRIconsGeneratorViewController.h; sourceTree = "<group>"; };
 		4C0403881DA910FC0075A71B /* SRIconsGeneratorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRIconsGeneratorViewController.m; sourceTree = "<group>"; };
+		4C0A13741DCF744900CFF881 /* SRLineImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRLineImageView.h; sourceTree = "<group>"; };
+		4C0A13751DCF744900CFF881 /* SRLineImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRLineImageView.m; sourceTree = "<group>"; };
+		4C0A13771DCF771E00CFF881 /* NSMutableArray+Stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+Stack.h"; path = "../Vendor/IQLineFrameView/NSMutableArray+Stack.h"; sourceTree = "<group>"; };
+		4C0A13781DCF771E00CFF881 /* NSMutableArray+Stack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+Stack.m"; path = "../Vendor/IQLineFrameView/NSMutableArray+Stack.m"; sourceTree = "<group>"; };
+		4C0A137A1DD0649000CFF881 /* UIScrollView+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Addition.h"; sourceTree = "<group>"; };
+		4C0A137B1DD0649000CFF881 /* UIScrollView+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Addition.m"; sourceTree = "<group>"; };
 		4C33F23B1DB7E047000BC753 /* ta-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ta-IN"; path = "ta-IN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		4C33F23C1DB7E047000BC753 /* ta-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ta-IN"; path = "ta-IN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4C33F23D1DB7E2EC000BC753 /* ta */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ta; path = ta.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -222,8 +230,6 @@
 		4CD426D81DA8235D000AD1CA /* SRToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRToolbar.m; sourceTree = "<group>"; };
 		4CD426D91DA8235D000AD1CA /* SRToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRToolbarButton.h; sourceTree = "<group>"; };
 		4CD426DA1DA8235D000AD1CA /* SRToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRToolbarButton.m; sourceTree = "<group>"; };
-		4CD426E01DA82364000AD1CA /* NSMutableArray+Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Queue.h"; sourceTree = "<group>"; };
-		4CD426E11DA82364000AD1CA /* NSMutableArray+Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Queue.m"; sourceTree = "<group>"; };
 		4CD426E21DA82364000AD1CA /* UIColor+ThemeColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ThemeColor.h"; sourceTree = "<group>"; };
 		4CD426E31DA82364000AD1CA /* UIColor+ThemeColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ThemeColor.m"; sourceTree = "<group>"; };
 		4CD426E41DA82364000AD1CA /* UIFont+AppFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+AppFont.h"; sourceTree = "<group>"; };
@@ -507,6 +513,8 @@
 			children = (
 				4CD426A71DA8234B000AD1CA /* IQLineFrameView.h */,
 				4CD426A81DA8234B000AD1CA /* IQLineFrameView.m */,
+				4C0A13741DCF744900CFF881 /* SRLineImageView.h */,
+				4C0A13751DCF744900CFF881 /* SRLineImageView.m */,
 			);
 			path = IQLineFrameView;
 			sourceTree = "<group>";
@@ -516,6 +524,8 @@
 			children = (
 				4CD426AA1DA8234B000AD1CA /* IQRulerScrollView.h */,
 				4CD426AB1DA8234B000AD1CA /* IQRulerScrollView.m */,
+				4C0A137A1DD0649000CFF881 /* UIScrollView+Addition.h */,
+				4C0A137B1DD0649000CFF881 /* UIScrollView+Addition.m */,
 				4CD426AC1DA8234B000AD1CA /* IQScrollContainerView.h */,
 				4CD426AD1DA8234B000AD1CA /* IQScrollContainerView.m */,
 			);
@@ -569,8 +579,8 @@
 		4CD426DF1DA82364000AD1CA /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				4CD426E01DA82364000AD1CA /* NSMutableArray+Queue.h */,
-				4CD426E11DA82364000AD1CA /* NSMutableArray+Queue.m */,
+				4C0A13771DCF771E00CFF881 /* NSMutableArray+Stack.h */,
+				4C0A13781DCF771E00CFF881 /* NSMutableArray+Stack.m */,
 				4CD426E21DA82364000AD1CA /* UIColor+ThemeColor.h */,
 				4CD426E31DA82364000AD1CA /* UIColor+ThemeColor.m */,
 				4CD426E41DA82364000AD1CA /* UIFont+AppFont.h */,
@@ -731,6 +741,7 @@
 					4CD031F61CC165B700539151 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 7UUTF6T5P9;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -911,10 +922,11 @@
 				4CED77E01DA82A8E0093176D /* SRToolbar.m in Sources */,
 				4C853B561DB2C271003E3717 /* CBZVectorSplashView.m in Sources */,
 				4CED77E11DA82A8E0093176D /* SRToolbarButton.m in Sources */,
-				4CED77E21DA82A8E0093176D /* NSMutableArray+Queue.m in Sources */,
 				4CED77E31DA82A8E0093176D /* UIColor+ThemeColor.m in Sources */,
 				4C853B5C1DB39087003E3717 /* SRDeveloperSettingsViewController.m in Sources */,
+				4C0A13791DCF771E00CFF881 /* NSMutableArray+Stack.m in Sources */,
 				4CED77E41DA82A8E0093176D /* UIFont+AppFont.m in Sources */,
+				4C0A137C1DD0649000CFF881 /* UIScrollView+Addition.m in Sources */,
 				4CED77E51DA82A8E0093176D /* UIImage+Color.m in Sources */,
 				4CED77E61DA82A8E0093176D /* SRCropViewController.m in Sources */,
 				4CED77E71DA82A8E0093176D /* SRDrawViewController.m in Sources */,
@@ -923,6 +935,7 @@
 				4CED77EA1DA82A8E0093176D /* SRScreenshotCollectionViewCell.m in Sources */,
 				4CED77EB1DA82A8E0093176D /* SRScreenshotCollectionViewController.m in Sources */,
 				4CED77EC1DA82A8E0093176D /* SRSettingsTableViewCell.m in Sources */,
+				4C0A13761DCF744900CFF881 /* SRLineImageView.m in Sources */,
 				4CEDBF971DB15B970005A812 /* SRVersionTableViewCell.m in Sources */,
 				4CED77ED1DA82A8E0093176D /* SRThemeTableViewCell.m in Sources */,
 				4CED77EF1DA82A8E0093176D /* SRAcknowledgementTableViewController.m in Sources */,
@@ -1091,7 +1104,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "04236ed9-1a27-4d60-aa97-25b9ab87e506";
@@ -1135,7 +1148,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "96274369-1d1c-4ef9-b8b4-0100dc95e151";
 				SDKROOT = iphoneos;
@@ -1150,14 +1163,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Iftekhar Qurashi (RFN29V7Q6Y)";
-				DEVELOPMENT_TEAM = 7UUTF6T5P9;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ScreenRuler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.infoenum.ruler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "04236ed9-1a27-4d60-aa97-25b9ab87e506";
-				PROVISIONING_PROFILE_SPECIFIER = RulerAppDevelopment;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1169,14 +1183,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Iftekhar Qurashi (7UUTF6T5P9)";
-				DEVELOPMENT_TEAM = 7UUTF6T5P9;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ScreenRuler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.infoenum.ruler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "96274369-1d1c-4ef9-b8b4-0100dc95e151";
-				PROVISIONING_PROFILE_SPECIFIER = RulerAppDistribution;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

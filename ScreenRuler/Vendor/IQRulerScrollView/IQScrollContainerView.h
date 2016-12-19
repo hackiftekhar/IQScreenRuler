@@ -17,7 +17,7 @@
 
 @property(nonatomic, readonly) IQRulerScrollView *scrollView;
 
-@property(nonatomic, readonly) UIImageView *imageView;
+@property(nonatomic, readonly) SRLineImageView *imageView;
 
 @property(nonatomic) UIImage *image;
 
@@ -36,3 +36,10 @@
 - (void)zoomToMaximumScaleAnimated:(BOOL)animated;
 
 @end
+
+@interface UIView (IQScrollContainerViewHierarchy)
+
+@property(readonly, assign) IQScrollContainerView *scrollContainerView;
+
+@end
+

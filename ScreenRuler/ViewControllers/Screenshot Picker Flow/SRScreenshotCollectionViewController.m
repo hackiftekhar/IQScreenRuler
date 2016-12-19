@@ -234,7 +234,16 @@
         label1.adjustsFontSizeToFitWidth = YES;
         label1.minimumScaleFactor = 0.5;
         label1.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        label1.font = [UIFont kohinoorBanglaSemiboldWithSize:25.0];
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        {
+            label1.font = [UIFont kohinoorBanglaSemiboldWithSize:40.0];
+        }
+        else
+        {
+            label1.font = [UIFont kohinoorBanglaSemiboldWithSize:25.0];
+        }
+
         label1.numberOfLines = 0;
         label1.textAlignment = NSTextAlignmentCenter;
         label1.textColor = [UIColor darkGrayColor];

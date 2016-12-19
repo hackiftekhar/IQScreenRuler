@@ -13,7 +13,7 @@
 #import "SRNavigationController.h"
 #import "UIColor+ThemeColor.h"
 #import <Crashlytics/Answers.h>
-
+#import "UIScrollView+Addition.h"
 
 @interface SRCropViewController ()<IQCropViewDelegate>
 

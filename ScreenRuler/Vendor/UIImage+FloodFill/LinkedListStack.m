@@ -21,12 +21,12 @@
     return [self initWithCapacity:500];
 }
 
-- (id)initWithCapacity:(int)capacity
+- (id)initWithCapacity:(NSInteger)capacity
 {
     return [self initWithCapacity:capacity incrementSize:500 andMultiplier:1000];
 }
 
-- (id)initWithCapacity:(int)capacity incrementSize:(int)increment andMultiplier:(int)mul
+- (id)initWithCapacity:(NSInteger)capacity incrementSize:(NSInteger)increment andMultiplier:(NSInteger)mul
 {
     self = [super init];
     
@@ -34,7 +34,7 @@
     {
         _cacheSizeIncrements = increment;
         
-        int bytesRequired = capacity * sizeof(PointNode);
+        NSInteger bytesRequired = capacity * sizeof(PointNode);
         
         nodeCache = [[NSMutableData alloc] initWithLength:bytesRequired];
         
@@ -61,9 +61,9 @@
  
     H is same for all X and Y and must be grater than Y. So generaly Height is prefered value;
 */
-- (void)pushFrontX:(int)x andY:(int)y;
+- (void)pushFrontX:(NSInteger)x andY:(NSInteger)y;
 {
-    int p = multiplier * x + y;
+    NSInteger p = multiplier * x + y;
     
     PointNode *node = [self getNextFreeNode];
     
@@ -73,7 +73,7 @@
     topNodeOffset = [self offsetOfNode:node];
 }
 
-- (int)popFront:(int *)x andY:(int *)y;
+- (NSInteger)popFront:(NSInteger *)x andY:(NSInteger *)y;
 {
     if(topNodeOffset == FINAL_NODE_OFFSET)
     {
@@ -82,11 +82,11 @@
     
     PointNode *node = [self nodeAtOffset:topNodeOffset];
     
-    int thisNodeOffset = topNodeOffset;
+    NSInteger thisNodeOffset = topNodeOffset;
     
     // Remove this node from the queue
     topNodeOffset = node->nextNodeOffset;
-    int value = node->point;
+    NSInteger value = node->point;
     
     // Reset it and add it to the free node cache
     node->point = 0;
@@ -101,12 +101,12 @@
 }
 
 #pragma mark - utility functions
-- (int)offsetOfNode:(PointNode *)node
+- (NSInteger)offsetOfNode:(PointNode *)node
 {
     return node - (PointNode *)nodeCache.mutableBytes;
 }
 
-- (PointNode *)nodeAtOffset:(int)offset
+- (PointNode *)nodeAtOffset:(NSInteger)offset
 {
     return (PointNode *)nodeCache.mutableBytes + offset;
 }
@@ -116,7 +116,7 @@
     if(freeNodeOffset < 0)
     {
         // Need to extend the size of the nodeCache
-        int currentSize = nodeCache.length / sizeof(PointNode);
+        NSInteger currentSize = nodeCache.length / sizeof(PointNode);
         [nodeCache increaseLengthBy:_cacheSizeIncrements * sizeof(PointNode)];
     
         // Set these new nodes to be the free ones
@@ -130,7 +130,7 @@
     return node;
 }
 
-- (void)initialiseNodesAtOffset:(int)offset count:(int)count
+- (void)initialiseNodesAtOffset:(NSInteger)offset count:(NSInteger)count
 {
     PointNode *node = (PointNode *)nodeCache.mutableBytes + offset;
     

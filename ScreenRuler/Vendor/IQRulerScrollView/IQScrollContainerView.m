@@ -104,7 +104,7 @@
     self.zoomInfoContainerView.hidden = image == nil;
 }
 
--(UIImageView *)imageView
+-(SRLineImageView *)imageView
 {
     return self.scrollView.imageView;
 }
@@ -230,7 +230,13 @@
 {
     if (_zoomInfoContainerView == nil)
     {
-        _zoomInfoContainerView = [[UIVisualEffectView alloc] initWithFrame:CGRectMake(0, 0, 168, 44)];
+        CGRect rect = CGRectMake(0, 0, 168, 44);
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        {
+            rect = CGRectMake(0, 0, 270, 70);
+        }
+
+        _zoomInfoContainerView = [[UIVisualEffectView alloc] initWithFrame:rect];
         _zoomInfoContainerView.effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
         _zoomInfoContainerView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMaxY(self.bounds)-25);
         _zoomInfoContainerView.layer.cornerRadius = 22;
@@ -257,8 +263,18 @@
         [_zoomIncreaseButton setTitle:[NSString localizedStringWithFormat:@"+"] forState:UIControlStateNormal];
         [_zoomIncreaseButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         [_zoomIncreaseButton setTitleColor:[[UIColor darkGrayColor] colorWithAlphaComponent:0.5] forState:UIControlStateDisabled];
-        _zoomIncreaseButton.frame = CGRectMake(CGRectGetMaxX(self.zoomInfoButton.frame), 0, 44, 44);
-        _zoomIncreaseButton.titleLabel.font = [UIFont kohinoorBanglaSemiboldWithSize:35];
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        {
+            _zoomIncreaseButton.frame = CGRectMake(CGRectGetMaxX(self.zoomInfoButton.frame), 0, 70, 70);
+            _zoomIncreaseButton.titleLabel.font = [UIFont kohinoorBanglaSemiboldWithSize:56];
+        }
+        else
+        {
+            _zoomIncreaseButton.frame = CGRectMake(CGRectGetMaxX(self.zoomInfoButton.frame), 0, 44, 44);
+            _zoomIncreaseButton.titleLabel.font = [UIFont kohinoorBanglaSemiboldWithSize:35];
+        }
+
         [_zoomIncreaseButton addTarget:self action:@selector(zoomIncreaseAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _zoomIncreaseButton;
@@ -277,8 +293,18 @@
         [_zoomDecreaseButton setTitle:[NSString localizedStringWithFormat:@"-"] forState:UIControlStateNormal];
         [_zoomDecreaseButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         [_zoomDecreaseButton setTitleColor:[[UIColor darkGrayColor] colorWithAlphaComponent:0.5] forState:UIControlStateDisabled];
-        _zoomDecreaseButton.frame = CGRectMake(CGRectGetMinX(self.zoomInfoButton.frame)-44, 0, 44, 44);
-        _zoomDecreaseButton.titleLabel.font = [UIFont kohinoorBanglaSemiboldWithSize:35];
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        {
+            _zoomDecreaseButton.frame = CGRectMake(CGRectGetMinX(self.zoomInfoButton.frame)-70, 0, 70, 70);
+            _zoomDecreaseButton.titleLabel.font = [UIFont kohinoorBanglaSemiboldWithSize:56];
+        }
+        else
+        {
+            _zoomDecreaseButton.frame = CGRectMake(CGRectGetMinX(self.zoomInfoButton.frame)-44, 0, 44, 44);
+            _zoomDecreaseButton.titleLabel.font = [UIFont kohinoorBanglaSemiboldWithSize:35];
+        }
+
         [_zoomDecreaseButton addTarget:self action:@selector(zoomDecreaseAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _zoomDecreaseButton;
@@ -296,9 +322,19 @@
         _zoomInfoButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_zoomInfoButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         [_zoomInfoButton setTitleColor:[[UIColor darkGrayColor] colorWithAlphaComponent:0.8] forState:UIControlStateHighlighted];
-        _zoomInfoButton.frame = CGRectMake(0, 0, 70, 44);
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        {
+            _zoomInfoButton.frame = CGRectMake(0, 0, 110, 70);
+            _zoomInfoButton.titleLabel.font = [UIFont kohinoorBanglaSemiboldWithSize:29];
+        }
+        else
+        {
+            _zoomInfoButton.frame = CGRectMake(0, 0, 70, 44);
+            _zoomInfoButton.titleLabel.font = [UIFont kohinoorBanglaSemiboldWithSize:18];
+        }
+
         _zoomInfoButton.center = CGPointMake(CGRectGetMidX(self.zoomInfoContainerView.bounds), CGRectGetMidY(self.zoomInfoContainerView.bounds));
-        _zoomInfoButton.titleLabel.font = [UIFont kohinoorBanglaSemiboldWithSize:18];
         _zoomInfoButton.titleLabel.adjustsFontSizeToFitWidth = YES;
         _zoomInfoButton.titleLabel.minimumScaleFactor = 0.5;
         [_zoomInfoButton addTarget:self action:@selector(zoomInfoAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -393,23 +429,6 @@
     {
         return self.bounds;
     }
-    
-//    /*Aspect Fit*/
-//    CGRect IQRectAspectFit(CGSize sourceSize, CGRect destRect);
-//    CGFloat IQAspectScaleFit(CGSize sourceSize, CGRect destRect);
-//    // Only scales down, not up, and centers result
-//    CGRect IQRectFitSizeInRect(CGSize sourceSize, CGRect destRect);
-//    
-//    /*Aspect Fill*/
-//    CGRect IQRectAspectFillRect(CGSize sourceSize, CGRect destRect);
-//    CGFloat IQAspectScaleFill(CGSize sourceSize, CGRect destRect);
-
-    
-//    CGSize originalSize = UIEdgeInsetsInsetRect(_overlayView.frame, UIEdgeInsetsMake(20, 20, 20, 20)).size;
-//    CGSize fitSize = CGSizeFitSize(originalSize, _imageScrollView.zoomView.image.size);
-//    CGFloat widthDiff = self.overlayView.frame.size.width-fitSize.width;
-//    CGFloat heightDiff = self.overlayView.frame.size.height-fitSize.height;
-//    self.maskRect = CGRectMake(widthDiff/2, heightDiff/2, fitSize.width, fitSize.height);
 }
 
 #pragma mark - Rotation
@@ -453,3 +472,26 @@
 
 
 @end
+
+
+@implementation UIView (IQScrollContainerViewHierarchy)
+
+-(IQScrollContainerView *)scrollContainerView
+{
+    UIView *superview = self.superview;
+    
+    while (superview) {
+        if ([superview isKindOfClass:[IQScrollContainerView class]]) {
+            return (IQScrollContainerView*)superview;
+            break;
+        }
+        else {
+            superview = superview.superview;
+        }
+    }
+    
+    return nil;
+}
+
+@end
+

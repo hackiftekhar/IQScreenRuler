@@ -9,7 +9,8 @@
 #import "IQRulerScrollView.h"
 #import "tgmath.h"
 #import "IQGeometry+AffineTransform.h"
-
+#import "SRLineImageView.h"
+#import "UIScrollView+Addition.h"
 
 @interface IQRulerScrollView ()<UIGestureRecognizerDelegate>
 
@@ -31,13 +32,12 @@
     [self addSubview:self.contentView];
     self.contentView.layer.magnificationFilter = kCAFilterNearest;
 
-    self.imageView = [[UIImageView alloc] init];
+    self.imageView = [[SRLineImageView alloc] init];
     self.imageView.layer.magnificationFilter = kCAFilterNearest;
     [self.contentView addSubview:self.imageView];
     
     _doubleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapRecognizer:)];
     _doubleTapRecognizer.numberOfTapsRequired = 2;
-//    _doubleTapRecognizer.delegate = self;
     [self addGestureRecognizer:_doubleTapRecognizer];
     
     [self.panGestureRecognizer requireGestureRecognizerToFail:_doubleTapRecognizer];
@@ -80,59 +80,6 @@
         [self initialize];
     }
     return self;
-}
-
-- (void)setZoomScale:(CGFloat)scale withCenter:(CGPoint)center animated:(BOOL)animated
-{
-        CGSize boundsSize = self.bounds.size;
-        CGRect zoomRect;
-        
-        zoomRect.size.width = boundsSize.width / scale;
-        zoomRect.size.height = boundsSize.height / scale;
-        zoomRect.origin.x = center.x - (zoomRect.size.width / 2.0f);
-        zoomRect.origin.y = center.y - (zoomRect.size.height / 2.0f);
-        
-    [self zoomToRect:zoomRect animated:YES];
-}
-
--(void)zoomToRect:(CGRect)rect animated:(BOOL)animated
-{
-    [super zoomToRect:rect animated:animated];
-}
-
--(void)setZoomScale:(CGFloat)scale animated:(BOOL)animated
-{
-    [super setZoomScale:scale animated:animated];
-}
-
--(void)setZoomScale:(CGFloat)zoomScale
-{
-    [super setZoomScale:zoomScale];
-}
-
--(void)setContentSize:(CGSize)contentSize
-{
-    [super setContentSize:contentSize];
-}
-
--(void)setContentOffset:(CGPoint)contentOffset
-{
-    [super setContentOffset:contentOffset];
-}
-
--(void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated
-{
-    [super setContentOffset:contentOffset animated:animated];
-}
-
--(CGRect)visibleRect
-{
-    return [self convertRect:self.bounds toView:self.contentView];
-}
-
--(CGSize)minimumSize
-{
-    return CGSizeMake(CGRectGetWidth(self.contentView.bounds)*self.minimumZoomScale, CGRectGetHeight(self.contentView.bounds)*self.minimumZoomScale);
 }
 
 -(UIImage *)image
@@ -189,6 +136,7 @@
     }
 
     self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
+    self.imageView.zoomScale = self.zoomScale;
 }
 
 -(void)doubleTapRecognizer:(UITapGestureRecognizer*)recognizer
@@ -208,3 +156,27 @@
 }
 
 @end
+
+
+
+@implementation UIView (IQRulerScrollViewHierarchy)
+
+-(IQRulerScrollView *)rulerView
+{
+    UIView *superview = self.superview;
+    
+    while (superview) {
+        if ([superview isKindOfClass:[IQRulerScrollView class]]) {
+            return (IQRulerScrollView*)superview;
+            break;
+        }
+        else {
+            superview = superview.superview;
+        }
+    }
+    
+    return nil;
+}
+
+@end
+
