@@ -44,14 +44,12 @@ Any contribution is more than welcome! You can contribute through pull requests 
 - Filipino (Filipino) localization (fil)
 - Filipino (Filippines) localization (fil-PH)
 - Finnish localization (fi)
-- French localization (fr)
 - German localization (de)
 - Greek localization (el)
 - Indonasion localization (id)
 - Japanese localization (ja)
 - Korean localization (ko)
 - Malay localization (ms)
-- Portuguese (Brazil) localization (pt-BR)
 - Portuguese (Portugal) localization (pt-PT)
 - Romanian localization (ro)
 - Slovak localization (sk)
@@ -79,6 +77,8 @@ Many thanks to
 - [Quentin Del](https://github.com/QuentinDela),[Jose Granja Martinez](https://github.com/dioxmio) for **French** localization.
 - [Mathi Arasan D V](https://github.com/mathiarasan24) for **Tamil (India)** localization.
 - [Gracjan Ziółek](mailto:poczta@gracjan.art.pl) for **Polish** localization.
+- [Hudson SIlva Borges](https://github.com/hsborges) for **Portuguese** localization.
+
 
 - **YOU ARE NEXT**.
 
