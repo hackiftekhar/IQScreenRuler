@@ -714,6 +714,7 @@
             SRImagePickerController *controller = [[SRImagePickerController alloc] init];
             controller.delegate = weakSelf;
             controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            controller.modalPresentationStyle = UIModalPresentationPopover;
             [weakSelf presentViewController:controller animated:YES completion:nil];
         }
     }];

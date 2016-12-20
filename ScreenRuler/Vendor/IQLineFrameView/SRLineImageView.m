@@ -106,21 +106,21 @@
 {
     NSMutableArray *currentHorizontalLines = [inUseHorizontalLineLayers mutableCopy];
     NSMutableArray *currentVerticalLines = [inUseVerticalLineLayers mutableCopy];
-    
+
+    if (animated)
+    {
+        [CATransaction begin];
+        [CATransaction setAnimationDuration:0.3];
+        [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+        [CATransaction setDisableActions:NO];
+    }
+    else
+    {
+        [CATransaction setDisableActions:YES];
+    }
+
     if (_hideLine == NO && self.image)
     {
-        if (animated)
-        {
-            [CATransaction begin];
-            [CATransaction setAnimationDuration:0.3];
-            [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-            [CATransaction setDisableActions:NO];
-        }
-        else
-        {
-            [CATransaction setDisableActions:YES];
-        }
-        
         IQRulerScrollView *scrollView = [self rulerView];
         
         CGRect newRect = self.bounds;
@@ -215,10 +215,13 @@
                     if (layer == nil)
                     {
                         layer = [[CALayer alloc] init];
+                        layer.delegate = self;
                         layer.actions = @{@"frame":[NSNull null],
                                           @"transform":[NSNull null],
                                           @"bounds":[NSNull null],
                                           @"position":[NSNull null],
+                                          @"onOrderIn":[NSNull null],
+                                          @"onOrderOut":[NSNull null],
                                           @"opacity":[NSNull null]};
                         layer.contentsScale = [[UIScreen mainScreen] scale];
                         layer.backgroundColor = colorRefAlpha;
@@ -278,10 +281,13 @@
                     if (layer == nil)
                     {
                         layer = [[CALayer alloc] init];
+                        layer.delegate = self;
                         layer.actions = @{@"frame":[NSNull null],
                                           @"transform":[NSNull null],
                                           @"bounds":[NSNull null],
                                           @"position":[NSNull null],
+                                          @"onOrderIn":[NSNull null],
+                                          @"onOrderOut":[NSNull null],
                                           @"opacity":[NSNull null]};
                         layer.contentsScale = [[UIScreen mainScreen] scale];
                         layer.backgroundColor = colorRefAlpha;
@@ -305,11 +311,6 @@
                 }
             }
         }
-        
-        if (animated)
-        {
-            [CATransaction commit];
-        }
     }
 
     for (CALayer *layer in currentHorizontalLines)
@@ -327,6 +328,14 @@
     [cachedHorizontalLineLayers addObjectsFromArray:currentHorizontalLines];
     [cachedVerticalLineLayers addObjectsFromArray:currentVerticalLines];
     
+    if (animated)
+    {
+        [CATransaction commit];
+    }
+    else
+    {
+        [CATransaction setDisableActions:NO];
+    }
 }
 
 -(id<CAAction>)actionForLayer:(CALayer *)layer forKey:(NSString *)event

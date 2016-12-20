@@ -91,6 +91,7 @@
     if ([[UIApplication sharedApplication] canOpenURL:url])
     {
         SFSafariViewController *controller = [[SFSafariViewController alloc] initWithURL:url];
+        controller.popoverPresentationController.sourceView = sender;
         
         if ([controller respondsToSelector:@selector(preferredBarTintColor)])
         {

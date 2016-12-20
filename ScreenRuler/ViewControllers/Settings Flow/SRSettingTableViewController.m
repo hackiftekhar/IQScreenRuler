@@ -177,6 +177,7 @@
         [controller setPreferredControlTintColor:[UIColor themeTextColor]];
     }
     
+    controller.popoverPresentationController.sourceView = sender;
     [self presentViewController:controller animated:YES completion:nil];
 }
 
@@ -202,7 +203,7 @@
     {
         if (indexPath.section == 0)
         {
-            return 200;
+            return 225;
         }
         else
         {

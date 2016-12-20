@@ -416,6 +416,7 @@
                 {
                     UIAlertController *controller = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"error", nil) message:NSLocalizedString(@"image_load_error", nil) preferredStyle:UIAlertControllerStyleAlert];
                     [controller addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"ok", nil) style:UIAlertActionStyleDefault handler:nil]];
+                    controller.popoverPresentationController.sourceView = collectionView;
                     [weakSelf presentViewController:controller animated:YES completion:nil];
                 }
                 else

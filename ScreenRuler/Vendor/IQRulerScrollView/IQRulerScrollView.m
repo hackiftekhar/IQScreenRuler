@@ -109,6 +109,26 @@
     
     self.contentView.layer.shadowRadius = 10.0/IQAffineTransformGetScale(self.contentView.transform).width;
 
+    self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
+    self.imageView.zoomScale = self.zoomScale;
+}
+
+-(void)setContentSize:(CGSize)contentSize
+{
+    [super setContentSize:contentSize];
+    
+    [self centerContent];
+}
+
+-(void)setContentOffset:(CGPoint)contentOffset
+{
+    [super setContentOffset:contentOffset];
+    
+    [self centerContent];
+}
+
+-(void)centerContent
+{
     // center the image as it becomes smaller than the size of the screen
     CGSize boundsSize = self.bounds.size;
     CGRect frameToCenter = self.contentView.frame;
@@ -134,9 +154,6 @@
             [self.delegate scrollViewDidScroll:self];
         }
     }
-
-    self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
-    self.imageView.zoomScale = self.zoomScale;
 }
 
 -(void)doubleTapRecognizer:(UITapGestureRecognizer*)recognizer
