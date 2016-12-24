@@ -1,17 +1,17 @@
 //
-//  IQAngleView.m
+//  SRProtractorView.m
 //  Screen Ruler
 //
-//  Created by Mohd Iftekhar Qurashi
-//  Copyright (c) 2016 InfoEum Software Systems. Licensed under the Apache License v2.0.
-//  See COPYING or https://www.apache.org/licenses/LICENSE-2.0
+//  Created by IEMacBook02 on 24/12/16.
+//  Copyright © 2016 InfoEnum Software Systems. All rights reserved.
+//
 
-#import "IQAngleView.h"
+#import "SRProtractorView.h"
 #import "IQGeometry+Point.h"
 #import "IQGeometry+Angle.h"
 #import "UIFont+AppFont.h"
 
-@implementation IQAngleView
+@implementation SRProtractorView
 {
     UILabel *angleLabel;
     UILabel *angleDegreeStatic;
@@ -51,7 +51,7 @@
     angleLabel.textAlignment = NSTextAlignmentCenter;
     [angleLabel sizeToFit];
     angleLabel.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
-
+    
     angleDegreeStatic.adjustsFontSizeToFitWidth = YES;
     angleDegreeStatic.minimumScaleFactor = 0.5;
     angleDegreeStatic.textAlignment = NSTextAlignmentRight;
@@ -59,7 +59,7 @@
     degreeWidth = CGRectGetWidth(angleDegreeStatic.bounds);
     
     angleDegreeStatic.frame = CGRectMake(CGRectGetMinX(angleLabel.frame)-degreeWidth, CGRectGetMinY(angleLabel.frame), CGRectGetWidth(angleLabel.bounds)+degreeWidth*2, CGRectGetHeight(angleLabel.bounds));
-
+    
     [self addSubview:angleLabel];
     [self addSubview:angleDegreeStatic];
 }
@@ -93,14 +93,14 @@
     _angle = angle;
     
     CGFloat angleInDegree = IQRadianToDegree(angle);
-
+    
     angleInDegree = fabs(angleInDegree);
     
     if (angleInDegree > 90)
     {
         angleInDegree = 180-angleInDegree;
     }
-
+    
     angleLabel.text = [NSString localizedStringWithFormat:@"%.0f",angleInDegree];
     [angleLabel sizeToFit];
     angleLabel.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
@@ -115,7 +115,7 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-
+    
     CGPoint centerPoint = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
     
     for (NSInteger i = 0; i<48; i++)
@@ -130,7 +130,7 @@
         CGPoint P1 = CGPointMake(1, self.frame.size.width/2);
         P1 = IQPointRotate(centerPoint, P1, IQDegreeToRadian(i*(360/48.0)));
         CGPoint P2 = IQPointWithDistance(P1,centerPoint,graduationLength);
-
+        
         CAShapeLayer  *shapeLayer = [CAShapeLayer layer];
         shapeLayer.contentsScale = [[UIScreen mainScreen] scale];
         UIBezierPath *path = [UIBezierPath bezierPath];
@@ -140,7 +140,7 @@
         [path addLineToPoint:P2];
         path.lineCapStyle = kCGLineCapSquare;
         [_textColor set];
-
+        
         [path strokeWithBlendMode:kCGBlendModeNormal alpha:1.0];
     }
 }
