@@ -63,6 +63,10 @@
 "mark_as_x_reference"       = "Marcar como referência X";
 "mark_as_y_reference"       = "Marcar como referência Y";
 
+/* Angle Calculation */
+"enter_angle_title"         = "Enter angle in degree";
+"enter_angle_description"   = "Angle should be a value between %1$d and %2$d, if it's any other value than this then we'll use modulus value of entered value from %3$d";
+
 /* Zoom Scale */
 "zoom_scale"        = "Zoom Scale";
 "minimum_percent"   = "Escala Minima (%.0f%%)";

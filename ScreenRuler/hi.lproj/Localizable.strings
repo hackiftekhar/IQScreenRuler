@@ -63,6 +63,10 @@
 "mark_as_x_reference"       = "X बिंदु संकेत स्थित करें";
 "mark_as_y_reference"       = "Y बिंदु संकेत स्थित करें";
 
+/* Angle Calculation */
+"enter_angle_title"         = "डिग्री में कोण दर्ज करें।";
+"enter_angle_description"   = "कोण %1$d और %2$d के बीच होना चाहिए, अगर यह कोई अन्य मूल्य है तो हम दर्ज की गई मूल्य के %3$d से मापांक मूल्य का उपयोग करेंगे।";
+
 /* Zoom Scale */
 "zoom_scale"            = "जूम पैमाना";
 "minimum_percent"       = "न्यूनतम पैमाना (%.0f%%)";
