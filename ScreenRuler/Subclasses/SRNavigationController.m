@@ -14,6 +14,12 @@
 @end
 
 @implementation SRNavigationView
+
+-(void)dealloc
+{
+    NSLog(@"%@",NSStringFromSelector(_cmd));
+}
+
 @end
 
 /************************************************/
@@ -22,6 +28,12 @@
 @end
 
 @implementation SRContainerView
+
+-(void)dealloc
+{
+    NSLog(@"%@",NSStringFromSelector(_cmd));
+}
+
 @end
 
 /************************************************/
@@ -292,7 +304,6 @@
     
     viewController.navigationControllerSR = self;
     viewController.view.frame = self.containerView.bounds;
-    [viewController willMoveToParentViewController:self];
     [self addChildViewController:viewController];
     [viewController.view setNeedsLayout];
     [viewController.view layoutIfNeeded];
@@ -309,10 +320,10 @@
     [UIView animateWithDuration:animated?0.3:0 animations:^{
         viewController.view.alpha = 1.0;
     } completion:^(BOOL finished) {
+        
         [topController willMoveToParentViewController:nil];
-        [topController removeFromParentViewController];
         [topController.view removeFromSuperview];
-        [topController didMoveToParentViewController:nil];
+        [topController removeFromParentViewController];
     }];
 }
 

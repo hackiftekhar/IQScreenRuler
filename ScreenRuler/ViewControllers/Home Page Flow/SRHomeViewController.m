@@ -8,6 +8,7 @@
 
 #import "SRHomeViewController.h"
 #import "IQRulerView.h"
+#import "IQProtractorView.h"
 #import "SRToolbarButton.h"
 #import "UIImage+Color.h"
 #import "UIColor+HexColors.h"
@@ -27,10 +28,22 @@
 #import "SRScreenshotCollectionViewController.h"
 #import "UIImage+fixOrientation.h"
 #import <Crashlytics/Answers.h>
-
+#import "SRSettingTableViewController.h"
 #import "CBZSplashView.h"
 #import "UIBezierPath+Shapes.h"
 
+@interface CustomView : UIView
+
+@end
+
+@implementation CustomView
+
+-(void)dealloc
+{
+    NSLog(@"%@",NSStringFromSelector(_cmd));
+}
+
+@end
 
 //https://www.iconfinder.com/iconsets/hawcons-gesture-stroke
 
@@ -44,6 +57,7 @@
 @property(nonatomic, strong) ACMagnifyingGlass *magnifyingGlass;
 
 @property(nonatomic, strong) IQRulerView *freeRulerView;
+@property(nonatomic, strong) IQProtractorView *freeProtractorView;
 
 @property (strong, nonatomic) IBOutlet IQLineFrameView *lineFrameView;
 
@@ -63,6 +77,8 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *freeHandBarButton;
 @property (strong, nonatomic) IBOutlet SRToolbarButton *straighenButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *straightenBarButton;
+@property (strong, nonatomic) IBOutlet SRToolbarButton *protractorButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *protractorBarButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *editOptionBarButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *rationBarButon;
 @property (strong, nonatomic) IBOutlet SRToolbarButton *ratioButton;
@@ -102,6 +118,7 @@
 
     BOOL shouldLineFrameShow = [[NSUserDefaults standardUserDefaults] boolForKey:@"LineFrameShow"];
     BOOL shouldFreeHandRulerShow = [[NSUserDefaults standardUserDefaults] boolForKey:@"FreeHandRulerShow"];
+    BOOL shouldFreeProtractorShow = [[NSUserDefaults standardUserDefaults] boolForKey:@"FreeProtractorShow"];
     BOOL shouldSideRulerShow = [[NSUserDefaults standardUserDefaults] boolForKey:@"SideRulerShow"];
 
     {
@@ -119,7 +136,15 @@
             [self.freeHandButton addTarget:self action:@selector(freeRulerAction:) forControlEvents:UIControlEventTouchUpInside];
             self.freeHandButton.frame = CGRectMake(0, 0, 35, 35);
         }
-
+        
+        {
+            self.protractorButton.layer.cornerRadius = 3.0;
+            self.protractorButton.layer.masksToBounds = YES;
+            self.protractorButton.selected = shouldFreeProtractorShow;
+            [self.protractorButton addTarget:self action:@selector(protractorAction:) forControlEvents:UIControlEventTouchUpInside];
+            self.protractorButton.frame = CGRectMake(0, 0, 35, 35);
+        }
+        
         {
             self.straighenButton.layer.cornerRadius = 3.0;
             self.straighenButton.layer.masksToBounds = YES;
@@ -158,6 +183,20 @@
         _freeRulerView.hidden = !shouldFreeHandRulerShow;
         _freeRulerView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
         [self.view insertSubview:_freeRulerView belowSubview:self.lineFrameView];
+
+        CGFloat halfScreenWidth = MIN([[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)/2;
+
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        {
+            halfScreenWidth = 200;
+        }
+        
+        _freeProtractorView = [[IQProtractorView alloc] initWithFrame:CGRectMake(0, 0,  halfScreenWidth ,halfScreenWidth)];
+        _freeProtractorView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
+        _freeProtractorView.alpha = shouldFreeProtractorShow?1.0:0.0;
+        _freeProtractorView.hidden = !shouldFreeProtractorShow;
+        _freeProtractorView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
+        [self.view insertSubview:_freeProtractorView belowSubview:self.lineFrameView];
     }
     
     {
@@ -205,10 +244,8 @@
     
     //Free
     {
-//        self.freeRulerView.rulerColor = shadeFactorColor;
-//        self.freeRulerView.lineColor = originalThemeColor;
-        self.freeRulerView.rulerColor = originalThemeColor;
-        self.freeRulerView.lineColor = shadeFactorColor;
+        self.freeRulerView.rulerColor = self.freeProtractorView.protractorColor = originalThemeColor;
+        self.freeRulerView.lineColor = self.freeProtractorView.textColor = shadeFactorColor;
     }
     
     //Line
@@ -264,6 +301,8 @@
     _sideRulerButton.selected = (image != nil && !_lineFrameView.hideRuler);
     _freeHandButton.enabled = image != nil;
     _freeHandButton.selected = (image != nil && _freeRulerView.alpha != 0.0);
+    _protractorButton.enabled = image != nil;
+    _protractorButton.selected = (image != nil && _freeProtractorView.alpha != 0.0);
     _straighenButton.enabled = image != nil;
     _straighenButton.selected = (image != nil && !_scrollContainerView.imageView.hideLine);
     _optionBarButton.enabled = image != nil;
@@ -271,6 +310,7 @@
     _viewNoScreenshotInfo.hidden = image != nil;
     _lineFrameView.hidden = image == nil;
     _freeRulerView.hidden = image == nil;
+    _freeProtractorView.hidden = image == nil;
 }
 
 - (IBAction)optionAction:(UIBarButtonItem *)sender
@@ -329,6 +369,9 @@
         
         self.freeHandButton.selected = NO;
         self.freeRulerView.alpha = 0.0;
+        
+        self.protractorButton.selected = NO;
+        self.freeProtractorView.alpha = 0.0;
     }
     
     CGRect rect = IQRectSetCenter(CGRectMake(0, 0, 160, 160), self.view.center);
@@ -715,6 +758,8 @@
             controller.delegate = weakSelf;
             controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             controller.modalPresentationStyle = UIModalPresentationPopover;
+            controller.popoverPresentationController.barButtonItem = weakSelf.libraryBarButton;
+            controller.preferredContentSize = CGSizeMake(375, 667);
             [weakSelf presentViewController:controller animated:YES completion:nil];
         }
     }];
@@ -980,6 +1025,31 @@
     }];
 }
 
+-(IBAction)protractorAction:(UIButton*)button
+{
+    button.selected = !button.selected;
+    
+    if (button.selected)
+    {
+        self.freeProtractorView.hidden = NO;
+    }
+    
+    __weak typeof(self) weakSelf = self;
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        weakSelf.freeProtractorView.alpha = weakSelf.freeProtractorView.alpha != 1.0?1.0:0.0;
+        
+        [[NSUserDefaults standardUserDefaults] setBool:weakSelf.freeProtractorView.alpha forKey:@"FreeProtractorShow"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } completion:^(BOOL finished) {
+        
+        if (!button.selected)
+        {
+            weakSelf.freeProtractorView.hidden = YES;
+        }
+    }];
+}
+
 #pragma mark - Straighten
 
 -(IBAction)straightenFrameAction:(UIButton*)button
@@ -1009,8 +1079,8 @@
     if (self.magnifyingGlass.window == nil)
     {
         self.magnifyingGlass.touchPoint = originalLocation;
-        self.topColorView.frame = CGRectMake(0, 0, self.navigationControllerSR.view.frame.size.width, self.navigationControllerSR.view.frame.size.height);
-        [self.navigationControllerSR.view insertSubview:self.topColorView aboveSubview:self.navigationControllerSR.bottomToolbar];
+        self.topColorView.frame = CGRectMake(0, 0, self.navigationControllerSR.view.bounds.size.width, self.navigationControllerSR.topToolbar.bounds.size.height);
+        [self.navigationControllerSR.view insertSubview:self.topColorView aboveSubview:self.navigationControllerSR.topToolbar];
         [self.view insertSubview:self.magnifyingGlass aboveSubview:self.lineFrameView];
         [self.magnifyingGlass show];
         
@@ -1020,6 +1090,8 @@
     }
     else
     {
+        self.topColorView.frame = CGRectMake(0, 0, self.navigationControllerSR.view.bounds.size.width, self.navigationControllerSR.topToolbar.bounds.size.height);
+
         [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
             weakSelf.magnifyingGlass.touchPoint = originalLocation;
         } completion:NULL];
@@ -1208,6 +1280,17 @@
         controller.image = self.scrollContainerView.image;
         controller.zoomScale = self.scrollContainerView.zoomScale;
         controller.contentOffset = self.scrollContainerView.contentOffset;
+    }
+    else if ([segue.destinationViewController isKindOfClass:[UINavigationController class]])
+    {
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        {
+            UINavigationController *navControler = segue.destinationViewController;
+            
+            navControler.modalPresentationStyle = UIModalPresentationPopover;
+            navControler.popoverPresentationController.barButtonItem = self.settingsMenuBarButton;
+            navControler.preferredContentSize = CGSizeMake(375, 667);
+        }
     }
 }
 

@@ -784,7 +784,7 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(nullable UIEvent *)event
 {
-    if (backgroundLayer.superlayer)
+    if (backgroundLayer.superlayer && backgroundLayer.opacity != 0.0)
     {
         bool isEventOdd = backgroundLayer.fillRule == kCAFillRuleEvenOdd;
         

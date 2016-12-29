@@ -26,7 +26,7 @@
 		4C853B5C1DB39087003E3717 /* SRDeveloperSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C853B5B1DB39087003E3717 /* SRDeveloperSettingsViewController.m */; };
 		4C853B601DB39737003E3717 /* SRDebugHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C853B5F1DB39737003E3717 /* SRDebugHelper.m */; };
 		4C8B705D1DA7AFD200285D24 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C8B705F1DA7AFD200285D24 /* InfoPlist.strings */; };
-		4CB7CB181E0E42CB00716C63 /* SRProtractorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB7CB171E0E42CB00716C63 /* SRProtractorView.m */; };
+		4CB7CB181E0E42CB00716C63 /* IQProtractorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB7CB171E0E42CB00716C63 /* IQProtractorView.m */; };
 		4CBD45191DB3F52800DA6D73 /* LinkedListStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CBD45161DB3F52800DA6D73 /* LinkedListStack.m */; };
 		4CBD451A1DB3F52800DA6D73 /* UIImage+FloodFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CBD45181DB3F52800DA6D73 /* UIImage+FloodFill.m */; };
 		4CD032051CC165B800539151 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CD032031CC165B800539151 /* Main.storyboard */; };
@@ -101,7 +101,7 @@
 		4C33F2441DB7E32E000BC753 /* ta-LK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ta-LK"; path = "ta-LK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4C33F2451DB7E5B4000BC753 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		4C33F2461DB7E5B4000BC753 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		4C7396E21DA6A6E700397366 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		4C7396E21DA6A6E700397366 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4C7396E41DA6A6EF00397366 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		4C7396EA1DA6A6F400397366 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		4C7396EF1DA6AEE100397366 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -134,8 +134,8 @@
 		4C8B70601DA7AFD500285D24 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4C8B70611DA7AFD500285D24 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4C8B70671DA7AFDA00285D24 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4CB7CB161E0E42CB00716C63 /* SRProtractorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRProtractorView.h; sourceTree = "<group>"; };
-		4CB7CB171E0E42CB00716C63 /* SRProtractorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRProtractorView.m; sourceTree = "<group>"; };
+		4CB7CB161E0E42CB00716C63 /* IQProtractorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQProtractorView.h; sourceTree = "<group>"; };
+		4CB7CB171E0E42CB00716C63 /* IQProtractorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQProtractorView.m; sourceTree = "<group>"; };
 		4CBD45151DB3F52800DA6D73 /* LinkedListStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkedListStack.h; sourceTree = "<group>"; };
 		4CBD45161DB3F52800DA6D73 /* LinkedListStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkedListStack.m; sourceTree = "<group>"; };
 		4CBD45171DB3F52800DA6D73 /* UIImage+FloodFill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FloodFill.h"; sourceTree = "<group>"; };
@@ -449,8 +449,8 @@
 			children = (
 				4CD426811DA8234B000AD1CA /* IQAngleView.h */,
 				4CD426821DA8234B000AD1CA /* IQAngleView.m */,
-				4CB7CB161E0E42CB00716C63 /* SRProtractorView.h */,
-				4CB7CB171E0E42CB00716C63 /* SRProtractorView.m */,
+				4CB7CB161E0E42CB00716C63 /* IQProtractorView.h */,
+				4CB7CB171E0E42CB00716C63 /* IQProtractorView.m */,
 			);
 			path = IQAngleView;
 			sourceTree = "<group>";
@@ -936,7 +936,7 @@
 				4CED77E61DA82A8E0093176D /* SRCropViewController.m in Sources */,
 				4CED77E71DA82A8E0093176D /* SRDrawViewController.m in Sources */,
 				4CED77E81DA82A8E0093176D /* SREditOptionViewController.m in Sources */,
-				4CB7CB181E0E42CB00716C63 /* SRProtractorView.m in Sources */,
+				4CB7CB181E0E42CB00716C63 /* IQProtractorView.m in Sources */,
 				4CED77E91DA82A8E0093176D /* SRHomeViewController.m in Sources */,
 				4CED77EA1DA82A8E0093176D /* SRScreenshotCollectionViewCell.m in Sources */,
 				4CED77EB1DA82A8E0093176D /* SRScreenshotCollectionViewController.m in Sources */,

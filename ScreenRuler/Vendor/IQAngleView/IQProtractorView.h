@@ -1,5 +1,5 @@
 //
-//  SRProtractorView.h
+//  IQProtractorView.h
 //  Screen Ruler
 //
 //  Created by IEMacBook02 on 24/12/16.
@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SRProtractorView : UIView
+@interface IQProtractorView : UIView
 
 @property(nonatomic, strong) UIColor *textColor;
-@property(nonatomic, assign) CGFloat angle;
+@property(nonatomic, strong) UIColor *protractorColor;
 
 @end

@@ -24,6 +24,7 @@
 
 @end
 
+
 @implementation IQRulerView
 
 #pragma mark - Initialization
@@ -102,8 +103,8 @@
 -(void)setRulerColor:(UIColor *)rulerColor
 {
     _rulerColor = rulerColor;
-    self.backgroundColor = _rulerColor;
-    self.angleView.backgroundColor = [_rulerColor colorWithAlphaComponent:_rulerColor.alpha+(1-_rulerColor.alpha)/2];
+    self.backgroundColor = [_rulerColor colorWithAlphaComponent:0.85];
+    self.angleView.backgroundColor = _rulerColor;
     [self setNeedsLayout];
 }
 
@@ -209,21 +210,7 @@
 {
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
-//        UIView *piece = recognizer.view;
-//        CGPoint locationInView = [recognizer locationInView:piece];
-//        CGPoint locationInSuperview = [recognizer locationInView:piece.superview];
-//        
-//        piece.layer.anchorPoint = CGPointMake(locationInView.x / piece.bounds.size.width, locationInView.y / piece.bounds.size.height);
-//        piece.center = locationInSuperview;
-
-        for (UIView *view in [self.superview.subviews reverseObjectEnumerator])
-        {
-            if ([view isKindOfClass:[IQRulerView class]] && view != self)
-            {
-                [self.superview insertSubview:self aboveSubview:view];
-                break;
-            }
-        }
+//        [self bringSubviewToFront:self];
     }
     else if (recognizer.state == UIGestureRecognizerStateChanged)
     {
@@ -237,15 +224,10 @@
 
 -(void)rotateRecognizer:(UIRotationGestureRecognizer*)recognizer
 {
-//    if (recognizer.state == UIGestureRecognizerStateBegan)
-//    {
-//        UIView *piece = recognizer.view;
-//        CGPoint locationInView = [recognizer locationInView:piece];
-//        CGPoint locationInSuperview = [recognizer locationInView:piece.superview];
-//        
-//        piece.layer.anchorPoint = CGPointMake(locationInView.x / piece.bounds.size.width, locationInView.y / piece.bounds.size.height);
-//        piece.center = locationInSuperview;
-//    }
+    if (recognizer.state == UIGestureRecognizerStateBegan)
+    {
+//        [self bringSubviewToFront:self];
+    }
 
     CGFloat const recognizerAngleInDegree = IQRadianToDegree(recognizer.rotation);
     CGFloat const currentAngleInRadian = IQAffineTransformGetAngle(self.transform);
@@ -256,7 +238,7 @@
         
     if (minimumRotationAngle > 2 || _isAngleLocked)
     {
-        minimumRotationAngle = 5;
+        minimumRotationAngle = 2;
     }
     else
     {
@@ -267,7 +249,7 @@
 
     [lockDegrees addObject:@(0)];
 
-    for (NSInteger i = 45; i< 360; i+=45)
+    for (NSInteger i = 5; i< 360; i+= 5)
     {
         [lockDegrees addObject:@(i)];
         [lockDegrees addObject:@(-i)];

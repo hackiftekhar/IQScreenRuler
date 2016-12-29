@@ -213,7 +213,7 @@
                                         <rect key="frame" x="0.0" y="35" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0UP-Oj-cc0" id="mG0-bm-qUz">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Show Touches" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="W0k-0k-uCt">
@@ -332,7 +332,7 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="CustomView">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -450,7 +450,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="p3Q-GJ-XM5"/>
                         <barButtonItem id="ukV-1D-apM">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Mry-3E-m5Q" customClass="SRToolbarButton">
-                                <rect key="frame" x="196" y="10" width="25" height="25"/>
+                                <rect key="frame" x="161" y="10" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="horizontal_ruler"/>
                                 <userDefinedRuntimeAttributes>
@@ -475,7 +475,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="y8N-DH-QFZ"/>
                         <barButtonItem id="MQY-9P-4nS">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pyb-lI-IG3" customClass="SRToolbarButton">
-                                <rect key="frame" x="372" y="10" width="25" height="25"/>
+                                <rect key="frame" x="301" y="10" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="line_frame"/>
                                 <userDefinedRuntimeAttributes>
@@ -495,6 +495,28 @@
                                 <connections>
                                     <action selector="straightenFrameAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ltL-1o-P93"/>
                                 </connections>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="yge-kD-Zjb"/>
+                        <barButtonItem id="REr-JI-SZU">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hVd-2v-j6x" customClass="SRToolbarButton">
+                                <rect key="frame" x="442" y="10" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="protractor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="normalStateColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="highlightedStateColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedStateColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="disabledStateColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </button>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="RxT-nf-NJl"/>
@@ -571,6 +593,8 @@
                         <outlet property="loadingColorDataIndicator" destination="SN5-Zm-Xev" id="Pj7-Vm-mG9"/>
                         <outlet property="noScreenshotActionButton" destination="Y6q-fu-Bb9" id="sPr-lD-Tzi"/>
                         <outlet property="optionBarButton" destination="WA8-oJ-SMr" id="EQM-uV-Ce7"/>
+                        <outlet property="protractorBarButton" destination="REr-JI-SZU" id="ICv-28-J0Q"/>
+                        <outlet property="protractorButton" destination="hVd-2v-j6x" id="Fa6-M2-YKJ"/>
                         <outlet property="ratioButton" destination="BS5-SW-4dg" id="eZE-8S-tbI"/>
                         <outlet property="rationBarButon" destination="Z3k-7t-jds" id="urZ-9h-p8w"/>
                         <outlet property="scrollContainerView" destination="kNi-0z-pNK" id="8V3-7Z-zwT"/>
@@ -943,7 +967,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="IKX-Rb-al2"/>
                         <barButtonItem id="kwn-Ku-wXT">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Enk-VY-nlH" customClass="IQTextPickerButton">
-                                <rect key="frame" x="495" y="5" width="35" height="35"/>
+                                <rect key="frame" x="495" y="4.5" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="16"/>
                                 <state key="normal" title="5"/>
@@ -1014,7 +1038,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="Vb7-gB-CIP">
-                            <rect key="frame" x="0.0" y="387" width="768" height="200"/>
+                            <rect key="frame" x="0.0" y="386.5" width="768" height="200"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Screen Ruler is open source at:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vUr-Ki-Ldf">
@@ -1580,7 +1604,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Share On Social Network" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IVF-fw-bRY">
-                                            <rect key="frame" x="48" y="0.0" width="672" height="43"/>
+                                            <rect key="frame" x="48" y="0.0" width="672" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
                                             <nil key="highlightedColor"/>
@@ -2788,6 +2812,7 @@
         <image name="line_frame" width="26" height="26"/>
         <image name="option" width="25" height="25"/>
         <image name="photo_library" width="25" height="25"/>
+        <image name="protractor" width="32" height="32"/>
         <image name="ratio" width="26" height="26"/>
         <image name="resize" width="26" height="26"/>
         <image name="rotate" width="19" height="25"/>
