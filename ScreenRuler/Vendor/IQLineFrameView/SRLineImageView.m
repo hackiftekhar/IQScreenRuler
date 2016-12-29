@@ -342,29 +342,12 @@
 {
     if (layer == self.layer)
     {
-        return nil;
+        return [super actionForLayer:layer forKey:event];
     }
     else
     {
         return [NSNull null];
     }
 }
-
-//- (BOOL)pointInside:(CGPoint)point withEvent:(nullable UIEvent *)event
-//{
-//    if (backgroundLayer.superlayer)
-//    {
-//        bool isEventOdd = backgroundLayer.fillRule == kCAFillRuleEvenOdd;
-//        
-//        bool result = CGPathContainsPoint(backgroundLayer.path,
-//                                          NULL, point, isEventOdd);
-//        
-//        return result;
-//    }
-//    else
-//    {
-//        return NO;
-//    }
-//}
 
 @end

@@ -22,8 +22,6 @@
 @property(nonatomic, strong, readonly) UIButton *zoomInfoButton;
 @property(nonatomic, strong, readonly) UIButton *zoomIncreaseButton;
 
-@property (strong, nonatomic) UIRotationGestureRecognizer *rotationGestureRecognizer;
-
 @end
 
 
@@ -37,12 +35,6 @@
 
 -(void)initialize
 {
-//    self.backgroundColor = [UIColor grayColor];
-    _rotationGestureRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotation:)];
-    _rotationGestureRecognizer.delaysTouchesEnded = NO;
-    _rotationGestureRecognizer.delegate = self;
-//    [self addGestureRecognizer:_rotationGestureRecognizer];
-    
     [self insertSubview:self.zoomInfoContainerView aboveSubview:self.scrollView];
 }
 
@@ -393,8 +385,6 @@
 {
     [super layoutSubviews];
     
-//    [self layoutImageScrollView];
-    
     CGFloat zoomScale = IQAspectScaleFit(self.image.size,self.bounds);
     self.minimumZoomScale = zoomScale;
     self.maximumZoomScale = [[UIScreen  mainScreen] bounds].size.width;
@@ -433,36 +423,9 @@
 
 #pragma mark - Rotation
 
-- (void)handleRotation:(UIRotationGestureRecognizer *)gestureRecognizer
-{
-    CGAffineTransform transform = CGAffineTransformRotate(self.scrollView.transform, gestureRecognizer.rotation);
-    self.scrollView.transform = transform;
-
-    gestureRecognizer.rotation = 0;
-}
-
 -(CGFloat)rotationAngle
 {
     return IQAffineTransformGetAngle(self.scrollView.transform);
-}
-
-- (void)layoutImageScrollView
-{
-//    CGRect frame = self.contentRect;
-//    frame.origin = CGPointZero;
-//    
-//    if (self.rotationAngle != 0.0)
-//    {
-//        // Step 1: Rotate the left edge of the initial rect of the image scroll view clockwise around the center by `rotationAngle`.
-//        CGFloat rotationAngle = self.rotationAngle;
-//        
-//        frame = IQBoundAspectFitRectWithAngle(frame,rotationAngle);
-//    }
-//    
-//    CGAffineTransform transform = self.scrollView.transform;
-//    self.scrollView.transform = CGAffineTransformIdentity;
-//    self.scrollView.bounds = frame;
-//    self.scrollView.transform = transform;
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
