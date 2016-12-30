@@ -121,6 +121,14 @@
 
     if (_hideLine == NO && self.image)
     {
+        NSDictionary* disabledActions = @{@"frame":[NSNull null],
+                                          @"transform":[NSNull null],
+                                          @"bounds":[NSNull null],
+                                          @"position":[NSNull null],
+                                          @"onOrderIn":[NSNull null],
+                                          @"onOrderOut":[NSNull null],
+                                          @"opacity":[NSNull null]};
+
         IQRulerScrollView *scrollView = [self rulerView];
         
         CGRect newRect = self.bounds;
@@ -215,14 +223,7 @@
                     if (layer == nil)
                     {
                         layer = [[CALayer alloc] init];
-                        layer.delegate = self;
-                        layer.actions = @{@"frame":[NSNull null],
-                                          @"transform":[NSNull null],
-                                          @"bounds":[NSNull null],
-                                          @"position":[NSNull null],
-                                          @"onOrderIn":[NSNull null],
-                                          @"onOrderOut":[NSNull null],
-                                          @"opacity":[NSNull null]};
+                        layer.actions = disabledActions;
                         layer.contentsScale = [[UIScreen mainScreen] scale];
                         layer.backgroundColor = colorRefAlpha;
                         [inUseHorizontalLineLayers push:layer];
@@ -281,14 +282,7 @@
                     if (layer == nil)
                     {
                         layer = [[CALayer alloc] init];
-                        layer.delegate = self;
-                        layer.actions = @{@"frame":[NSNull null],
-                                          @"transform":[NSNull null],
-                                          @"bounds":[NSNull null],
-                                          @"position":[NSNull null],
-                                          @"onOrderIn":[NSNull null],
-                                          @"onOrderOut":[NSNull null],
-                                          @"opacity":[NSNull null]};
+                        layer.actions = disabledActions;
                         layer.contentsScale = [[UIScreen mainScreen] scale];
                         layer.backgroundColor = colorRefAlpha;
                         [inUseVerticalLineLayers push:layer];
@@ -335,18 +329,6 @@
     else
     {
         [CATransaction setDisableActions:NO];
-    }
-}
-
--(id<CAAction>)actionForLayer:(CALayer *)layer forKey:(NSString *)event
-{
-    if (layer == self.layer)
-    {
-        return [super actionForLayer:layer forKey:event];
-    }
-    else
-    {
-        return [NSNull null];
     }
 }
 

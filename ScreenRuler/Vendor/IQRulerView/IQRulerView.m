@@ -249,7 +249,7 @@
 
     [lockDegrees addObject:@(0)];
 
-    for (NSInteger i = 5; i< 360; i+= 5)
+    for (NSInteger i = 15; i< 360; i+= 15)
     {
         [lockDegrees addObject:@(i)];
         [lockDegrees addObject:@(-i)];

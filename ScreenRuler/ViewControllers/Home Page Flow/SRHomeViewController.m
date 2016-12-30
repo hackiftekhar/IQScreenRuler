@@ -32,19 +32,6 @@
 #import "CBZSplashView.h"
 #import "UIBezierPath+Shapes.h"
 
-@interface CustomView : UIView
-
-@end
-
-@implementation CustomView
-
--(void)dealloc
-{
-    NSLog(@"%@",NSStringFromSelector(_cmd));
-}
-
-@end
-
 //https://www.iconfinder.com/iconsets/hawcons-gesture-stroke
 
 @interface SRHomeViewController ()<UIScrollViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIToolbarDelegate,MPCoachMarksViewDelegate,SRImageControllerDelegate,SRScreenshotCollectionViewControllerDelegate,IQLineFrameViewDelegate>
@@ -1283,14 +1270,11 @@
     }
     else if ([segue.destinationViewController isKindOfClass:[UINavigationController class]])
     {
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-        {
-            UINavigationController *navControler = segue.destinationViewController;
-            
-            navControler.modalPresentationStyle = UIModalPresentationPopover;
-            navControler.popoverPresentationController.barButtonItem = self.settingsMenuBarButton;
-            navControler.preferredContentSize = CGSizeMake(375, 667);
-        }
+        UINavigationController *navControler = segue.destinationViewController;
+        
+        navControler.modalPresentationStyle = UIModalPresentationPopover;
+        navControler.popoverPresentationController.barButtonItem = self.settingsMenuBarButton;
+        navControler.preferredContentSize = CGSizeMake(375, 667);
     }
 }
 
@@ -1307,19 +1291,27 @@
 {
     __weak typeof(self) weakSelf = self;
 
-    CGAffineTransform transform = _freeRulerView.transform;
+    CGAffineTransform rulerTransform = _freeRulerView.transform;
+    CGAffineTransform protractorTransform = _freeProtractorView.transform;
     [UIView animateWithDuration:0.25 animations:^{
         weakSelf.freeRulerView.transform = CGAffineTransformIdentity;
+        weakSelf.freeProtractorView.transform = CGAffineTransformIdentity;
+        [weakSelf.freeProtractorView setNeedsLayout];
     }];
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         
-        weakSelf.freeRulerView.transform = transform;
+        weakSelf.freeRulerView.transform = rulerTransform;
         
         [weakSelf.lineFrameView updateUIAnimated:YES];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         
         [weakSelf.lineFrameView updateUIAnimated:YES];
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            weakSelf.freeProtractorView.transform = protractorTransform;
+            [weakSelf.freeProtractorView setNeedsLayout];
+        }];
     }];
 }
 

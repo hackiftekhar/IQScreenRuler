@@ -15,11 +15,6 @@
 
 @implementation SRNavigationView
 
--(void)dealloc
-{
-    NSLog(@"%@",NSStringFromSelector(_cmd));
-}
-
 @end
 
 /************************************************/
@@ -28,11 +23,6 @@
 @end
 
 @implementation SRContainerView
-
--(void)dealloc
-{
-    NSLog(@"%@",NSStringFromSelector(_cmd));
-}
 
 @end
 

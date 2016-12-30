@@ -46,7 +46,7 @@
 	<key>CFBundleSpokenName</key>
 	<string>Screen Ruler</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>

@@ -463,10 +463,6 @@ typedef NS_ENUM(NSUInteger, DirectionLock) {
             verticalBeginAngle = fmodf(verticalBeginAngle, M_PI);
         }
         
-        CGAffineTransform transform1 = _layerDegree1.affineTransform;
-        CGAffineTransform transform2 = _layerDegree2.affineTransform;
-        CGAffineTransform transform3 = _layerDegree3.affineTransform;
-        CGAffineTransform transform4 = _layerDegree4.affineTransform;
         _layerDegree1.affineTransform = CGAffineTransformIdentity;
         _layerDegree2.affineTransform = CGAffineTransformIdentity;
         _layerDegree3.affineTransform = CGAffineTransformIdentity;
@@ -533,10 +529,14 @@ typedef NS_ENUM(NSUInteger, DirectionLock) {
             _layerDegree4.position = IQPointGetMidPoint(rotatedPoint4, centerPoint);
         }
         
-        _layerDegree1.affineTransform = transform1;
-        _layerDegree2.affineTransform = transform2;
-        _layerDegree3.affineTransform = transform3;
-        _layerDegree4.affineTransform = transform4;
+        
+        CGFloat finalAngleInRadian = IQAffineTransformGetAngle(self.transform);
+        
+        CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(-finalAngleInRadian);
+        _layerDegree1.affineTransform = rotationTransform;
+        _layerDegree2.affineTransform = rotationTransform;
+        _layerDegree3.affineTransform = rotationTransform;
+        _layerDegree4.affineTransform = rotationTransform;
     }
 }
 
@@ -615,7 +615,7 @@ typedef NS_ENUM(NSUInteger, DirectionLock) {
     
     [lockDegrees addObject:@(0)];
     
-    for (NSInteger i = 5; i< 360; i+= 5)
+    for (NSInteger i = 15; i< 360; i+= 15)
     {
         [lockDegrees addObject:@(i)];
         [lockDegrees addObject:@(-i)];
@@ -657,15 +657,7 @@ typedef NS_ENUM(NSUInteger, DirectionLock) {
             recognizer.rotation = 0.0;
         }
         
-        CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(finalAngleInRadian);
-
-        for (CALayer *layer in self.layer.sublayers)
-        {
-            if ([layer isKindOfClass:[CATextLayer class]])
-            {
-                layer.affineTransform = CGAffineTransformInvert(rotationTransform);
-            }
-        }
+        [self setNeedsLayout];
     }
 }
 
@@ -834,16 +826,6 @@ typedef NS_ENUM(NSUInteger, DirectionLock) {
             transform.ty = self.transform.ty;
             
             self.transform = transform;
-            
-            CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(-finalAngleInRadian);
-            
-            for (CALayer *layer in self.layer.sublayers)
-            {
-                if ([layer isKindOfClass:[CATextLayer class]])
-                {
-                    layer.affineTransform = CGAffineTransformInvert(rotationTransform);
-                }
-            }
         }
             break;
     }

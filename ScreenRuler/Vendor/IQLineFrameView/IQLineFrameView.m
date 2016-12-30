@@ -383,6 +383,15 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
             backgroundLayer.opacity = 1.0;
         }
         
+        NSDictionary* disabledActions = @{@"frame":[NSNull null],
+                                          @"string":[NSNull null],
+                                          @"transform":[NSNull null],
+                                          @"bounds":[NSNull null],
+                                          @"position":[NSNull null],
+                                          @"onOrderIn":[NSNull null],
+                                          @"onOrderOut":[NSNull null],
+                                          @"opacity":[NSNull null]};
+
         //Horizontal Scale
         {
             CGFloat currentStep = respectivePoint.x;
@@ -420,11 +429,7 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
                     if (layer1 == nil)
                     {
                         layer1 = [[CALayer alloc] init];
-                        layer1.actions = @{@"frame":[NSNull null],
-                                           @"transform":[NSNull null],
-                                           @"bounds":[NSNull null],
-                                           @"position":[NSNull null],
-                                           @"opacity":[NSNull null]};
+                        layer1.actions = disabledActions;
                         layer1.backgroundColor = self.lineColor.CGColor;
                         layer1.contentsScale = [[UIScreen mainScreen] scale];
                         [inUseHorizontalShortLineLayers push:layer1];
@@ -447,11 +452,7 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
                     if (layer2 == nil)
                     {
                         layer2 = [[CALayer alloc] init];
-                        layer2.actions = @{@"frame":[NSNull null],
-                                           @"transform":[NSNull null],
-                                           @"bounds":[NSNull null],
-                                           @"position":[NSNull null],
-                                           @"opacity":[NSNull null]};
+                        layer2.actions = disabledActions;
                         layer2.backgroundColor = self.lineColor.CGColor;
                         layer2.contentsScale = [[UIScreen mainScreen] scale];
                         [inUseHorizontalShortLineLayers push:layer2];
@@ -492,12 +493,7 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
                         if (topTextLayer == nil)
                         {
                             topTextLayer = [[CATextLayer alloc] init];
-                            topTextLayer.actions = @{@"frame":[NSNull null],
-                                                     @"transform":[NSNull null],
-                                                     @"bounds":[NSNull null],
-                                                     @"position":[NSNull null],
-                                                     @"string":[NSNull null],
-                                                     @"opacity":[NSNull null]};
+                            topTextLayer.actions = disabledActions;
                             topTextLayer.foregroundColor = self.lineColor.CGColor;
                             topTextLayer.contentsScale = [[UIScreen mainScreen] scale];
                             topTextLayer.font = (__bridge CFTypeRef)@"KohinoorBangla-Semibold";
@@ -523,12 +519,7 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
                         if (bottomTextLayer == nil)
                         {
                             bottomTextLayer = [[CATextLayer alloc] init];
-                            bottomTextLayer.actions = @{@"frame":[NSNull null],
-                                                        @"transform":[NSNull null],
-                                                        @"bounds":[NSNull null],
-                                                        @"position":[NSNull null],
-                                                        @"string":[NSNull null],
-                                                        @"opacity":[NSNull null]};
+                            bottomTextLayer.actions = disabledActions;
                             bottomTextLayer.foregroundColor = self.lineColor.CGColor;
                             bottomTextLayer.contentsScale = [[UIScreen mainScreen] scale];
                             bottomTextLayer.font = (__bridge CFTypeRef)@"KohinoorBangla-Semibold";
@@ -586,11 +577,7 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
                     if (layer1 == nil)
                     {
                         layer1 = [[CALayer alloc] init];
-                        layer1.actions = @{@"frame":[NSNull null],
-                                           @"transform":[NSNull null],
-                                           @"bounds":[NSNull null],
-                                           @"position":[NSNull null],
-                                           @"opacity":[NSNull null]};
+                        layer1.actions = disabledActions;
                         layer1.backgroundColor = self.lineColor.CGColor;
                         layer1.contentsScale = [[UIScreen mainScreen] scale];
                         [inUseVerticalShortLineLayers push:layer1];
@@ -614,11 +601,7 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
                     if (layer2 == nil)
                     {
                         layer2 = [[CALayer alloc] init];
-                        layer2.actions = @{@"frame":[NSNull null],
-                                           @"transform":[NSNull null],
-                                           @"bounds":[NSNull null],
-                                           @"position":[NSNull null],
-                                           @"opacity":[NSNull null]};
+                        layer2.actions = disabledActions;
                         layer2.backgroundColor = self.lineColor.CGColor;
                         layer2.contentsScale = [[UIScreen mainScreen] scale];
                         [inUseVerticalShortLineLayers push:layer2];
@@ -661,12 +644,7 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
                         if (leftTextLayer == nil)
                         {
                             leftTextLayer = [[CATextLayer alloc] init];
-                            leftTextLayer.actions = @{@"frame":[NSNull null],
-                                                      @"transform":[NSNull null],
-                                                      @"bounds":[NSNull null],
-                                                      @"position":[NSNull null],
-                                                      @"string":[NSNull null],
-                                                      @"opacity":[NSNull null]};
+                            leftTextLayer.actions = disabledActions;
                             leftTextLayer.foregroundColor = self.lineColor.CGColor;
                             leftTextLayer.contentsScale = [[UIScreen mainScreen] scale];
                             leftTextLayer.font = (__bridge CFTypeRef)@"KohinoorBangla-Semibold";
@@ -693,12 +671,7 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
                         if (rightTextLayer == nil)
                         {
                             rightTextLayer = [[CATextLayer alloc] init];
-                            rightTextLayer.actions = @{@"frame":[NSNull null],
-                                                       @"transform":[NSNull null],
-                                                       @"bounds":[NSNull null],
-                                                       @"position":[NSNull null],
-                                                       @"string":[NSNull null],
-                                                       @"opacity":[NSNull null]};
+                            rightTextLayer.actions = disabledActions;
                             rightTextLayer.foregroundColor = self.lineColor.CGColor;
                             rightTextLayer.contentsScale = [[UIScreen mainScreen] scale];
                             rightTextLayer.font = (__bridge CFTypeRef)@"KohinoorBangla-Semibold";
@@ -768,18 +741,6 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
     [super layoutSubviews];
     
     backgroundLayer.frame = self.layer.bounds;
-}
-
--(id<CAAction>)actionForLayer:(CALayer *)layer forKey:(NSString *)event
-{
-    if (layer == self.layer)
-    {
-        return nil;
-    }
-    else
-    {
-        return [NSNull null];
-    }
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(nullable UIEvent *)event
