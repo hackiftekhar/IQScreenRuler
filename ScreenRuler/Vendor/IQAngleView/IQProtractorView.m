@@ -24,6 +24,11 @@ typedef NS_ENUM(NSUInteger, TapLocation) {
     TapLocationVerticalEnd,
 };
 
+typedef NS_ENUM(NSUInteger, DirectionLock) {
+    DirectionLockNone,
+    DirectionLockHorizontal,
+    DirectionLockVertical,
+};
 
 @interface IQProtractorView ()<UIGestureRecognizerDelegate>
 
@@ -46,6 +51,8 @@ typedef NS_ENUM(NSUInteger, TapLocation) {
 
 @property(strong, readonly) CATextLayer *layerDegree1;
 @property(strong, readonly) CATextLayer *layerDegree2;
+@property(strong, readonly) CATextLayer *layerDegree3;
+@property(strong, readonly) CATextLayer *layerDegree4;
 
 @end
 
@@ -59,7 +66,9 @@ typedef NS_ENUM(NSUInteger, TapLocation) {
     
     //linePanRecognizer
     TapLocation tapLocation;
-    CGFloat deltaAngle;
+    
+    //panRecognizer
+    DirectionLock directionLock;
 }
 
 -(CGPoint)horizontalStartPoint
@@ -94,11 +103,13 @@ typedef NS_ENUM(NSUInteger, TapLocation) {
 {
     _textColor = textColor;
     
-    _layerDegree1.foregroundColor = [textColor CGColor];
-    _layerDegree2.foregroundColor = [textColor CGColor];
-    _layerHorizontalLine.strokeColor = [textColor CGColor];
-    _layerVerticalLine.strokeColor = [textColor CGColor];
-    _arcLayer.strokeColor = [textColor CGColor];
+    _layerDegree1.foregroundColor =
+    _layerDegree2.foregroundColor =
+    _layerDegree3.foregroundColor =
+    _layerDegree4.foregroundColor =
+    _layerHorizontalLine.strokeColor =
+    _layerVerticalLine.strokeColor =
+    _arcLayer.strokeColor =
     _dashLayer.strokeColor = [textColor CGColor];
 
     [self setNeedsLayout];
@@ -108,8 +119,15 @@ typedef NS_ENUM(NSUInteger, TapLocation) {
 {
     _protractorColor = protractorColor;
     
-    _layerCircle.fillColor = _layerDegree1.backgroundColor = _layerDegree2.backgroundColor = [_protractorColor colorWithAlphaComponent:0.8].CGColor;
-    _invertLayerHorizontalLine.strokeColor = _invertLayerVerticalLine.strokeColor = [_protractorColor CGColor];
+    _layerCircle.fillColor =
+    _layerDegree1.backgroundColor =
+    _layerDegree2.backgroundColor =
+    _layerDegree3.backgroundColor =
+    _layerDegree4.backgroundColor = [_protractorColor colorWithAlphaComponent:0.8].CGColor;
+    
+    _invertLayerHorizontalLine.strokeColor =
+    _invertLayerVerticalLine.strokeColor = [_protractorColor CGColor];
+    
     [self setNeedsLayout];
 }
 
@@ -194,20 +212,39 @@ typedef NS_ENUM(NSUInteger, TapLocation) {
         _layerDegree2.fontSize = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)?24:15;
         _layerDegree2.alignmentMode = kCAAlignmentCenter;
         [self.layer addSublayer:_layerDegree2];
+
+        _layerDegree3 = [[CATextLayer alloc] init];
+        _layerDegree3.masksToBounds = YES;
+        _layerDegree3.frame = CGRectMake(0, 0, 40, 40);
+        _layerDegree3.actions = disabledActions;
+        _layerDegree3.contentsScale = [[UIScreen mainScreen] scale];
+        _layerDegree3.font = (__bridge CFTypeRef)@"KohinoorBangla-Semibold";
+        _layerDegree3.fontSize = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)?24:15;
+        _layerDegree3.alignmentMode = kCAAlignmentCenter;
+        [self.layer addSublayer:_layerDegree3];
+        
+        _layerDegree4 = [[CATextLayer alloc] init];
+        _layerDegree4.masksToBounds = YES;
+        _layerDegree4.actions = disabledActions;
+        _layerDegree4.frame = CGRectMake(0, 0, 40, 40);
+        _layerDegree4.contentsScale = [[UIScreen mainScreen] scale];
+        _layerDegree4.font = (__bridge CFTypeRef)@"KohinoorBangla-Semibold";
+        _layerDegree4.fontSize = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)?24:15;
+        _layerDegree4.alignmentMode = kCAAlignmentCenter;
+        [self.layer addSublayer:_layerDegree4];
     }
     
     {
-        _panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panRecognizer:)];
-        _panRecognizer.delegate = self;
-        _panRecognizer.maximumNumberOfTouches = 2;
-        [self addGestureRecognizer:_panRecognizer];
-        
         _linePanRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(linePanRecognizer:)];
         _linePanRecognizer.delegate = self;
         _linePanRecognizer.maximumNumberOfTouches = 1;
         [self addGestureRecognizer:_linePanRecognizer];
-        
+
+        _panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panRecognizer:)];
+        _panRecognizer.delegate = self;
+        _panRecognizer.maximumNumberOfTouches = 2;
         [_panRecognizer requireGestureRecognizerToFail:_linePanRecognizer];
+        [self addGestureRecognizer:_panRecognizer];
         
         _rotateRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotateRecognizer:)];
         _rotateRecognizer.delegate = self;
@@ -219,6 +256,8 @@ typedef NS_ENUM(NSUInteger, TapLocation) {
         
         _longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressRecognizer:)];
         _longPressRecognizer.delegate = self;
+        _longPressRecognizer.minimumPressDuration = 1;
+        _longPressRecognizer.allowableMovement = 3;
         [self addGestureRecognizer:_longPressRecognizer];
     }
 }
@@ -287,6 +326,7 @@ typedef NS_ENUM(NSUInteger, TapLocation) {
             [path closePath];
             [path moveToPoint:stopPoint2];
             [path addLineToPoint:endPoint];
+            [path closePath];
 
             _layerHorizontalLine.path = _layerVerticalLine.path = path.CGPath;
         }
@@ -301,10 +341,15 @@ typedef NS_ENUM(NSUInteger, TapLocation) {
             _invertLayerHorizontalLine.position = _invertLayerVerticalLine.position = centerPoint;
 
             CGPoint beginPoint = CGPointMake(CGRectGetMinX(bounds), lineTapWidth/2);
+            CGPoint stopPoint1 = CGPointMake(CGRectGetMidX(bounds)-1.25, lineTapWidth/2);
+            CGPoint stopPoint2 = CGPointMake(CGRectGetMidX(bounds)+1.25, lineTapWidth/2);
             CGPoint endPoint = CGPointMake(CGRectGetMaxX(bounds), lineTapWidth/2);
             
             UIBezierPath *path = [UIBezierPath bezierPath];
             [path moveToPoint:beginPoint];
+            [path addLineToPoint:stopPoint1];
+            [path closePath];
+            [path moveToPoint:stopPoint2];
             [path addLineToPoint:endPoint];
             [path closePath];
 
@@ -347,26 +392,68 @@ typedef NS_ENUM(NSUInteger, TapLocation) {
         _dashLayer.path = path.CGPath;
     }
     
-    CGFloat radius = CGRectGetWidth(self.bounds)/4;
-
     //Arc
     {
+        
         UIBezierPath *path = [UIBezierPath bezierPath];
-        CGPoint horizontalStartPoint = IQPointWithDistance(centerPoint, self.horizontalStartPoint, radius);
-        CGPoint horizontalEndPoint = IQPointWithDistance(centerPoint, self.horizontalEndPoint, radius);
         
-        CGFloat beginAngle = IQPointGetAngle(centerPoint, CGPointMake(centerPoint.x+10, centerPoint.y), horizontalStartPoint);
-        CGFloat endAngle = IQPointGetAngle(centerPoint, CGPointMake(centerPoint.x+10, centerPoint.y), horizontalEndPoint);
+        CGPoint basePoint2 = CGPointMake(centerPoint.x+10, centerPoint.y);
         
-        [path moveToPoint:horizontalStartPoint];
-        [path addArcWithCenter:centerPoint radius:radius startAngle:beginAngle endAngle:endAngle clockwise:YES];
-        [path addArcWithCenter:centerPoint radius:radius startAngle:endAngle endAngle:beginAngle clockwise:NO];
-        [path closePath];
+        {
+            CGFloat radius = innerRadius*1.5;
+            CGPoint point1 = IQPointWithDistance(centerPoint, self.horizontalStartPoint, radius);
+            CGPoint point2 = IQPointWithDistance(centerPoint, self.verticalEndPoint, radius);
+            
+            CGFloat beginAngle = IQPointGetAngle(centerPoint, basePoint2, point1);
+            CGFloat endAngle = IQPointGetAngle(centerPoint, basePoint2, point2);
+            
+            [path moveToPoint:point1];
+            [path addArcWithCenter:centerPoint radius:radius startAngle:beginAngle endAngle:endAngle clockwise:YES];
+        }
+        
+        {
+            CGFloat radius = innerRadius*2;
+            CGPoint point1 = IQPointWithDistance(centerPoint, self.horizontalEndPoint, radius);
+            CGPoint point2 = IQPointWithDistance(centerPoint, self.verticalEndPoint, radius);
+            
+            CGFloat beginAngle = IQPointGetAngle(centerPoint, basePoint2, point1);
+            CGFloat endAngle = IQPointGetAngle(centerPoint, basePoint2, point2);
+            
+            [path moveToPoint:point1];
+            [path addArcWithCenter:centerPoint radius:radius startAngle:beginAngle endAngle:endAngle clockwise:NO];
+        }
+
+        {
+            CGFloat radius = innerRadius*2.5;
+            CGPoint point1 = IQPointWithDistance(centerPoint, self.horizontalStartPoint, radius);
+            CGPoint point2 = IQPointWithDistance(centerPoint, self.verticalStartPoint, radius);
+            
+            CGFloat beginAngle = IQPointGetAngle(centerPoint, basePoint2, point1);
+            CGFloat endAngle = IQPointGetAngle(centerPoint, basePoint2, point2);
+            
+            [path moveToPoint:point1];
+            [path addArcWithCenter:centerPoint radius:radius startAngle:beginAngle endAngle:endAngle clockwise:YES];
+        }
+        
+        {
+            CGFloat radius = innerRadius*3;
+            CGPoint point1 = IQPointWithDistance(centerPoint, self.horizontalEndPoint, radius);
+            CGPoint point2 = IQPointWithDistance(centerPoint, self.verticalStartPoint, radius);
+            
+            CGFloat beginAngle = IQPointGetAngle(centerPoint, basePoint2, point1);
+            CGFloat endAngle = IQPointGetAngle(centerPoint, basePoint2, point2);
+            
+            [path moveToPoint:point1];
+            [path addArcWithCenter:centerPoint radius:radius startAngle:beginAngle endAngle:endAngle clockwise:NO];
+        }
+        
         _arcLayer.path = path.CGPath;
     }
 
     //Horizontal and vertical lines
     {
+        CGFloat radius = CGRectGetWidth(self.bounds)/4;
+
         CGPoint verticalStartPoint = IQPointWithDistance(centerPoint, self.verticalStartPoint, radius);
         CGFloat originalAngle = IQPointGetAngle(centerPoint, CGPointMake(centerPoint.x-10, centerPoint.y), verticalStartPoint);
         CGFloat verticalBeginAngle = originalAngle;
@@ -378,28 +465,44 @@ typedef NS_ENUM(NSUInteger, TapLocation) {
         
         CGAffineTransform transform1 = _layerDegree1.affineTransform;
         CGAffineTransform transform2 = _layerDegree2.affineTransform;
+        CGAffineTransform transform3 = _layerDegree3.affineTransform;
+        CGAffineTransform transform4 = _layerDegree4.affineTransform;
         _layerDegree1.affineTransform = CGAffineTransformIdentity;
         _layerDegree2.affineTransform = CGAffineTransformIdentity;
+        _layerDegree3.affineTransform = CGAffineTransformIdentity;
+        _layerDegree4.affineTransform = CGAffineTransformIdentity;
         
         {
             CGFloat degree1 = IQRadianToDegree(verticalBeginAngle);
-//            degree1 = roundf(degree1*10)/10;
             CGFloat degree2 = IQRadianToDegree(M_PI-verticalBeginAngle);
-//            degree2 = roundf(degree2*10)/10;
             
-            _layerDegree1.string = [NSString stringWithFormat:@"%.1f",degree1];
-            _layerDegree2.string = [NSString stringWithFormat:@"%.1f",degree2];
+            _layerDegree1.string = [NSString stringWithFormat:@"%.0f°",degree1];
+            _layerDegree2.string = [NSString stringWithFormat:@"%.0f°",degree2];
+            _layerDegree3.string = [NSString stringWithFormat:@"%.0f°",degree1+180];
+            _layerDegree4.string = [NSString stringWithFormat:@"%.0f°",degree2+180];
         }
         
-        CGRect layer1Rect = [_layerDegree1.string boundingRectWithSize:CGSizeMake(40, 40) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName : [UIFont fontWithName:@"KohinoorBangla-Semibold" size:_layerDegree1.fontSize]} context:nil];
-        layer1Rect.size.width +=10;
-        _layerDegree1.cornerRadius = layer1Rect.size.height/2;
-        _layerDegree1.bounds = layer1Rect;
-        
-        CGRect layer2Rect = [_layerDegree2.string boundingRectWithSize:CGSizeMake(40, 40) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName : [UIFont fontWithName:@"KohinoorBangla-Semibold" size:_layerDegree2.fontSize]} context:nil];
-        layer2Rect.size.width +=10;
-        _layerDegree2.cornerRadius = layer2Rect.size.height/2;
-        _layerDegree2.bounds = layer2Rect;
+        {
+            CGRect layer1Rect = [_layerDegree1.string boundingRectWithSize:CGSizeMake(40, 40) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName : [UIFont fontWithName:@"KohinoorBangla-Semibold" size:_layerDegree1.fontSize]} context:nil];
+            layer1Rect.size.width +=10;
+            _layerDegree1.cornerRadius = layer1Rect.size.height/2;
+            _layerDegree1.bounds = layer1Rect;
+            
+            CGRect layer2Rect = [_layerDegree2.string boundingRectWithSize:CGSizeMake(40, 40) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName : [UIFont fontWithName:@"KohinoorBangla-Semibold" size:_layerDegree2.fontSize]} context:nil];
+            layer2Rect.size.width +=10;
+            _layerDegree2.cornerRadius = layer2Rect.size.height/2;
+            _layerDegree2.bounds = layer2Rect;
+
+            CGRect layer3Rect = [_layerDegree3.string boundingRectWithSize:CGSizeMake(40, 40) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName : [UIFont fontWithName:@"KohinoorBangla-Semibold" size:_layerDegree3.fontSize]} context:nil];
+            layer3Rect.size.width +=10;
+            _layerDegree3.cornerRadius = layer3Rect.size.height/2;
+            _layerDegree3.bounds = layer3Rect;
+            
+            CGRect layer4Rect = [_layerDegree4.string boundingRectWithSize:CGSizeMake(40, 40) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName : [UIFont fontWithName:@"KohinoorBangla-Semibold" size:_layerDegree4.fontSize]} context:nil];
+            layer4Rect.size.width +=10;
+            _layerDegree4.cornerRadius = layer4Rect.size.height/2;
+            _layerDegree4.bounds = layer4Rect;
+        }
         
         if (originalAngle > M_PI)
         {
@@ -408,6 +511,12 @@ typedef NS_ENUM(NSUInteger, TapLocation) {
 
             CGPoint rotatedPoint2 = IQPointRotate(centerPoint,self.horizontalEndPoint, (verticalBeginAngle-M_PI)/2);
             _layerDegree2.position = IQPointGetMidPoint(rotatedPoint2, centerPoint);
+
+            CGPoint rotatedPoint3 = IQPointRotate(centerPoint,self.horizontalEndPoint, verticalBeginAngle/2);
+            _layerDegree3.position = IQPointGetMidPoint(rotatedPoint3, centerPoint);
+            
+            CGPoint rotatedPoint4 = IQPointRotate(centerPoint,self.horizontalStartPoint, (verticalBeginAngle-M_PI)/2);
+            _layerDegree4.position = IQPointGetMidPoint(rotatedPoint4, centerPoint);
         }
         else
         {
@@ -416,10 +525,18 @@ typedef NS_ENUM(NSUInteger, TapLocation) {
 
             CGPoint rotatedPoint2 = IQPointRotate(centerPoint,self.horizontalEndPoint, (verticalBeginAngle-M_PI)/2);
             _layerDegree2.position = IQPointGetMidPoint(rotatedPoint2, centerPoint);
+
+            CGPoint rotatedPoint3 = IQPointRotate(centerPoint,self.horizontalEndPoint, verticalBeginAngle/2);
+            _layerDegree3.position = IQPointGetMidPoint(rotatedPoint3, centerPoint);
+            
+            CGPoint rotatedPoint4 = IQPointRotate(centerPoint,self.horizontalStartPoint, (verticalBeginAngle-M_PI)/2);
+            _layerDegree4.position = IQPointGetMidPoint(rotatedPoint4, centerPoint);
         }
         
         _layerDegree1.affineTransform = transform1;
         _layerDegree2.affineTransform = transform2;
+        _layerDegree3.affineTransform = transform3;
+        _layerDegree4.affineTransform = transform4;
     }
 }
 
@@ -429,15 +546,45 @@ typedef NS_ENUM(NSUInteger, TapLocation) {
 {
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
-//        [self bringSubviewToFront:self];
+        CGPoint velocity = [recognizer velocityInView:self];
+
+        CGFloat x = fabs(velocity.x);
+        CGFloat y = fabs(velocity.y);
+        
+        if (x > 1 && y < 1)
+        {
+            directionLock = DirectionLockHorizontal;
+        }
+        else if (x < 1 && y > 1)
+        {
+            directionLock = DirectionLockVertical;
+        }
+        else
+        {
+            directionLock = DirectionLockNone;
+        }
     }
     else if (recognizer.state == UIGestureRecognizerStateChanged)
     {
         CGPoint translation = [recognizer translationInView:recognizer.view];
         
+        switch (directionLock) {
+            case DirectionLockHorizontal:
+                translation.y = 0;
+                break;
+            case DirectionLockVertical:
+                translation.x = 0;
+                break;
+            default:
+                break;
+        }
         recognizer.view.transform = CGAffineTransformTranslate(recognizer.view.transform, translation.x, translation.y);
         
         [recognizer setTranslation:CGPointMake(0, 0) inView:recognizer.view];
+    }
+    else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateFailed || recognizer.state == UIGestureRecognizerStateCancelled)
+    {
+        directionLock = DirectionLockNone;
     }
 }
 
@@ -492,6 +639,11 @@ typedef NS_ENUM(NSUInteger, TapLocation) {
     _isAngleLocked = isLocked;
     
     {
+        if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateFailed || recognizer.state == UIGestureRecognizerStateCancelled)
+        {
+            finalAngleInDegree = roundf(finalAngleInDegree);
+        }
+
         CGFloat finalAngleInRadian = IQDegreeToRadian(finalAngleInDegree);
         
         CGAffineTransform transform = CGAffineTransformMakeRotation(finalAngleInRadian);
@@ -523,20 +675,41 @@ typedef NS_ENUM(NSUInteger, TapLocation) {
     
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
-        _dashLayer.strokeColor = [_protractorColor colorWithAlphaComponent:0.5].CGColor;
-        _arcLayer.opacity = 0.5;
-        _layerDegree1.foregroundColor = _layerDegree2.foregroundColor = _protractorColor.CGColor;
-        _layerDegree1.backgroundColor = _layerDegree2.backgroundColor = [_textColor colorWithAlphaComponent:0.8].CGColor;
-        _layerHorizontalLine.opacity = _layerVerticalLine.opacity = 0.0;
+        _dashLayer.strokeColor =
+        _arcLayer.strokeColor = [_protractorColor colorWithAlphaComponent:0.5].CGColor;
+        
+        _layerDegree1.foregroundColor =
+        _layerDegree2.foregroundColor =
+        _layerDegree3.foregroundColor =
+        _layerDegree4.foregroundColor = _protractorColor.CGColor;
+        
+        _layerDegree1.backgroundColor =
+        _layerDegree2.backgroundColor =
+        _layerDegree3.backgroundColor =
+        _layerDegree4.backgroundColor = [_textColor colorWithAlphaComponent:0.8].CGColor;
+        
+        _layerHorizontalLine.opacity =
+        _layerVerticalLine.opacity = 0.0;
+        
         _layerCircle.fillColor = [_protractorColor colorWithAlphaComponent:0.1].CGColor;
 
     } else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateFailed || recognizer.state == UIGestureRecognizerStateCancelled)
     {
-        _dashLayer.strokeColor = _textColor.CGColor;
-        _arcLayer.opacity = 1;
-        _layerDegree1.foregroundColor = _layerDegree2.foregroundColor = _textColor.CGColor;
+        _dashLayer.strokeColor =
+        _arcLayer.strokeColor = _textColor.CGColor;
+        
+        _layerDegree1.foregroundColor =
+        _layerDegree2.foregroundColor =
+        _layerDegree3.foregroundColor =
+        _layerDegree4.foregroundColor = _textColor.CGColor;
+        
+        _layerDegree1.backgroundColor =
+        _layerDegree2.backgroundColor =
+        _layerDegree3.backgroundColor =
+        _layerDegree4.backgroundColor =
+        _layerCircle.fillColor = [_protractorColor colorWithAlphaComponent:0.8].CGColor;
+
         _layerHorizontalLine.opacity = _layerVerticalLine.opacity = 1.0;
-        _layerCircle.fillColor = _layerDegree1.backgroundColor = _layerDegree2.backgroundColor = [_protractorColor colorWithAlphaComponent:0.8].CGColor;
     }
     
     CGPoint centerPoint = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
@@ -587,6 +760,13 @@ typedef NS_ENUM(NSUInteger, TapLocation) {
             
             _isAngleLocked = isLocked;
 
+            finalAngleInDegree = fmodf(finalAngleInDegree, 180);
+            
+            if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateFailed || recognizer.state == UIGestureRecognizerStateCancelled)
+            {
+                finalAngleInDegree = roundf(finalAngleInDegree);
+            }
+            
             CGFloat finalAngleInRadian = IQDegreeToRadian(finalAngleInDegree);
 
             _invertLayerVerticalLine.affineTransform = _layerVerticalLine.affineTransform = CGAffineTransformMakeRotation(finalAngleInRadian);
@@ -601,17 +781,13 @@ typedef NS_ENUM(NSUInteger, TapLocation) {
             
             CGPoint touchPoint = [recognizer locationInView:self];
             
-            if (recognizer.state == UIGestureRecognizerStateBegan)
+            CGFloat deltaAngle = 0;
+            
+            if (tapLocation == TapLocationHorizontalBegin)
             {
-                if (tapLocation == TapLocationHorizontalBegin)
-                {
-                    deltaAngle = M_PI;
-                }
-                else
-                {
-                    deltaAngle = 0;
-                }
+                deltaAngle = M_PI;
             }
+
             float ang = atan2(touchPoint.y-centerPoint.y, touchPoint.x-centerPoint.x);
             float angle = deltaAngle - ang;
             
@@ -645,6 +821,11 @@ typedef NS_ENUM(NSUInteger, TapLocation) {
             }
             
             _isAngleLocked = isLocked;
+            
+            if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateFailed || recognizer.state == UIGestureRecognizerStateCancelled)
+            {
+                finalAngleInDegree = roundf(finalAngleInDegree);
+            }
             
             CGFloat finalAngleInRadian = IQDegreeToRadian(finalAngleInDegree);
 
