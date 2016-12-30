@@ -356,12 +356,26 @@
         
         __weak typeof(self) weakSelf = self;
 
-        if (self.zoomScale != 1.0)
+        if (self.minimumZoomScale <= 1.0 && self.zoomScale != 1.0 && self.maximumZoomScale >= 1.0)
         {
             [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:NSLocalizedString(@"original_percent", nil),(CGFloat)100]  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [weakSelf zoomToOriginalScaleAnimated:YES];
             }]];
         }
+        
+//        if (self.minimumZoomScale <= 0.5 && self.zoomScale != 0.5 && self.maximumZoomScale >= 0.5)
+//        {
+//            [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:NSLocalizedString(@"half_percent", nil),(CGFloat)50]  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                [weakSelf setZoomScale:0.5 animated:YES];
+//            }]];
+//        }
+//        
+//        if (self.minimumZoomScale <= 2.0 && self.zoomScale != 2.0 && self.maximumZoomScale >= 2.0)
+//        {
+//            [alertController addAction:[UIAlertAction actionWithTitle:[NSString localizedStringWithFormat:NSLocalizedString(@"double_percent", nil),(CGFloat)200]  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                [weakSelf setZoomScale:2.0 animated:YES];
+//            }]];
+//        }
         
         if (self.zoomScale != self.minimumZoomScale)
         {
@@ -371,6 +385,12 @@
                 [weakSelf zoomToMinimumScaleAnimated:YES];
             }]];
         }
+
+//        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"hide_zoom_options", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+//            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ShowZoomOption"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//            [weakSelf setShowZoomControls:NO];
+//        }]];
 
         [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
         

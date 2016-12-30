@@ -15,6 +15,7 @@
 {
     CGFloat _previousAngle;
     BOOL _isAngleLocked;
+    BOOL isInvertedUI;
 }
 
 @property(nonatomic, strong, readonly) IQAngleView *angleView;
@@ -103,7 +104,7 @@
 -(void)setRulerColor:(UIColor *)rulerColor
 {
     _rulerColor = rulerColor;
-    self.backgroundColor = [_rulerColor colorWithAlphaComponent:0.85];
+    self.backgroundColor = [_rulerColor colorWithAlphaComponent:0.8];
     self.angleView.backgroundColor = _rulerColor;
     [self setNeedsLayout];
 }
@@ -157,10 +158,8 @@
             {
                 CALayer *layer1 = [[CALayer alloc] init];
                 layer1.contentsScale = [[UIScreen mainScreen] scale];
-                layer1.backgroundColor = self.lineColor.CGColor;
                 CALayer *layer2 = [[CALayer alloc] init];
                 layer2.contentsScale = [[UIScreen mainScreen] scale];
-                layer2.backgroundColor = self.lineColor.CGColor;
                 
                 if (i % 10 == 0)
                 {
@@ -178,6 +177,17 @@
                     layer2.frame = CGRectMake(currentStep-0.25, self.bounds.size.height-5, 0.5, 5);
                 }
                 
+                if (isInvertedUI)
+                {
+                    layer1.backgroundColor = _rulerColor.CGColor;
+                    layer2.backgroundColor = _rulerColor.CGColor;
+                }
+                else
+                {
+                    layer1.backgroundColor = _lineColor.CGColor;
+                    layer2.backgroundColor = _lineColor.CGColor;
+                }
+
                 [self.layer addSublayer:layer1];
                 [self.layer addSublayer:layer2];
                 
@@ -189,11 +199,20 @@
                     textLayer.fontSize = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)?16:10;
                     textLayer.alignmentMode = kCAAlignmentCenter;
                     textLayer.string = [NSString localizedStringWithFormat:@"%.0f",i*multiplier/_deviceScale];
-                    textLayer.foregroundColor = self.lineColor.CGColor;
                     textLayer.frame = CGRectMake(currentStep-20, self.bounds.size.height/2-10, 40, 20);
                     textLayer.position = CGPointMake(layer1.frame.origin.x, CGRectGetMidY(self.bounds));
                     
-                    textLayer.transform = CATransform3DMakeAffineTransform(CGAffineTransformInvert(CGAffineTransformMakeRotation(IQAffineTransformGetAngle(self.transform))));
+                    textLayer.affineTransform = CGAffineTransformInvert(CGAffineTransformMakeRotation(IQAffineTransformGetAngle(self.transform)));
+
+                    if (isInvertedUI)
+                    {
+                        textLayer.foregroundColor = _rulerColor.CGColor;
+                    }
+                    else
+                    {
+                        textLayer.foregroundColor = _lineColor.CGColor;
+                    }
+
                     [self.layer addSublayer:textLayer];
                 }
             }
@@ -206,8 +225,49 @@
 
 #pragma mark - Gesture Recognizers
 
+-(void)switchToInvertedUI
+{
+    isInvertedUI = YES;
+    
+    self.layer.borderColor = _rulerColor.CGColor;
+    self.angleView.textColor = _rulerColor;
+    
+    [UIView animateWithDuration:0.1 animations:^{
+        self.backgroundColor = [_rulerColor colorWithAlphaComponent:0.2];
+        self.angleView.backgroundColor = _lineColor;
+    }];
+
+    [self setNeedsLayout];
+}
+
+-(void)switchToNormalUI
+{
+    isInvertedUI = NO;
+    
+    self.layer.borderColor = _lineColor.CGColor;
+    self.angleView.textColor = _lineColor;
+
+    [UIView animateWithDuration:0.1 animations:^{
+        self.backgroundColor = [_rulerColor colorWithAlphaComponent:0.8];
+        self.angleView.backgroundColor = _rulerColor;
+    }];
+
+    [self setNeedsLayout];
+}
+
+
 -(void)panRecognizer:(UIPanGestureRecognizer*)recognizer
 {
+    if (recognizer.state == UIGestureRecognizerStateBegan)
+    {
+        [self switchToInvertedUI];
+        
+    } else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateFailed || recognizer.state == UIGestureRecognizerStateCancelled)
+    {
+        [self switchToNormalUI];
+    }
+    
+
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
 //        [self bringSubviewToFront:self];
@@ -224,6 +284,16 @@
 
 -(void)rotateRecognizer:(UIRotationGestureRecognizer*)recognizer
 {
+    if (recognizer.state == UIGestureRecognizerStateBegan)
+    {
+        [self switchToInvertedUI];
+        
+    } else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateFailed || recognizer.state == UIGestureRecognizerStateCancelled)
+    {
+        [self switchToNormalUI];
+    }
+    
+
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
 //        [self bringSubviewToFront:self];
@@ -292,7 +362,7 @@
         {
             if ([layer isKindOfClass:[CATextLayer class]])
             {
-                layer.transform = CATransform3DMakeAffineTransform(CGAffineTransformInvert(self.transform));
+                layer.affineTransform = CGAffineTransformInvert(self.transform);
             }
         }
         

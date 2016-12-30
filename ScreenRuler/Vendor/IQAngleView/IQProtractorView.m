@@ -542,8 +542,57 @@ typedef NS_ENUM(NSUInteger, DirectionLock) {
 
 #pragma mark - Gesture Recognizers
 
+-(void)switchToInvertedUI
+{
+    _dashLayer.strokeColor =
+    _arcLayer.strokeColor = [_protractorColor colorWithAlphaComponent:0.5].CGColor;
+    
+    _layerDegree1.foregroundColor =
+    _layerDegree2.foregroundColor =
+    _layerDegree3.foregroundColor =
+    _layerDegree4.foregroundColor = _protractorColor.CGColor;
+    
+    _layerDegree1.backgroundColor =
+    _layerDegree2.backgroundColor =
+    _layerDegree3.backgroundColor =
+    _layerDegree4.backgroundColor = [_textColor colorWithAlphaComponent:0.8].CGColor;
+    
+    _layerHorizontalLine.opacity =
+    _layerVerticalLine.opacity = 0.0;
+    
+    _layerCircle.fillColor = [_protractorColor colorWithAlphaComponent:0.1].CGColor;
+}
+
+-(void)switchToNormalUI
+{
+    _dashLayer.strokeColor =
+    _arcLayer.strokeColor = _textColor.CGColor;
+    
+    _layerDegree1.foregroundColor =
+    _layerDegree2.foregroundColor =
+    _layerDegree3.foregroundColor =
+    _layerDegree4.foregroundColor = _textColor.CGColor;
+    
+    _layerDegree1.backgroundColor =
+    _layerDegree2.backgroundColor =
+    _layerDegree3.backgroundColor =
+    _layerDegree4.backgroundColor =
+    _layerCircle.fillColor = [_protractorColor colorWithAlphaComponent:0.8].CGColor;
+    
+    _layerHorizontalLine.opacity = _layerVerticalLine.opacity = 1.0;
+}
+
 -(void)panRecognizer:(UIPanGestureRecognizer*)recognizer
 {
+    if (recognizer.state == UIGestureRecognizerStateBegan)
+    {
+        [self switchToInvertedUI];
+        
+    } else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateFailed || recognizer.state == UIGestureRecognizerStateCancelled)
+    {
+        [self switchToNormalUI];
+    }
+
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
         CGPoint velocity = [recognizer velocityInView:self];
@@ -592,7 +641,11 @@ typedef NS_ENUM(NSUInteger, DirectionLock) {
 {
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
-//        [self bringSubviewToFront:self];
+        [self switchToInvertedUI];
+        
+    } else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateFailed || recognizer.state == UIGestureRecognizerStateCancelled)
+    {
+        [self switchToNormalUI];
     }
     
     CGFloat const recognizerAngleInDegree = IQRadianToDegree(recognizer.rotation);
@@ -667,41 +720,11 @@ typedef NS_ENUM(NSUInteger, DirectionLock) {
     
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
-        _dashLayer.strokeColor =
-        _arcLayer.strokeColor = [_protractorColor colorWithAlphaComponent:0.5].CGColor;
-        
-        _layerDegree1.foregroundColor =
-        _layerDegree2.foregroundColor =
-        _layerDegree3.foregroundColor =
-        _layerDegree4.foregroundColor = _protractorColor.CGColor;
-        
-        _layerDegree1.backgroundColor =
-        _layerDegree2.backgroundColor =
-        _layerDegree3.backgroundColor =
-        _layerDegree4.backgroundColor = [_textColor colorWithAlphaComponent:0.8].CGColor;
-        
-        _layerHorizontalLine.opacity =
-        _layerVerticalLine.opacity = 0.0;
-        
-        _layerCircle.fillColor = [_protractorColor colorWithAlphaComponent:0.1].CGColor;
+        [self switchToInvertedUI];
 
     } else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateFailed || recognizer.state == UIGestureRecognizerStateCancelled)
     {
-        _dashLayer.strokeColor =
-        _arcLayer.strokeColor = _textColor.CGColor;
-        
-        _layerDegree1.foregroundColor =
-        _layerDegree2.foregroundColor =
-        _layerDegree3.foregroundColor =
-        _layerDegree4.foregroundColor = _textColor.CGColor;
-        
-        _layerDegree1.backgroundColor =
-        _layerDegree2.backgroundColor =
-        _layerDegree3.backgroundColor =
-        _layerDegree4.backgroundColor =
-        _layerCircle.fillColor = [_protractorColor colorWithAlphaComponent:0.8].CGColor;
-
-        _layerHorizontalLine.opacity = _layerVerticalLine.opacity = 1.0;
+        [self switchToNormalUI];
     }
     
     CGPoint centerPoint = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
@@ -835,6 +858,16 @@ typedef NS_ENUM(NSUInteger, DirectionLock) {
 
 -(void)pinchRecognizer:(UIPinchGestureRecognizer*)recognizer
 {
+    if (recognizer.state == UIGestureRecognizerStateBegan)
+    {
+        [self switchToInvertedUI];
+        
+    } else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateFailed || recognizer.state == UIGestureRecognizerStateCancelled)
+    {
+        [self switchToNormalUI];
+    }
+
+    
     if([recognizer state] == UIGestureRecognizerStateBegan) {
         // Reset the last scale, necessary if there are multiple objects with different scales
         _beginBounds = self.bounds;

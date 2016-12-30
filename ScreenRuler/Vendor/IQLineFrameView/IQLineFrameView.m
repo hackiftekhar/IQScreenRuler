@@ -682,14 +682,14 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
                         }
                         
                         leftTextLayer.string = [NSString localizedStringWithFormat:@"%.0f",i*multiplier/_deviceScale];
-                        leftTextLayer.transform = CATransform3DIdentity;
+                        leftTextLayer.affineTransform = CGAffineTransformIdentity;
                         leftTextLayer.frame = CGRectMake((remainingWidth/2)-20, currentStep-remainingWidth/2, 40, remainingWidth);
-                        leftTextLayer.transform = CATransform3DMakeAffineTransform(CGAffineTransformMakeRotation(-M_PI_2));
+                        leftTextLayer.affineTransform = CGAffineTransformMakeRotation(-M_PI_2);
                         
                         rightTextLayer.string = [NSString localizedStringWithFormat:@"%.0f",i*multiplier/_deviceScale];
-                        rightTextLayer.transform = CATransform3DIdentity;
+                        rightTextLayer.affineTransform = CGAffineTransformIdentity;
                         rightTextLayer.frame = CGRectMake(self.frame.size.width-(remainingWidth/2)-20, currentStep-remainingWidth/2, 40, remainingWidth);
-                        rightTextLayer.transform = CATransform3DMakeAffineTransform(CGAffineTransformMakeRotation(M_PI_2));
+                        rightTextLayer.affineTransform = CGAffineTransformMakeRotation(M_PI_2);
                     }
                 }
             }
