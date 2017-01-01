@@ -20,7 +20,6 @@
 
 @property(nonatomic, strong, readonly) IQAngleView *angleView;
 
-@property(strong, readonly) UIPanGestureRecognizer *panRecognizer;
 @property(strong, readonly) UIRotationGestureRecognizer *rotateRecognizer;
 
 @end

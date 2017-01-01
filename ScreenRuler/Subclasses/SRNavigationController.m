@@ -252,7 +252,7 @@
 {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(themeDidChanged:) name:kRAThemeChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTheme) name:kRASettingsChangedNotification object:nil];
 }
 
 -(void)dealloc
@@ -480,9 +480,14 @@
 {
     [super viewWillAppear:animated];
 
-    __weak typeof(self) weakSelf = self;
+    [self updateTheme];
+}
 
-    [UIView animateWithDuration:animated?0.3:0 animations:^{
+-(void)updateTheme
+{
+    __weak typeof(self) weakSelf = self;
+    
+    [UIView animateWithDuration:0.25 animations:^{
         
         UIColor *themeColor = [UIColor themeColor];
         UIColor *textColor = [UIColor themeTextColor];
@@ -508,18 +513,6 @@
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
     return (self.topToolbar.barStyle == UIBarStyleDefault)?UIStatusBarStyleDefault:UIStatusBarStyleLightContent;
-}
-
--(void)themeDidChanged:(NSNotification*)notification
-{
-    UIColor *themeColor = [UIColor themeColor];
-    UIColor *textColor = [UIColor themeTextColor];
-    UIColor *backgroundColor = [UIColor themeBackgroundColor];
-
-    self.view.backgroundColor = backgroundColor;
-    self.topToolbar.barTintColor = self.bottomToolbar.barTintColor = themeColor;
-    self.topToolbar.tintColor = self.bottomToolbar.tintColor = textColor;
-    self.topToolbar.barStyle = self.bottomToolbar.barStyle = ![UIColor isThemeInverted];
 }
 
 - (BOOL)shouldAutorotate

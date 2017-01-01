@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString *const kRAThemeChangedNotification;
+extern NSString *const kRASettingsChangedNotification;
 
 @interface UIColor (ThemeColor)
 

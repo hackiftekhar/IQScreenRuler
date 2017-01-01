@@ -153,10 +153,12 @@
 
 -(void)showZoomOptionAction:(UISwitch*)aSwitch
 {
-    [Answers logCustomEventWithName:@"Theme Inverted" customAttributes:@{@"Show":@(aSwitch.on)}];
+    [Answers logCustomEventWithName:@"ZoomOption" customAttributes:@{@"Show":@(aSwitch.on)}];
 
     [[NSUserDefaults standardUserDefaults] setBool:aSwitch.on forKey:@"ShowZoomOption"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRASettingsChangedNotification object:nil];
 }
 
 - (IBAction)openSourceAtGithubAction:(UIButton *)sender {

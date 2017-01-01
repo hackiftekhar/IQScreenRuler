@@ -9,7 +9,7 @@
 #import "UIColor+ThemeColor.h"
 #import "UIColor+HexColors.h"
 
-NSString *const kRAThemeChangedNotification = @"kRAThemeChangedNotification";
+NSString *const kRASettingsChangedNotification = @"kRASettingsChangedNotification";
 
 @implementation UIColor (ThemeColor)
 
@@ -83,14 +83,14 @@ NSString *const kRAThemeChangedNotification = @"kRAThemeChangedNotification";
     
     [[NSUserDefaults standardUserDefaults] setObject:colorHex forKey:@"ThemeColor"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRAThemeChangedNotification object:color];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRASettingsChangedNotification object:color];
 }
 
 +(void)setThemeInverted:(BOOL)inverted
 {
     [[NSUserDefaults standardUserDefaults] setBool:inverted forKey:@"ThemeInverted"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRAThemeChangedNotification object:[self themeColor]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRASettingsChangedNotification object:[self themeColor]];
 }
 
 +(BOOL)isThemeInverted

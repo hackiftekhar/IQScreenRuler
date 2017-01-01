@@ -34,9 +34,11 @@
 
 //https://www.iconfinder.com/iconsets/hawcons-gesture-stroke
 
-@interface SRHomeViewController ()<UIScrollViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIToolbarDelegate,MPCoachMarksViewDelegate,SRImageControllerDelegate,SRScreenshotCollectionViewControllerDelegate,IQLineFrameViewDelegate>
+@interface SRHomeViewController ()<UIScrollViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIToolbarDelegate,UIPopoverPresentationControllerDelegate,MPCoachMarksViewDelegate,SRImageControllerDelegate,SRScreenshotCollectionViewControllerDelegate,IQLineFrameViewDelegate>
 {
     BOOL isLockedOrientation;
+    CGPoint protractorCenterInImage;
+    CGPoint rulerCenterInImage;
 }
 
 @property (nonatomic, strong) NSTimer *coachMarkTimer;
@@ -95,9 +97,16 @@
     [super awakeFromNib];
 }
 
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTheme) name:kRASettingsChangedNotification object:nil];
+
     self.topColorView.translatesAutoresizingMaskIntoConstraints = YES;
 
     self.magnifyingGlass = [[ACMagnifyingGlass alloc] initWithFrame:CGRectMake(0, 0, 115, 115)];
@@ -165,6 +174,7 @@
         CGFloat height = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)?90:55;
 
         _freeRulerView = [[IQRulerView alloc] initWithFrame:CGRectMake(0, 0, width ,height)];
+        [_freeRulerView.panRecognizer addTarget:self action:@selector(rulerPanAction:)];
         _freeRulerView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
         _freeRulerView.alpha = shouldFreeHandRulerShow?1.0:0.0;
         _freeRulerView.hidden = !shouldFreeHandRulerShow;
@@ -179,6 +189,8 @@
         }
         
         _freeProtractorView = [[IQProtractorView alloc] initWithFrame:CGRectMake(0, 0,  halfScreenWidth ,halfScreenWidth)];
+        [_freeProtractorView.panRecognizer addTarget:self action:@selector(protractorPanAction:)];
+        
         _freeProtractorView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
         _freeProtractorView.alpha = shouldFreeProtractorShow?1.0:0.0;
         _freeProtractorView.hidden = !shouldFreeProtractorShow;
@@ -220,6 +232,11 @@
 {
     [super viewWillAppear:animated];
 
+    [self updateTheme];
+}
+
+-(void)updateTheme
+{
     self.scrollContainerView.showZoomControls = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowZoomOption"];
 
     UIColor *originalThemeColor = [UIColor originalThemeColor];
@@ -276,6 +293,15 @@
         _freeRulerView.zoomScale = self.scrollContainerView.zoomScale;
         _lineFrameView.zoomScale = self.scrollContainerView.zoomScale;
         _lineFrameView.startingScalePoint = CGPointZero;
+        self.freeProtractorView.transform = CGAffineTransformIdentity;
+        [self.freeProtractorView setNeedsLayout];
+        self.freeRulerView.transform = CGAffineTransformIdentity;
+        
+        CGPoint rulerCenterPoint = IQRectGetCenter(self.freeRulerView.bounds);
+        rulerCenterInImage = [self.freeRulerView convertPoint:rulerCenterPoint toView:self.scrollContainerView.imageView];
+        
+        CGPoint protractorCenterPoint = IQRectGetCenter(self.freeProtractorView.bounds);
+        protractorCenterInImage = [self.freeProtractorView convertPoint:protractorCenterPoint toView:self.scrollContainerView.imageView];
     }
     else
     {
@@ -988,6 +1014,28 @@
 
 #pragma mark - Free Ruler
 
+-(void)rulerPanAction:(UIPanGestureRecognizer*)recognizer
+{
+    if (recognizer.state == UIGestureRecognizerStateEnded ||
+        recognizer.state == UIGestureRecognizerStateFailed ||
+        recognizer.state == UIGestureRecognizerStateCancelled)
+    {
+        CGPoint centerPoint = IQRectGetCenter(self.freeRulerView.bounds);
+        
+        rulerCenterInImage = [self.freeRulerView convertPoint:centerPoint toView:self.scrollContainerView.imageView];
+    }
+}
+
+-(void)updateRulerPosition
+{
+//    CGPoint rulerCenterPoint = [self.scrollContainerView.imageView convertPoint:rulerCenterInImage toView:self.freeRulerView];
+//    
+//    CGAffineTransform transform = self.freeRulerView.transform;
+//    transform.tx += rulerCenterPoint.x - self.freeRulerView.bounds.size.width/2;
+//    transform.ty += rulerCenterPoint.y - self.freeRulerView.bounds.size.height/2;
+//    self.freeRulerView.transform = transform;
+}
+
 -(IBAction)freeRulerAction:(UIButton*)button
 {
     button.selected = !button.selected;
@@ -1000,6 +1048,16 @@
     __weak typeof(self) weakSelf = self;
 
     [UIView animateWithDuration:0.2 animations:^{
+        
+        CGPoint centerPoint = IQRectGetCenter(weakSelf.freeRulerView.frame);
+        if(button.selected == YES && CGRectContainsPoint(weakSelf.freeRulerView.superview.bounds, centerPoint) == false)
+        {
+            CGAffineTransform transform = weakSelf.freeRulerView.transform;
+            transform.tx = 0;
+            transform.ty = 0;
+            weakSelf.freeRulerView.transform = transform;
+        }
+        
         weakSelf.freeRulerView.alpha = weakSelf.freeRulerView.alpha != 1.0?1.0:0.0;
         [[NSUserDefaults standardUserDefaults] setBool:weakSelf.freeRulerView.alpha forKey:@"FreeHandRulerShow"];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -1010,6 +1068,29 @@
             weakSelf.freeRulerView.hidden = YES;
         }
     }];
+}
+
+-(void)protractorPanAction:(UIPanGestureRecognizer*)recognizer
+{
+    if (recognizer.state == UIGestureRecognizerStateEnded ||
+        recognizer.state == UIGestureRecognizerStateFailed ||
+        recognizer.state == UIGestureRecognizerStateCancelled)
+    {
+        CGPoint centerPoint = IQRectGetCenter(self.freeProtractorView.bounds);
+
+        protractorCenterInImage = [self.freeProtractorView convertPoint:centerPoint toView:self.scrollContainerView.imageView];
+    }
+}
+
+-(void)updateProtractorPosition
+{
+    CGPoint protractorCenterPoint = [self.scrollContainerView.imageView convertPoint:protractorCenterInImage toView:self.freeProtractorView];
+    
+    CGAffineTransform transform = self.freeProtractorView.transform;
+    transform.tx += protractorCenterPoint.x - self.freeProtractorView.bounds.size.width/2;
+    transform.ty += protractorCenterPoint.y - self.freeProtractorView.bounds.size.height/2;
+    self.freeProtractorView.transform = transform;
+    [self.freeProtractorView setNeedsLayout];
 }
 
 -(IBAction)protractorAction:(UIButton*)button
@@ -1024,6 +1105,16 @@
     __weak typeof(self) weakSelf = self;
     
     [UIView animateWithDuration:0.2 animations:^{
+        
+        CGPoint centerPoint = IQRectGetCenter(weakSelf.freeProtractorView.frame);
+        if(button.selected == YES && CGRectContainsPoint(weakSelf.freeProtractorView.superview.bounds, centerPoint) == false)
+        {
+            CGAffineTransform transform = weakSelf.freeProtractorView.transform;
+            transform.tx = 0;
+            transform.ty = 0;
+            weakSelf.freeProtractorView.transform = transform;
+        }
+        
         weakSelf.freeProtractorView.alpha = weakSelf.freeProtractorView.alpha != 1.0?1.0:0.0;
         
         [[NSUserDefaults standardUserDefaults] setBool:weakSelf.freeProtractorView.alpha forKey:@"FreeProtractorShow"];
@@ -1226,6 +1317,9 @@
             BOOL animated = !(scrollView.isTracking || scrollView.isDecelerating || scrollView.isDragging);
             [_lineFrameView setZoomScale:scrollView.zoomScale animated:animated];
         }
+        
+        [self updateProtractorPosition];
+        [self updateRulerPosition];
     }
 }
 
@@ -1235,6 +1329,9 @@
     {
         _freeRulerView.zoomScale = scrollView.zoomScale;
         _lineFrameView.zoomScale = scrollView.zoomScale;
+        
+        [self updateProtractorPosition];
+        [self updateRulerPosition];
     }
 }
 
@@ -1253,6 +1350,9 @@
 
             [_lineFrameView setZoomScale:scrollView.zoomScale animated:animated];
         }
+
+        [self updateProtractorPosition];
+        [self updateRulerPosition];
     }
 }
 
@@ -1274,8 +1374,27 @@
         
         navControler.modalPresentationStyle = UIModalPresentationPopover;
         navControler.popoverPresentationController.barButtonItem = self.settingsMenuBarButton;
-        navControler.preferredContentSize = CGSizeMake(375, 667);
+        navControler.popoverPresentationController.delegate = self;
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        {
+            navControler.preferredContentSize = CGSizeMake(375, 667);
+        }
+        else
+        {
+            CGSize size = self.view.bounds.size;
+
+            size.width -=40;
+            size.height -= 60;
+            
+            navControler.preferredContentSize = size;
+        }
     }
+}
+
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller
+{
+    return UIModalPresentationNone;
 }
 
 -(void)controller:(UIViewController*)controller finishWithImage:(UIImage*)image zoomScale:(CGFloat)zoomScale contentOffset:(CGPoint)contentOffset
@@ -1292,7 +1411,7 @@
     __weak typeof(self) weakSelf = self;
 
     CGAffineTransform rulerTransform = _freeRulerView.transform;
-    CGAffineTransform protractorTransform = _freeProtractorView.transform;
+    __block CGAffineTransform protractorTransform = _freeProtractorView.transform;
     [UIView animateWithDuration:0.25 animations:^{
         weakSelf.freeRulerView.transform = CGAffineTransformIdentity;
         weakSelf.freeProtractorView.transform = CGAffineTransformIdentity;
@@ -1301,17 +1420,22 @@
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         
-        weakSelf.freeRulerView.transform = rulerTransform;
-        
         [weakSelf.lineFrameView updateUIAnimated:YES];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         
         [weakSelf.lineFrameView updateUIAnimated:YES];
         
-        [UIView animateWithDuration:0.2 animations:^{
+        {
             weakSelf.freeProtractorView.transform = protractorTransform;
-            [weakSelf.freeProtractorView setNeedsLayout];
-        }];
+            CGPoint protractorCenterPoint = [self.scrollContainerView.imageView convertPoint:protractorCenterInImage toView:self.freeProtractorView];
+            
+            protractorTransform.tx += protractorCenterPoint.x - self.freeProtractorView.bounds.size.width/2;
+            protractorTransform.ty += protractorCenterPoint.y - self.freeProtractorView.bounds.size.height/2;
+            self.freeProtractorView.transform = protractorTransform;
+            [self.freeProtractorView setNeedsLayout];
+        }
+
+        weakSelf.freeRulerView.transform = rulerTransform;
     }];
 }
 

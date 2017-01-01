@@ -50,8 +50,8 @@ Class IQUIToolbarBackgroundClass;
 
 -(void)updateColors
 {
-    UIColor *tintColor = [self tintColor];
-    UIColor *barTintColor = [self barTintColor];
+    UIColor *tintColor = [[self tintColor] colorWithAlphaComponent:1];
+    UIColor *barTintColor = [[self barTintColor] colorWithAlphaComponent:1];
     
     for (UIBarButtonItem *item in self.items)
     {

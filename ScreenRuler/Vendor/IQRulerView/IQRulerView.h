@@ -11,6 +11,8 @@
 
 @interface IQRulerView : UIView
 
+@property(strong, readonly) UIPanGestureRecognizer *panRecognizer;
+
 @property(nonatomic,assign) CGFloat deviceScale;
 @property(nonatomic,assign) CGFloat zoomScale;
 @property(nonatomic,weak) UIView *respectiveView;

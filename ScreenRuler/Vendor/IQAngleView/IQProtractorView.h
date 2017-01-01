@@ -10,6 +10,8 @@
 
 @interface IQProtractorView : UIView
 
+@property(strong, readonly) UIPanGestureRecognizer *panRecognizer;
+
 @property(nonatomic, strong) UIColor *textColor;
 @property(nonatomic, strong) UIColor *protractorColor;
 

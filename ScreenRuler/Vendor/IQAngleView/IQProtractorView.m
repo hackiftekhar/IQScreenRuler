@@ -32,7 +32,6 @@ typedef NS_ENUM(NSUInteger, DirectionLock) {
 
 @interface IQProtractorView ()<UIGestureRecognizerDelegate>
 
-@property(strong, readonly) UIPanGestureRecognizer *panRecognizer;
 @property(strong, readonly) UIPanGestureRecognizer *linePanRecognizer;
 @property(strong, readonly) UIRotationGestureRecognizer *rotateRecognizer;
 @property(strong, readonly) UIPinchGestureRecognizer *pinchRecognizer;
@@ -334,7 +333,11 @@ typedef NS_ENUM(NSUInteger, DirectionLock) {
         //Color long lines
         {
             CGFloat maxWidthHeight = MAX([[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
-
+            CGFloat xMove = ABS(self.transform.tx);
+            CGFloat yMove = ABS(self.transform.ty);
+            CGFloat maxMove = sqrtf(powf(xMove, 2)+powf(yMove, 2));
+            maxWidthHeight += maxMove;
+            
             CGRect bounds = CGRectMake(0, 0, maxWidthHeight*2, lineTapWidth);
             
             _invertLayerHorizontalLine.bounds = _invertLayerVerticalLine.bounds = bounds;
