@@ -13,6 +13,7 @@
 		4C0A13761DCF744900CFF881 /* SRLineImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0A13751DCF744900CFF881 /* SRLineImageView.m */; };
 		4C0A13791DCF771E00CFF881 /* NSMutableArray+Stack.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0A13781DCF771E00CFF881 /* NSMutableArray+Stack.m */; };
 		4C0A137C1DD0649000CFF881 /* UIScrollView+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0A137B1DD0649000CFF881 /* UIScrollView+Addition.m */; };
+		4C2EDF521E1963450088F970 /* SRNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EDF511E1963450088F970 /* SRNavigationBar.m */; };
 		4C7396E31DA6A6E700397366 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C7396E11DA6A6E700397366 /* Localizable.strings */; };
 		4C853B351DB23DA2003E3717 /* RoundedCornerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C853B341DB23DA2003E3717 /* RoundedCornerView.m */; };
 		4C853B3A1DB27313003E3717 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 4C853B371DB272FA003E3717 /* iTunesArtwork@2x */; };
@@ -89,6 +90,8 @@
 		4C0A13781DCF771E00CFF881 /* NSMutableArray+Stack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+Stack.m"; path = "../Vendor/IQLineFrameView/NSMutableArray+Stack.m"; sourceTree = "<group>"; };
 		4C0A137A1DD0649000CFF881 /* UIScrollView+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Addition.h"; sourceTree = "<group>"; };
 		4C0A137B1DD0649000CFF881 /* UIScrollView+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Addition.m"; sourceTree = "<group>"; };
+		4C2EDF501E1963450088F970 /* SRNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRNavigationBar.h; sourceTree = "<group>"; };
+		4C2EDF511E1963450088F970 /* SRNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRNavigationBar.m; sourceTree = "<group>"; };
 		4C33F23B1DB7E047000BC753 /* ta-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ta-IN"; path = "ta-IN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		4C33F23C1DB7E047000BC753 /* ta-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ta-IN"; path = "ta-IN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4C33F23D1DB7E2EC000BC753 /* ta */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ta; path = ta.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -575,6 +578,8 @@
 				4CD426D61DA8235D000AD1CA /* SRNavigationController.m */,
 				4CD426D71DA8235D000AD1CA /* SRToolbar.h */,
 				4CD426D81DA8235D000AD1CA /* SRToolbar.m */,
+				4C2EDF501E1963450088F970 /* SRNavigationBar.h */,
+				4C2EDF511E1963450088F970 /* SRNavigationBar.m */,
 				4CD426D91DA8235D000AD1CA /* SRToolbarButton.h */,
 				4CD426DA1DA8235D000AD1CA /* SRToolbarButton.m */,
 			);
@@ -950,6 +955,7 @@
 				4CED77F21DA82A8E0093176D /* AppDelegate.m in Sources */,
 				4CBD451A1DB3F52800DA6D73 /* UIImage+FloodFill.m in Sources */,
 				4C853B551DB2C271003E3717 /* CBZSplashView.m in Sources */,
+				4C2EDF521E1963450088F970 /* SRNavigationBar.m in Sources */,
 				4CED77F31DA82A8E0093176D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

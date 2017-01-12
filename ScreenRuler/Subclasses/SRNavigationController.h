@@ -7,7 +7,6 @@
 //  See COPYING or https://www.apache.org/licenses/LICENSE-2.0
 
 #import <UIKit/UIKit.h>
-#import "SRToolbar.h"
 
 @interface SRNavigationController : UIViewController
 
@@ -22,11 +21,11 @@
 
 //@property(nonatomic,getter=isNavigationBarHidden) BOOL navigationBarHidden;
 //- (void)setNavigationBarHidden:(BOOL)hidden animated:(BOOL)animated; // Hide or show the navigation bar. If animated, it will transition vertically using UINavigationControllerHideShowBarDuration.
-@property(nonatomic,readonly,nonnull) SRToolbar *topToolbar; // The navigation bar managed by the controller. Pushing, popping or setting navigation items on a managed navigation bar is not supported.
+@property(nonatomic,readonly,nonnull) UINavigationBar *navigationBar; // The navigation bar managed by the controller. Pushing, popping or setting navigation items on a managed navigation bar is not supported.
 
 //@property(nonatomic,getter=isToolbarHidden) BOOL toolbarHidden NS_AVAILABLE_IOS(3_0) __TVOS_PROHIBITED; // Defaults to YES, i.e. hidden.
 //- (void)setToolbarHidden:(BOOL)hidden animated:(BOOL)animated NS_AVAILABLE_IOS(3_0) __TVOS_PROHIBITED; // Hide or show the toolbar at the bottom of the screen. If animated, it will transition vertically using UINavigationControllerHideShowBarDuration.
-@property(null_resettable,nonatomic,readonly) SRToolbar *bottomToolbar NS_AVAILABLE_IOS(3_0) __TVOS_PROHIBITED; // For use when presenting an action sheet.
+@property(null_resettable,nonatomic,readonly) UIToolbar *toolbar NS_AVAILABLE_IOS(3_0) __TVOS_PROHIBITED; // For use when presenting an action sheet.
 
 
 @end

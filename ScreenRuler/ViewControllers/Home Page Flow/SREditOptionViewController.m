@@ -49,6 +49,15 @@
     self.view.backgroundColor = backgroundColor;
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+
+    if ([self.delegate respondsToSelector:@selector(controller:finishWithImage:zoomScale:contentOffset:)]) {
+        [self.delegate controller:self finishWithImage:self.scrollContainerView.image zoomScale:self.scrollContainerView.zoomScale contentOffset:self.scrollContainerView.contentOffset];
+    }
+}
+
 -(BOOL)prefersStatusBarHidden
 {
     return YES;
@@ -63,15 +72,6 @@
 {
     _image = image;
     self.scrollContainerView.image = self.image;
-}
-
--(IBAction)cancelAction:(UIBarButtonItem*)item
-{
-    if ([self.delegate respondsToSelector:@selector(controller:finishWithImage:zoomScale:contentOffset:)]) {
-        [self.delegate controller:self finishWithImage:self.scrollContainerView.image zoomScale:self.scrollContainerView.zoomScale contentOffset:self.scrollContainerView.contentOffset];
-    }
-
-    [self.navigationControllerSR popViewControllerAnimated:YES];
 }
 
 -(IBAction)resizeAction:(UIBarButtonItem*)item

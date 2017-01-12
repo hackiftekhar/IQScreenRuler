@@ -1,21 +1,21 @@
 //
-//  SRToolbar.m
+//  SRNavigationBar.m
 //  Screen Ruler
 //
-//  Created by Mohd Iftekhar Qurashi
-//  Copyright (c) 2016 InfoEum Software Systems. Licensed under the Apache License v2.0.
-//  See COPYING or https://www.apache.org/licenses/LICENSE-2.0
+//  Created by IEMacBook02 on 01/01/17.
+//  Copyright © 2017 InfoEnum Software Systems. All rights reserved.
+//
 
-#import "SRToolbar.h"
+#import "SRNavigationBar.h"
 #import "SRToolbarButton.h"
 #import "UIImage+Color.h"
 
-@implementation SRToolbar
+@implementation SRNavigationBar
 
 -(void)setTintColor:(UIColor *)tintColor
 {
     [super setTintColor:tintColor];
-
+    
     [self updateColors];
 }
 
@@ -26,14 +26,24 @@
     [self updateColors];
 }
 
+//barStyle
+
 -(void)updateColors
 {
     UIColor *tintColor = [[self tintColor] colorWithAlphaComponent:1];
     UIColor *barTintColor = [[self barTintColor] colorWithAlphaComponent:1];
-    
-    for (UIBarButtonItem *item in self.items)
+
+    for (UINavigationItem *item in self.items)
     {
-        item.tintColor = tintColor;
+        for (UIBarButtonItem *barItem in item.leftBarButtonItems)
+        {
+            barItem.tintColor = tintColor;
+        }
+
+        for (UIBarButtonItem *barItem in item.rightBarButtonItems)
+        {
+            barItem.tintColor = tintColor;
+        }
     }
     
     for (UIView *barButtonItemView in self.subviews)
@@ -53,7 +63,7 @@
             }
             
             UIImage *selectedImage = [button imageForState:UIControlStateSelected];
-
+            
             if (selectedImage)
             {
                 [button setImage:[selectedImage imageWithColor:barTintColor] forState:UIControlStateSelected];

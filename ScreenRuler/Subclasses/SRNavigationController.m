@@ -9,6 +9,8 @@
 #import "SRNavigationController.h"
 #import <objc/runtime.h>
 #import "UIColor+ThemeColor.h"
+#import "SRToolbar.h"
+#import "SRNavigationBar.h"
 
 @interface SRNavigationView : UIView
 @end
@@ -53,39 +55,6 @@
 
 @implementation UIViewController (SRNavigationControllerItem)
 
--(NSArray<UIBarButtonItem *> *)topToolbarItems
-{
-    UIBarButtonItem *flexibleBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-
-    NSMutableArray *topToolbarItems = [[NSMutableArray alloc] init];
-    NSMutableArray *allToolbarItems = [[NSMutableArray alloc] initWithArray:self.navigationItem.leftBarButtonItems];
-    [allToolbarItems addObjectsFromArray:self.navigationItem.rightBarButtonItems];
-    
-    if (allToolbarItems.count == 1)
-    {
-        topToolbarItems = [@[flexibleBarButton,allToolbarItems[0],flexibleBarButton] mutableCopy];
-    }
-    else if (allToolbarItems.count > 1)
-    {
-        UIBarButtonItem *firstItem = allToolbarItems[0];
-        [allToolbarItems removeObject:firstItem];
-        [topToolbarItems addObject:firstItem];
-
-        for (UIBarButtonItem *item in allToolbarItems)
-        {
-            [topToolbarItems addObject:flexibleBarButton];
-            [topToolbarItems addObject:item];
-        }
-    }
-    
-    return topToolbarItems;
-}
-
--(NSArray<UIBarButtonItem *> *)bottomToolbarItems
-{
-    return self.toolbarItems;
-}
-
 -(SRNavigationController *)navigationControllerSR
 {
     return objc_getAssociatedObject(self, @selector(navigationControllerSR));
@@ -100,13 +69,14 @@
 
 
 
-@interface SRNavigationController ()<UIToolbarDelegate>
+@interface SRNavigationController ()<UIToolbarDelegate,UINavigationBarDelegate>
 
 @property(nonatomic, strong) SRContainerView *containerView;
 
-@property(nonatomic,readwrite,nonnull) SRToolbar *topToolbar; // The navigation bar managed by the controller. Pushing, popping or setting navigation items on a managed navigation bar is not supported.
+@property BOOL isPopping;
+@property(nonatomic,readwrite,nonnull) UINavigationBar *navigationBar; // The navigation bar managed by the controller. Pushing, popping or setting navigation items on a managed navigation bar is not supported.
 
-@property(null_resettable,nonatomic,readwrite) SRToolbar *bottomToolbar NS_AVAILABLE_IOS(3_0) __TVOS_PROHIBITED; // For use when presenting an action sheet.
+@property(null_resettable,nonatomic,readwrite) UIToolbar *toolbar NS_AVAILABLE_IOS(3_0) __TVOS_PROHIBITED; // For use when presenting an action sheet.
 
 @property(nonatomic, strong) NSArray *navigationPortraitConstraints;
 @property(nonatomic, strong) NSArray *navigationLandscapeLeftConstraints;
@@ -139,22 +109,22 @@
     return _containerView;
 }
 
--(SRToolbar *)topToolbar
+-(UINavigationBar *)navigationBar
 {
-    if (_topToolbar == nil)
+    if (_navigationBar == nil)
     {
-        _topToolbar = [[SRToolbar alloc] init];
-        _topToolbar.delegate = self;
-        _topToolbar.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.view addSubview:_topToolbar];
+        _navigationBar = [[SRNavigationBar alloc] init];
+        _navigationBar.delegate = self;
+        _navigationBar.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.view addSubview:_navigationBar];
 
         //Portrait
         {
             //navigation bar
             {
-                NSLayoutConstraint *constraintXCenter = [NSLayoutConstraint constraintWithItem:_topToolbar attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
-                NSLayoutConstraint *constraintYCenter = [NSLayoutConstraint constraintWithItem:_topToolbar attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:22];
-                NSLayoutConstraint *constraintWidth = [NSLayoutConstraint constraintWithItem:_topToolbar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
+                NSLayoutConstraint *constraintXCenter = [NSLayoutConstraint constraintWithItem:_navigationBar attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+                NSLayoutConstraint *constraintYCenter = [NSLayoutConstraint constraintWithItem:_navigationBar attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:22];
+                NSLayoutConstraint *constraintWidth = [NSLayoutConstraint constraintWithItem:_navigationBar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
 
                 _navigationPortraitConstraints = @[constraintXCenter,constraintYCenter,constraintWidth];
             }
@@ -164,9 +134,9 @@
         {
             //navigation bar
             {
-                NSLayoutConstraint *constraintXCenter = [NSLayoutConstraint constraintWithItem:_topToolbar attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:22];
-                NSLayoutConstraint *constraintYCenter = [NSLayoutConstraint constraintWithItem:_topToolbar attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
-                NSLayoutConstraint *constraintWidth = [NSLayoutConstraint constraintWithItem:_topToolbar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
+                NSLayoutConstraint *constraintXCenter = [NSLayoutConstraint constraintWithItem:_navigationBar attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:22];
+                NSLayoutConstraint *constraintYCenter = [NSLayoutConstraint constraintWithItem:_navigationBar attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+                NSLayoutConstraint *constraintWidth = [NSLayoutConstraint constraintWithItem:_navigationBar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
 
                 _navigationLandscapeRightConstraints = @[constraintXCenter,constraintYCenter,constraintWidth];
             }
@@ -176,39 +146,39 @@
         {
             //navigation bar
             {
-                NSLayoutConstraint *constraintXCenter = [NSLayoutConstraint constraintWithItem:_topToolbar attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1 constant:-22];
-                NSLayoutConstraint *constraintYCenter = [NSLayoutConstraint constraintWithItem:_topToolbar attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
-                NSLayoutConstraint *constraintWidth = [NSLayoutConstraint constraintWithItem:_topToolbar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
+                NSLayoutConstraint *constraintXCenter = [NSLayoutConstraint constraintWithItem:_navigationBar attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1 constant:-22];
+                NSLayoutConstraint *constraintYCenter = [NSLayoutConstraint constraintWithItem:_navigationBar attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+                NSLayoutConstraint *constraintWidth = [NSLayoutConstraint constraintWithItem:_navigationBar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
 
                 _navigationLandscapeLeftConstraints = @[constraintXCenter,constraintYCenter,constraintWidth];
             }
        }
         
-        NSLayoutConstraint *constraintHeight = [NSLayoutConstraint constraintWithItem:_topToolbar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:44];
+        NSLayoutConstraint *constraintHeight = [NSLayoutConstraint constraintWithItem:_navigationBar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:44];
 
         [self.view addConstraint:constraintHeight];
         [self.view addConstraints:_navigationPortraitConstraints];
     }
     
-    return _topToolbar;
+    return _navigationBar;
 }
 
--(SRToolbar *)bottomToolbar
+-(UIToolbar *)toolbar
 {
-    if (_bottomToolbar == nil)
+    if (_toolbar == nil)
     {
-        _bottomToolbar = [[SRToolbar alloc] init];
-        _bottomToolbar.delegate = self;
-        _bottomToolbar.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.view addSubview:_bottomToolbar];
+        _toolbar = [[SRToolbar alloc] init];
+        _toolbar.delegate = self;
+        _toolbar.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.view addSubview:_toolbar];
 
         //Portrait
         {
             //toolbar
             {
-                NSLayoutConstraint *constraintXCenter = [NSLayoutConstraint constraintWithItem:_bottomToolbar attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
-                NSLayoutConstraint *constraintYCenter = [NSLayoutConstraint constraintWithItem:_bottomToolbar attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:-22];
-                NSLayoutConstraint *constraintWidth = [NSLayoutConstraint constraintWithItem:_bottomToolbar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
+                NSLayoutConstraint *constraintXCenter = [NSLayoutConstraint constraintWithItem:_toolbar attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+                NSLayoutConstraint *constraintYCenter = [NSLayoutConstraint constraintWithItem:_toolbar attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:-22];
+                NSLayoutConstraint *constraintWidth = [NSLayoutConstraint constraintWithItem:_toolbar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
 
                 _toolbarPortraitConstraints = @[constraintXCenter,constraintYCenter,constraintWidth];
             }
@@ -218,9 +188,9 @@
         {
             //toolbar
             {
-                NSLayoutConstraint *constraintXCenter = [NSLayoutConstraint constraintWithItem:_bottomToolbar attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1 constant:-22];
-                NSLayoutConstraint *constraintYCenter = [NSLayoutConstraint constraintWithItem:_bottomToolbar attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
-                NSLayoutConstraint *constraintWidth = [NSLayoutConstraint constraintWithItem:_bottomToolbar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
+                NSLayoutConstraint *constraintXCenter = [NSLayoutConstraint constraintWithItem:_toolbar attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1 constant:-22];
+                NSLayoutConstraint *constraintYCenter = [NSLayoutConstraint constraintWithItem:_toolbar attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+                NSLayoutConstraint *constraintWidth = [NSLayoutConstraint constraintWithItem:_toolbar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
 
                 _toolbarLandscapeRightConstraints = @[constraintXCenter,constraintYCenter,constraintWidth];
             }
@@ -230,22 +200,22 @@
         {
             //toolbar
             {
-                NSLayoutConstraint *constraintXCenter = [NSLayoutConstraint constraintWithItem:_bottomToolbar attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:22];
-                NSLayoutConstraint *constraintYCenter = [NSLayoutConstraint constraintWithItem:_bottomToolbar attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
-                NSLayoutConstraint *constraintWidth = [NSLayoutConstraint constraintWithItem:_bottomToolbar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
+                NSLayoutConstraint *constraintXCenter = [NSLayoutConstraint constraintWithItem:_toolbar attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:22];
+                NSLayoutConstraint *constraintYCenter = [NSLayoutConstraint constraintWithItem:_toolbar attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+                NSLayoutConstraint *constraintWidth = [NSLayoutConstraint constraintWithItem:_toolbar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
 
                 _toolbarLandscapeLeftConstraints = @[constraintXCenter,constraintYCenter,constraintWidth];
             }
         }
 
-        NSLayoutConstraint *constraintHeight = [NSLayoutConstraint constraintWithItem:_bottomToolbar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:44];
+        NSLayoutConstraint *constraintHeight = [NSLayoutConstraint constraintWithItem:_toolbar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:44];
         
         [self.view addConstraint:constraintHeight];
 
         [self.view addConstraints:_toolbarPortraitConstraints];
     }
     
-    return _bottomToolbar;
+    return _toolbar;
 }
 
 -(void)viewDidLoad
@@ -289,8 +259,8 @@
 
 -(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    [self.topToolbar setItems:viewController.topToolbarItems animated:animated];
-    [self.bottomToolbar setItems:viewController.bottomToolbarItems animated:animated];
+    [self.navigationBar pushNavigationItem:viewController.navigationItem animated:animated];
+    [self.toolbar setItems:viewController.toolbarItems animated:animated];
     
     viewController.navigationControllerSR = self;
     viewController.view.frame = self.containerView.bounds;
@@ -322,8 +292,11 @@
     UIViewController *topController = [self topViewController];
     UIViewController *previousController = [self.viewControllers objectAtIndex:self.viewControllers.count-2];
     
-    [self.topToolbar setItems:previousController.topToolbarItems animated:animated];
-    [self.bottomToolbar setItems:previousController.bottomToolbarItems animated:animated];
+    _isPopping = YES;
+    [self.navigationBar popNavigationItemAnimated:animated];
+    _isPopping = NO;
+    
+    [self.toolbar setItems:previousController.toolbarItems animated:animated];
     
     previousController.view.frame = self.containerView.bounds;
     
@@ -392,19 +365,38 @@
 
 - (UIBarPosition)positionForBar:(id <UIBarPositioning>)bar
 {
-    if (bar == self.topToolbar)
-    {
-        return UIToolbarPositionTop;
-    }
-    else if (bar == self.bottomToolbar)
+    if (bar == self.toolbar)
     {
         return UIToolbarPositionBottom;
+    }
+    else if (bar == self.navigationBar)
+    {
+        return UIBarPositionTop;
     }
     else
     {
         return UIToolbarPositionAny;
     }
 }
+
+#pragma mark - UINavigationBar Delegate
+- (BOOL)navigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item
+{
+    if (self.isPopping)
+    {
+        return YES;
+    }
+    else
+    {
+        [self popViewControllerAnimated:YES];
+        return NO;
+    }
+}
+
+//- (void)navigationBar:(UINavigationBar *)navigationBar didPopItem:(UINavigationItem *)item
+//{
+//    [self popViewControllerAnimated:YES];
+//}
 
 - (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator
 {
@@ -442,8 +434,8 @@
 
                     [weakSelf.view addConstraints:weakSelf.navigationLandscapeLeftConstraints];
                     [weakSelf.view addConstraints:weakSelf.toolbarLandscapeLeftConstraints];
-                    weakSelf.topToolbar.transform = CGAffineTransformMakeRotation(M_PI_2);
-                    weakSelf.bottomToolbar.transform = CGAffineTransformMakeRotation(M_PI_2);
+                    weakSelf.navigationBar.transform = CGAffineTransformMakeRotation(M_PI_2);
+                    weakSelf.toolbar.transform = CGAffineTransformMakeRotation(M_PI_2);
                 }
                     break;
                 case UIInterfaceOrientationLandscapeRight:
@@ -453,8 +445,8 @@
 
                     [weakSelf.view addConstraints:weakSelf.navigationLandscapeRightConstraints];
                     [weakSelf.view addConstraints:weakSelf.toolbarLandscapeRightConstraints];
-                    weakSelf.topToolbar.transform = CGAffineTransformMakeRotation(-M_PI_2);
-                    weakSelf.bottomToolbar.transform = CGAffineTransformMakeRotation(-M_PI_2);
+                    weakSelf.navigationBar.transform = CGAffineTransformMakeRotation(-M_PI_2);
+                    weakSelf.toolbar.transform = CGAffineTransformMakeRotation(-M_PI_2);
                 }
                     break;
                 default:
@@ -464,8 +456,8 @@
 
                     [weakSelf.view addConstraints:weakSelf.navigationPortraitConstraints];
                     [weakSelf.view addConstraints:weakSelf.toolbarPortraitConstraints];
-                    weakSelf.topToolbar.transform = CGAffineTransformIdentity;
-                    weakSelf.bottomToolbar.transform = CGAffineTransformIdentity;
+                    weakSelf.navigationBar.transform = CGAffineTransformIdentity;
+                    weakSelf.toolbar.transform = CGAffineTransformIdentity;
                 }
                     break;
             }
@@ -494,9 +486,9 @@
         UIColor *backgroundColor = [UIColor themeBackgroundColor];
 
         weakSelf.view.backgroundColor = backgroundColor;
-        weakSelf.topToolbar.barTintColor = weakSelf.bottomToolbar.barTintColor = themeColor;
-        weakSelf.topToolbar.tintColor = weakSelf.bottomToolbar.tintColor = textColor;
-        weakSelf.topToolbar.barStyle = weakSelf.bottomToolbar.barStyle = ![UIColor isThemeInverted];
+        weakSelf.navigationBar.barTintColor = weakSelf.toolbar.barTintColor = themeColor;
+        weakSelf.navigationBar.tintColor = weakSelf.toolbar.tintColor = textColor;
+        weakSelf.navigationBar.barStyle = weakSelf.toolbar.barStyle = ![UIColor isThemeInverted];
     }];
 }
 
@@ -512,7 +504,7 @@
 
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
-    return (self.topToolbar.barStyle == UIBarStyleDefault)?UIStatusBarStyleDefault:UIStatusBarStyleLightContent;
+    return (self.navigationBar.barStyle == UIBarStyleDefault)?UIStatusBarStyleDefault:UIStatusBarStyleLightContent;
 }
 
 - (BOOL)shouldAutorotate

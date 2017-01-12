@@ -18,6 +18,7 @@
 @interface SRCropViewController ()<IQCropViewDelegate>
 
 @property (strong, nonatomic) IBOutlet IQCropperView *cropView;
+@property (strong, nonatomic) IBOutlet UIView *viewCropInfoContainer;
 @property (strong, nonatomic) IBOutlet UILabel *cropInfoLabel;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *barButtonCrop;
 
@@ -31,6 +32,8 @@
     [super viewDidLoad];
     
     self.image = self.image;
+    self.viewCropInfoContainer.bounds = CGRectMake(0, 0, 240, 40);
+    self.navigationItem.titleView = self.viewCropInfoContainer;
 }
 
 -(void)viewWillAppear:(BOOL)animated

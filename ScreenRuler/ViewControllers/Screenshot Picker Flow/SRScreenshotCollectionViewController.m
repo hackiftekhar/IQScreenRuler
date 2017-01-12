@@ -36,7 +36,10 @@
 @property (strong, nonatomic) IBOutlet UIButton *buttonCamera;
 @property (strong, nonatomic) IBOutlet UIButton *buttonCancel;
 @property (strong, nonatomic) IBOutlet UIVisualEffectView *visualEffectView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *effectViewHeight;
 
+
+@property (strong, nonatomic) IBOutlet UIPanGestureRecognizer *panGesture;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGesture;
 @property (nonatomic, strong) PHFetchResult * completeFetchResult;
 
@@ -93,6 +96,19 @@
     [[PHPhotoLibrary sharedPhotoLibrary] unregisterChangeObserver:self];
 }
 
+- (IBAction)panAction:(UIPanGestureRecognizer *)sender {
+    
+    CGPoint point = [sender locationInView:self.view];
+
+    CGFloat newConstant = self.view.bounds.size.height-(point.y-22);
+    newConstant = MAX(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad? 300 : 188, newConstant);
+    newConstant = MIN(newConstant, self.view.bounds.size.height);
+    self.effectViewHeight.constant = newConstant;
+    [self.visualEffectView setNeedsLayout];
+    [self.visualEffectView layoutIfNeeded];
+}
+
+
 - (IBAction)tapAction:(UITapGestureRecognizer *)sender {
     
     if (sender.state == UIGestureRecognizerStateEnded)
@@ -103,13 +119,20 @@
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-    if (touch.view == self.view)
+    if (gestureRecognizer == _tapGesture)
     {
-        return YES;
+        if (touch.view == self.view)
+        {
+            return YES;
+        }
+        else
+        {
+            return NO;
+        }
     }
     else
     {
-        return NO;
+        return YES;
     }
 }
 
@@ -479,7 +502,7 @@
 
     self.view.backgroundColor = [UIColor clearColor];
     self.visualEffectView.transform = CGAffineTransformMakeTranslation(0, self.visualEffectView.frame.size.height);
-    [UIView animateWithDuration:0.25 delay:0 options:7<<16 animations:^{
+    [UIView animateWithDuration:0.25 delay:0 options:7<<16|UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionAllowUserInteraction animations:^{
         weakSelf.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
         weakSelf.visualEffectView.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
@@ -497,7 +520,7 @@
 
     __weak typeof(self) weakSelf = self;
 
-    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseIn|UIViewAnimationOptionBeginFromCurrentState animations:^{
         weakSelf.view.backgroundColor = [UIColor clearColor];
         weakSelf.visualEffectView.transform = CGAffineTransformMakeTranslation(0, weakSelf.visualEffectView.frame.size.height);
     } completion:^(BOOL finished) {

@@ -772,7 +772,19 @@
             controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             controller.modalPresentationStyle = UIModalPresentationPopover;
             controller.popoverPresentationController.barButtonItem = weakSelf.libraryBarButton;
+            controller.popoverPresentationController.delegate = self;
             controller.preferredContentSize = CGSizeMake(375, 667);
+            
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            {
+                controller.preferredContentSize = CGSizeMake(375, 667);
+            }
+            else
+            {
+                controller.preferredContentSize = self.view.bounds.size;
+            }
+
+            
             [weakSelf presentViewController:controller animated:YES completion:nil];
         }
     }];
@@ -1157,8 +1169,8 @@
     if (self.magnifyingGlass.window == nil)
     {
         self.magnifyingGlass.touchPoint = originalLocation;
-        self.topColorView.frame = CGRectMake(0, 0, self.navigationControllerSR.view.bounds.size.width, self.navigationControllerSR.topToolbar.bounds.size.height);
-        [self.navigationControllerSR.view insertSubview:self.topColorView aboveSubview:self.navigationControllerSR.topToolbar];
+        self.topColorView.frame = CGRectMake(0, 0, self.navigationControllerSR.view.bounds.size.width, self.navigationControllerSR.navigationBar.bounds.size.height);
+        [self.navigationControllerSR.view insertSubview:self.topColorView aboveSubview:self.navigationControllerSR.navigationBar];
         [self.view insertSubview:self.magnifyingGlass aboveSubview:self.lineFrameView];
         [self.magnifyingGlass show];
         
@@ -1168,7 +1180,7 @@
     }
     else
     {
-        self.topColorView.frame = CGRectMake(0, 0, self.navigationControllerSR.view.bounds.size.width, self.navigationControllerSR.topToolbar.bounds.size.height);
+        self.topColorView.frame = CGRectMake(0, 0, self.navigationControllerSR.view.bounds.size.width, self.navigationControllerSR.navigationBar.bounds.size.height);
 
         [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
             weakSelf.magnifyingGlass.touchPoint = originalLocation;
