@@ -55,7 +55,6 @@ Any contribution is more than welcome! You can contribute through pull requests 
 - Slovak localization (sk)
 - Swedish localization (sv)
 - Thai localization (th)
-- Turkish localization (tr)
 - Ukrainian localization (uk)
 - Veitnamese localization (vi)
 
@@ -78,6 +77,7 @@ Many thanks to
 - [Mathi Arasan D V](https://github.com/mathiarasan24) for **Tamil (India)** localization.
 - [Gracjan Ziółek](mailto:poczta@gracjan.art.pl) for **Polish** localization.
 - [Hudson SIlva Borges](https://github.com/hsborges) for **Portuguese** localization.
+- [Durul Dalkanat](https://github.com/durul) for **Turkish** localization.
 
 
 - **YOU ARE NEXT**.
