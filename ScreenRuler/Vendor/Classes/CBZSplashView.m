@@ -42,7 +42,7 @@
   [self startAnimationWithCompletionHandler:nil];
 }
 
-- (void)startAnimationWithCompletionHandler:(void(^)())completionHandler;
+- (void)startAnimationWithCompletionHandler:(void(^)(void))completionHandler;
 {
   NSAssert(NO, @"Override me!");
 }

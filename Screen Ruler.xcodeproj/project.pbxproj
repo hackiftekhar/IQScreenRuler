@@ -13,6 +13,14 @@
 		4C0A13761DCF744900CFF881 /* SRLineImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0A13751DCF744900CFF881 /* SRLineImageView.m */; };
 		4C0A13791DCF771E00CFF881 /* NSMutableArray+Stack.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0A13781DCF771E00CFF881 /* NSMutableArray+Stack.m */; };
 		4C0A137C1DD0649000CFF881 /* UIScrollView+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0A137B1DD0649000CFF881 /* UIScrollView+Addition.m */; };
+		4C2AAF0F1E277E6000D4A542 /* SROnboardingWelcomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2AAF0E1E277E6000D4A542 /* SROnboardingWelcomeController.m */; };
+		4C2AAF121E277F1000D4A542 /* SROnboardingZoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2AAF111E277F1000D4A542 /* SROnboardingZoomController.m */; };
+		4C2AAF151E277F3D00D4A542 /* SROnboardingScreenScaleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2AAF141E277F3D00D4A542 /* SROnboardingScreenScaleController.m */; };
+		4C2AAF181E277F7000D4A542 /* SROnboardingMagnifierController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2AAF171E277F7000D4A542 /* SROnboardingMagnifierController.m */; };
+		4C2AAF1B1E277F9100D4A542 /* SROnboardingScaleAdjustController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2AAF1A1E277F9100D4A542 /* SROnboardingScaleAdjustController.m */; };
+		4C2AAF1E1E277FB300D4A542 /* SROnboardingRulerScaleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2AAF1D1E277FB300D4A542 /* SROnboardingRulerScaleController.m */; };
+		4C2AAF211E277FC400D4A542 /* SROnboardingProtractorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2AAF201E277FC400D4A542 /* SROnboardingProtractorController.m */; };
+		4C2AAF241E27811100D4A542 /* SROnboardingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2AAF231E27811100D4A542 /* SROnboardingNavigationController.m */; };
 		4C2EDF521E1963450088F970 /* SRNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EDF511E1963450088F970 /* SRNavigationBar.m */; };
 		4C7396E31DA6A6E700397366 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C7396E11DA6A6E700397366 /* Localizable.strings */; };
 		4C853B351DB23DA2003E3717 /* RoundedCornerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C853B341DB23DA2003E3717 /* RoundedCornerView.m */; };
@@ -90,6 +98,22 @@
 		4C0A13781DCF771E00CFF881 /* NSMutableArray+Stack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+Stack.m"; path = "../Vendor/IQLineFrameView/NSMutableArray+Stack.m"; sourceTree = "<group>"; };
 		4C0A137A1DD0649000CFF881 /* UIScrollView+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Addition.h"; sourceTree = "<group>"; };
 		4C0A137B1DD0649000CFF881 /* UIScrollView+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Addition.m"; sourceTree = "<group>"; };
+		4C2AAF0D1E277E6000D4A542 /* SROnboardingWelcomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SROnboardingWelcomeController.h; sourceTree = "<group>"; };
+		4C2AAF0E1E277E6000D4A542 /* SROnboardingWelcomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SROnboardingWelcomeController.m; sourceTree = "<group>"; };
+		4C2AAF101E277F1000D4A542 /* SROnboardingZoomController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SROnboardingZoomController.h; sourceTree = "<group>"; };
+		4C2AAF111E277F1000D4A542 /* SROnboardingZoomController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SROnboardingZoomController.m; sourceTree = "<group>"; };
+		4C2AAF131E277F3D00D4A542 /* SROnboardingScreenScaleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SROnboardingScreenScaleController.h; sourceTree = "<group>"; };
+		4C2AAF141E277F3D00D4A542 /* SROnboardingScreenScaleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SROnboardingScreenScaleController.m; sourceTree = "<group>"; };
+		4C2AAF161E277F7000D4A542 /* SROnboardingMagnifierController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SROnboardingMagnifierController.h; sourceTree = "<group>"; };
+		4C2AAF171E277F7000D4A542 /* SROnboardingMagnifierController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SROnboardingMagnifierController.m; sourceTree = "<group>"; };
+		4C2AAF191E277F9100D4A542 /* SROnboardingScaleAdjustController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SROnboardingScaleAdjustController.h; sourceTree = "<group>"; };
+		4C2AAF1A1E277F9100D4A542 /* SROnboardingScaleAdjustController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SROnboardingScaleAdjustController.m; sourceTree = "<group>"; };
+		4C2AAF1C1E277FB300D4A542 /* SROnboardingRulerScaleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SROnboardingRulerScaleController.h; sourceTree = "<group>"; };
+		4C2AAF1D1E277FB300D4A542 /* SROnboardingRulerScaleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SROnboardingRulerScaleController.m; sourceTree = "<group>"; };
+		4C2AAF1F1E277FC400D4A542 /* SROnboardingProtractorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SROnboardingProtractorController.h; sourceTree = "<group>"; };
+		4C2AAF201E277FC400D4A542 /* SROnboardingProtractorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SROnboardingProtractorController.m; sourceTree = "<group>"; };
+		4C2AAF221E27811100D4A542 /* SROnboardingNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SROnboardingNavigationController.h; sourceTree = "<group>"; };
+		4C2AAF231E27811100D4A542 /* SROnboardingNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SROnboardingNavigationController.m; sourceTree = "<group>"; };
 		4C2EDF501E1963450088F970 /* SRNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRNavigationBar.h; sourceTree = "<group>"; };
 		4C2EDF511E1963450088F970 /* SRNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRNavigationBar.m; sourceTree = "<group>"; };
 		4C33F23B1DB7E047000BC753 /* ta-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ta-IN"; path = "ta-IN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -326,6 +350,29 @@
 				4C853B341DB23DA2003E3717 /* RoundedCornerView.m */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		4C2AAF0C1E277E1C00D4A542 /* Onboarding Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4C2AAF221E27811100D4A542 /* SROnboardingNavigationController.h */,
+				4C2AAF231E27811100D4A542 /* SROnboardingNavigationController.m */,
+				4C2AAF0D1E277E6000D4A542 /* SROnboardingWelcomeController.h */,
+				4C2AAF0E1E277E6000D4A542 /* SROnboardingWelcomeController.m */,
+				4C2AAF101E277F1000D4A542 /* SROnboardingZoomController.h */,
+				4C2AAF111E277F1000D4A542 /* SROnboardingZoomController.m */,
+				4C2AAF131E277F3D00D4A542 /* SROnboardingScreenScaleController.h */,
+				4C2AAF141E277F3D00D4A542 /* SROnboardingScreenScaleController.m */,
+				4C2AAF161E277F7000D4A542 /* SROnboardingMagnifierController.h */,
+				4C2AAF171E277F7000D4A542 /* SROnboardingMagnifierController.m */,
+				4C2AAF191E277F9100D4A542 /* SROnboardingScaleAdjustController.h */,
+				4C2AAF1A1E277F9100D4A542 /* SROnboardingScaleAdjustController.m */,
+				4C2AAF1C1E277FB300D4A542 /* SROnboardingRulerScaleController.h */,
+				4C2AAF1D1E277FB300D4A542 /* SROnboardingRulerScaleController.m */,
+				4C2AAF1F1E277FC400D4A542 /* SROnboardingProtractorController.h */,
+				4C2AAF201E277FC400D4A542 /* SROnboardingProtractorController.m */,
+			);
+			path = "Onboarding Controllers";
 			sourceTree = "<group>";
 		};
 		4C554A881DB3E58000B5F292 /* UIImage+FloodFill */ = {
@@ -604,6 +651,7 @@
 		4CD426EC1DA8236A000AD1CA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				4C2AAF0C1E277E1C00D4A542 /* Onboarding Controllers */,
 				4CD426ED1DA8236A000AD1CA /* Home Page Flow */,
 				4CD426F61DA8236A000AD1CA /* Screenshot Picker Flow */,
 				4CD426FC1DA8236A000AD1CA /* Settings Flow */,
@@ -745,7 +793,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SR;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "InfoEnum Software Systems";
 				TargetAttributes = {
 					4CD031F61CC165B700539151 = {
@@ -910,7 +958,9 @@
 				4C0403891DA910FC0075A71B /* SRIconsGeneratorViewController.m in Sources */,
 				4CED77D01DA82A8E0093176D /* IQGeometry+AffineTransform.m in Sources */,
 				4CED77D11DA82A8E0093176D /* IQGeometry+Angle.m in Sources */,
+				4C2AAF1E1E277FB300D4A542 /* SROnboardingRulerScaleController.m in Sources */,
 				4CED77D21DA82A8E0093176D /* IQGeometry+Distance.m in Sources */,
+				4C2AAF181E277F7000D4A542 /* SROnboardingMagnifierController.m in Sources */,
 				4CED77D31DA82A8E0093176D /* IQGeometry+Line.m in Sources */,
 				4CED77D41DA82A8E0093176D /* IQGeometry+Point.m in Sources */,
 				4CED77D51DA82A8E0093176D /* IQGeometry+Rect.m in Sources */,
@@ -918,6 +968,7 @@
 				4CED77D71DA82A8E0093176D /* IQLineFrameView.m in Sources */,
 				4CED77D81DA82A8E0093176D /* IQRulerScrollView.m in Sources */,
 				4CED77D91DA82A8E0093176D /* IQScrollContainerView.m in Sources */,
+				4C2AAF151E277F3D00D4A542 /* SROnboardingScreenScaleController.m in Sources */,
 				4C853B601DB39737003E3717 /* SRDebugHelper.m in Sources */,
 				4CED77DA1DA82A8E0093176D /* IQRulerView.m in Sources */,
 				4C853B351DB23DA2003E3717 /* RoundedCornerView.m in Sources */,
@@ -927,6 +978,7 @@
 				4C853B541DB2C271003E3717 /* CBZRasterSplashView.m in Sources */,
 				4C853B4D1DB2938F003E3717 /* UIBezierPath+Shapes.m in Sources */,
 				4CED77DD1DA82A8E0093176D /* IQ_SmoothedBIView.m in Sources */,
+				4C2AAF211E277FC400D4A542 /* SROnboardingProtractorController.m in Sources */,
 				4CED77DE1DA82A8E0093176D /* SRImagePickerController.m in Sources */,
 				4CED77DF1DA82A8E0093176D /* SRNavigationController.m in Sources */,
 				4CED77E01DA82A8E0093176D /* SRToolbar.m in Sources */,
@@ -934,12 +986,15 @@
 				4CED77E11DA82A8E0093176D /* SRToolbarButton.m in Sources */,
 				4CED77E31DA82A8E0093176D /* UIColor+ThemeColor.m in Sources */,
 				4C853B5C1DB39087003E3717 /* SRDeveloperSettingsViewController.m in Sources */,
+				4C2AAF1B1E277F9100D4A542 /* SROnboardingScaleAdjustController.m in Sources */,
 				4C0A13791DCF771E00CFF881 /* NSMutableArray+Stack.m in Sources */,
+				4C2AAF121E277F1000D4A542 /* SROnboardingZoomController.m in Sources */,
 				4CED77E41DA82A8E0093176D /* UIFont+AppFont.m in Sources */,
 				4C0A137C1DD0649000CFF881 /* UIScrollView+Addition.m in Sources */,
 				4CED77E51DA82A8E0093176D /* UIImage+Color.m in Sources */,
 				4CED77E61DA82A8E0093176D /* SRCropViewController.m in Sources */,
 				4CED77E71DA82A8E0093176D /* SRDrawViewController.m in Sources */,
+				4C2AAF241E27811100D4A542 /* SROnboardingNavigationController.m in Sources */,
 				4CED77E81DA82A8E0093176D /* SREditOptionViewController.m in Sources */,
 				4CB7CB181E0E42CB00716C63 /* IQProtractorView.m in Sources */,
 				4CED77E91DA82A8E0093176D /* SRHomeViewController.m in Sources */,
@@ -947,6 +1002,7 @@
 				4CED77EB1DA82A8E0093176D /* SRScreenshotCollectionViewController.m in Sources */,
 				4CED77EC1DA82A8E0093176D /* SRSettingsTableViewCell.m in Sources */,
 				4C0A13761DCF744900CFF881 /* SRLineImageView.m in Sources */,
+				4C2AAF0F1E277E6000D4A542 /* SROnboardingWelcomeController.m in Sources */,
 				4CEDBF971DB15B970005A812 /* SRVersionTableViewCell.m in Sources */,
 				4CED77ED1DA82A8E0093176D /* SRThemeTableViewCell.m in Sources */,
 				4CED77EF1DA82A8E0093176D /* SRAcknowledgementTableViewController.m in Sources */,
@@ -1085,14 +1141,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1116,7 +1178,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "04236ed9-1a27-4d60-aa97-25b9ab87e506";
@@ -1135,14 +1197,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1160,7 +1228,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "96274369-1d1c-4ef9-b8b4-0100dc95e151";
 				SDKROOT = iphoneos;
@@ -1178,7 +1246,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ScreenRuler/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.infoenum.ruler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1198,7 +1266,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ScreenRuler/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.infoenum.ruler;
 				PRODUCT_NAME = "$(TARGET_NAME)";

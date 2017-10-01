@@ -10,7 +10,7 @@
 
 @interface CBZVectorSplashView ()<CAAnimationDelegate>
 
-@property (nonatomic, copy) void(^animationCompletionHandler)();
+@property (nonatomic, copy) void(^animationCompletionHandler)(void);
 
 @property (nonatomic, strong) CAShapeLayer *iconLayer;
 @property (nonatomic, strong) UIColor *backgroundViewColor;
@@ -61,7 +61,7 @@
   return shapeLayer;
 }
 
-- (void)startAnimationWithCompletionHandler:(void (^)())completionHandler
+- (void)startAnimationWithCompletionHandler:(void (^)(void))completionHandler
 {
   self.animationCompletionHandler = completionHandler;
   

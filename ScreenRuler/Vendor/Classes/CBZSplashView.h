@@ -38,7 +38,7 @@
 /**
  *  Call to start the animation with completion handler.
  */
-- (void)startAnimationWithCompletionHandler:(void(^)())completionHandler;
+- (void)startAnimationWithCompletionHandler:(void(^)(void))completionHandler;
 
 /**
  *  The starting size of the centred icon.

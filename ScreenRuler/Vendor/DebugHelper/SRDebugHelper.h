@@ -11,6 +11,8 @@
 
 @interface SRDebugHelper : NSObject
 
++(BOOL)isBeingDebugged;
+
 +(struct task_basic_info)memoryReport;
 
 @end

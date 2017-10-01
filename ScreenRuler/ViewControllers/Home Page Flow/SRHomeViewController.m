@@ -31,6 +31,8 @@
 #import "SRSettingTableViewController.h"
 #import "CBZSplashView.h"
 #import "UIBezierPath+Shapes.h"
+#import "SRDebugHelper.h"
+#import "SROnboardingNavigationController.h"
 
 //https://www.iconfinder.com/iconsets/hawcons-gesture-stroke
 
@@ -372,6 +374,13 @@
 
 -(void)startHelpTour
 {
+    if ([SRDebugHelper isBeingDebugged])
+    {
+        SROnboardingNavigationController *navController = [[SROnboardingNavigationController alloc] init];
+        [self presentViewController:navController animated:YES completion:nil];
+        return;
+    }
+    
     {
         [self.scrollContainerView zoomToMinimumScaleAnimated:YES];
         self.scrollContainerView.imageView.hideLine = NO;

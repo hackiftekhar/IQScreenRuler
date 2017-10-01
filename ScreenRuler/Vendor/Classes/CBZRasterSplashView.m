@@ -37,7 +37,7 @@
     return self;
 }
 
-- (void)startAnimationWithCompletionHandler:(void (^)())completionHandler
+- (void)startAnimationWithCompletionHandler:(void (^)(void))completionHandler
 {
     __block __weak typeof(self) weakSelf = self;
     
