@@ -10,6 +10,7 @@
 #import "SRScreenshotCollectionViewCell.h"
 #import <Photos/Photos.h>
 #import "UIFont+AppFont.h"
+#import "UIColor+ThemeColor.h"
 #import <Crashlytics/Answers.h>
 
 @implementation UICollectionView(Screenshots)
@@ -36,8 +37,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *buttonCamera;
 @property (strong, nonatomic) IBOutlet UIButton *buttonCancel;
 @property (strong, nonatomic) IBOutlet UIVisualEffectView *visualEffectView;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *effectViewHeight;
-
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *collectionViewHeight;
+@property CGFloat panBeginHeight;
 
 @property (strong, nonatomic) IBOutlet UIPanGestureRecognizer *panGesture;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGesture;
@@ -53,6 +54,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.tintColor = [UIColor originalThemeColor];
     
     [self.buttonPhotoLibrary setTitle:NSLocalizedString(@"photo_library", nil) forState:UIControlStateNormal];
     [self.buttonCamera setTitle:NSLocalizedString(@"camera", nil) forState:UIControlStateNormal];
@@ -97,13 +100,19 @@
 }
 
 - (IBAction)panAction:(UIPanGestureRecognizer *)sender {
-    
-    CGPoint point = [sender locationInView:self.view];
 
-    CGFloat newConstant = self.view.bounds.size.height-(point.y-22);
-    newConstant = MAX(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad? 300 : 188, newConstant);
-    newConstant = MIN(newConstant, self.view.bounds.size.height);
-    self.effectViewHeight.constant = newConstant;
+    if (sender.state == UIGestureRecognizerStateBegan)
+    {
+        self.panBeginHeight = self.collectionViewHeight.constant;
+    }
+
+    CGPoint translation = [sender translationInView:self.view];
+    
+    CGFloat newConstant = self.panBeginHeight - translation.y;
+    
+    newConstant = MAX(100, newConstant);
+    newConstant = MIN(newConstant, self.view.safeAreaLayoutGuide.layoutFrame.size.height-200);
+    self.collectionViewHeight.constant = newConstant;
     [self.visualEffectView setNeedsLayout];
     [self.visualEffectView layoutIfNeeded];
 }

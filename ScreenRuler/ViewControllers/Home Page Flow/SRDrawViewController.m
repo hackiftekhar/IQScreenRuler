@@ -10,7 +10,6 @@
 #import "IQScrollContainerView.h"
 #import "IQColorPickerButton.h"
 #import "IQTextPickerButton.h"
-#import "SRNavigationController.h"
 #import "IQ_SmoothedBIView.h"
 #import "UIColor+ThemeColor.h"
 #import "UIImage+Color.h"
@@ -80,7 +79,7 @@
 
 -(BOOL)prefersStatusBarHidden
 {
-    return YES;
+    return NO;
 }
 
 -(UIStatusBarAnimation)preferredStatusBarUpdateAnimation
@@ -113,7 +112,7 @@
         [self.delegate controller:self finishWithImage:self.scrollContainerView.image zoomScale:self.scrollContainerView.zoomScale contentOffset:self.scrollContainerView.contentOffset];
     }
 
-    [self.navigationControllerSR popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 -(IBAction)doneAction:(UIBarButtonItem*)item
@@ -136,7 +135,7 @@
             [weakSelf.delegate controller:weakSelf finishWithImage:weakSelf.scrollContainerView.image zoomScale:weakSelf.scrollContainerView.zoomScale contentOffset:weakSelf.scrollContainerView.contentOffset];
         }
 
-        [weakSelf.navigationControllerSR popViewControllerAnimated:YES];
+        [weakSelf.navigationController popViewControllerAnimated:NO];
     }];
 }
 

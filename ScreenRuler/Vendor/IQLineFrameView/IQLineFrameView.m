@@ -301,6 +301,13 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
     [self updateUIAnimated:NO];
 }
 
+- (void)safeAreaInsetsDidChange
+{
+    [super safeAreaInsetsDidChange];
+    
+    [self updateUIAnimated:YES];
+}
+
 -(void)updateUIAnimated:(BOOL)animated
 {
     if (animated)
@@ -321,7 +328,6 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
     NSMutableArray *currentHorizontalShortLines = [inUseHorizontalShortLineLayers mutableCopy];
     NSMutableArray *currentVerticalShortLines = [inUseVerticalShortLineLayers mutableCopy];
     
-    CGRect newRect =self.bounds;
     CGSize scaleMargin = self.scaleMargin;
     
     if (_hideRuler == YES)
@@ -358,17 +364,18 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
 
     CGFloat singleStep = self.zoomScale*multiplier;
     
-    CGFloat  minX = CGRectGetMinX(newRect)+scaleMargin.width;
-    CGFloat  minY = CGRectGetMinY(newRect)+scaleMargin.height;
-    CGFloat  maxX = CGRectGetMaxX(newRect)-scaleMargin.width;
-    CGFloat  maxY = CGRectGetMaxY(newRect)-scaleMargin.height;
+    CGRect safeAreaRect = UIEdgeInsetsInsetRect(self.bounds, self.safeAreaInsets);
+    CGFloat  minX = CGRectGetMinX(safeAreaRect)+scaleMargin.width;
+    CGFloat  minY = CGRectGetMinY(safeAreaRect)+scaleMargin.height;
+    CGFloat  maxX = CGRectGetMaxX(safeAreaRect)-scaleMargin.width;
+    CGFloat  maxY = CGRectGetMaxY(safeAreaRect)-scaleMargin.height;
 
     if (_hideRuler == NO)
     {
         //Background layer
         {
-            UIBezierPath *path = [UIBezierPath bezierPathWithRect:newRect];
-            UIBezierPath *innerPath = [UIBezierPath bezierPathWithRect:CGRectInset(newRect, scaleMargin.width, scaleMargin.height)];
+            UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.bounds];
+            UIBezierPath *innerPath = [UIBezierPath bezierPathWithRect:CGRectInset(safeAreaRect, scaleMargin.width, scaleMargin.height)];
             [path appendPath:innerPath];
             
 //            if (animated)
@@ -626,8 +633,6 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
                     
                     if (singleStep > 40 || (singleStep*5 >= 40 && i%5 == 0) || (singleStep*10 >= 40 && i%10 == 0))
                     {
-                        CGFloat remainingWidth = (scaleMargin.width-longLineHeight);
-                        
                         CATextLayer *leftTextLayer  = [currentVerticalTextLines pop];
                         
                         if (leftTextLayer == nil)
@@ -681,14 +686,16 @@ typedef NS_ENUM(NSUInteger, PositionSelector) {
                             [self.layer insertSublayer:rightTextLayer above:backgroundLayer];
                         }
                         
+                        CGFloat remainingWidth = (scaleMargin.width-longLineHeight);
+
                         leftTextLayer.string = [NSString localizedStringWithFormat:@"%.0f",i*multiplier/_deviceScale];
                         leftTextLayer.affineTransform = CGAffineTransformIdentity;
-                        leftTextLayer.frame = CGRectMake((remainingWidth/2)-20, currentStep-remainingWidth/2, 40, remainingWidth);
+                        leftTextLayer.frame = CGRectMake((remainingWidth/2)+(minX-scaleMargin.width)-20, currentStep-remainingWidth/2, 40, remainingWidth);
                         leftTextLayer.affineTransform = CGAffineTransformMakeRotation(-M_PI_2);
                         
                         rightTextLayer.string = [NSString localizedStringWithFormat:@"%.0f",i*multiplier/_deviceScale];
                         rightTextLayer.affineTransform = CGAffineTransformIdentity;
-                        rightTextLayer.frame = CGRectMake(self.frame.size.width-(remainingWidth/2)-20, currentStep-remainingWidth/2, 40, remainingWidth);
+                        rightTextLayer.frame = CGRectMake((maxX+scaleMargin.width)-(remainingWidth/2)-20, currentStep-remainingWidth/2, 40, remainingWidth);
                         rightTextLayer.affineTransform = CGAffineTransformMakeRotation(M_PI_2);
                     }
                 }

@@ -11,7 +11,6 @@
 #import "UIImage+Resizing.h"
 #import "SRCropViewController.h"
 #import "SRDrawViewController.h"
-#import "SRNavigationController.h"
 #import "UIColor+ThemeColor.h"
 #import <Crashlytics/Answers.h>
 #import "UIImage+Rotating.h"
@@ -60,7 +59,7 @@
 
 -(BOOL)prefersStatusBarHidden
 {
-    return YES;
+    return NO;
 }
 
 -(UIStatusBarAnimation)preferredStatusBarUpdateAnimation

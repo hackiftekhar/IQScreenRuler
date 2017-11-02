@@ -10,7 +10,6 @@
 #import "IQCropperView.h"
 #import "UIImage+CropRotate.h"
 #import "IQScrollContainerView.h"
-#import "SRNavigationController.h"
 #import "UIColor+ThemeColor.h"
 #import <Crashlytics/Answers.h>
 #import "UIScrollView+Addition.h"
@@ -74,7 +73,7 @@
 
 -(BOOL)prefersStatusBarHidden
 {
-    return YES;
+    return NO;
 }
 
 -(UIStatusBarAnimation)preferredStatusBarUpdateAnimation
@@ -208,7 +207,7 @@
         [self.delegate controller:self finishWithImage:self.scrollContainerView.image zoomScale:self.scrollContainerView.zoomScale contentOffset:self.scrollContainerView.contentOffset];
     }
 
-    [self.navigationControllerSR popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 -(IBAction)doneAction:(UIBarButtonItem*)item
@@ -229,7 +228,7 @@
             [weakSelf.delegate controller:weakSelf finishWithImage:weakSelf.scrollContainerView.image zoomScale:weakSelf.scrollContainerView.zoomScale contentOffset:weakSelf.scrollContainerView.contentOffset];
         }
 
-        [weakSelf.navigationControllerSR popViewControllerAnimated:YES];
+        [weakSelf.navigationController popViewControllerAnimated:NO];
     }];
 }
 

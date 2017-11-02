@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "UIFont+AppFont.h"
 #import "UIColor+HexColors.h"
-#import "SRNavigationController.h"
 #import "SRHomeViewController.h"
 #import "COSTouchVisualizerWindow.h"
 #import <Fabric/Fabric.h>
@@ -59,6 +58,11 @@ const NSInteger kSRAppStoreID = 1104790987;
     
     [iVersion sharedInstance].delegate = self;
     
+    if ([[UIScrollView appearance] respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)])
+    {
+        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+    }
+    
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont kohinoorBanglaSemiboldWithSize:16.0]} forState:UIControlStateNormal];
     
     UIApplicationShortcutItem *shortcutItem = [launchOptions objectForKey:UIApplicationLaunchOptionsShortcutItemKey];
@@ -81,9 +85,9 @@ const NSInteger kSRAppStoreID = 1104790987;
     NSData *data = [NSData dataWithContentsOfURL:url];
     UIImage *image = [UIImage imageWithData:data];
 
-    SRNavigationController* navController = (SRNavigationController*)self.window.rootViewController;
+    UINavigationController* navController = (UINavigationController*)self.window.rootViewController;
     
-    if([navController isKindOfClass:[SRNavigationController class]])
+    if([navController isKindOfClass:[UINavigationController class]])
     {
         [navController dismissViewControllerAnimated:NO completion:nil];
         
@@ -141,9 +145,9 @@ const NSInteger kSRAppStoreID = 1104790987;
 
 - (void)handleShortCutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(nonnull void (^)(BOOL))completionHandler {
     
-    SRNavigationController* navController = (SRNavigationController*)self.window.rootViewController;
+    UINavigationController* navController = (UINavigationController*)self.window.rootViewController;
     
-    if([navController isKindOfClass:[SRNavigationController class]])
+    if([navController isKindOfClass:[UINavigationController class]])
     {
         [navController dismissViewControllerAnimated:NO completion:nil];
         

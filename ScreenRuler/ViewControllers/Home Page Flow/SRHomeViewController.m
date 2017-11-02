@@ -20,7 +20,6 @@
 #import "MPCoachMarkView.h"
 #import "IQGeometry+Rect.h"
 #import "SREditOptionViewController.h"
-#import "SRNavigationController.h"
 #import "UIColor+ThemeColor.h"
 #import <Social/Social.h>
 #import "SRImagePickerController.h"
@@ -106,6 +105,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    self.additionalSafeAreaInsets = UIEdgeInsetsMake(20, 20, 20, 20);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTheme) name:kRASettingsChangedNotification object:nil];
 
@@ -225,7 +226,7 @@
     
     splashView.animationDuration = 1.4;
     
-    [self.navigationControllerSR.view addSubview:splashView];
+    [self.navigationController.view addSubview:splashView];
     
     self.splashView = splashView;
 }
@@ -259,6 +260,18 @@
         self.lineFrameView.rulerColor = shadeFactorColor;
         self.scrollContainerView.imageView.lineColor = self.lineFrameView.lineColor = originalThemeColor;
     }
+    
+    __weak typeof(self) weakSelf = self;
+
+    [UIView animateWithDuration:0.2 animations:^{
+        weakSelf.navigationController.navigationBar.barTintColor = [UIColor themeColor];
+        weakSelf.navigationController.navigationBar.tintColor = [UIColor themeTextColor];
+        weakSelf.navigationController.navigationBar.barStyle = ![UIColor isThemeInverted];
+        weakSelf.navigationController.toolbar.barTintColor = [UIColor themeColor];
+        weakSelf.navigationController.toolbar.tintColor = [UIColor themeTextColor];
+        weakSelf.navigationController.toolbar.barStyle = ![UIColor isThemeInverted];
+    }];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -273,7 +286,7 @@
 
 -(BOOL)prefersStatusBarHidden
 {
-    return YES;
+    return NO;
 }
 
 -(UIStatusBarAnimation)preferredStatusBarUpdateAnimation
@@ -744,13 +757,13 @@
             status == PHAuthorizationStatusDenied)
         {
             NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-            [[UIApplication sharedApplication] openURL:url];
+            [[UIApplication sharedApplication] openURL:url options:nil completionHandler:nil];
         }
         else if (status == PHAuthorizationStatusAuthorized)
         {
             SRScreenshotCollectionViewController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([SRScreenshotCollectionViewController class])];
             controller.delegate = weakSelf;
-            [controller presentOverViewController:weakSelf.navigationControllerSR completion:nil];
+            [controller presentOverViewController:weakSelf.navigationController completion:nil];
         }
     };
     
@@ -782,7 +795,6 @@
             controller.modalPresentationStyle = UIModalPresentationPopover;
             controller.popoverPresentationController.barButtonItem = weakSelf.libraryBarButton;
             controller.popoverPresentationController.delegate = self;
-            controller.preferredContentSize = CGSizeMake(375, 667);
             
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
             {
@@ -1178,8 +1190,8 @@
     if (self.magnifyingGlass.window == nil)
     {
         self.magnifyingGlass.touchPoint = originalLocation;
-        self.topColorView.frame = CGRectMake(0, 0, self.navigationControllerSR.view.bounds.size.width, self.navigationControllerSR.navigationBar.bounds.size.height);
-        [self.navigationControllerSR.view insertSubview:self.topColorView aboveSubview:self.navigationControllerSR.navigationBar];
+        self.topColorView.frame = CGRectMake(0, 0, self.navigationController.view.bounds.size.width, self.navigationController.navigationBar.bounds.size.height);
+        [self.navigationController.view insertSubview:self.topColorView aboveSubview:self.navigationController.navigationBar];
         [self.view insertSubview:self.magnifyingGlass aboveSubview:self.lineFrameView];
         [self.magnifyingGlass show];
         
@@ -1189,7 +1201,7 @@
     }
     else
     {
-        self.topColorView.frame = CGRectMake(0, 0, self.navigationControllerSR.view.bounds.size.width, self.navigationControllerSR.navigationBar.bounds.size.height);
+        self.topColorView.frame = CGRectMake(0, 0, self.navigationController.view.bounds.size.width, self.navigationController.navigationBar.bounds.size.height);
 
         [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
             weakSelf.magnifyingGlass.touchPoint = originalLocation;
@@ -1404,10 +1416,6 @@
         else
         {
             CGSize size = self.view.bounds.size;
-
-            size.width -=40;
-            size.height -= 60;
-            
             navControler.preferredContentSize = size;
         }
     }

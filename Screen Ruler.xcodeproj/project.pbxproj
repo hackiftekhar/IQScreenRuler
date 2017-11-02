@@ -22,6 +22,7 @@
 		4C2AAF211E277FC400D4A542 /* SROnboardingProtractorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2AAF201E277FC400D4A542 /* SROnboardingProtractorController.m */; };
 		4C2AAF241E27811100D4A542 /* SROnboardingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2AAF231E27811100D4A542 /* SROnboardingNavigationController.m */; };
 		4C2EDF521E1963450088F970 /* SRNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EDF511E1963450088F970 /* SRNavigationBar.m */; };
+		4C50DB1B1FAB22EA00118511 /* SRNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C50DB1A1FAB22EA00118511 /* SRNavigationController.m */; };
 		4C7396E31DA6A6E700397366 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C7396E11DA6A6E700397366 /* Localizable.strings */; };
 		4C853B351DB23DA2003E3717 /* RoundedCornerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C853B341DB23DA2003E3717 /* RoundedCornerView.m */; };
 		4C853B3A1DB27313003E3717 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 4C853B371DB272FA003E3717 /* iTunesArtwork@2x */; };
@@ -67,7 +68,6 @@
 		4CED77DC1DA82A8E0093176D /* MPCoachMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426B51DA8234B000AD1CA /* MPCoachMarkView.m */; };
 		4CED77DD1DA82A8E0093176D /* IQ_SmoothedBIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426B81DA8234B000AD1CA /* IQ_SmoothedBIView.m */; };
 		4CED77DE1DA82A8E0093176D /* SRImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426D41DA8235D000AD1CA /* SRImagePickerController.m */; };
-		4CED77DF1DA82A8E0093176D /* SRNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426D61DA8235D000AD1CA /* SRNavigationController.m */; };
 		4CED77E01DA82A8E0093176D /* SRToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426D81DA8235D000AD1CA /* SRToolbar.m */; };
 		4CED77E11DA82A8E0093176D /* SRToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426DA1DA8235D000AD1CA /* SRToolbarButton.m */; };
 		4CED77E31DA82A8E0093176D /* UIColor+ThemeColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD426E31DA82364000AD1CA /* UIColor+ThemeColor.m */; };
@@ -128,6 +128,8 @@
 		4C33F2441DB7E32E000BC753 /* ta-LK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ta-LK"; path = "ta-LK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4C33F2451DB7E5B4000BC753 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		4C33F2461DB7E5B4000BC753 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		4C50DB191FAB22EA00118511 /* SRNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRNavigationController.h; sourceTree = "<group>"; };
+		4C50DB1A1FAB22EA00118511 /* SRNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRNavigationController.m; sourceTree = "<group>"; };
 		4C7396E21DA6A6E700397366 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4C7396E41DA6A6EF00397366 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		4C7396EA1DA6A6F400397366 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
@@ -254,8 +256,6 @@
 		4CD426B81DA8234B000AD1CA /* IQ_SmoothedBIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQ_SmoothedBIView.m; sourceTree = "<group>"; };
 		4CD426D31DA8235D000AD1CA /* SRImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRImagePickerController.h; sourceTree = "<group>"; };
 		4CD426D41DA8235D000AD1CA /* SRImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRImagePickerController.m; sourceTree = "<group>"; };
-		4CD426D51DA8235D000AD1CA /* SRNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRNavigationController.h; sourceTree = "<group>"; };
-		4CD426D61DA8235D000AD1CA /* SRNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRNavigationController.m; sourceTree = "<group>"; };
 		4CD426D71DA8235D000AD1CA /* SRToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRToolbar.h; sourceTree = "<group>"; };
 		4CD426D81DA8235D000AD1CA /* SRToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRToolbar.m; sourceTree = "<group>"; };
 		4CD426D91DA8235D000AD1CA /* SRToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRToolbarButton.h; sourceTree = "<group>"; };
@@ -621,14 +621,14 @@
 			children = (
 				4CD426D31DA8235D000AD1CA /* SRImagePickerController.h */,
 				4CD426D41DA8235D000AD1CA /* SRImagePickerController.m */,
-				4CD426D51DA8235D000AD1CA /* SRNavigationController.h */,
-				4CD426D61DA8235D000AD1CA /* SRNavigationController.m */,
 				4CD426D71DA8235D000AD1CA /* SRToolbar.h */,
 				4CD426D81DA8235D000AD1CA /* SRToolbar.m */,
 				4C2EDF501E1963450088F970 /* SRNavigationBar.h */,
 				4C2EDF511E1963450088F970 /* SRNavigationBar.m */,
 				4CD426D91DA8235D000AD1CA /* SRToolbarButton.h */,
 				4CD426DA1DA8235D000AD1CA /* SRToolbarButton.m */,
+				4C50DB191FAB22EA00118511 /* SRNavigationController.h */,
+				4C50DB1A1FAB22EA00118511 /* SRNavigationController.m */,
 			);
 			path = Subclasses;
 			sourceTree = "<group>";
@@ -980,7 +980,6 @@
 				4CED77DD1DA82A8E0093176D /* IQ_SmoothedBIView.m in Sources */,
 				4C2AAF211E277FC400D4A542 /* SROnboardingProtractorController.m in Sources */,
 				4CED77DE1DA82A8E0093176D /* SRImagePickerController.m in Sources */,
-				4CED77DF1DA82A8E0093176D /* SRNavigationController.m in Sources */,
 				4CED77E01DA82A8E0093176D /* SRToolbar.m in Sources */,
 				4C853B561DB2C271003E3717 /* CBZVectorSplashView.m in Sources */,
 				4CED77E11DA82A8E0093176D /* SRToolbarButton.m in Sources */,
@@ -1006,6 +1005,7 @@
 				4CEDBF971DB15B970005A812 /* SRVersionTableViewCell.m in Sources */,
 				4CED77ED1DA82A8E0093176D /* SRThemeTableViewCell.m in Sources */,
 				4CED77EF1DA82A8E0093176D /* SRAcknowledgementTableViewController.m in Sources */,
+				4C50DB1B1FAB22EA00118511 /* SRNavigationController.m in Sources */,
 				4CED77F01DA82A8E0093176D /* SRPrivacyPolicyViewController.m in Sources */,
 				4CED77F11DA82A8E0093176D /* SRSettingTableViewController.m in Sources */,
 				4CED77F21DA82A8E0093176D /* AppDelegate.m in Sources */,
