@@ -1521,4 +1521,28 @@
     }
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    UIView *snapshotView = [_scrollContainerView snapshotViewAfterScreenUpdates:false];
+    snapshotView.frame = _scrollContainerView.frame;
+    [self.view insertSubview:snapshotView aboveSubview:_scrollContainerView];
+    [UIView animateWithDuration:duration animations:^
+     {
+         snapshotView.alpha = 1.2;
+     } completion:^(__unused BOOL finished)
+     {
+         [snapshotView removeFromSuperview];
+     }];
+    
+
+    [_scrollContainerView layoutSubviews];
+
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+}
+
 @end
